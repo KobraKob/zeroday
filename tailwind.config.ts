@@ -11,9 +11,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        cream: "#FFF6E5",
+        ink: "var(--color-ink)",
+        cobalt: {
+          DEFAULT: "#2536E8",
+          hover: "#1D2BB8",
+          subtle: "#ECEEFE",
+        },
+        marigold: {
+          DEFAULT: "#FFC21A",
+          subtle: "#FFF8E6",
+        },
+        coral: {
+          DEFAULT: "#FF6B4A",
+          subtle: "#FFF0EC",
+        },
+        mint: {
+          DEFAULT: "#5FE0B0",
+          subtle: "#EEFCF6",
+        },
         paper: "var(--color-paper)",
         surface: "var(--color-surface)",
-        ink: "var(--color-ink)",
         muted: "var(--color-muted)",
         hairline: {
           DEFAULT: "var(--color-hairline)",
@@ -31,24 +49,19 @@ const config: Config = {
       },
       fontFamily: {
         display: [
+          "Bricolage Grotesque",
           "var(--font-display)",
-          "Fraunces",
-          "Newsreader",
-          "Georgia",
-          "serif",
+          "sans-serif",
         ],
         body: [
+          "Instrument Sans",
           "var(--font-body)",
-          "Inter Tight",
-          "Inter",
           "-apple-system",
           "sans-serif",
         ],
         mono: [
+          "DM Mono",
           "var(--font-mono)",
-          "JetBrains Mono",
-          "IBM Plex Mono",
-          "ui-monospace",
           "monospace",
         ],
       },

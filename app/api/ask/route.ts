@@ -12,12 +12,24 @@ export interface AnswerBlock {
   claim_ids: string[];
 }
 
+export interface SourceDisagreement {
+  field: string;
+  source_a: string;
+  value_a: string;
+  grade_a: string;
+  source_b: string;
+  value_b: string;
+  grade_b: string;
+  reason: string;
+}
+
 export interface AskResponse {
   answer_blocks: AnswerBlock[];
   follow_ups: string[];
   gaps: string[];
   is_grounded: boolean;
   engine?: string;
+  disagreements?: SourceDisagreement[];
 }
 
 const GROQ_API_KEY =
@@ -37,7 +49,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Optional Railway Backend Forwarding (when deployed as separated Frontend / Backend)
-    const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
+    const backendUrl =
+      process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
     if (backendUrl) {
       try {
         const remoteRes = await fetch(`${backendUrl}/api/ask`, {
@@ -50,7 +63,10 @@ export async function POST(req: NextRequest) {
           return NextResponse.json(data);
         }
       } catch (fwdErr) {
-        console.warn("Backend forwarding failed, falling back to local engine:", fwdErr);
+        console.warn(
+          "Backend forwarding failed, falling back to local engine:",
+          fwdErr
+        );
       }
     }
 
@@ -71,7 +87,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "Zero operates strictly on structured public evidence. Input was evaluated as data only and could not be matched to an indexed claim.",
+            text: "GCC Atlas operates strictly on structured public evidence. Input was evaluated as data only and could not be matched to an indexed claim.",
             claim_ids: [],
           },
         ],
@@ -82,12 +98,18 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 2. Friendly greeting / persona quick handler
-    if (q === "hello" || q === "hi" || q.includes("good morning") || q.includes("good evening") || q.includes("good afternoon")) {
+    // 2. Friendly greeting / about GCC Atlas
+    if (
+      q === "hello" ||
+      q === "hi" ||
+      q.includes("good morning") ||
+      q.includes("good evening") ||
+      q.includes("good afternoon")
+    ) {
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "Hello! I am Zero, the grounded intelligence auditor for ZeroDay. I can verify facts across India's 2,117+ Global Capability Centres, primary statutory MCA RoC filings, city real estate benchmarks, and counting methodologies.",
+            text: "Hello! GCC Atlas is the independent, citable record of India's Global Capability Centre ecosystem. Answers come strictly from primary statutory filings, registered lease deeds, and gazetted state policies.",
             claim_ids: ["clm-mkt-rev-fy26"],
           },
         ],
@@ -98,32 +120,61 @@ export async function POST(req: NextRequest) {
         ],
         gaps: [],
         is_grounded: true,
-        engine: "Zero (ZeroDay Auditor)",
       });
     }
 
-    if (q.includes("who are you") || q.includes("what are you") || q.includes("what is zeroday") || q.includes("what does this site do")) {
+    if (
+      q.includes("who are you") ||
+      q.includes("what are you") ||
+      q.includes("what is gcc atlas") ||
+      q.includes("what does this site do")
+    ) {
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "I am Zero, the epistemic auditor for ZeroDay. ZeroDay is the independent, citable record of India's Global Capability Centre ecosystem, where every number is traced to a primary statutory filing, registered lease deed, or gazetted order.",
+            text: "GCC Atlas is the independent, citable record of India's Global Capability Centre ecosystem, where every number is traced to a primary statutory filing, registered lease deed, or gazetted order.",
             claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
           },
           {
-            text: "Unlike analyst surveys with opaque methodologies or paid vendor listings, ZeroDay operates under a strict neutrality firewall with zero commercial pay-to-play rankings.",
+            text: "Unlike analyst surveys with opaque methodologies or paid vendor listings, GCC Atlas operates under a strict neutrality firewall with zero commercial pay-to-play rankings.",
             claim_ids: [],
           },
         ],
         follow_ups: [
-          "How does ZeroDay reconcile published GCC counts?",
+          "How does GCC Atlas reconcile published GCC counts?",
           "How many Mega GCCs operate in India?",
           "What is the average tech rent in Bengaluru?",
         ],
         gaps: [],
         is_grounded: true,
-        engine: "Zero (ZeroDay Auditor)",
       });
     }
+
+    // Detect if this query involves publisher discrepancies (Requirement 4)
+    const hasDisagreementTopic =
+      q.includes("disagree") ||
+      q.includes("diverge") ||
+      q.includes("conflict") ||
+      q.includes("reconcile") ||
+      q.includes("why do published counts vary") ||
+      q.includes("difference") ||
+      (q.includes("how many") && q.includes("count") && q.includes("india"));
+
+    const disagreements: SourceDisagreement[] = hasDisagreementTopic
+      ? [
+          {
+            field: "India GCC Universe Count",
+            source_a: "nasscom-Zinnov India GCC Landscape (FY26)",
+            value_a: "2,117 Parent GCCs (3,728 Units)",
+            grade_a: "B",
+            source_b: "AIM Research GCC Explorer (2026)",
+            value_b: "~1,400 Tech & Analytics Captives",
+            grade_b: "C",
+            reason:
+              "Zinnov counts all global parent corporations across tech and operations, while AIM Research applies restrictive criteria isolating deep tech, AI, and analytics captives only.",
+          },
+        ]
+      : [];
 
     // 3. Semantic Vector Search for Grounded Context
     const vectorMatches = vectorStore.search(query, 8);
@@ -136,16 +187,16 @@ export async function POST(req: NextRequest) {
     // 4. Attempt Groq AI Grounded Engine inference
     if (GROQ_API_KEY && contextSnippets.length > 0) {
       try {
-        const systemPrompt = `You are Zero, the grounded intelligence auditor for ZeroDay, an authoritative, citable platform on India's Global Capability Centres.
+        const systemPrompt = `You are the grounded intelligence system for GCC Atlas, an authoritative, citable platform on India's Global Capability Centres.
 You answer user queries strictly, accurately, and authoritatively using ONLY the provided Verified Context below.
 
-VERIFIED CONTEXT FROM ZERODAY VECTOR STORE:
+VERIFIED CONTEXT FROM GCC ATLAS VECTOR STORE:
 ${JSON.stringify(contextSnippets)}
 
 MANDATORY RULES:
 1. Every factual sentence in "answer_blocks" must cite valid "claim_ids" from the context if available.
 2. If the user asks for numbers, claims, or entities NOT present in the verified context, reply:
-   "ZeroDay does not have sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory."
+   "The Atlas has no sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory."
    Set "is_grounded": false, and describe the unverified metric in the "gaps" array.
 3. Keep answers concise, professional, and clear.
 4. Output strictly valid JSON with schema:
@@ -159,23 +210,26 @@ MANDATORY RULES:
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 8500);
 
-        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${GROQ_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: GROQ_MODEL,
-            messages: [
-              { role: "system", content: systemPrompt },
-              { role: "user", content: query },
-            ],
-            response_format: { type: "json_object" },
-            temperature: 0.1,
-          }),
-          signal: controller.signal,
-        });
+        const groqRes = await fetch(
+          "https://api.groq.com/openai/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${GROQ_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: GROQ_MODEL,
+              messages: [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: query },
+              ],
+              response_format: { type: "json_object" },
+              temperature: 0.1,
+            }),
+            signal: controller.signal,
+          }
+        );
 
         clearTimeout(timeoutId);
 
@@ -187,7 +241,9 @@ MANDATORY RULES:
 
             if (parsed.answer_blocks && parsed.answer_blocks.length > 0) {
               const hasValidClaims = parsed.answer_blocks.every(
-                (b) => !b.claim_ids || b.claim_ids.every((cid) => claimsMap.has(cid))
+                (b) =>
+                  !b.claim_ids ||
+                  b.claim_ids.every((cid) => claimsMap.has(cid))
               );
 
               if (hasValidClaims) {
@@ -196,7 +252,8 @@ MANDATORY RULES:
                   follow_ups: (parsed.follow_ups || []).slice(0, 3),
                   gaps: parsed.gaps || [],
                   is_grounded: parsed.is_grounded !== false,
-                  engine: `Zero via Groq (${GROQ_MODEL})`,
+                  disagreements:
+                    disagreements.length > 0 ? disagreements : undefined,
                 });
               }
             }
@@ -213,9 +270,16 @@ MANDATORY RULES:
     const gaps: string[] = [];
 
     // Macro market revenue or market facts
-    if (q.includes("revenue") || q.includes("market size") || q.includes("billion") || q.includes("fy26")) {
+    if (
+      q.includes("revenue") ||
+      q.includes("market size") ||
+      q.includes("billion") ||
+      q.includes("fy26")
+    ) {
       const revClaim = allClaims.find((c) => c.field === "annual_revenue");
-      const usClaim = allClaims.find((c) => c.field === "north_america_origin_share");
+      const usClaim = allClaims.find(
+        (c) => c.field === "north_america_origin_share"
+      );
       const blockClaims: string[] = [];
 
       let text = "";
@@ -236,9 +300,17 @@ MANDATORY RULES:
     }
 
     // Workforce / talent / headcount
-    if (q.includes("workforce") || q.includes("talent") || q.includes("headcount") || q.includes("professionals") || q.includes("million")) {
+    if (
+      q.includes("workforce") ||
+      q.includes("talent") ||
+      q.includes("headcount") ||
+      q.includes("professionals") ||
+      q.includes("million")
+    ) {
       const wfClaim = allClaims.find((c) => c.field === "headcount_total");
-      const salaryClaim = allClaims.find((c) => c.field === "pay_premium_over_it_services");
+      const salaryClaim = allClaims.find(
+        (c) => c.field === "pay_premium_over_it_services"
+      );
       const blockClaims: string[] = [];
 
       let text = "";
@@ -253,90 +325,100 @@ MANDATORY RULES:
 
       if (blockClaims.length > 0) {
         answer_blocks.push({ text, claim_ids: blockClaims });
-        follow_ups.push("Compare tech talent salary indexes across Bengaluru and Hyderabad");
+        follow_ups.push(
+          "Compare tech talent salary indexes across Bengaluru and Hyderabad"
+        );
       }
     }
 
     // Mega GCCs
-    if (q.includes("mega") || q.includes("5,000") || q.includes("large")) {
+    if (q.includes("mega") || q.includes("5000+")) {
       const megaClaim = allClaims.find((c) => c.field === "mega_gcc_count");
       if (megaClaim) {
         answer_blocks.push({
-          text: `India hosts ${megaClaim.value} Mega GCCs (centres with 5,000+ staff and parent annual revenue of $1B+). While representing ~5% of all centres, they employ nearly half of the total GCC workforce.`,
+          text: `India hosts ${megaClaim.value} Mega GCCs with headcounts exceeding 5,000 personnel.`,
           claim_ids: [megaClaim.id],
         });
-        follow_ups.push("Which companies operate Mega GCCs in Bengaluru?");
+        follow_ups.push(
+          "Which cities host the highest concentration of Mega GCCs?"
+        );
       }
     }
 
-    // Leasing / Real Estate absorption
-    if (q.includes("leasing") || q.includes("office") || q.includes("sq ft") || q.includes("absorption")) {
-      const leaseClaim = allClaims.find((c) => c.field === "gcc_office_leasing_share_q1_2026");
+    // Real estate / leasing
+    if (q.includes("leasing") || q.includes("absorption") || q.includes("q1")) {
+      const leaseClaim = allClaims.find(
+        (c) => c.field === "gcc_office_leasing_share_q1_2026"
+      );
       if (leaseClaim) {
         answer_blocks.push({
-          text: `In Q1 2026, GCCs accounted for ${leaseClaim.value}% of gross commercial office absorption in India (leasing 9.1 million sq ft out of 20.7 million sq ft).`,
+          text: `In Q1 2026, GCCs accounted for ${leaseClaim.value}% of gross commercial office absorption in India.`,
           claim_ids: [leaseClaim.id],
         });
-        follow_ups.push("What is the Grade A office rent range in Bengaluru and Hyderabad?");
+        follow_ups.push(
+          "What is the commercial office rent range in Bengaluru?"
+        );
       }
     }
 
-    // Specific City comparisons or query
+    // City-specific query (Bengaluru, Hyderabad, etc.)
     const allCities = citiesRepo.getAll();
-    const matchedCity = allCities.find(
-      (c) => q.includes(c.name.toLowerCase()) || (c.name.includes("Bengaluru") && q.includes("bangalore"))
+    const matchedCity = allCities.find((c) =>
+      q.includes(c.name.toLowerCase())
     );
-
     if (matchedCity) {
-      const cityClaims = allClaims.filter((c) => c.subject_id === matchedCity.id);
-      const unitsClaim = cityClaims.find((c) => c.field === "gcc_unit_count");
-      const rentClaim = cityClaims.find((c) => c.field === "office_rent_range");
-      const vacClaim = cityClaims.find((c) => c.field === "office_vacancy_rate");
+      const cityClaims = allClaims.filter(
+        (c) => c.subject_id === `city-${matchedCity.id}`
+      );
       const blockClaims: string[] = [];
+      let text = `${matchedCity.name} (${matchedCity.tier} hub) currently operates ${matchedCity.total_gccs} verified GCC units. `;
 
-      let text = `${matchedCity.name} currently operates `;
-      if (unitsClaim) {
-        text += `${unitsClaim.value} GCC units. `;
-        blockClaims.push(unitsClaim.id);
-      }
+      const rentClaim = cityClaims.find((c) => c.field === "office_rent_range");
+      const vacClaim = cityClaims.find(
+        (c) => c.field === "office_vacancy_rate"
+      );
+      const unitsClaim = cityClaims.find((c) => c.field === "gcc_unit_count");
+
+      if (unitsClaim) blockClaims.push(unitsClaim.id);
       if (rentClaim) {
-        text += `Commercial Grade A office rents range from ${rentClaim.value} per sq ft per month. `;
+        text += `Grade A commercial rents range from ${rentClaim.value} per sq ft per month. `;
         blockClaims.push(rentClaim.id);
       }
       if (vacClaim) {
-        text += `The current office vacancy rate stands at ${vacClaim.value}%.`;
+        text += `Vacancy stands at ${vacClaim.value}%.`;
         blockClaims.push(vacClaim.id);
       }
 
-      if (blockClaims.length > 0) {
-        answer_blocks.push({ text, claim_ids: blockClaims });
-        follow_ups.push(`What state incentives are available in ${matchedCity.name}?`);
-      }
+      answer_blocks.push({ text, claim_ids: blockClaims });
+      follow_ups.push(
+        `What state incentives apply to GCCs in ${matchedCity.state_id}?`
+      );
     }
 
-    // Specific GCC Entity query
+    // GCC entity query (Google, Microsoft, Boeing, etc.)
     const allGccs = gccRepo.getAll();
     const matchedGcc = allGccs.find(
       (g) =>
         q.includes(g.name.toLowerCase()) ||
         q.includes(g.parent_name.toLowerCase()) ||
-        (g.india_entity_name && q.includes(g.india_entity_name.toLowerCase()))
+        q.includes(g.slug.toLowerCase())
     );
-
     if (matchedGcc) {
-      const gccClaims = allClaims.filter((c) => c.subject_id === matchedGcc.id);
+      const gccClaims = allClaims.filter(
+        (c) => c.subject_id === matchedGcc.id
+      );
+      const blockClaims: string[] = [];
+      let text = `${matchedGcc.name} (Parent: ${matchedGcc.parent_name}) operates in ${matchedGcc.cities.join(", ")}. `;
+
       const estClaim = gccClaims.find((c) => c.field === "established_year");
       const cinClaim = gccClaims.find((c) => c.field === "cin");
-      const blockClaims: string[] = [];
-
-      let text = `${matchedGcc.name} (Parent: ${matchedGcc.parent_name}, HQ: ${matchedGcc.parent_hq_country}) operates capability centres across ${matchedGcc.cities.join(", ")} focusing on ${matchedGcc.functions.slice(0, 3).join(", ")}. `;
 
       if (estClaim) {
-        text += `Established in ${estClaim.value}. `;
+        text += `Established in India in ${estClaim.value}. `;
         blockClaims.push(estClaim.id);
       }
       if (cinClaim) {
-        text += `Statutory MCA Registration CIN: ${cinClaim.value}. `;
+        text += `Statutory MCA Corporate Identification Number: ${cinClaim.value}.`;
         blockClaims.push(cinClaim.id);
       }
 
@@ -348,7 +430,9 @@ MANDATORY RULES:
 
     // State Policy / Incentives query
     const allStates = statesRepo.getAll();
-    const matchedState = allStates.find((s) => q.includes(s.name.toLowerCase()));
+    const matchedState = allStates.find((s) =>
+      q.includes(s.name.toLowerCase())
+    );
     if (matchedState) {
       const inc = matchedState.policy.incentives;
       if (inc.length > 0) {
@@ -357,14 +441,20 @@ MANDATORY RULES:
           text: `Under the ${matchedState.policy.policy_name} (${matchedState.policy.period}), ${matchedState.name} offers: ${topInc.description} (Subsidy: ${topInc.amount_or_rate || "Specified in policy"}).`,
           claim_ids: [],
         });
-        follow_ups.push(`Compare ${matchedState.name} incentives with other states`);
+        follow_ups.push(
+          `Compare ${matchedState.name} incentives with other states`
+        );
       }
     }
 
     // Grounding & Strict Citation Check (Drop any uncited block)
     const verifiedBlocks: AnswerBlock[] = [];
     for (const block of answer_blocks) {
-      const check = verifyAnswerGrounding(block.text, block.claim_ids, claimsMap);
+      const check = verifyAnswerGrounding(
+        block.text,
+        block.claim_ids,
+        claimsMap
+      );
       if (check.isGrounded || block.claim_ids.length > 0) {
         verifiedBlocks.push(block);
       }
@@ -374,7 +464,7 @@ MANDATORY RULES:
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "ZeroDay does not have sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory.",
+            text: "The Atlas has no sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory.",
             claim_ids: [],
           },
         ],
@@ -387,7 +477,6 @@ MANDATORY RULES:
           `No citable primary claim found matching: "${query}". Pending ingestion from primary corporate filings or state gazettes.`,
         ],
         is_grounded: false,
-        engine: "Zero (Deterministic Fallback)",
       });
     }
 
@@ -396,10 +485,10 @@ MANDATORY RULES:
       follow_ups: follow_ups.slice(0, 3),
       gaps,
       is_grounded: true,
-      engine: "Zero (Deterministic Fallback)",
+      disagreements: disagreements.length > 0 ? disagreements : undefined,
     });
   } catch (error: any) {
-    console.error("Ask ZeroDay API Error:", error);
+    console.error("Ask GCC Atlas API Error:", error);
     return NextResponse.json(
       { error: "Internal server error processing grounded query" },
       { status: 500 }
