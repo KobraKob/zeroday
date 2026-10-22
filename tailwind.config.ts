@@ -11,40 +11,36 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#FFF6E5",
-        ink: "var(--color-ink)",
+        cream: "var(--cream)",
+        paper: "var(--paper)",
+        surface: "var(--surface)",
+        card: "var(--card)",
+        ink: "var(--ink)",
+        muted: "var(--muted)",
+        rule: {
+          DEFAULT: "var(--rule)",
+          subtle: "var(--rule-subtle)",
+        },
+        hairline: {
+          DEFAULT: "var(--hairline)",
+          subtle: "var(--hairline-subtle)",
+        },
         cobalt: {
-          DEFAULT: "#2536E8",
-          hover: "#1D2BB8",
-          subtle: "#ECEEFE",
+          DEFAULT: "var(--cobalt)",
+          hover: "var(--cobalt)",
+          subtle: "var(--surface)",
         },
         marigold: {
-          DEFAULT: "#FFC21A",
-          subtle: "#FFF8E6",
+          DEFAULT: "var(--marigold)",
+          subtle: "var(--surface)",
         },
         coral: {
-          DEFAULT: "#FF6B4A",
-          subtle: "#FFF0EC",
+          DEFAULT: "var(--coral)",
+          subtle: "var(--surface)",
         },
         mint: {
-          DEFAULT: "#5FE0B0",
-          subtle: "#EEFCF6",
-        },
-        paper: "var(--color-paper)",
-        surface: "var(--color-surface)",
-        muted: "var(--color-muted)",
-        hairline: {
-          DEFAULT: "var(--color-hairline)",
-          subtle: "var(--color-hairline-subtle)",
-        },
-        verdigris: {
-          DEFAULT: "var(--color-verdigris)",
-          hover: "var(--color-verdigris-hover)",
-          subtle: "var(--color-verdigris-subtle)",
-        },
-        vermilion: {
-          DEFAULT: "var(--color-vermilion)",
-          subtle: "var(--color-vermilion-subtle)",
+          DEFAULT: "var(--mint)",
+          subtle: "var(--surface)",
         },
       },
       fontFamily: {

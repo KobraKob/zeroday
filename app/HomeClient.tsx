@@ -81,8 +81,8 @@ export function HomeClient({
       <section aria-labelledby="hero-statement" className="border-b border-hairline pb-12 pt-4">
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono mb-6">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-verdigris"></span>
-            <span className="uppercase font-bold tracking-wider text-verdigris">
+            <span className="w-1.5 h-1.5 bg-cobalt"></span>
+            <span className="uppercase font-bold tracking-wider text-cobalt">
               Official Reference Record
             </span>
             <span className="text-muted">• Edition 2026-Q1</span>
@@ -148,7 +148,7 @@ export function HomeClient({
                 Office Leasing Share Q1 2026
               </span>
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl sm:text-4xl font-black text-verdigris tabular-nums">
+                <span className="font-display text-3xl sm:text-4xl font-black text-cobalt tabular-nums">
                   44.0%
                 </span>
                 <SourceFootnote
@@ -180,7 +180,7 @@ export function HomeClient({
           </div>
           <Link
             href="/reconcile"
-            className="font-mono text-xs text-verdigris hover:text-ink hover:underline decoration-1 underline-offset-2 flex items-center gap-1 font-semibold"
+            className="font-mono text-xs text-cobalt hover:text-ink hover:underline decoration-1 underline-offset-2 flex items-center gap-1 font-semibold"
           >
             <span>Open Full Reconcile Ledger</span>
             <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -206,7 +206,7 @@ export function HomeClient({
               <span className="font-display text-4xl sm:text-5xl font-black text-ink tabular-nums">
                 {recomputeResult.count}
               </span>
-              <span className="font-mono text-xs uppercase text-verdigris font-semibold">
+              <span className="font-mono text-xs uppercase text-cobalt font-semibold">
                 {selectedUnit.replace("_", " ")} units
               </span>
             </div>
@@ -245,7 +245,7 @@ export function HomeClient({
                 <span className="font-mono text-[10px] uppercase tracking-widest text-muted font-bold">
                   Pathway I
                 </span>
-                <Compass className="w-4 h-4 text-verdigris" strokeWidth={1.5} />
+                <Compass className="w-4 h-4 text-cobalt" strokeWidth={1.5} />
               </div>
               <h3 className="font-display text-xl font-bold text-ink leading-snug">
                 Plan an Entry: Site Selection &amp; Subsidies
@@ -256,7 +256,7 @@ export function HomeClient({
             </div>
             <Link
               href="/compare"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:text-verdigris transition-colors duration-fast pt-3 border-t border-hairline-subtle"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:text-cobalt transition-colors duration-fast pt-3 border-t border-hairline-subtle"
             >
               <span>Examine City Compare</span>
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -267,10 +267,10 @@ export function HomeClient({
           <div className="p-6 sm:p-7 flex flex-col justify-between space-y-6 hover:bg-paper/30 transition-colors duration-fast">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-vermilion font-bold">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-coral font-bold">
                   Pathway II • Predictive
                 </span>
-                <Radio className="w-4 h-4 text-vermilion" strokeWidth={1.5} />
+                <Radio className="w-4 h-4 text-coral" strokeWidth={1.5} />
               </div>
               <h3 className="font-display text-xl font-bold text-ink leading-snug">
                 Find Who is Coming: Radar Intelligence
@@ -281,7 +281,7 @@ export function HomeClient({
             </div>
             <Link
               href="/radar"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:text-vermilion transition-colors duration-fast pt-3 border-t border-hairline-subtle"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:text-coral transition-colors duration-fast pt-3 border-t border-hairline-subtle"
             >
               <span>Inspect Radar Signals</span>
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -295,7 +295,7 @@ export function HomeClient({
                 <span className="font-mono text-[10px] uppercase tracking-widest text-muted font-bold">
                   Pathway III
                 </span>
-                <Award className="w-4 h-4 text-verdigris" strokeWidth={1.5} />
+                <Award className="w-4 h-4 text-cobalt" strokeWidth={1.5} />
               </div>
               <h3 className="font-display text-xl font-bold text-ink leading-snug">
                 Verify a Provider: Evidence Proof Links
@@ -306,7 +306,7 @@ export function HomeClient({
             </div>
             <Link
               href="/providers"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:text-verdigris transition-colors duration-fast pt-3 border-t border-hairline-subtle"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink hover:text-cobalt transition-colors duration-fast pt-3 border-t border-hairline-subtle"
             >
               <span>Audit Proof Links</span>
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -421,7 +421,7 @@ export function HomeClient({
                 <th scope="row" className="py-3.5 px-4 font-mono font-medium text-ink">
                   Office Leasing Share (Q1 2026)
                 </th>
-                <td className="py-3.5 px-4 font-mono font-bold text-sm text-verdigris tabular-nums">
+                <td className="py-3.5 px-4 font-mono font-bold text-sm text-cobalt tabular-nums">
                   44.0% of Market
                 </td>
                 <td className="py-3.5 px-4 text-muted font-serif italic text-xs">

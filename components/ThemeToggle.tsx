@@ -9,9 +9,8 @@ export function ThemeToggle() {
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem("zeroday-theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+    const savedTheme = localStorage.getItem("gcc-atlas-theme");
+    if (savedTheme === "dark") {
       setIsDark(true);
       document.documentElement.classList.add("dark");
     } else {
@@ -25,16 +24,16 @@ export function ThemeToggle() {
     setIsDark(nextDark);
     if (nextDark) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("zeroday-theme", "dark");
+      localStorage.setItem("gcc-atlas-theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("zeroday-theme", "light");
+      localStorage.setItem("gcc-atlas-theme", "light");
     }
   };
 
   if (!mounted) {
     return (
-      <div className="w-8 h-8 border border-hairline bg-surface flex items-center justify-center text-muted opacity-50" />
+      <div className="w-9 h-9 border-2 border-ink rounded-full bg-surface flex items-center justify-center text-muted opacity-40 min-h-[36px] min-w-[36px]" />
     );
   }
 
@@ -42,14 +41,14 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={isDark ? "Switch to light ledger mode" : "Switch to dark obsidian mode"}
-      title={isDark ? "Light Ledger (Day)" : "Dark Obsidian (Night)"}
-      className="w-8 h-8 border border-hairline bg-surface text-ink hover:text-verdigris hover:border-ink transition-colors duration-fast flex items-center justify-center focus-visible:outline-verdigris min-h-[32px] min-w-[32px]"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="w-9 h-9 border-2 border-ink rounded-full bg-surface text-ink hover:bg-paper hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all flex items-center justify-center focus-visible:outline-cobalt min-h-[36px] min-w-[36px] cursor-pointer"
     >
       {isDark ? (
-        <Sun className="w-3.5 h-3.5 text-verdigris" strokeWidth={1.5} />
+        <Sun className="w-4 h-4 text-marigold" strokeWidth={2} />
       ) : (
-        <Moon className="w-3.5 h-3.5 text-ink" strokeWidth={1.5} />
+        <Moon className="w-4 h-4 text-ink" strokeWidth={2} />
       )}
     </button>
   );

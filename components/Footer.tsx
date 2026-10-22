@@ -7,111 +7,110 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export function Footer() {
   return (
-    <footer className="border-t border-hairline bg-paper/70 font-sans text-xs text-muted py-12 mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <footer className="border-t-2 border-ink bg-paper/80 font-sans text-xs text-muted py-8 mt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Masthead Colophon */}
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 border border-ink text-ink flex items-center justify-center font-serif font-bold text-xs bg-surface">
+              <div className="w-6 h-6 border-2 border-ink text-ink flex items-center justify-center font-display font-bold text-xs bg-surface rounded-xs">
                 GA
               </div>
-              <span className="font-serif font-bold text-ink text-sm tracking-tight uppercase">
+              <span className="font-display font-bold text-ink text-sm tracking-tight uppercase">
                 GCC Atlas
               </span>
             </div>
-            <p className="text-[12px] font-mono uppercase tracking-widest text-muted">
-              Independent Archival Record of India
+            <p className="text-xs font-sans text-muted">
+              Independent archival record of India
             </p>
-            <p className="font-serif italic text-sm text-ink/80 max-w-md leading-relaxed">
+            <p className="font-body italic text-sm text-ink/80 max-w-md leading-relaxed">
               &ldquo;The independent, citable record of India&apos;s Global Capability Centre ecosystem. Every number traced to a primary statutory source.&rdquo;
             </p>
-            <div className="flex items-center gap-2 pt-2 text-[11px] font-mono text-muted">
-              <Shield className="w-3.5 h-3.5 text-verdigris" strokeWidth={1.5} />
-              <span>Neutrality Guarantee: Commercial relationships never alter scoring, counts, or verification.</span>
+            <div className="flex items-center gap-2 pt-1 text-xs font-sans text-muted">
+              <Shield className="w-3.5 h-3.5 text-cobalt flex-shrink-0" strokeWidth={1.5} />
+              <span>Neutrality guarantee: Commercial relationships never alter scoring, counts, or verification.</span>
             </div>
           </div>
 
           {/* Core Indexes */}
-          <div className="space-y-2">
-            <div className="font-mono uppercase text-ink text-[11px] font-bold tracking-wider">
-              Primary Indexes
+          <div className="space-y-2.5">
+            <div className="text-ink text-xs font-semibold">
+              Primary indexes
             </div>
-            <ul className="space-y-1.5 font-mono text-[11px]">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/reconcile" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Reconcile Counts
+                  Reconcile counts
                 </Link>
               </li>
               <li>
                 <Link href="/registry" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Verified GCC Registry
+                  GCC registry
                 </Link>
               </li>
               <li>
                 <Link href="/radar" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Radar Signal Intelligence
+                  Radar signal intelligence
                 </Link>
               </li>
               <li>
                 <Link href="/compare" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Site Selection Compare
+                  Site selection compare
                 </Link>
               </li>
               <li>
                 <Link href="/providers" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Proof-Backed Directory
+                  Proof-backed directory
                 </Link>
               </li>
               <li>
                 <Link href="/advisor" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  India Entry Advisor
+                  India entry advisor
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Governance & Methodology */}
-          <div className="space-y-2">
-            <div className="font-mono uppercase text-ink text-[11px] font-bold tracking-wider">
-              Governance & Methodology
+          <div className="space-y-2.5">
+            <div className="text-ink text-xs font-semibold">
+              Governance and methodology
             </div>
-            <ul className="space-y-1.5 font-mono text-[11px]">
+            <ul className="space-y-1.5 text-xs">
               <li>
                 <Link href="/methodology" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Methodology &amp; Rubric
+                  Methodology and rubric
                 </Link>
               </li>
               <li>
                 <Link href="/methodology#disputes" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Correction &amp; Dispute Protocol
+                  Correction and dispute protocol
                 </Link>
               </li>
               <li>
                 <Link href="/submit" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Submit Provider Attestation
+                  Submit provider attestation
                 </Link>
               </li>
               <li>
                 <Link href="/admin/review" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Review Queue
+                  Review queue
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Hairline Colophon Rule with Theme Toggle */}
-        <div className="pt-6 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-muted">
+        {/* Colophon Rule with Theme Toggle */}
+        <div className="pt-6 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
           <div>
-            &copy; 2026 GCC Atlas. Data is citable under Open Attribution.
+            &copy; <span className="font-mono">2026</span> GCC Atlas. Data is citable under Open Attribution.
           </div>
           <div className="flex items-center gap-4">
-            <span>Edition: May 2026</span>
-            <span className="text-verdigris">Last reviewed: May 2026</span>
-            {/* Theme Toggle moved to footer as requested */}
+            <span>Edition: May <span className="font-mono">2026</span></span>
+            <span className="text-cobalt">Last reviewed: May <span className="font-mono">2026</span></span>
             <div className="flex items-center gap-2 pl-2 border-l border-hairline">
-              <span className="text-[10px] uppercase tracking-wider text-muted hidden sm:inline">Theme:</span>
+              <span className="text-xs text-muted hidden sm:inline">Theme:</span>
               <ThemeToggle />
             </div>
           </div>

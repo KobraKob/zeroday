@@ -34,13 +34,13 @@ export function CoverageMeter({
       {/* Hairline Proportional Rule */}
       <div className="w-full bg-paper border border-hairline h-2 overflow-hidden">
         <div
-          className="bg-verdigris h-full transition-all duration-slow ease-ledger"
+          className="bg-cobalt h-full transition-all duration-slow ease-ledger"
           style={{ width: `${Math.min(100, Math.max(3, coveragePercentage))}%` }}
         />
       </div>
 
       <div className="flex items-start gap-2 text-xs font-serif italic text-muted leading-relaxed">
-        <AlertCircle className="w-3.5 h-3.5 text-verdigris mt-0.5 shrink-0 not-italic" strokeWidth={1.5} />
+        <AlertCircle className="w-3.5 h-3.5 text-cobalt mt-0.5 shrink-0 not-italic" strokeWidth={1.5} />
         <span>
           <strong className="font-mono not-italic uppercase text-[10px] text-ink mr-1 font-bold">
             Methodological Disclosure:

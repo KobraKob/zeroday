@@ -7,13 +7,29 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Google India Private Limited",
     "cin": "U72900KA2003PTC033028",
-    "cities": ["Bengaluru", "Hyderabad", "Mumbai", "Gurugram"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad",
+      "Mumbai",
+      "Gurugram"
+    ],
     "sector": "Software & Internet",
-    "functions": ["Core Software Engineering", "AI & ML Research", "Cloud Infrastructure", "Product Operations"],
+    "functions": [
+      "Core Software Engineering",
+      "AI & ML Research",
+      "Cloud Infrastructure",
+      "Product Operations"
+    ],
     "established_year": 2004,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-goog-est", "clm-gcc-goog-cin", "clm-gcc-goog-size", "clm-gcc-goog-lease"]
+    "claim_ids": [
+      "clm-gcc-goog-est",
+      "clm-gcc-goog-cin",
+      "clm-gcc-goog-size",
+      "clm-gcc-goog-lease"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-microsoft",
@@ -23,13 +39,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Microsoft India (R&D) Private Limited",
     "cin": "U72200TG1998PTC029414",
-    "cities": ["Hyderabad", "Bengaluru", "Noida"],
+    "cities": [
+      "Hyderabad",
+      "Bengaluru",
+      "Noida"
+    ],
     "sector": "Software & Cloud Computing",
-    "functions": ["Azure Cloud Platform", "Windows & Devices", "Office 365", "AI Platform"],
+    "functions": [
+      "Azure Cloud Platform",
+      "Windows & Devices",
+      "Office 365",
+      "AI Platform"
+    ],
     "established_year": 1998,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-msft-est", "clm-gcc-msft-cin", "clm-gcc-msft-size"]
+    "claim_ids": [
+      "clm-gcc-msft-est",
+      "clm-gcc-msft-cin",
+      "clm-gcc-msft-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-amazon",
@@ -39,13 +69,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Amazon Development Centre (India) Private Limited",
     "cin": "U72200KA2004FTC034233",
-    "cities": ["Bengaluru", "Hyderabad", "Chennai"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad",
+      "Chennai"
+    ],
     "sector": "E-Commerce & Cloud Infrastructure",
-    "functions": ["AWS Engineering", "Retail Systems", "Supply Chain Optimization", "Alexa AI"],
+    "functions": [
+      "AWS Engineering",
+      "Retail Systems",
+      "Supply Chain Optimization",
+      "Alexa AI"
+    ],
     "established_year": 2004,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-amzn-est", "clm-gcc-amzn-cin", "clm-gcc-amzn-size"]
+    "claim_ids": [
+      "clm-gcc-amzn-est",
+      "clm-gcc-amzn-cin",
+      "clm-gcc-amzn-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-jpmorgan",
@@ -55,13 +99,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "J.P. Morgan Services India Private Limited",
     "cin": "U72900MH2000PTC124563",
-    "cities": ["Mumbai", "Bengaluru", "Hyderabad"],
+    "cities": [
+      "Mumbai",
+      "Bengaluru",
+      "Hyderabad"
+    ],
     "sector": "Banking & Financial Services",
-    "functions": ["Quantitative Research", "Investment Banking Tech", "Risk Analytics", "Global Operations"],
+    "functions": [
+      "Quantitative Research",
+      "Investment Banking Tech",
+      "Risk Analytics",
+      "Global Operations"
+    ],
     "established_year": 2002,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-jpmc-est", "clm-gcc-jpmc-cin", "clm-gcc-jpmc-size"]
+    "claim_ids": [
+      "clm-gcc-jpmc-est",
+      "clm-gcc-jpmc-cin",
+      "clm-gcc-jpmc-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-wells-fargo",
@@ -71,13 +129,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Wells Fargo International Solutions Private Limited",
     "cin": "U72200TG2006FTC051401",
-    "cities": ["Hyderabad", "Bengaluru", "Chennai"],
+    "cities": [
+      "Hyderabad",
+      "Bengaluru",
+      "Chennai"
+    ],
     "sector": "Banking & Financial Services",
-    "functions": ["Core Banking Engineering", "Cybersecurity", "Credit Risk Modeling", "Financial Crimes Compliance"],
+    "functions": [
+      "Core Banking Engineering",
+      "Cybersecurity",
+      "Credit Risk Modeling",
+      "Financial Crimes Compliance"
+    ],
     "established_year": 2006,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-wells-est", "clm-gcc-wells-cin", "clm-gcc-wells-size"]
+    "claim_ids": [
+      "clm-gcc-wells-est",
+      "clm-gcc-wells-cin",
+      "clm-gcc-wells-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-goldman-sachs",
@@ -87,13 +159,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Goldman Sachs Services Private Limited",
     "cin": "U72200KA2003FTC032644",
-    "cities": ["Bengaluru", "Hyderabad"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad"
+    ],
     "sector": "Investment Banking & Wealth Management",
-    "functions": ["Algorithmic Trading Tech", "Asset Management Analytics", "Global Risk Operations", "FinTech R&D"],
+    "functions": [
+      "Algorithmic Trading Tech",
+      "Asset Management Analytics",
+      "Global Risk Operations",
+      "FinTech R&D"
+    ],
     "established_year": 2004,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-gs-est", "clm-gcc-gs-cin", "clm-gcc-gs-size"]
+    "claim_ids": [
+      "clm-gcc-gs-est",
+      "clm-gcc-gs-cin",
+      "clm-gcc-gs-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-walmart",
@@ -103,13 +188,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Walmart Global Technology Services India Private Limited",
     "cin": "U72200KA2011FTC061730",
-    "cities": ["Bengaluru", "Chennai", "Gurugram"],
+    "cities": [
+      "Bengaluru",
+      "Chennai",
+      "Gurugram"
+    ],
     "sector": "Retail & Supply Chain Technology",
-    "functions": ["Omnichannel Commerce Tech", "Automated Fulfilment AI", "Data Platforms", "Cyber Defense"],
+    "functions": [
+      "Omnichannel Commerce Tech",
+      "Automated Fulfilment AI",
+      "Data Platforms",
+      "Cyber Defense"
+    ],
     "established_year": 2011,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-walmart-est", "clm-gcc-walmart-cin", "clm-gcc-walmart-size"]
+    "claim_ids": [
+      "clm-gcc-walmart-est",
+      "clm-gcc-walmart-cin",
+      "clm-gcc-walmart-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-target",
@@ -119,13 +218,24 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Target Corporation India Private Limited",
     "cin": "U74900KA2004FTC035028",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Retail Technology & Merchandising",
-    "functions": ["Digital Merchandising", "E-commerce Platforms", "Supply Chain Systems", "Marketing Analytics"],
+    "functions": [
+      "Digital Merchandising",
+      "E-commerce Platforms",
+      "Supply Chain Systems",
+      "Marketing Analytics"
+    ],
     "established_year": 2005,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-target-est", "clm-gcc-target-cin"]
+    "claim_ids": [
+      "clm-gcc-target-est",
+      "clm-gcc-target-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-boeing",
@@ -135,13 +245,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Boeing India Private Limited",
     "cin": "U74999DL2003FTC123616",
-    "cities": ["Bengaluru", "Chennai"],
+    "cities": [
+      "Bengaluru",
+      "Chennai"
+    ],
     "sector": "Aerospace & Defense",
-    "functions": ["Avionics Software", "Aerodynamics Modeling", "Digital Aviation Analytics", "Advanced Materials Testing"],
+    "functions": [
+      "Avionics Software",
+      "Aerodynamics Modeling",
+      "Digital Aviation Analytics",
+      "Advanced Materials Testing"
+    ],
     "established_year": 2016,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-boeing-est", "clm-gcc-boeing-cin", "clm-gcc-boeing-size"]
+    "claim_ids": [
+      "clm-gcc-boeing-est",
+      "clm-gcc-boeing-cin",
+      "clm-gcc-boeing-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-airbus",
@@ -151,13 +274,24 @@
     "parent_hq_country": "France / Netherlands",
     "india_entity_name": "Airbus India Private Limited",
     "cin": "U74140KA2006FTC041285",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Aerospace & Aviation",
-    "functions": ["Flight Physics", "Aerospace Structures", "Digital Simulation & Cockpit Software", "Customer Services Tech"],
+    "functions": [
+      "Flight Physics",
+      "Aerospace Structures",
+      "Digital Simulation & Cockpit Software",
+      "Customer Services Tech"
+    ],
     "established_year": 2007,
     "headcount_band": "1k-5k",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-airbus-est", "clm-gcc-airbus-cin"]
+    "claim_ids": [
+      "clm-gcc-airbus-est",
+      "clm-gcc-airbus-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-schneider",
@@ -167,13 +301,26 @@
     "parent_hq_country": "France",
     "india_entity_name": "Schneider Electric India Private Limited",
     "cin": "U74899DL1995PTC065815",
-    "cities": ["Bengaluru", "Hyderabad", "Noida"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad",
+      "Noida"
+    ],
     "sector": "Energy Management & Automation",
-    "functions": ["Microgrid Software", "IoT Edge Devices", "Power Systems R&D", "Sustainability Solutions"],
+    "functions": [
+      "Microgrid Software",
+      "IoT Edge Devices",
+      "Power Systems R&D",
+      "Sustainability Solutions"
+    ],
     "established_year": 2000,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-schneider-est", "clm-gcc-schneider-cin"]
+    "claim_ids": [
+      "clm-gcc-schneider-est",
+      "clm-gcc-schneider-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-bosch",
@@ -183,13 +330,28 @@
     "parent_hq_country": "Germany",
     "india_entity_name": "Bosch Global Software Technologies Private Limited",
     "cin": "U72400KA1997PTC023164",
-    "cities": ["Bengaluru", "Coimbatore", "Hyderabad", "Pune"],
+    "cities": [
+      "Bengaluru",
+      "Coimbatore",
+      "Hyderabad",
+      "Pune"
+    ],
     "sector": "Automotive Engineering & IoT",
-    "functions": ["Autonomous Driving Software", "Mobility Solutions", "Industrial IoT", "Electronic Control Units (ECU)"],
+    "functions": [
+      "Autonomous Driving Software",
+      "Mobility Solutions",
+      "Industrial IoT",
+      "Electronic Control Units (ECU)"
+    ],
     "established_year": 1997,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-bosch-est", "clm-gcc-bosch-cin", "clm-gcc-bosch-size"]
+    "claim_ids": [
+      "clm-gcc-bosch-est",
+      "clm-gcc-bosch-cin",
+      "clm-gcc-bosch-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-intel",
@@ -199,13 +361,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Intel Technology India Private Limited",
     "cin": "U72900KA1998PTC024522",
-    "cities": ["Bengaluru", "Hyderabad"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad"
+    ],
     "sector": "Semiconductors & Computing Hardware",
-    "functions": ["Silicon Design (SoC)", "Validation & Hardware Emulation", "Graphics Software", "AI Accelerators"],
+    "functions": [
+      "Silicon Design (SoC)",
+      "Validation & Hardware Emulation",
+      "Graphics Software",
+      "AI Accelerators"
+    ],
     "established_year": 1998,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-intel-est", "clm-gcc-intel-cin", "clm-gcc-intel-size"]
+    "claim_ids": [
+      "clm-gcc-intel-est",
+      "clm-gcc-intel-cin",
+      "clm-gcc-intel-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-qualcomm",
@@ -215,13 +390,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Qualcomm India Private Limited",
     "cin": "U64202DL1996PTC077750",
-    "cities": ["Hyderabad", "Bengaluru", "Chennai", "Noida"],
+    "cities": [
+      "Hyderabad",
+      "Bengaluru",
+      "Chennai",
+      "Noida"
+    ],
     "sector": "Semiconductors & Telecommunications",
-    "functions": ["5G/6G Modem Firmware", "Snapdragon System Architecture", "Automotive Connectivity", "Wi-Fi Chipset Design"],
+    "functions": [
+      "5G/6G Modem Firmware",
+      "Snapdragon System Architecture",
+      "Automotive Connectivity",
+      "Wi-Fi Chipset Design"
+    ],
     "established_year": 2004,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-qualcomm-est", "clm-gcc-qualcomm-cin"]
+    "claim_ids": [
+      "clm-gcc-qualcomm-est",
+      "clm-gcc-qualcomm-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-cisco",
@@ -231,13 +420,24 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Cisco Systems (India) Private Limited",
     "cin": "U31909KA1995PTC019505",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Networking & Cybersecurity",
-    "functions": ["Routing & Switching Operating Systems", "Cloud Security", "Enterprise Collaboration", "Hardware Verification"],
+    "functions": [
+      "Routing & Switching Operating Systems",
+      "Cloud Security",
+      "Enterprise Collaboration",
+      "Hardware Verification"
+    ],
     "established_year": 1995,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-cisco-est", "clm-gcc-cisco-cin"]
+    "claim_ids": [
+      "clm-gcc-cisco-est",
+      "clm-gcc-cisco-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-sap",
@@ -247,13 +447,28 @@
     "parent_hq_country": "Germany",
     "india_entity_name": "SAP Labs India Private Limited",
     "cin": "U72200KA1998PTC024440",
-    "cities": ["Bengaluru", "Gurugram", "Pune", "Hyderabad"],
+    "cities": [
+      "Bengaluru",
+      "Gurugram",
+      "Pune",
+      "Hyderabad"
+    ],
     "sector": "Enterprise Software & Cloud ERP",
-    "functions": ["S/4HANA Core Development", "Business Technology Platform (BTP)", "GenAI Copilot Joule", "Supply Chain Cloud"],
+    "functions": [
+      "S/4HANA Core Development",
+      "Business Technology Platform (BTP)",
+      "GenAI Copilot Joule",
+      "Supply Chain Cloud"
+    ],
     "established_year": 1998,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-sap-est", "clm-gcc-sap-cin", "clm-gcc-sap-size"]
+    "claim_ids": [
+      "clm-gcc-sap-est",
+      "clm-gcc-sap-cin",
+      "clm-gcc-sap-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-barclays",
@@ -263,13 +478,26 @@
     "parent_hq_country": "United Kingdom",
     "india_entity_name": "Barclays Global Service Centre Private Limited",
     "cin": "U72900PN2006FTC129486",
-    "cities": ["Pune", "Chennai"],
+    "cities": [
+      "Pune",
+      "Chennai"
+    ],
     "sector": "Banking & Financial Services",
-    "functions": ["Corporate & Investment Bank Tech", "Retail Banking Platforms", "Cyber Operations", "Regulatory Reporting"],
+    "functions": [
+      "Corporate & Investment Bank Tech",
+      "Retail Banking Platforms",
+      "Cyber Operations",
+      "Regulatory Reporting"
+    ],
     "established_year": 2007,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-barclays-est", "clm-gcc-barclays-cin", "clm-gcc-barclays-size"]
+    "claim_ids": [
+      "clm-gcc-barclays-est",
+      "clm-gcc-barclays-cin",
+      "clm-gcc-barclays-size"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-hsbc",
@@ -279,13 +507,26 @@
     "parent_hq_country": "United Kingdom",
     "india_entity_name": "HSBC Electronic Data Processing India Private Limited",
     "cin": "U72200TG2000PTC035465",
-    "cities": ["Hyderabad", "Pune", "Bengaluru"],
+    "cities": [
+      "Hyderabad",
+      "Pune",
+      "Bengaluru"
+    ],
     "sector": "Banking & Financial Services",
-    "functions": ["Commercial Banking Software", "Wealth & Personal Banking Tech", "Global Operations", "AI Analytics"],
+    "functions": [
+      "Commercial Banking Software",
+      "Wealth & Personal Banking Tech",
+      "Global Operations",
+      "AI Analytics"
+    ],
     "established_year": 2002,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-hsbc-est", "clm-gcc-hsbc-cin"]
+    "claim_ids": [
+      "clm-gcc-hsbc-est",
+      "clm-gcc-hsbc-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-standard-chartered",
@@ -295,13 +536,25 @@
     "parent_hq_country": "United Kingdom",
     "india_entity_name": "Standard Chartered Global Business Services Private Limited",
     "cin": "U72900TN2000PTC044738",
-    "cities": ["Chennai", "Bengaluru"],
+    "cities": [
+      "Chennai",
+      "Bengaluru"
+    ],
     "sector": "Banking & Financial Services",
-    "functions": ["Transaction Banking Platforms", "Financial Crime Surveillance", "Global Treasury Tech", "Client Operations"],
+    "functions": [
+      "Transaction Banking Platforms",
+      "Financial Crime Surveillance",
+      "Global Treasury Tech",
+      "Client Operations"
+    ],
     "established_year": 2000,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-sc-est", "clm-gcc-sc-cin"]
+    "claim_ids": [
+      "clm-gcc-sc-est",
+      "clm-gcc-sc-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-fidelity",
@@ -311,13 +564,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "FMR India Software Services Private Limited",
     "cin": "U72200KA2001FTC028445",
-    "cities": ["Bengaluru", "Chennai"],
+    "cities": [
+      "Bengaluru",
+      "Chennai"
+    ],
     "sector": "Asset Management & Retirement Services",
-    "functions": ["Brokerage Technology", "Institutional Asset Management Platforms", "Data Science & AI", "Cloud Engineering"],
+    "functions": [
+      "Brokerage Technology",
+      "Institutional Asset Management Platforms",
+      "Data Science & AI",
+      "Cloud Engineering"
+    ],
     "established_year": 2001,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-fidelity-est", "clm-gcc-fidelity-cin"]
+    "claim_ids": [
+      "clm-gcc-fidelity-est",
+      "clm-gcc-fidelity-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-lowes",
@@ -327,13 +592,24 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Lowe's Services India Private Limited",
     "cin": "U72900KA2014FTC074213",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Home Improvement Retail",
-    "functions": ["Supply Chain Optimization", "E-Commerce Experience", "Store Associate Mobile Tools", "Inventory Analytics"],
+    "functions": [
+      "Supply Chain Optimization",
+      "E-Commerce Experience",
+      "Store Associate Mobile Tools",
+      "Inventory Analytics"
+    ],
     "established_year": 2014,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-lowes-est", "clm-gcc-lowes-cin"]
+    "claim_ids": [
+      "clm-gcc-lowes-est",
+      "clm-gcc-lowes-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-pepsico",
@@ -343,13 +619,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "PepsiCo India GBS Private Limited",
     "cin": "U74999TG2019FTC134812",
-    "cities": ["Hyderabad", "Gurugram"],
+    "cities": [
+      "Hyderabad",
+      "Gurugram"
+    ],
     "sector": "Food & Beverage / FMCG",
-    "functions": ["Demand Forecasting AI", "Global Procurement Operations", "Supply Chain Logistics", "Financial Shared Services"],
+    "functions": [
+      "Demand Forecasting AI",
+      "Global Procurement Operations",
+      "Supply Chain Logistics",
+      "Financial Shared Services"
+    ],
     "established_year": 2019,
     "headcount_band": "1k-5k",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-pepsi-est", "clm-gcc-pepsi-cin"]
+    "claim_ids": [
+      "clm-gcc-pepsi-est",
+      "clm-gcc-pepsi-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-astrazeneca",
@@ -359,13 +647,25 @@
     "parent_hq_country": "United Kingdom / Sweden",
     "india_entity_name": "AstraZeneca India Private Limited",
     "cin": "U24231KA1979PTC003563",
-    "cities": ["Chennai", "Bengaluru"],
+    "cities": [
+      "Chennai",
+      "Bengaluru"
+    ],
     "sector": "Pharmaceuticals & Biotechnology",
-    "functions": ["Clinical Trials Data Platforms", "Genomics Analytics", "Digital Health Applications", "Drug Supply Chain IT"],
+    "functions": [
+      "Clinical Trials Data Platforms",
+      "Genomics Analytics",
+      "Digital Health Applications",
+      "Drug Supply Chain IT"
+    ],
     "established_year": 2014,
     "headcount_band": "1k-5k",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-astra-est", "clm-gcc-astra-cin"]
+    "claim_ids": [
+      "clm-gcc-astra-est",
+      "clm-gcc-astra-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-novartis",
@@ -375,13 +675,24 @@
     "parent_hq_country": "Switzerland",
     "india_entity_name": "Novartis Healthcare Private Limited",
     "cin": "U73100TG2007FTC055416",
-    "cities": ["Hyderabad"],
+    "cities": [
+      "Hyderabad"
+    ],
     "sector": "Life Sciences & Pharmaceuticals",
-    "functions": ["Biostatistics & Clinical Data Management", "Regulatory Affairs", "Pharmacovigilance", "Medical Writing"],
+    "functions": [
+      "Biostatistics & Clinical Data Management",
+      "Regulatory Affairs",
+      "Pharmacovigilance",
+      "Medical Writing"
+    ],
     "established_year": 2007,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-novartis-est", "clm-gcc-novartis-cin"]
+    "claim_ids": [
+      "clm-gcc-novartis-est",
+      "clm-gcc-novartis-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-pfizer",
@@ -391,13 +702,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Pfizer Healthcare India Private Limited",
     "cin": "U24231TN2009FTC072790",
-    "cities": ["Chennai", "Mumbai"],
+    "cities": [
+      "Chennai",
+      "Mumbai"
+    ],
     "sector": "Pharmaceuticals",
-    "functions": ["Analytical Chemistry Labs", "Formulation R&D", "Oral Solid Dose Technology", "Clinical Regulatory Submissions"],
+    "functions": [
+      "Analytical Chemistry Labs",
+      "Formulation R&D",
+      "Oral Solid Dose Technology",
+      "Clinical Regulatory Submissions"
+    ],
     "established_year": 2022,
     "headcount_band": "<500",
     "status": "operating",
-    "claim_ids": ["clm-gcc-pfizer-est", "clm-gcc-pfizer-cin"]
+    "claim_ids": [
+      "clm-gcc-pfizer-est",
+      "clm-gcc-pfizer-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-shell",
@@ -407,13 +730,25 @@
     "parent_hq_country": "United Kingdom",
     "india_entity_name": "Shell India Markets Private Limited",
     "cin": "U23201TN2004PTC053147",
-    "cities": ["Bengaluru", "Chennai"],
+    "cities": [
+      "Bengaluru",
+      "Chennai"
+    ],
     "sector": "Energy & Renewables",
-    "functions": ["Subsurface Computational Geophysics", "Process Engineering", "Clean Energy Materials", "Digital Plant Ops"],
+    "functions": [
+      "Subsurface Computational Geophysics",
+      "Process Engineering",
+      "Clean Energy Materials",
+      "Digital Plant Ops"
+    ],
     "established_year": 2006,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-shell-est", "clm-gcc-shell-cin"]
+    "claim_ids": [
+      "clm-gcc-shell-est",
+      "clm-gcc-shell-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-mercedes-benz",
@@ -423,13 +758,25 @@
     "parent_hq_country": "Germany",
     "india_entity_name": "Mercedes-Benz Research and Development India Private Limited",
     "cin": "U72200KA1996FTC020583",
-    "cities": ["Bengaluru", "Pune"],
+    "cities": [
+      "Bengaluru",
+      "Pune"
+    ],
     "sector": "Automotive & Luxury Mobility",
-    "functions": ["MB.OS Operating System", "Connected Vehicle Telematics", "Battery Management Systems (BMS)", "Crash Simulation"],
+    "functions": [
+      "MB.OS Operating System",
+      "Connected Vehicle Telematics",
+      "Battery Management Systems (BMS)",
+      "Crash Simulation"
+    ],
     "established_year": 1996,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-mbrdi-est", "clm-gcc-mbrdi-cin"]
+    "claim_ids": [
+      "clm-gcc-mbrdi-est",
+      "clm-gcc-mbrdi-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-continental",
@@ -439,13 +786,24 @@
     "parent_hq_country": "Germany",
     "india_entity_name": "Continental Automotive Components (India) Private Limited",
     "cin": "U29309KA2007PTC044439",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Automotive Systems & ADAS",
-    "functions": ["Radar/Camera Perception Algorithms", "Electronic Braking Systems", "Vehicle Cockpit Electronics", "Cyber Security"],
+    "functions": [
+      "Radar/Camera Perception Algorithms",
+      "Electronic Braking Systems",
+      "Vehicle Cockpit Electronics",
+      "Cyber Security"
+    ],
     "established_year": 2009,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-continental-est", "clm-gcc-continental-cin"]
+    "claim_ids": [
+      "clm-gcc-continental-est",
+      "clm-gcc-continental-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-volvo-group",
@@ -455,13 +813,24 @@
     "parent_hq_country": "Sweden",
     "india_entity_name": "Volvo Group India Private Limited",
     "cin": "U35923KA1997PTC022062",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Commercial Vehicles & Transport Solutions",
-    "functions": ["Fleet Telematics Cloud", "Electromobility Drivetrain Software", "Automated Driving Hub", "Global IT Services"],
+    "functions": [
+      "Fleet Telematics Cloud",
+      "Electromobility Drivetrain Software",
+      "Automated Driving Hub",
+      "Global IT Services"
+    ],
     "established_year": 1998,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-volvo-est", "clm-gcc-volvo-cin"]
+    "claim_ids": [
+      "clm-gcc-volvo-est",
+      "clm-gcc-volvo-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-3m",
@@ -471,13 +840,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "3M India Limited",
     "cin": "L31300KA1987PLC035230",
-    "cities": ["Bengaluru", "Pune"],
+    "cities": [
+      "Bengaluru",
+      "Pune"
+    ],
     "sector": "Materials Science & Industrial Solutions",
-    "functions": ["Adhesives & Film Formulation", "Acoustic Insulation Design", "Healthcare Consumables R&D", "Micro-replication Labs"],
+    "functions": [
+      "Adhesives & Film Formulation",
+      "Acoustic Insulation Design",
+      "Healthcare Consumables R&D",
+      "Micro-replication Labs"
+    ],
     "established_year": 2011,
     "headcount_band": "500-1k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-3m-est", "clm-gcc-3m-cin"]
+    "claim_ids": [
+      "clm-gcc-3m-est",
+      "clm-gcc-3m-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-abbott",
@@ -487,13 +868,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Abbott India Limited",
     "cin": "L24239MH1944PLC007330",
-    "cities": ["Mumbai", "Bengaluru"],
+    "cities": [
+      "Mumbai",
+      "Bengaluru"
+    ],
     "sector": "Medical Devices & Diagnostics",
-    "functions": ["Digital Diagnostics Applications", "Nutritional Formulation Testing", "Regulatory Informatics", "Medical Affairs Tech"],
+    "functions": [
+      "Digital Diagnostics Applications",
+      "Nutritional Formulation Testing",
+      "Regulatory Informatics",
+      "Medical Affairs Tech"
+    ],
     "established_year": 2012,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-abbott-est", "clm-gcc-abbott-cin"]
+    "claim_ids": [
+      "clm-gcc-abbott-est",
+      "clm-gcc-abbott-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-philips",
@@ -503,13 +896,24 @@
     "parent_hq_country": "Netherlands",
     "india_entity_name": "Philips India Limited",
     "cin": "U31902WB1930PLC006663",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "HealthTech & Medical Imaging",
-    "functions": ["MRI/CT Imaging Reconstruction Algorithms", "Patient Monitoring Systems", "AI Precision Diagnosis", "Connected Care Cloud"],
+    "functions": [
+      "MRI/CT Imaging Reconstruction Algorithms",
+      "Patient Monitoring Systems",
+      "AI Precision Diagnosis",
+      "Connected Care Cloud"
+    ],
     "established_year": 1996,
     "headcount_band": "1k-5k",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-philips-est", "clm-gcc-philips-cin"]
+    "claim_ids": [
+      "clm-gcc-philips-est",
+      "clm-gcc-philips-cin"
+    ],
+    "cin_status": "verified"
   },
   {
     "id": "gcc-siemens-healthineers",
@@ -519,13 +923,24 @@
     "parent_hq_country": "Germany",
     "india_entity_name": "Siemens Healthcare Private Limited",
     "cin": "U85110KA2015FTC080706",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Medical Technology & Digital Health",
-    "functions": ["Diagnostic Imaging Software", "Molecular Diagnostics", "Robotic-Assisted Surgery Platforms", "Clinical Digital Twins"],
+    "functions": [
+      "Diagnostic Imaging Software",
+      "Molecular Diagnostics",
+      "Robotic-Assisted Surgery Platforms",
+      "Clinical Digital Twins"
+    ],
     "established_year": 2015,
     "headcount_band": "1k-5k",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-siemens-est", "clm-gcc-siemens-cin"]
+    "claim_ids": [
+      "clm-gcc-siemens-est",
+      "clm-gcc-siemens-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-john-deere",
@@ -535,13 +950,24 @@
     "parent_hq_country": "United States",
     "india_entity_name": "John Deere India Private Limited",
     "cin": "U29220PN1997PTC112316",
-    "cities": ["Pune"],
+    "cities": [
+      "Pune"
+    ],
     "sector": "Heavy Machinery & Precision Agriculture",
-    "functions": ["Autonomous Tractor Guidance Software", "IoT Telematics", "Drivetrain Design", "Agricultural Computer Vision"],
+    "functions": [
+      "Autonomous Tractor Guidance Software",
+      "IoT Telematics",
+      "Drivetrain Design",
+      "Agricultural Computer Vision"
+    ],
     "established_year": 2001,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-deere-est", "clm-gcc-deere-cin"]
+    "claim_ids": [
+      "clm-gcc-deere-est",
+      "clm-gcc-deere-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-caterpillar",
@@ -551,13 +977,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Caterpillar India Private Limited",
     "cin": "U27310TN2000PTC043940",
-    "cities": ["Chennai", "Bengaluru"],
+    "cities": [
+      "Chennai",
+      "Bengaluru"
+    ],
     "sector": "Heavy Machinery & Industrial Equipment",
-    "functions": ["Hydraulics Systems Modeling", "Structural Simulation", "Machine Electrification Software", "Supply Chain IT"],
+    "functions": [
+      "Hydraulics Systems Modeling",
+      "Structural Simulation",
+      "Machine Electrification Software",
+      "Supply Chain IT"
+    ],
     "established_year": 2002,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-caterpillar-est", "clm-gcc-caterpillar-cin"]
+    "claim_ids": [
+      "clm-gcc-caterpillar-est",
+      "clm-gcc-caterpillar-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-ford",
@@ -567,13 +1005,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Ford Global Business Services Private Limited",
     "cin": "U72900TN1998PTC041285",
-    "cities": ["Chennai", "Coimbatore"],
+    "cities": [
+      "Chennai",
+      "Coimbatore"
+    ],
     "sector": "Automotive Engineering & Digital Services",
-    "functions": ["Vehicle Connected Services", "Electrification Software", "Data Analytics & Pricing Models", "Global Finance Shared Services"],
+    "functions": [
+      "Vehicle Connected Services",
+      "Electrification Software",
+      "Data Analytics & Pricing Models",
+      "Global Finance Shared Services"
+    ],
     "established_year": 1998,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-ford-est", "clm-gcc-ford-cin"]
+    "claim_ids": [
+      "clm-gcc-ford-est",
+      "clm-gcc-ford-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-amex",
@@ -583,13 +1033,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "American Express (India) Private Limited",
     "cin": "U74899DL1993FTC055375",
-    "cities": ["Gurugram", "Bengaluru"],
+    "cities": [
+      "Gurugram",
+      "Bengaluru"
+    ],
     "sector": "Payments & Financial Services",
-    "functions": ["Credit Fraud Detection AI", "Payment Gateway Architecture", "Customer Analytics", "Global Servicing Operations"],
+    "functions": [
+      "Credit Fraud Detection AI",
+      "Payment Gateway Architecture",
+      "Customer Analytics",
+      "Global Servicing Operations"
+    ],
     "established_year": 1993,
     "headcount_band": "5k+",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-amex-est", "clm-gcc-amex-cin", "clm-gcc-amex-size"]
+    "claim_ids": [
+      "clm-gcc-amex-est",
+      "clm-gcc-amex-cin",
+      "clm-gcc-amex-size"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-citi",
@@ -599,13 +1062,28 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Citicorp Services India Private Limited",
     "cin": "U72900MH1995PTC095111",
-    "cities": ["Mumbai", "Pune", "Chennai", "Gurugram"],
+    "cities": [
+      "Mumbai",
+      "Pune",
+      "Chennai",
+      "Gurugram"
+    ],
     "sector": "Banking & Institutional Finance",
-    "functions": ["Securities Services Tech", "Global Treasury Operations", "Trade Finance Platforms", "Risk & Capital Reporting"],
+    "functions": [
+      "Securities Services Tech",
+      "Global Treasury Operations",
+      "Trade Finance Platforms",
+      "Risk & Capital Reporting"
+    ],
     "established_year": 1985,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-citi-est", "clm-gcc-citi-cin", "clm-gcc-citi-size"]
+    "claim_ids": [
+      "clm-gcc-citi-est",
+      "clm-gcc-citi-cin",
+      "clm-gcc-citi-size"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-morgan-stanley",
@@ -615,13 +1093,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Morgan Stanley Solutions India Private Limited",
     "cin": "U72900MH2003FTC142991",
-    "cities": ["Mumbai", "Bengaluru"],
+    "cities": [
+      "Mumbai",
+      "Bengaluru"
+    ],
     "sector": "Investment Banking & Wealth Management",
-    "functions": ["Institutional Equities Trading Tech", "Fixed Income Risk Engines", "Machine Learning in Quantitative Research", "Cloud Architecture"],
+    "functions": [
+      "Institutional Equities Trading Tech",
+      "Fixed Income Risk Engines",
+      "Machine Learning in Quantitative Research",
+      "Cloud Architecture"
+    ],
     "established_year": 2003,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-ms-est", "clm-gcc-ms-cin", "clm-gcc-ms-size"]
+    "claim_ids": [
+      "clm-gcc-ms-est",
+      "clm-gcc-ms-cin",
+      "clm-gcc-ms-size"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-bny",
@@ -631,13 +1122,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "BNY Mellon Technology Private Limited",
     "cin": "U72200PN2000FTC014798",
-    "cities": ["Pune", "Chennai"],
+    "cities": [
+      "Pune",
+      "Chennai"
+    ],
     "sector": "Custody & Financial Market Infrastructure",
-    "functions": ["Clearing & Settlement Systems", "Asset Servicing Analytics", "FinTech AI Solutions", "Global Cyber Security"],
+    "functions": [
+      "Clearing & Settlement Systems",
+      "Asset Servicing Analytics",
+      "FinTech AI Solutions",
+      "Global Cyber Security"
+    ],
     "established_year": 2000,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-bny-est", "clm-gcc-bny-cin"]
+    "claim_ids": [
+      "clm-gcc-bny-est",
+      "clm-gcc-bny-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-state-street",
@@ -647,13 +1150,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "State Street Corporate Services Mumbai Private Limited",
     "cin": "U74140MH2007FTC172822",
-    "cities": ["Bengaluru", "Hyderabad", "Mumbai", "Coimbatore"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad",
+      "Mumbai",
+      "Coimbatore"
+    ],
     "sector": "Institutional Investment Services",
-    "functions": ["Fund Accounting Platforms", "Risk Analytics Engine (Charles River)", "Securities Lending", "Tax & Regulatory Reporting"],
+    "functions": [
+      "Fund Accounting Platforms",
+      "Risk Analytics Engine (Charles River)",
+      "Securities Lending",
+      "Tax & Regulatory Reporting"
+    ],
     "established_year": 2007,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-statestreet-est", "clm-gcc-statestreet-cin"]
+    "claim_ids": [
+      "clm-gcc-statestreet-est",
+      "clm-gcc-statestreet-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-ubs",
@@ -663,13 +1180,26 @@
     "parent_hq_country": "Switzerland",
     "india_entity_name": "UBS Business Solutions (India) Private Limited",
     "cin": "U74900PN2006FTC128101",
-    "cities": ["Pune", "Mumbai", "Hyderabad"],
+    "cities": [
+      "Pune",
+      "Mumbai",
+      "Hyderabad"
+    ],
     "sector": "Wealth Management & Banking",
-    "functions": ["Private Banking Core Technology", "Risk & Stress Testing Models", "Compliance Automation", "Client Onboarding Platforms"],
+    "functions": [
+      "Private Banking Core Technology",
+      "Risk & Stress Testing Models",
+      "Compliance Automation",
+      "Client Onboarding Platforms"
+    ],
     "established_year": 2006,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-ubs-est", "clm-gcc-ubs-cin"]
+    "claim_ids": [
+      "clm-gcc-ubs-est",
+      "clm-gcc-ubs-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-ansys",
@@ -679,13 +1209,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Ansys Software Private Limited",
     "cin": "U72200PN1996PTC099411",
-    "cities": ["Pune", "Bengaluru", "Noida"],
+    "cities": [
+      "Pune",
+      "Bengaluru",
+      "Noida"
+    ],
     "sector": "Engineering Simulation Software",
-    "functions": ["Computational Fluid Dynamics (CFD)", "Electromagnetic Solvers", "Semiconductor Power Integrity", "Cloud Simulation"],
+    "functions": [
+      "Computational Fluid Dynamics (CFD)",
+      "Electromagnetic Solvers",
+      "Semiconductor Power Integrity",
+      "Cloud Simulation"
+    ],
     "established_year": 1996,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-ansys-est", "clm-gcc-ansys-cin"]
+    "claim_ids": [
+      "clm-gcc-ansys-est",
+      "clm-gcc-ansys-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-cadence",
@@ -695,13 +1238,27 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Cadence Design Systems (India) Private Limited",
     "cin": "U72200UP1987PTC008985",
-    "cities": ["Noida", "Bengaluru", "Pune", "Hyderabad"],
+    "cities": [
+      "Noida",
+      "Bengaluru",
+      "Pune",
+      "Hyderabad"
+    ],
     "sector": "Electronic Design Automation (EDA)",
-    "functions": ["Custom IC Design Tools", "Logic Synthesis Algorithms", "Formal Verification", "System-Level Emulation"],
+    "functions": [
+      "Custom IC Design Tools",
+      "Logic Synthesis Algorithms",
+      "Formal Verification",
+      "System-Level Emulation"
+    ],
     "established_year": 1987,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-cadence-est", "clm-gcc-cadence-cin"]
+    "claim_ids": [
+      "clm-gcc-cadence-est",
+      "clm-gcc-cadence-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-synopsys",
@@ -711,13 +1268,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Synopsys (India) Private Limited",
     "cin": "U72200KA1995PTC018861",
-    "cities": ["Bengaluru", "Hyderabad", "Noida"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad",
+      "Noida"
+    ],
     "sector": "Semiconductor Design & Software Integrity",
-    "functions": ["Physical Implementation Engines", "Analog/Mixed-Signal IP", "Silicon Lifecycle Management", "DevSecOps"],
+    "functions": [
+      "Physical Implementation Engines",
+      "Analog/Mixed-Signal IP",
+      "Silicon Lifecycle Management",
+      "DevSecOps"
+    ],
     "established_year": 1995,
     "headcount_band": "1k-5k",
     "status": "operating",
-    "claim_ids": ["clm-gcc-synopsys-est", "clm-gcc-synopsys-cin"]
+    "claim_ids": [
+      "clm-gcc-synopsys-est",
+      "clm-gcc-synopsys-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-dell",
@@ -727,13 +1297,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Dell International Services India Private Limited",
     "cin": "U72900KA1996PTC020436",
-    "cities": ["Bengaluru", "Hyderabad"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad"
+    ],
     "sector": "Enterprise Infrastructure & PC Hardware",
-    "functions": ["Server Storage Array OS", "Data Protection Software", "Edge Gateway Firmware", "Global Support Analytics"],
+    "functions": [
+      "Server Storage Array OS",
+      "Data Protection Software",
+      "Edge Gateway Firmware",
+      "Global Support Analytics"
+    ],
     "established_year": 1996,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-dell-est", "clm-gcc-dell-cin"]
+    "claim_ids": [
+      "clm-gcc-dell-est",
+      "clm-gcc-dell-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-hp",
@@ -743,13 +1325,25 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Hewlett Packard Enterprise India Private Limited",
     "cin": "U72900KA2015FTC084225",
-    "cities": ["Bengaluru", "Chennai"],
+    "cities": [
+      "Bengaluru",
+      "Chennai"
+    ],
     "sector": "Enterprise Cloud & Networking",
-    "functions": ["GreenLake Hybrid Cloud Platform", "Aruba Wireless Architecture", "Storage Virtualization", "HPC Clusters"],
+    "functions": [
+      "GreenLake Hybrid Cloud Platform",
+      "Aruba Wireless Architecture",
+      "Storage Virtualization",
+      "HPC Clusters"
+    ],
     "established_year": 2015,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-hpe-est", "clm-gcc-hpe-cin"]
+    "claim_ids": [
+      "clm-gcc-hpe-est",
+      "clm-gcc-hpe-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-honeywell",
@@ -759,13 +1353,26 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Honeywell Technology Solutions Lab Private Limited",
     "cin": "U72200KA1994PTC016462",
-    "cities": ["Bengaluru", "Hyderabad", "Madurai"],
+    "cities": [
+      "Bengaluru",
+      "Hyderabad",
+      "Madurai"
+    ],
     "sector": "Industrial Automation & Aerospace",
-    "functions": ["Building Management Systems", "Cockpit Avionics Flight Controls", "Process Plant Automation", "Industrial IoT Sensors"],
+    "functions": [
+      "Building Management Systems",
+      "Cockpit Avionics Flight Controls",
+      "Process Plant Automation",
+      "Industrial IoT Sensors"
+    ],
     "established_year": 1994,
     "headcount_band": "5k+",
     "status": "operating",
-    "claim_ids": ["clm-gcc-honeywell-est", "clm-gcc-honeywell-cin"]
+    "claim_ids": [
+      "clm-gcc-honeywell-est",
+      "clm-gcc-honeywell-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-applied-materials",
@@ -775,13 +1382,24 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Applied Materials India Private Limited",
     "cin": "U72900KA2002PTC031388",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Semiconductor Equipment Manufacturing",
-    "functions": ["Semiconductor Equipment Software", "Precision Mechanical Design", "Chemical Vapor Deposition Modeling", "Supply Chain Engineering"],
+    "functions": [
+      "Semiconductor Equipment Software",
+      "Precision Mechanical Design",
+      "Chemical Vapor Deposition Modeling",
+      "Supply Chain Engineering"
+    ],
     "established_year": 2003,
     "headcount_band": "1k-5k",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-amat-est", "clm-gcc-amat-cin"]
+    "claim_ids": [
+      "clm-gcc-amat-est",
+      "clm-gcc-amat-cin"
+    ],
+    "cin_status": "unverified"
   },
   {
     "id": "gcc-lam-research",
@@ -791,12 +1409,23 @@
     "parent_hq_country": "United States",
     "india_entity_name": "Lam Research (India) Private Limited",
     "cin": "U72200KA2000PTC027787",
-    "cities": ["Bengaluru"],
+    "cities": [
+      "Bengaluru"
+    ],
     "sector": "Semiconductor Equipment & Wafer Fabrication",
-    "functions": ["Plasma Etch Simulation", "Cleanroom Automation Software", "Hardware Reliability Engineering", "Digital Twin Modeling"],
+    "functions": [
+      "Plasma Etch Simulation",
+      "Cleanroom Automation Software",
+      "Hardware Reliability Engineering",
+      "Digital Twin Modeling"
+    ],
     "established_year": 2000,
     "headcount_band": "1k-5k",
     "status": "expanding",
-    "claim_ids": ["clm-gcc-lam-est", "clm-gcc-lam-cin"]
+    "claim_ids": [
+      "clm-gcc-lam-est",
+      "clm-gcc-lam-cin"
+    ],
+    "cin_status": "unverified"
   }
 ]

@@ -66,6 +66,8 @@ export const GccStatusSchema = z.enum([
   "expanding",
 ]);
 
+export const CinStatusSchema = z.enum(["verified", "unverified"]);
+
 export const GccSchema = z.object({
   id: z.string(),
   slug: z.string(),
@@ -74,6 +76,7 @@ export const GccSchema = z.object({
   parent_hq_country: z.string(),
   india_entity_name: z.string().optional().nullable(),
   cin: z.string().optional().nullable(),
+  cin_status: CinStatusSchema.optional().nullable(),
   cities: z.array(z.string()),
   sector: z.string(),
   functions: z.array(z.string()),

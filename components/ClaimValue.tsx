@@ -63,12 +63,12 @@ export function ClaimValue({
       <button
         type="button"
         onClick={handleClick}
-        className="text-left font-mono font-medium text-ink hover:text-verdigris hover:underline decoration-1 underline-offset-2 cursor-pointer transition-colors duration-fast"
+        className="text-left font-mono font-medium text-ink hover:text-cobalt hover:underline decoration-1 underline-offset-2 cursor-pointer transition-colors duration-fast"
         title="Inspect primary source verification"
       >
         <span>{displayValue}</span>
         {source && (
-          <sup className="text-[10px] font-mono text-verdigris font-bold ml-0.5">
+          <sup className="text-[10px] font-mono text-cobalt font-bold ml-0.5">
             [{marker}]
           </sup>
         )}
@@ -77,7 +77,7 @@ export function ClaimValue({
       {claim?.demo && (
         <span
           title="Demo Data: Synthetic benchmark for demonstration"
-          className="text-[10px] font-mono px-1 py-0.2 border border-vermilion text-vermilion"
+          className="text-[10px] font-mono px-1 py-0.2 border border-coral text-coral"
         >
           DEMO
         </span>

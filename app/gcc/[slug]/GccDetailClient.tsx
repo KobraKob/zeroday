@@ -69,7 +69,7 @@ export function GccDetailClient({
               <span
                 className={`text-[10px] uppercase px-2 py-0.5 border font-bold ${
                   gcc.status === "expanding"
-                    ? "border-verdigris text-verdigris bg-verdigris/10"
+                    ? "border-cobalt text-cobalt bg-cobalt/10"
                     : "border-ink text-ink bg-paper/40"
                 }`}
               >
@@ -138,7 +138,7 @@ export function GccDetailClient({
                 key={city}
                 className="inline-flex items-center gap-1 px-2.5 py-1 border border-hairline bg-paper text-xs font-mono text-ink"
               >
-                <MapPin className="w-3 h-3 text-verdigris" />
+                <MapPin className="w-3 h-3 text-cobalt" />
                 <span>{city}</span>
               </span>
             ))}
@@ -246,7 +246,7 @@ export function GccDetailClient({
                       {prov && (
                         <Link
                           href={`/provider/${prov.slug}`}
-                          className="font-display font-bold text-ink hover:text-verdigris hover:underline text-sm"
+                          className="font-display font-bold text-ink hover:text-cobalt hover:underline text-sm"
                         >
                           {prov.name}
                         </Link>
@@ -262,7 +262,7 @@ export function GccDetailClient({
                       href={src.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-xs text-verdigris hover:text-ink font-semibold shrink-0"
+                      className="inline-flex items-center gap-1 font-mono text-xs text-cobalt hover:text-ink font-semibold shrink-0"
                     >
                       <span>Public Proof Link</span>
                       <ExternalLink className="w-3 h-3" />

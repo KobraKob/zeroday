@@ -55,13 +55,13 @@ export function MethodologyClient() {
           </h2>
         </div>
 
-        <div className="p-5 border border-hairline bg-paper/40 font-serif italic text-sm leading-relaxed text-ink/90 border-l-2 border-verdigris">
+        <div className="p-5 border border-hairline bg-paper/40 font-serif italic text-sm leading-relaxed text-ink/90 border-l-2 border-cobalt">
           &ldquo;An India-incorporated legal entity or physical operating campus whose primary economic purpose is the delivery of captive technology engineering, digital product development, advanced analytics, or global shared services solely for an affiliated non-Indian corporate parent group.&rdquo;
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-sans">
           <div className="p-4 border border-hairline bg-surface space-y-1">
-            <span className="font-mono text-[10px] uppercase font-bold text-verdigris block">
+            <span className="font-mono text-[10px] uppercase font-bold text-cobalt block">
               Explicitly Included
             </span>
             <p className="text-muted leading-relaxed">
@@ -69,7 +69,7 @@ export function MethodologyClient() {
             </p>
           </div>
           <div className="p-4 border border-hairline bg-surface space-y-1">
-            <span className="font-mono text-[10px] uppercase font-bold text-vermilion block">
+            <span className="font-mono text-[10px] uppercase font-bold text-coral block">
               Strictly Excluded
             </span>
             <p className="text-muted leading-relaxed">
@@ -108,7 +108,7 @@ export function MethodologyClient() {
                 Ministry of Corporate Affairs (MCA) RoC incorporation filings, Corporate Identification Numbers (CIN), registered sub-registrar lease deeds, or officially gazetted state government policy orders.
               </p>
             </div>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-verdigris font-bold shrink-0">
+            <span className="font-mono text-[10px] uppercase tracking-wider text-cobalt font-bold shrink-0">
               Highest Provenance
             </span>
           </div>
@@ -187,15 +187,15 @@ export function MethodologyClient() {
 
           <ul className="space-y-2.5 font-mono text-xs text-ink/90 border-t border-hairline-subtle pt-3">
             <li className="flex items-start gap-2">
-              <span className="text-verdigris font-bold">01.</span>
+              <span className="text-cobalt font-bold">01.</span>
               <span><strong>Zero Paid Placement:</strong> No corporation or service provider can purchase ranking, priority listing, or editorial mention.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-verdigris font-bold">02.</span>
+              <span className="text-cobalt font-bold">02.</span>
               <span><strong>Immutable Evidence Trail:</strong> No datapoint is recorded without a verifiable public link, gazette order, or primary disclosure.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-verdigris font-bold">03.</span>
+              <span className="text-cobalt font-bold">03.</span>
               <span><strong>Equal Burden of Proof:</strong> Submissions from multi-billion dollar enterprises undergo identical automated and human verification as small startups.</span>
             </li>
           </ul>
@@ -217,10 +217,10 @@ export function MethodologyClient() {
           If any datapoint, headcount estimate, or entity attribution in the Atlas is inaccurate, submit a primary statutory correction below:
         </p>
 
-        <form onSubmit={handleSubmitReport} className="p-6 border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-4 font-sans text-xs">
+        <form onSubmit={handleSubmitReport} className="p-6 border-2 border-ink bg-surface space-y-4 font-sans text-xs rounded-xs">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Target GCC or Provider:
               </label>
               <input
@@ -229,12 +229,12 @@ export function MethodologyClient() {
                 placeholder="e.g. JPMorgan Chase India"
                 value={reportGcc}
                 onChange={(e) => setReportGcc(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px]"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Disputed Field / Metric:
               </label>
               <input
@@ -243,13 +243,13 @@ export function MethodologyClient() {
                 placeholder="e.g. Establishment Year / CIN / Headcount"
                 value={reportField}
                 onChange={(e) => setReportField(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+            <label className="block text-xs uppercase text-muted font-bold mb-1">
               Public Primary Source URL:
             </label>
             <input
@@ -258,12 +258,12 @@ export function MethodologyClient() {
               placeholder="https://mca.gov.in/... or official SEC 10-K filing"
               value={reportUrl}
               onChange={(e) => setReportUrl(e.target.value)}
-              className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+              className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px]"
             />
           </div>
 
           <div>
-            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+            <label className="block text-xs uppercase text-muted font-bold mb-1">
               Audited Correction Note:
             </label>
             <textarea
@@ -272,7 +272,7 @@ export function MethodologyClient() {
               placeholder="Explain the discrepancy and quote the exact passage in the primary document..."
               value={reportNote}
               onChange={(e) => setReportNote(e.target.value)}
-              className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris"
+              className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt"
             />
           </div>
 
@@ -282,14 +282,14 @@ export function MethodologyClient() {
             </span>
             <button
               type="submit"
-              className="px-5 py-2.5 bg-ink text-paper text-xs uppercase tracking-wider font-semibold hover:bg-verdigris transition-colors duration-fast min-h-[44px]"
+              className="px-5 py-2.5 bg-ink text-paper text-xs uppercase tracking-wider font-semibold hover:bg-cobalt transition-colors duration-fast min-h-[44px]"
             >
               Submit for Archival Audit
             </button>
           </div>
 
           {errorReported && (
-            <div className="p-3 border border-verdigris bg-verdigris/10 text-xs text-verdigris flex items-center gap-2">
+            <div className="p-3 border border-cobalt bg-cobalt/10 text-xs text-cobalt flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4" />
               <span>Correction logged to the human-in-the-loop audit ledger.</span>
             </div>

@@ -127,7 +127,7 @@ export function SourceDrawer() {
             )}
 
             {claim?.demo && (
-              <div className="pt-2 text-[11px] font-mono text-vermilion border-t border-hairline-subtle">
+              <div className="pt-2 text-[11px] font-mono text-coral border-t border-hairline-subtle">
                 [SYNTHETIC BENCHMARK FOR DEMONSTRATION]
               </div>
             )}
@@ -137,10 +137,10 @@ export function SourceDrawer() {
           {claim?.exact_quote && (
             <div className="space-y-1.5">
               <div className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-muted">
-                <FileText className="w-3.5 h-3.5 text-verdigris" strokeWidth={1.5} />
+                <FileText className="w-3.5 h-3.5 text-cobalt" strokeWidth={1.5} />
                 <span>Primary Verbatim Excerpt</span>
               </div>
-              <blockquote className="border-l-2 border-verdigris pl-3.5 py-1 text-xs font-serif italic leading-relaxed text-ink/90 bg-paper/40">
+              <blockquote className="border-l-2 border-cobalt pl-3.5 py-1 text-xs font-serif italic leading-relaxed text-ink/90 bg-paper/40">
                 &ldquo;{claim.exact_quote}&rdquo;
               </blockquote>
             </div>
@@ -223,7 +223,7 @@ export function SourceDrawer() {
                 href={source.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-ink text-ink font-mono text-xs font-semibold uppercase tracking-wider hover:bg-verdigris hover:border-verdigris hover:text-surface transition-colors duration-fast"
+                className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-ink text-ink font-mono text-xs font-semibold uppercase tracking-wider hover:bg-cobalt hover:border-cobalt hover:text-surface transition-colors duration-fast"
               >
                 <span>Examine Public Source URL</span>
                 <ExternalLink className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -245,7 +245,7 @@ export function SourceDrawer() {
               <button
                 type="button"
                 onClick={handleCopyCitation}
-                className="inline-flex items-center gap-1 text-[11px] font-mono text-verdigris hover:text-ink font-semibold transition-colors duration-fast"
+                className="inline-flex items-center gap-1 text-[11px] font-mono text-cobalt hover:text-ink font-semibold transition-colors duration-fast"
               >
                 {copied ? <Check className="w-3 h-3" strokeWidth={1.5} /> : <Copy className="w-3 h-3" strokeWidth={1.5} />}
                 <span>{copied ? "Copied" : "Copy"}</span>
@@ -259,7 +259,7 @@ export function SourceDrawer() {
           {/* Neutrality Firewall Notice */}
           <div className="p-3 border-l-2 border-hairline bg-paper/30 text-[11px] text-muted space-y-1">
             <div className="font-mono uppercase font-bold text-ink flex items-center gap-1.5 text-[10px]">
-              <Shield className="w-3 h-3 text-verdigris" strokeWidth={1.5} />
+              <Shield className="w-3 h-3 text-cobalt" strokeWidth={1.5} />
               <span>Neutrality Firewall</span>
             </div>
             <p className="font-serif leading-relaxed">
@@ -276,7 +276,7 @@ export function SourceDrawer() {
           <button
             type="button"
             onClick={closeDrawer}
-            className="min-h-[44px] px-4 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-ink hover:text-verdigris transition-colors duration-fast"
+            className="min-h-[44px] px-4 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-ink hover:text-cobalt transition-colors duration-fast"
           >
             Close Panel
           </button>

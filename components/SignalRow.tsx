@@ -37,7 +37,7 @@ export function SignalRow({ score, sourcesMap }: SignalRowProps) {
             className="w-6 h-6 flex items-center justify-center text-muted hover:text-ink shrink-0"
           >
             {isOpen ? (
-              <ChevronDown className="w-4 h-4 text-verdigris" />
+              <ChevronDown className="w-4 h-4 text-cobalt" />
             ) : (
               <ChevronRight className="w-4 h-4" />
             )}
@@ -50,7 +50,7 @@ export function SignalRow({ score, sourcesMap }: SignalRowProps) {
               </span>
               {score.targetCities.length > 0 && (
                 <span className="text-xs font-mono text-muted flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-verdigris" />
+                  <MapPin className="w-3 h-3 text-cobalt" />
                   {score.targetCities.join(", ")}
                 </span>
               )}
@@ -69,7 +69,7 @@ export function SignalRow({ score, sourcesMap }: SignalRowProps) {
             </span>
             <span
               className={`font-mono text-lg font-bold tabular-nums ${
-                isImminent ? "text-vermilion" : "text-ink"
+                isImminent ? "text-coral" : "text-ink"
               }`}
             >
               {score.score}/100
@@ -83,9 +83,9 @@ export function SignalRow({ score, sourcesMap }: SignalRowProps) {
             <span
               className={`inline-block font-mono text-[10px] uppercase font-bold px-2 py-0.5 border ${
                 isImminent
-                  ? "border-vermilion text-vermilion bg-vermilion/10"
+                  ? "border-coral text-coral bg-coral/10"
                   : isArrived
-                  ? "border-verdigris text-verdigris bg-verdigris/10"
+                  ? "border-cobalt text-cobalt bg-cobalt/10"
                   : "border-hairline text-muted bg-paper/50"
               }`}
             >
@@ -140,7 +140,7 @@ export function SignalRow({ score, sourcesMap }: SignalRowProps) {
                           </div>
                         )}
                       </td>
-                      <td className="py-2.5 px-3 text-center font-mono font-bold text-verdigris tabular-nums">
+                      <td className="py-2.5 px-3 text-center font-mono font-bold text-cobalt tabular-nums">
                         +{contrib.decayedWeight} pts
                       </td>
                       <td className="py-2.5 px-3 text-center">

@@ -53,7 +53,7 @@ export function ConfidenceStamp({
       role="note"
       aria-label={`${meta.title} — ${meta.rubric}`}
       title={`${meta.title}\n${meta.rubric}`}
-      className={`inline-flex items-center gap-1.5 font-mono uppercase font-semibold border border-ink text-ink bg-transparent select-none transition-colors duration-fast hover:border-verdigris hover:text-verdigris cursor-help ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center gap-1.5 font-mono uppercase font-semibold border border-ink text-ink bg-transparent select-none transition-colors duration-fast hover:border-cobalt hover:text-cobalt cursor-help ${sizeClasses[size]} ${className}`}
       style={{
         boxShadow: "inset 0 0 0 1px currentColor",
         letterSpacing: "0.08em",

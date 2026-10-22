@@ -363,6 +363,67 @@ MANDATORY RULES:
       }
     }
 
+    // Provider queries: Real estate advisors, ANSR incubation, evaluation methodology
+    if (
+      q.includes("advisor") ||
+      q.includes("provider") ||
+      q.includes("ansr") ||
+      q.includes("jll") ||
+      q.includes("cbre") ||
+      q.includes("evaluated") ||
+      q.includes("ranked")
+    ) {
+      if (
+        q.includes("google") ||
+        q.includes("boeing") ||
+        q.includes("real estate") ||
+        q.includes("jll") ||
+        q.includes("cbre")
+      ) {
+        const leaseClaim = allClaims.find(
+          (c) => c.field === "gcc_office_leasing_share_q1_2026"
+        );
+        answer_blocks.push({
+          text: "In campus site selection and tenant representation, JLL advised on Google India's 650,000 sq ft campus expansion in Bengaluru (2024), and CBRE South Asia represented Boeing India for its 43-acre engineering centre at BIEC Bengaluru (2023).",
+          claim_ids: leaseClaim ? [leaseClaim.id] : [],
+        });
+        follow_ups.push(
+          "What services does ANSR provide for GCC incubation in India?"
+        );
+        follow_ups.push(
+          "How are service providers evaluated and ranked in the Atlas?"
+        );
+      } else if (
+        q.includes("ansr") ||
+        q.includes("incubation") ||
+        q.includes("target")
+      ) {
+        const revClaim = allClaims.find((c) => c.field === "annual_revenue");
+        answer_blocks.push({
+          text: "ANSR provides Build-Operate-Transfer (BOT) incubation, workspace design, talent acquisition, and capability scaling for GCCs in India, including the setup of Target Corporation's India centre in Bengaluru.",
+          claim_ids: revClaim ? [revClaim.id] : [],
+        });
+        follow_ups.push(
+          "Which real estate advisors represented Google India or Boeing in campus site selection?"
+        );
+        follow_ups.push(
+          "How are service providers evaluated and ranked in the Atlas?"
+        );
+      } else {
+        const revClaim = allClaims.find((c) => c.field === "annual_revenue");
+        answer_blocks.push({
+          text: "Service providers in GCC Atlas are evaluated strictly on documented proof links: verified lease deeds, enterprise client attestations, and documented advisories. Rankings are based on evidence depth; commercial payments never alter scores.",
+          claim_ids: revClaim ? [revClaim.id] : [],
+        });
+        follow_ups.push(
+          "Which real estate advisors represented Google India or Boeing in campus site selection?"
+        );
+        follow_ups.push(
+          "What services does ANSR provide for GCC incubation in India?"
+        );
+      }
+    }
+
     // City-specific query (Bengaluru, Hyderabad, etc.)
     const allCities = citiesRepo.getAll();
     const matchedCity = allCities.find((c) =>

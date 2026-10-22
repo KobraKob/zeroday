@@ -6,17 +6,19 @@
 
 export const tokens = {
   colors: {
+    cream: "var(--cream)",
     paper: "var(--color-paper)",
     surface: "var(--color-surface)",
     ink: "var(--color-ink)",
     muted: "var(--color-muted)",
     hairline: "var(--color-hairline)",
     hairlineSubtle: "var(--color-hairline-subtle)",
-    verdigris: "var(--color-verdigris)",
-    verdigrisHover: "var(--color-verdigris-hover)",
-    verdigrisSubtle: "var(--color-verdigris-subtle)",
-    vermilion: "var(--color-vermilion)",
-    vermilionSubtle: "var(--color-vermilion-subtle)",
+    rule: "var(--rule)",
+    ruleSubtle: "var(--rule-subtle)",
+    cobalt: "var(--color-cobalt)",
+    marigold: "var(--color-marigold)",
+    coral: "var(--color-coral)",
+    mint: "var(--color-mint)",
   },
   typography: {
     display: "var(--font-display)",

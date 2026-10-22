@@ -30,7 +30,7 @@ export function CitationButton({ pageTitle, path, className = "" }: CitationButt
         className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono font-medium border border-hairline bg-surface hover:bg-paper hover:border-ink transition-colors duration-fast text-ink min-h-[36px] ${className}`}
         title="Generate formal academic/archival citation for this page"
       >
-        <Quote className="w-3.5 h-3.5 text-verdigris" strokeWidth={1.5} />
+        <Quote className="w-3.5 h-3.5 text-cobalt" strokeWidth={1.5} />
         <span className="uppercase text-[11px] tracking-wider">Cite View</span>
       </button>
 
@@ -77,7 +77,7 @@ export function CitationButton({ pageTitle, path, className = "" }: CitationButt
               <button
                 type="button"
                 onClick={handleCopy}
-                className="min-h-[44px] inline-flex items-center gap-1.5 px-4 py-2 bg-ink text-paper text-xs font-mono font-semibold uppercase tracking-wider hover:bg-verdigris transition-colors duration-fast"
+                className="min-h-[44px] inline-flex items-center gap-1.5 px-4 py-2 bg-ink text-paper text-xs font-mono font-semibold uppercase tracking-wider hover:bg-cobalt transition-colors duration-fast"
               >
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? "Copied" : "Copy String"}</span>

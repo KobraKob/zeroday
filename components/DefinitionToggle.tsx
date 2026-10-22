@@ -86,7 +86,7 @@ export function DefinitionToggle({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-hairline-subtle text-[11px] font-mono">
             <div>
-              <span className="font-bold text-verdigris uppercase block mb-0.5">
+              <span className="font-bold text-cobalt uppercase block mb-0.5">
                 Included in count:
               </span>
               <span className="text-muted leading-relaxed">
@@ -94,7 +94,7 @@ export function DefinitionToggle({
               </span>
             </div>
             <div>
-              <span className="font-bold text-vermilion uppercase block mb-0.5">
+              <span className="font-bold text-coral uppercase block mb-0.5">
                 Excluded from count:
               </span>
               <span className="text-muted leading-relaxed">

@@ -27,7 +27,7 @@ export default function GlobalError({
   return (
     <div className="min-h-[60vh] flex items-center justify-center p-6 font-sans">
       <div className="max-w-md w-full border border-hairline bg-surface p-8 text-center space-y-6 shadow-sm">
-        <div className="w-12 h-12 mx-auto border border-vermilion text-vermilion flex items-center justify-center bg-vermilion-subtle">
+        <div className="w-12 h-12 mx-auto border border-coral text-coral flex items-center justify-center bg-coral-subtle">
           <AlertCircle className="w-6 h-6" strokeWidth={1.5} />
         </div>
 
@@ -53,7 +53,7 @@ export default function GlobalError({
                 reset();
               }
             }}
-            className="w-full sm:w-auto min-h-[44px] px-5 py-2.5 bg-ink text-surface font-semibold uppercase tracking-wider hover:bg-verdigris transition-colors duration-fast inline-flex items-center justify-center gap-2"
+            className="w-full sm:w-auto min-h-[44px] px-5 py-2.5 bg-ink text-surface font-semibold uppercase tracking-wider hover:bg-cobalt transition-colors duration-fast inline-flex items-center justify-center gap-2"
           >
             <RefreshCw className="w-3.5 h-3.5" strokeWidth={1.5} />
             <span>Reload Document</span>

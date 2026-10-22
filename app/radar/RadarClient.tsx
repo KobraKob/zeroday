@@ -108,7 +108,7 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
             onClick={() => setActiveTab("leaderboard")}
             className={`px-4 py-2.5 text-xs font-mono font-semibold uppercase tracking-wider border-b-2 min-h-[44px] transition-colors duration-fast ${
               activeTab === "leaderboard"
-                ? "border-verdigris text-ink font-bold bg-surface"
+                ? "border-cobalt text-ink font-bold bg-surface"
                 : "border-transparent text-muted hover:text-ink hover:border-hairline"
             }`}
           >
@@ -121,7 +121,7 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
             onClick={() => setActiveTab("feed")}
             className={`px-4 py-2.5 text-xs font-mono font-semibold uppercase tracking-wider border-b-2 min-h-[44px] transition-colors duration-fast ${
               activeTab === "feed"
-                ? "border-verdigris text-ink font-bold bg-surface"
+                ? "border-cobalt text-ink font-bold bg-surface"
                 : "border-transparent text-muted hover:text-ink hover:border-hairline"
             }`}
           >
@@ -131,7 +131,7 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
 
         {/* Decay Model Explainer Callout */}
         <div className="text-xs font-mono text-muted flex items-center gap-2 pb-2 sm:pb-0">
-          <span className="w-2 h-2 bg-vermilion inline-block"></span>
+          <span className="w-2 h-2 bg-coral inline-block"></span>
           <span>Imminent threshold &ge; 75 pts</span>
         </div>
       </div>
@@ -222,7 +222,7 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
                   setSelectedType("all");
                   setSelectedCity("all");
                 }}
-                className="text-verdigris hover:text-ink hover:underline text-xs"
+                className="text-cobalt hover:text-ink hover:underline text-xs"
               >
                 Reset filters
               </button>
@@ -313,11 +313,11 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
               placeholder="enterprise@domain.com"
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
-              className="py-2 px-3 border border-hairline bg-surface text-xs font-mono text-ink placeholder:text-muted focus-visible:outline-verdigris min-h-[44px] min-w-[240px]"
+              className="py-2 px-3 border border-hairline bg-surface text-xs font-mono text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px] min-w-[240px]"
             />
             <button
               type="submit"
-              className="px-4 py-2 bg-ink text-paper text-xs font-mono font-semibold uppercase tracking-wider hover:bg-verdigris transition-colors duration-fast min-h-[44px] whitespace-nowrap"
+              className="px-4 py-2 bg-ink text-paper text-xs font-mono font-semibold uppercase tracking-wider hover:bg-cobalt transition-colors duration-fast min-h-[44px] whitespace-nowrap"
             >
               Subscribe
             </button>
@@ -325,7 +325,7 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
         </div>
 
         {alertSubscribed && (
-          <div className="p-3 border border-verdigris bg-verdigris/10 text-xs font-mono text-verdigris flex items-center gap-2">
+          <div className="p-3 border border-cobalt bg-cobalt/10 text-xs font-mono text-cobalt flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4" />
             <span>Filing alert active. You will receive primary gazette updates as verified.</span>
           </div>

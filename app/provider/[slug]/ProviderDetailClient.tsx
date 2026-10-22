@@ -85,7 +85,7 @@ export function ProviderDetailClient({
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-hairline text-xs font-mono">
           <div>
             <span className="text-muted text-[10px] uppercase block">Evidence Depth Score</span>
-            <span className="font-bold text-lg text-verdigris tabular-nums">
+            <span className="font-bold text-lg text-cobalt tabular-nums">
               {scoreData.score} pts
             </span>
           </div>
@@ -151,7 +151,7 @@ export function ProviderDetailClient({
                       {gcc ? (
                         <Link
                           href={`/gcc/${gcc.slug}`}
-                          className="font-bold hover:text-verdigris hover:underline font-sans text-sm"
+                          className="font-bold hover:text-cobalt hover:underline font-sans text-sm"
                         >
                           {gcc.name}
                         </Link>
@@ -162,7 +162,7 @@ export function ProviderDetailClient({
                     <td className="py-3 px-4 font-serif italic text-ink/90 text-xs">
                       {firstEv?.excerpt_summary || pl.service}
                     </td>
-                    <td className="py-3 px-3 text-center font-mono font-bold text-verdigris">
+                    <td className="py-3 px-3 text-center font-mono font-bold text-cobalt">
                       {pl.status === "attested" ? "+3 pts" : "+2 pts"}
                     </td>
                     <td className="py-3 px-3 text-right">
@@ -188,7 +188,7 @@ export function ProviderDetailClient({
       {/* Neutrality Note */}
       <section className="border border-hairline bg-paper/40 p-5 text-xs text-muted font-serif italic space-y-1">
         <div className="font-mono not-italic uppercase font-bold text-ink flex items-center gap-1.5 text-[10px]">
-          <Shield className="w-3.5 h-3.5 text-verdigris" strokeWidth={1.5} />
+          <Shield className="w-3.5 h-3.5 text-cobalt" strokeWidth={1.5} />
           <span>Neutrality Firewall Rule</span>
         </div>
         <p>

@@ -1,22 +1,18 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { useAsk } from "./AskContext";
 import { useSourceDrawer } from "./SourceDrawerContext";
 import { Claim, Source } from "../lib/schema";
 import {
   X,
-  Search,
-  ArrowRight,
   ExternalLink,
   Copy,
   Check,
   AlertTriangle,
   RotateCcw,
-  Sparkles,
   HelpCircle,
-  ShieldCheck,
 } from "lucide-react";
 
 interface AskDrawerProps {
@@ -64,21 +60,37 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  const claimsMap = new Map<string, Claim>();
-  claims.forEach((c) => claimsMap.set(c.id, c));
+  const claimsMap = useMemo(() => {
+    const map = new Map<string, Claim>();
+    claims.forEach((c) => map.set(c.id, c));
+    return map;
+  }, [claims]);
 
-  const sourcesMap = new Map<string, Source>();
-  sources.forEach((s) => sourcesMap.set(s.id, s));
+  const sourcesMap = useMemo(() => {
+    const map = new Map<string, Source>();
+    sources.forEach((s) => map.set(s.id, s));
+    return map;
+  }, [sources]);
 
-  // Determine current page context & context-specific questions (Requirement 5)
+  // Determine current page context & verified eval-list questions (Requirements 5 & 8)
   const pageContext = (() => {
+    if (pathname.includes("provider")) {
+      return {
+        label: "You are viewing Providers",
+        questions: [
+          "Which real estate advisors represented Google India or Boeing in campus site selection?",
+          "What services does ANSR provide for GCC incubation in India?",
+          "How are service providers evaluated and ranked in the Atlas?",
+        ],
+      };
+    }
     if (pathname.includes("reconcile")) {
       return {
         label: "You are viewing Reconcile",
         questions: [
           "Why do published GCC counts vary from 1,400 to 2,975?",
-          "What is the difference between parent company count and centre unit count?",
-          "How many parent GCCs are verified in the registry?",
+          "What is India's total GCC market revenue in FY26?",
+          "How many professionals work in Indian GCCs in FY26?",
         ],
       };
     }
@@ -86,9 +98,9 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
       return {
         label: "You are viewing Registry",
         questions: [
-          "What is Google India's Corporate Identity Number (CIN)?",
-          "Which GCCs in India operate in software and internet?",
-          "How many Mega GCCs have over 5,000 employees?",
+          "What is Google India Private Limited's Corporate Identification Number (CIN)?",
+          "When was Microsoft India Development Center (IDC) established?",
+          "How many Mega GCCs exist in India with 5000+ employees?",
         ],
       };
     }
@@ -96,9 +108,9 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
       return {
         label: "You are viewing Radar",
         questions: [
-          "What corporate signals indicate an imminent GCC opening?",
-          "What was the GCC commercial office leasing share in Q1 2026?",
+          "What was the GCC share of commercial office leasing in Q1 2026?",
           "How many Mega GCCs exist in India with 5000+ employees?",
+          "What compensation pay premium do GCCs offer over legacy IT services?",
         ],
       };
     }
@@ -108,12 +120,12 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
         questions: [
           "What is the commercial office rent range in Bengaluru?",
           "What is the commercial office vacancy rate in Hyderabad?",
-          "What compensation pay premium do GCCs offer over legacy IT services?",
+          "What is the talent salary index for Pune relative to Bengaluru?",
         ],
       };
     }
     return {
-      label: "General GCC Atlas Record",
+      label: "You are viewing GCC Atlas Record",
       questions: [
         "What is India's total GCC market revenue in FY26?",
         "How many professionals work in Indian GCCs in FY26?",
@@ -183,7 +195,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
         is_grounded: data.is_grounded !== false,
         disagreements: data.disagreements || [],
       });
-    } catch (err) {
+    } catch {
       clearTimeout(t1);
       clearTimeout(t2);
       setLoadingStep(null);
@@ -212,90 +224,87 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
         onClick={closeAskDrawer}
       />
 
-      {/* Drawer Surface */}
+      {/* Drawer Surface: single surface background = var(--paper), text = var(--ink), 2px var(--rule) border */}
       <div
         ref={drawerRef}
-        className="relative w-full sm:w-[580px] md:w-[680px] h-full bg-cream border-l-2 border-ink shadow-2xl flex flex-col z-10 overflow-hidden font-sans"
+        className="relative w-full sm:w-[580px] md:w-[680px] h-full bg-paper text-ink border-l-2 border-rule shadow-2xl flex flex-col z-10 overflow-hidden font-sans"
       >
-        {/* Top Masthead & Close Bar */}
-        <div className="p-4 sm:p-5 border-b-2 border-ink bg-surface flex items-start justify-between gap-3 flex-shrink-0">
+        {/* Header row: title "Ask the record" (display font, 28px), one-line subtitle, and a close button with a visible X icon (44x44, 2px outline, keyboard focus ring, Esc closes) */}
+        <div className="p-5 sm:p-6 border-b-2 border-rule bg-surface flex items-start justify-between gap-4 flex-shrink-0">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-cobalt" />
-              <h2 className="font-display font-bold text-xl sm:text-2xl text-ink leading-tight">
+            <div className="flex items-center gap-2.5">
+              <span className="w-3 h-3 rounded-full bg-cobalt flex-shrink-0" />
+              <h2 className="font-display font-bold text-[28px] text-ink leading-tight">
                 Ask the record
               </h2>
             </div>
-            <p className="font-body text-xs sm:text-sm text-muted mt-1 leading-snug">
+            <p className="font-body text-sm text-muted mt-1 leading-snug">
               Answers come only from sourced data in the Atlas. If we don&apos;t have it, we say so.
             </p>
           </div>
           <button
             type="button"
             onClick={closeAskDrawer}
-            className="w-9 h-9 border-2 border-ink rounded-full bg-cream text-ink hover:bg-ink hover:text-white flex items-center justify-center transition-colors flex-shrink-0 shadow-[2px_2px_0px_#15183A]"
+            className="w-11 h-11 border-2 border-rule rounded-full bg-surface text-ink hover:bg-paper focus-visible:outline-cobalt focus-visible:ring-2 focus-visible:ring-cobalt flex items-center justify-center transition-all flex-shrink-0 shadow-[2px_2px_0px_var(--color-ink)] cursor-pointer"
             aria-label="Close drawer"
           >
-            <X className="w-4 h-4" strokeWidth={2} />
+            <X className="w-5 h-5 text-ink" strokeWidth={2} />
           </button>
         </div>
 
-        {/* Current Page Context Indicator */}
-        <div className="px-5 py-2 border-b border-hairline-subtle bg-marigold/15 text-[11px] font-mono text-ink flex items-center justify-between">
-          <span className="font-medium">{pageContext.label}</span>
-          <span className="text-muted">3 context questions available</span>
+        {/* Plain context line (min 14px, AA contrast): "You are viewing Providers" (no pale strip) */}
+        <div className="px-6 py-2.5 border-b border-rule-subtle bg-surface text-sm font-medium text-muted">
+          {pageContext.label}
         </div>
 
-        {/* Input Bar pinned at the top (Requirement 2) */}
-        <div className="p-4 sm:p-5 border-b-2 border-ink bg-surface flex-shrink-0">
+        {/* Input: single 2px border (no double ring), min height 56px. Placeholder shortened. Enter hint below. Ask button filled cobalt, min 44px */}
+        <div className="p-5 sm:p-6 border-b-2 border-rule bg-surface flex-shrink-0">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleExecute();
             }}
-            className="space-y-3"
+            className="space-y-1.5"
           >
             <label htmlFor="drawer-ask-input" className="sr-only">
-              Ask about GCCs, cities, incentives, providers
+              Ask about GCCs, cities, providers
             </label>
-            <div className="relative flex items-center">
+            <div className="flex items-center gap-2">
               <input
                 ref={inputRef}
                 id="drawer-ask-input"
                 type="text"
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
-                placeholder="Ask anything about India's GCC ecosystem... (e.g. 'How many GCCs in Bengaluru?', 'What does ANSR claim?')"
-                className="w-full py-3 pl-4 pr-24 border-2 border-ink rounded-full bg-cream text-ink text-sm sm:text-base font-body placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-cobalt min-h-[50px] shadow-inner"
+                placeholder="Ask about GCCs, cities, providers..."
+                className="flex-1 py-3.5 px-5 border-2 border-rule rounded-full bg-surface text-ink text-base font-body placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-cobalt min-h-[56px]"
               />
-              <div className="absolute right-2 flex items-center gap-1.5">
-                <span className="text-[10px] font-mono text-muted hidden sm:inline px-1.5 py-0.5 border border-hairline-subtle rounded-sm">
-                  Enter ↵
-                </span>
-                <button
-                  type="submit"
-                  disabled={!inputQuery.trim()}
-                  className="px-4 py-2 bg-cobalt text-white border-2 border-ink rounded-full text-xs font-mono font-bold hover:shadow-[2px_2px_0px_#15183A] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  Ask
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={!inputQuery.trim()}
+                className="min-h-[44px] px-6 bg-cobalt text-white border-2 border-rule rounded-full font-mono text-sm font-bold hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all flex-shrink-0 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Ask
+              </button>
             </div>
+            <p className="text-xs font-mono text-muted pl-4 pt-0.5">
+              Press Enter ↵ or click Ask
+            </p>
           </form>
         </div>
 
         {/* Content Body (Scrollable Answer Sheet) */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6" aria-live="polite">
+        <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6" aria-live="polite">
           {/* Progress / Loading State (Requirement 4: no spinner dots) */}
           {loadingStep && (
-            <div className="p-5 border-2 border-ink bg-surface rounded-xs shadow-[3px_3px_0px_#15183A] space-y-3">
+            <div className="p-5 border-2 border-rule bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] space-y-3">
               <div className="flex items-center gap-2.5">
                 <span className="w-3 h-3 rounded-full bg-cobalt animate-ping" />
                 <span className="font-mono text-xs font-bold text-cobalt uppercase tracking-wider">
                   {loadingStep}
                 </span>
               </div>
-              <div className="w-full h-1.5 bg-cream border border-ink overflow-hidden rounded-full">
+              <div className="w-full h-2 bg-paper border border-rule overflow-hidden rounded-full">
                 <div
                   className="h-full bg-cobalt transition-all duration-normal"
                   style={{
@@ -308,8 +317,8 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                   }}
                 />
               </div>
-              <p className="font-body text-xs text-muted italic">
-                Verifying claim ids and citation integrity against the local Atlas repository...
+              <p className="font-body text-xs text-muted">
+                Verifying claims and citation integrity against the Atlas repository...
               </p>
             </div>
           )}
@@ -325,22 +334,22 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
               <button
                 type="button"
                 onClick={() => handleExecute()}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 border-2 border-ink rounded-full bg-surface text-xs font-mono font-bold hover:bg-cream"
+                className="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-rule rounded-full bg-surface text-xs font-mono font-bold hover:bg-paper cursor-pointer"
               >
-                <RotateCcw className="w-3 h-3" />
+                <RotateCcw className="w-3.5 h-3.5" />
                 <span>Retry Question</span>
               </button>
             </div>
           )}
 
-          {/* Empty State (when no active result and not loading) */}
+          {/* Empty State: Try asking 3 pill buttons, body font 15px, 1.5px outline, transparent background, hover = marigold tint, wrap to multiple lines */}
           {!result && !loadingStep && !errorMsg && (
             <div className="space-y-6">
-              <div className="space-y-2">
-                <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-muted">
-                  Context Questions for {pageContext.label.replace("You are viewing ", "")}
-                </h3>
-                <div className="flex flex-col gap-2">
+              <div className="space-y-3">
+                <div className="text-sm font-medium text-muted">
+                  Try asking
+                </div>
+                <div className="flex flex-wrap gap-2.5">
                   {pageContext.questions.map((q, idx) => (
                     <button
                       key={idx}
@@ -349,22 +358,17 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                         setInputQuery(q);
                         handleExecute(q);
                       }}
-                      className="text-left p-3 border-2 border-ink rounded-full bg-surface text-ink font-body text-xs sm:text-sm hover:bg-cream hover:shadow-[2px_2px_0px_#15183A] transition-all flex items-center justify-between group"
+                      className="text-left px-4 py-2.5 border-[1.5px] border-rule rounded-full bg-transparent text-ink font-body text-[15px] hover:bg-marigold/20 transition-colors cursor-pointer leading-snug"
                     >
-                      <span>{q}</span>
-                      <ArrowRight className="w-4 h-4 text-cobalt opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-2" />
+                      {q}
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className="p-4 border-2 border-ink bg-surface rounded-xs space-y-2">
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink block">
-                  Grounding Guarantee
-                </span>
-                <p className="font-body text-xs text-muted leading-relaxed">
-                  Every answer produced by Ask is checked against audited claims. If a metric cannot be sourced from a primary statutory filing, municipal lease deed, or state gazette decree, it is discarded.
-                </p>
+              {/* Requirement B.9: Small line at the bottom */}
+              <div className="pt-6 border-t border-rule-subtle text-xs font-body text-muted leading-relaxed">
+                Answers come only from sourced data in the Atlas. If we don&apos;t have it, we say so.
               </div>
             </div>
           )}
@@ -372,15 +376,14 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
           {/* Answered State (Answer Sheet) */}
           {result && !loadingStep && (
             <div className="space-y-6">
-              {/* Answer Sheet Card */}
-              <div className="p-5 sm:p-6 border-2 border-ink bg-surface rounded-xs shadow-[3px_3px_0px_#15183A] space-y-4">
+              <article className="p-5 sm:p-6 border-2 border-rule bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] space-y-4">
                 {/* Question as Heading */}
-                <h3 className="font-display font-bold text-xl sm:text-2xl text-ink leading-tight border-b-2 border-ink pb-3">
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-ink leading-tight border-b-2 border-rule pb-3">
                   {result.query}
                 </h3>
 
                 {/* Sourced Short Paragraphs with Footnote Markers */}
-                <div className="space-y-3 font-body text-[17px] text-ink leading-relaxed max-w-[68ch]">
+                <div className="space-y-3 font-body text-[16px] text-ink leading-relaxed max-w-[68ch]">
                   {result.answer_blocks.map((block, bIdx) => (
                     <p key={bIdx} className="relative">
                       <span>{block.text}</span>
@@ -398,7 +401,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                                     openSourceDrawer(source, claim);
                                   }
                                 }}
-                                className="inline-flex items-center justify-center w-5 h-5 text-[11px] font-mono font-bold bg-marigold border border-ink text-ink rounded-full hover:bg-cobalt hover:text-white transition-colors cursor-pointer shadow-2xs"
+                                className="inline-flex items-center justify-center w-5 h-5 text-[11px] font-mono font-bold bg-marigold border border-rule text-ink rounded-full hover:bg-cobalt hover:text-white transition-colors cursor-pointer shadow-2xs"
                                 title={`Inspect source citation for ${claim?.field || "claim"}`}
                               >
                                 {cIdx + 1}
@@ -411,7 +414,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                   ))}
                 </div>
 
-                {/* Sources Disagree Box (Requirement 4: Disagreement between sources) */}
+                {/* Sources Disagree Box */}
                 {result.disagreements && result.disagreements.length > 0 && (
                   <div className="p-4 border-2 border-marigold bg-marigold/15 rounded-xs space-y-2 mt-4">
                     <div className="flex items-center gap-2 font-mono text-xs font-bold text-ink">
@@ -420,11 +423,11 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                     </div>
                     {result.disagreements.map((dis, dIdx) => (
                       <div key={dIdx} className="space-y-1.5 text-xs font-mono pt-1">
-                        <div className="p-2 border border-ink bg-surface rounded-xs flex items-center justify-between">
+                        <div className="p-2 border border-rule bg-surface rounded-xs flex items-center justify-between">
                           <span>{dis.source_a}</span>
                           <span className="font-bold">{dis.value_a} (Grade {dis.grade_a})</span>
                         </div>
-                        <div className="p-2 border border-ink bg-surface rounded-xs flex items-center justify-between">
+                        <div className="p-2 border border-rule bg-surface rounded-xs flex items-center justify-between">
                           <span>{dis.source_b}</span>
                           <span className="font-bold">{dis.value_b} (Grade {dis.grade_b})</span>
                         </div>
@@ -436,85 +439,78 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                   </div>
                 )}
 
-                {/* No-Answer State: "The Atlas has no sourced data on this yet" (Requirement 4) */}
+                {/* No-Answer State: "The Atlas has no sourced data on this yet" */}
                 {!result.is_grounded && (
                   <div className="p-4 border-2 border-coral bg-coral/10 rounded-xs space-y-3 mt-4">
                     <div className="font-mono text-xs font-bold text-coral uppercase tracking-wider flex items-center gap-1.5">
                       <HelpCircle className="w-4 h-4" />
                       <span>The Atlas has no sourced data on this yet</span>
                     </div>
-                    <p className="font-body text-xs text-ink leading-relaxed">
-                      This question asks for figures or claims that are not yet verified in our statutory repository. In accordance with our hard rules, we never guess.
+                    <p className="font-body text-sm text-ink leading-relaxed">
+                      In accordance with our hard rules, we never invent figures or answer from ungrounded memory.
                     </p>
                     <button
                       type="button"
                       onClick={() => setSuggestSent(true)}
-                      className="px-3.5 py-1.5 border-2 border-ink rounded-full bg-surface text-xs font-mono font-bold hover:bg-cream"
+                      className="px-4 py-2 border-2 border-rule rounded-full bg-surface text-xs font-mono font-bold hover:bg-paper transition-all cursor-pointer"
                     >
                       {suggestSent ? "✓ Thank you! Source suggested." : "+ Suggest a source"}
                     </button>
                   </div>
                 )}
 
-                {/* Under each answer: Three Required Blocks (Requirement 2) */}
-                <div className="pt-4 border-t-2 border-ink space-y-4">
+                {/* Under each answer: Three Required Blocks */}
+                <div className="pt-5 border-t-2 border-rule space-y-4">
                   {/* Block A: What we could not verify */}
-                  <div className="p-3 border border-ink bg-cream rounded-xs space-y-1">
-                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-muted block">
-                      What we could not verify:
+                  <div className="p-3.5 border border-rule-subtle bg-surface rounded-xs space-y-1">
+                    <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider block">
+                      What we could not verify
                     </span>
                     {result.gaps && result.gaps.length > 0 ? (
                       <ul className="list-disc list-inside text-xs font-body text-ink space-y-0.5">
-                        {result.gaps.map((g, gIdx) => (
-                          <li key={gIdx}>{g}</li>
+                        {result.gaps.map((g, idx) => (
+                          <li key={idx}>{g}</li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-xs font-body text-muted italic">
-                        No gaps found for this question. All stated numbers are verified against repository claims.
+                      <p className="text-xs font-body text-muted">
+                        No gaps found for this query. All claims are verified against sources.
                       </p>
                     )}
                   </div>
 
-                  {/* Block B: See in the Atlas pre-filtered links */}
-                  <div className="space-y-1.5">
-                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-muted block">
-                      See in the Atlas:
+                  {/* Block B: See in the Atlas pre-filtered deep links */}
+                  <div className="p-3 border border-rule-subtle bg-surface rounded-xs space-y-2">
+                    <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider block">
+                      See in the Atlas
                     </span>
                     <div className="flex flex-wrap gap-2 text-xs font-mono">
                       <a
                         href="/reconcile"
-                        className="inline-flex items-center gap-1 px-3 py-1 border border-ink bg-surface hover:bg-cream rounded-full"
+                        className="inline-flex items-center gap-1 px-3 py-1 border border-rule bg-surface hover:bg-paper rounded-full"
                       >
-                        <span>Reconcile Counts</span>
+                        <span>Reconcile Ledger</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                       <a
                         href="/registry"
-                        className="inline-flex items-center gap-1 px-3 py-1 border border-ink bg-surface hover:bg-cream rounded-full"
+                        className="inline-flex items-center gap-1 px-3 py-1 border border-rule bg-surface hover:bg-paper rounded-full"
                       >
-                        <span>Verified Registry</span>
+                        <span>GCC Registry</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                       <a
-                        href="/compare"
-                        className="inline-flex items-center gap-1 px-3 py-1 border border-ink bg-surface hover:bg-cream rounded-full"
+                        href="/providers"
+                        className="inline-flex items-center gap-1 px-3 py-1 border border-rule bg-surface hover:bg-paper rounded-full"
                       >
-                        <span>City Compare</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                      <a
-                        href="/radar"
-                        className="inline-flex items-center gap-1 px-3 py-1 border border-ink bg-surface hover:bg-cream rounded-full"
-                      >
-                        <span>Radar Signals</span>
+                        <span>Providers</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
                   </div>
 
                   {/* Block C: Actions (Copy citation, Copy answer with sources, Report an error) */}
-                  <div className="pt-2 border-t border-hairline-subtle flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-muted">
+                  <div className="pt-2 border-t border-rule-subtle flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-muted">
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
@@ -524,7 +520,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                             `GCC Atlas Record: "${result.query}" — Retrieved from https://gccatlas.in/ask`
                           )
                         }
-                        className="inline-flex items-center gap-1 hover:text-ink underline decoration-1"
+                        className="inline-flex items-center gap-1 hover:text-ink underline decoration-1 cursor-pointer"
                       >
                         {copiedType === "citation" ? <Check className="w-3 h-3 text-mint" /> : <Copy className="w-3 h-3" />}
                         <span>{copiedType === "citation" ? "Copied citation!" : "Copy citation"}</span>
@@ -535,10 +531,10 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                         onClick={() =>
                           handleCopy(
                             "full",
-                            `Q: ${result.query}\nA: ${result.answer_blocks.map((b) => b.text).join(" ")}\n(Source: GCC Atlas Research Record)`
+                            `Q: ${result.query}\nA: ${result.answer_blocks.map((b) => b.text).join(" ")}\n(Source: GCC Atlas Archival Record)`
                           )
                         }
-                        className="inline-flex items-center gap-1 hover:text-ink underline decoration-1"
+                        className="inline-flex items-center gap-1 hover:text-ink underline decoration-1 cursor-pointer"
                       >
                         {copiedType === "full" ? <Check className="w-3 h-3 text-mint" /> : <Copy className="w-3 h-3" />}
                         <span>{copiedType === "full" ? "Copied answer!" : "Copy answer with sources"}</span>
@@ -553,9 +549,9 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                     </a>
                   </div>
                 </div>
-              </div>
+              </article>
 
-              {/* Follow-up suggestions as 2-3 plain pill buttons (Requirement 2) */}
+              {/* Follow-up suggestions */}
               {result.follow_ups && result.follow_ups.length > 0 && (
                 <div className="space-y-2">
                   <span className="font-mono text-xs font-bold uppercase tracking-wider text-muted block">
@@ -570,7 +566,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                           setInputQuery(fu);
                           handleExecute(fu);
                         }}
-                        className="px-3.5 py-1.5 border-2 border-ink rounded-full bg-surface text-ink text-xs font-body font-medium hover:bg-cream hover:shadow-[2px_2px_0px_#15183A] transition-all"
+                        className="px-4 py-2 border-2 border-rule rounded-full bg-surface text-ink text-xs font-body font-medium hover:bg-paper hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all cursor-pointer"
                       >
                         {fu}
                       </button>
@@ -578,6 +574,11 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                   </div>
                 </div>
               )}
+
+              {/* Requirement B.9: Small line at the bottom */}
+              <div className="pt-4 border-t border-rule-subtle text-xs font-body text-muted leading-relaxed text-center">
+                Answers come only from sourced data in the Atlas. If we don&apos;t have it, we say so.
+              </div>
             </div>
           )}
         </div>

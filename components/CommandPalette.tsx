@@ -216,7 +216,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`flex items-center justify-between p-3 cursor-pointer transition-colors duration-fast ${
                     isSelected
-                      ? "bg-verdigris/10 border-l-2 border-verdigris"
+                      ? "bg-cobalt/10 border-l-2 border-cobalt"
                       : "hover:bg-paper/50 border-l-2 border-transparent"
                   }`}
                 >
@@ -241,7 +241,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                       </span>
                     )}
                     {item.kind === "provider" && (item as any).score !== undefined && (
-                      <span className="font-mono text-[10px] text-verdigris font-bold border border-verdigris px-1">
+                      <span className="font-mono text-[10px] text-cobalt font-bold border border-cobalt px-1">
                         Score: {(item as any).score}
                       </span>
                     )}
@@ -260,7 +260,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
             <span>↵ Select</span>
             <span>ESC Close</span>
           </div>
-          <span className="text-verdigris font-semibold">Groq AI Grounded Engine Active</span>
+          <span className="text-cobalt font-semibold">Groq AI Grounded Engine Active</span>
         </div>
       </div>
     </div>

@@ -63,7 +63,7 @@ export function SourceFootnote({
         onKeyDown={handleKeyDown}
         aria-label={`Inspect source footnote [${marker}]: ${fieldLabel || source?.publisher || "Evidence"}`}
         title={`Source Footnote [${marker}]: Click to open margin verification ledger`}
-        className={`inline-flex items-center justify-center align-super text-[11px] font-mono font-semibold text-verdigris hover:text-ink hover:underline decoration-1 underline-offset-2 ml-0.5 px-0.5 cursor-pointer focus-visible:outline-verdigris transition-colors duration-fast ${className}`}
+        className={`inline-flex items-center justify-center align-super text-[11px] font-mono font-semibold text-cobalt hover:text-ink hover:underline decoration-1 underline-offset-2 ml-0.5 px-0.5 cursor-pointer focus-visible:outline-cobalt transition-colors duration-fast ${className}`}
       >
         <span className="sr-only">Footnote </span>
         <sup className="font-mono text-[11px] font-bold">[{marker}]</sup>
@@ -94,7 +94,7 @@ export function SourceFootnote({
         onKeyDown={handleKeyDown}
         aria-label={`Source footnote [${marker}] for ${fieldLabel || "datapoint"}`}
         title={`Footnote [${marker}]: ${source?.publisher || "Verified claim"}. Click to inspect source margin.`}
-        className="inline-flex items-center justify-center text-[10px] font-mono font-bold text-verdigris hover:text-ink hover:underline decoration-1 underline-offset-2 px-0.5 cursor-pointer focus-visible:outline-verdigris transition-colors duration-fast"
+        className="inline-flex items-center justify-center text-[10px] font-mono font-bold text-cobalt hover:text-ink hover:underline decoration-1 underline-offset-2 px-0.5 cursor-pointer focus-visible:outline-cobalt transition-colors duration-fast"
       >
         <sup>[{marker}]</sup>
       </button>

@@ -100,16 +100,16 @@ export function ProvidersClient({
     <div className="space-y-8 font-sans">
       {/* Editorial Header */}
       <PageHeader
-        rubric="Evidence-Based Provider Registry"
-        findingHeadline="Service providers ranked strictly by documented proof links and statutory filings"
-        findingDescription="Zero paid placements or directory sponsorships. We separate marketed self-claims from audited proof: registered sub-registrar lease deeds, joint press announcements, and direct corporate GCC client attestations."
+        rubric="Evidence-Based Provider Directory"
+        findingHeadline="Service providers ranked strictly by documented proof links"
+        findingDescription="Ranking is based on evidence only; payment never changes it. We evaluate documented proof links: verified lease records, documented enterprise advisories, and direct corporate GCC client attestations."
         pageTitle="Verified GCC Service Providers Directory"
         path="/providers"
-        metadata={`${providers.length} Audited Providers`}
+        metadata={`${providers.length} Reviewed Providers • Reviewed: May 2026`}
         primaryAction={
           <Link
             href="/submit"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-semibold uppercase tracking-wider bg-ink text-paper hover:bg-verdigris transition-colors duration-fast min-h-[36px]"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border-2 border-ink rounded-full hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all min-h-[38px]"
           >
             <span>+ Attest Engagement</span>
           </Link>
@@ -117,30 +117,30 @@ export function ProvidersClient({
       />
 
       {/* Formula & Neutrality Firewall Banner */}
-      <div className="p-4 border border-hairline bg-surface flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono">
+      <div className="p-5 border-2 border-ink bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono">
         <div>
-          <span className="text-muted uppercase text-[10px] font-bold block">
+          <span className="text-muted uppercase text-xs font-bold block">
             Evidence Depth Formula
           </span>
           <div className="text-ink font-bold text-sm mt-0.5">
             Score = Σ(Verified Proof Links × Kind Weight)
           </div>
-          <div className="text-[11px] text-muted mt-1 font-serif italic">
-            Weights: Statutory Lease Deed = 3 | Direct Attestation = 3 | Joint Announcement = 2 | Case Study = 1
+          <div className="text-xs text-muted mt-1 font-body">
+            Weights: Registered Lease Record = 3 | Direct Client Attestation = 3 | Documented Advisory = 2 | Public Case Study = 1
           </div>
         </div>
 
-        <div className="sm:border-l sm:border-hairline sm:pl-4 text-xs font-mono">
-          <div className="font-bold text-verdigris flex items-center gap-1.5">
-            <Shield className="w-3.5 h-3.5" strokeWidth={1.5} />
+        <div className="sm:border-l-2 sm:border-ink sm:pl-4 text-xs font-mono">
+          <div className="font-bold text-cobalt flex items-center gap-1.5">
+            <Shield className="w-4 h-4" strokeWidth={1.75} />
             <span>Neutrality Firewall</span>
           </div>
-          <div className="text-muted text-[11px]">Money never alters ranking.</div>
+          <div className="text-muted text-xs mt-0.5">Ranking is based on evidence only; payment never changes it.</div>
         </div>
       </div>
 
-      {/* Category Tabs */}
-      <div className="flex flex-wrap gap-1 border-b border-hairline pb-2 font-mono text-xs">
+      {/* Category Tabs: pill buttons */}
+      <div className="flex flex-wrap gap-2 border-b-2 border-ink pb-3 font-mono text-xs">
         {categories.map((cat) => {
           const isSelected = selectedCategory === cat.id;
           return (
@@ -148,10 +148,10 @@ export function ProvidersClient({
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3 py-1.5 uppercase tracking-wider transition-colors duration-fast min-h-[38px] border ${
+              className={`px-4 py-2 rounded-full uppercase tracking-wider transition-all min-h-[38px] border-2 border-ink cursor-pointer font-bold ${
                 isSelected
-                  ? "bg-ink text-paper border-ink font-bold"
-                  : "bg-paper/40 text-muted border-hairline hover:border-ink hover:text-ink"
+                  ? "bg-ink text-paper shadow-[2px_2px_0px_var(--color-ink)]"
+                  : "bg-surface text-muted hover:border-ink hover:text-ink"
               }`}
             >
               {cat.label}
@@ -161,31 +161,31 @@ export function ProvidersClient({
       </div>
 
       {/* Ruled Provider Table */}
-      <div className="border border-hairline bg-surface overflow-x-auto">
-        <table className="w-full text-left border-collapse font-sans text-xs">
+      <div className="border-2 border-ink bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] overflow-x-auto">
+        <table className="w-full text-left border-collapse font-sans text-sm">
           <thead>
-            <tr className="border-b-2 border-ink bg-paper/90 font-mono text-[11px] uppercase tracking-wider text-muted">
-              <th scope="col" className="w-8 py-3 px-3 text-center">
+            <tr className="border-b-2 border-ink bg-paper font-mono text-xs uppercase tracking-wider text-muted">
+              <th scope="col" className="w-10 py-3.5 px-3 text-center">
                 <span className="sr-only">Toggle</span>
               </th>
-              <th scope="col" className="py-3 px-4 min-w-[200px]">
+              <th scope="col" className="py-3.5 px-4 min-w-[200px]">
                 Provider Firm
               </th>
-              <th scope="col" className="py-3 px-4 min-w-[150px]">
+              <th scope="col" className="py-3.5 px-4 min-w-[150px]">
                 Category
               </th>
-              <th scope="col" className="py-3 px-3 min-w-[120px]">
+              <th scope="col" className="py-3.5 px-3 min-w-[120px]">
                 Verified Proofs
               </th>
-              <th scope="col" className="py-3 px-3 min-w-[110px] text-right">
+              <th scope="col" className="py-3.5 px-3 min-w-[110px] text-right">
                 Evidence Score
               </th>
-              <th scope="col" className="py-3 px-4 min-w-[140px] text-right">
+              <th scope="col" className="py-3.5 px-4 min-w-[140px] text-right">
                 Dossier
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-hairline">
+          <tbody className="divide-y-2 divide-ink/10">
             {filteredProviders.map(({ provider, links, scoreData }) => {
               const isExpanded = expandedProviderId === provider.id;
 
@@ -197,37 +197,37 @@ export function ProvidersClient({
                       isExpanded ? "bg-paper/70" : "hover:bg-paper/30"
                     }`}
                   >
-                    <td className="w-8 py-3 px-3 text-center text-muted">
+                    <td className="w-10 py-3.5 px-3 text-center text-muted">
                       <button
                         type="button"
                         aria-expanded={isExpanded}
                         aria-label={isExpanded ? "Collapse proofs" : "Expand proofs"}
-                        className="w-6 h-6 inline-flex items-center justify-center text-muted hover:text-ink"
+                        className="w-7 h-7 inline-flex items-center justify-center text-muted hover:text-ink border border-ink/40 rounded-full"
                       >
                         {isExpanded ? (
-                          <ChevronDown className="w-3.5 h-3.5 text-verdigris" />
+                          <ChevronDown className="w-4 h-4 text-cobalt" />
                         ) : (
-                          <ChevronRight className="w-3.5 h-3.5" />
+                          <ChevronRight className="w-4 h-4" />
                         )}
                       </button>
                     </td>
 
-                    <td className="py-3.5 px-4 font-serif text-ink">
-                      <div className="font-display font-bold text-sm text-ink font-sans">
+                    <td className="py-3.5 px-4 text-ink">
+                      <div className="font-display font-bold text-base text-ink">
                         {provider.name}
                       </div>
-                      <div className="text-[11px] font-mono text-muted">
+                      <div className="text-xs font-mono text-muted">
                         Hubs: {provider.cities.join(", ")}
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-4 font-mono text-[11px] text-ink uppercase">
-                      <span className="inline-block px-1.5 py-0.5 border border-hairline bg-paper/60">
+                    <td className="py-3.5 px-4 font-mono text-xs text-ink uppercase">
+                      <span className="inline-block px-2 py-0.5 border border-ink bg-surface rounded-xs">
                         {provider.category.replace(/_/g, " ")}
                       </span>
                     </td>
 
-                    <td className="py-3.5 px-3 font-mono text-ink tabular-nums">
+                    <td className="py-3.5 px-3 font-mono text-ink tabular-nums text-xs">
                       <span className="font-bold">{links.length}</span> proof link{links.length !== 1 ? "s" : ""}
                     </td>
 
@@ -239,21 +239,21 @@ export function ProvidersClient({
                       <Link
                         href={`/provider/${provider.slug}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 font-mono text-[11px] uppercase font-semibold text-verdigris hover:text-ink hover:underline decoration-1 underline-offset-2"
+                        className="inline-flex items-center gap-1 font-mono text-xs uppercase font-bold text-cobalt hover:text-ink hover:underline decoration-1 underline-offset-2"
                       >
                         <span>Examine</span>
-                        <ExternalLink className="w-3 h-3" strokeWidth={1.5} />
+                        <ExternalLink className="w-3.5 h-3.5" strokeWidth={1.5} />
                       </Link>
                     </td>
                   </tr>
 
                   {/* Inline Proof Links Ledger */}
                   {isExpanded && (
-                    <tr className="bg-paper/40 border-b border-hairline">
-                      <td colSpan={6} className="p-5 border-l-2 border-verdigris space-y-3">
-                        <div className="flex items-center justify-between border-b border-hairline-subtle pb-2 text-xs font-mono">
+                    <tr className="bg-paper/40 border-b-2 border-ink">
+                      <td colSpan={6} className="p-5 border-l-4 border-cobalt space-y-3">
+                        <div className="flex items-center justify-between border-b border-rule-subtle pb-2 text-xs font-mono">
                           <span className="font-bold uppercase tracking-wider text-ink">
-                            Audited Proof Links for {provider.name}
+                            Reviewed Proof Links for {provider.name}
                           </span>
                           <span className="text-muted">
                             Total Depth: {scoreData.score} Points
@@ -261,18 +261,18 @@ export function ProvidersClient({
                         </div>
 
                         {links.length > 0 ? (
-                          <div className="border border-hairline bg-surface overflow-x-auto">
+                          <div className="border-2 border-ink bg-surface rounded-xs overflow-x-auto">
                             <table className="w-full text-left text-xs font-sans border-collapse">
                               <thead>
-                                <tr className="border-b border-hairline bg-paper/80 font-mono text-[10px] uppercase tracking-wider text-muted">
-                                  <th className="py-2 px-3">Evidence Kind</th>
-                                  <th className="py-2 px-3">Associated GCC</th>
-                                  <th className="py-2 px-3">Audited Claim</th>
-                                  <th className="py-2 px-3 text-center">Score Weight</th>
-                                  <th className="py-2 px-3 text-right">Source Link</th>
+                                <tr className="border-b-2 border-ink bg-paper font-mono text-xs uppercase tracking-wider text-muted">
+                                  <th className="py-2.5 px-3">Evidence Kind</th>
+                                  <th className="py-2.5 px-3">Associated GCC</th>
+                                  <th className="py-2.5 px-3">Documented Claim</th>
+                                  <th className="py-2.5 px-3 text-center">Score Weight</th>
+                                  <th className="py-2.5 px-3 text-right">Source Link</th>
                                 </tr>
                               </thead>
-                              <tbody className="divide-y divide-hairline">
+                              <tbody className="divide-y divide-ink/10">
                                 {links.map((pl) => {
                                   const gcc = pl.gcc_id ? gccsMap.get(pl.gcc_id) : null;
                                   const firstEv = pl.evidence?.[0];
@@ -281,16 +281,16 @@ export function ProvidersClient({
 
                                   return (
                                     <tr key={pl.id} className="hover:bg-paper/30">
-                                      <td className="py-2 px-3 font-mono text-[10px] uppercase font-bold text-ink">
-                                        <span className="inline-block px-1.5 py-0.5 border border-hairline bg-paper">
+                                      <td className="py-2.5 px-3 font-mono text-xs uppercase font-bold text-ink">
+                                        <span className="inline-block px-1.5 py-0.5 border border-ink bg-surface rounded-2xs">
                                           {kind.replace(/_/g, " ")}
                                         </span>
                                       </td>
-                                      <td className="py-2 px-3 font-serif text-ink">
+                                      <td className="py-2.5 px-3 text-ink">
                                         {gcc ? (
                                           <Link
                                             href={`/gcc/${gcc.slug}`}
-                                            className="font-bold hover:text-verdigris hover:underline font-sans"
+                                            className="font-bold hover:text-cobalt hover:underline font-sans text-sm"
                                           >
                                             {gcc.name}
                                           </Link>
@@ -298,19 +298,19 @@ export function ProvidersClient({
                                           <span className="text-muted font-mono">—</span>
                                         )}
                                       </td>
-                                      <td className="py-2 px-3 text-ink/90 font-serif italic text-xs">
+                                      <td className="py-2.5 px-3 text-ink/90 font-body text-xs">
                                         {firstEv?.excerpt_summary || pl.service}
                                       </td>
-                                      <td className="py-2 px-3 text-center font-mono font-bold text-verdigris">
+                                      <td className="py-2.5 px-3 text-center font-mono font-bold text-cobalt text-xs">
                                         {pl.status === "attested" ? "+3 pts" : "+2 pts"}
                                       </td>
-                                      <td className="py-2 px-3 text-right">
+                                      <td className="py-2.5 px-3 text-right">
                                         {src ? (
                                           <a
                                             href={src.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-1 font-mono text-xs text-verdigris hover:text-ink font-semibold"
+                                            className="inline-flex items-center gap-1 font-mono text-xs text-cobalt hover:text-ink font-semibold"
                                           >
                                             <span>Examine</span>
                                             <ExternalLink className="w-3 h-3" />
@@ -326,7 +326,7 @@ export function ProvidersClient({
                             </table>
                           </div>
                         ) : (
-                          <div className="py-4 text-center font-serif italic text-muted text-xs">
+                          <div className="py-4 text-center font-body text-muted text-xs">
                             No verified proof links on file for this provider firm.
                           </div>
                         )}

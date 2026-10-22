@@ -150,30 +150,30 @@ export function ReconcileClient({
     switch (unitType) {
       case "parent_company":
         return {
-          bar: "bg-verdigris",
-          dot: "bg-verdigris border-surface text-verdigris",
-          badge: "text-verdigris border-verdigris/30 bg-verdigris/10",
+          bar: "bg-coral",
+          dot: "bg-coral border-surface text-coral",
+          badge: "text-coral border-coral/40 bg-coral/10 font-bold",
           label: "Parent Company",
         };
       case "legal_entity":
         return {
-          bar: "bg-slate-700 dark:bg-slate-300",
-          dot: "bg-slate-700 dark:bg-slate-300 border-surface text-slate-700 dark:text-slate-300",
-          badge: "text-slate-700 dark:text-slate-300 border-slate-400/30 bg-slate-500/10",
+          bar: "bg-marigold",
+          dot: "bg-marigold border-surface text-marigold",
+          badge: "text-ink border-marigold/60 bg-marigold/20 font-bold",
           label: "Legal Entity",
         };
       case "centre_unit":
         return {
-          bar: "bg-[#DC2626]",
-          dot: "bg-[#DC2626] border-surface text-[#DC2626]",
-          badge: "text-[#DC2626] border-[#DC2626]/30 bg-[#DC2626]/10",
+          bar: "bg-mint",
+          dot: "bg-mint border-surface text-mint",
+          badge: "text-ink border-mint/60 bg-mint/20 font-bold",
           label: "Centre Unit",
         };
       default:
         return {
-          bar: "bg-hatched border border-hairline",
-          dot: "bg-paper border-hairline text-muted",
-          badge: "text-muted border-hairline bg-paper/60",
+          bar: "bg-hatched border-2 border-ink",
+          dot: "bg-paper border-2 border-ink text-muted",
+          badge: "text-muted border-2 border-ink bg-paper/60",
           label: "Unstated Unit",
         };
     }
@@ -187,53 +187,53 @@ export function ReconcileClient({
       <section
         id="hero"
         aria-labelledby="hero-heading"
-        className="scroll-mt-24 border-b border-hairline pb-10 pt-2"
+        className="scroll-mt-24 border-b-2 border-ink pb-10 pt-2"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Column: Plain-English headline + 2-line explainer */}
           <div className="lg:col-span-6 space-y-4">
             <div className="flex items-center gap-2 text-xs font-mono text-muted uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-verdigris" />
+              <span className="w-2.5 h-2.5 rounded-full bg-cobalt" />
               <span>Reconciliation Ledger • Edition: May 2026</span>
             </div>
 
             <h1
               id="hero-heading"
-              className="font-serif text-3xl sm:text-4xl lg:text-[40px] font-bold text-ink leading-tight tracking-tight"
+              className="font-display text-3xl sm:text-4xl lg:text-[42px] font-bold text-ink leading-tight tracking-tight"
             >
               Why India&apos;s GCC counts vary between{" "}
-              <span className="text-verdigris tabular-nums">
+              <span className="text-cobalt tabular-nums">
                 {minPublished.toLocaleString()}
               </span>{" "}
               and{" "}
-              <span className="text-verdigris tabular-nums">
+              <span className="text-cobalt tabular-nums">
                 {maxPublished.toLocaleString()}
               </span>
             </h1>
 
-            <p className="font-sans text-base text-muted leading-relaxed">
+            <p className="font-body text-base text-muted leading-relaxed">
               Major industry reports disagree because each survey measures an
               unstated, different unit: the global parent corporation, the
               incorporated Indian legal entity, or the multi-city campus operating
               unit.
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-muted border-t border-hairline-subtle">
+            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-muted border-t border-rule-subtle">
               <span>{numericRows.length} publisher benchmarks reconciled</span>
               <span>•</span>
               <span>{gccs.length} parent enterprises in verified registry</span>
               <span>•</span>
-              <span className="text-verdigris">Last reviewed: May 2026</span>
+              <span className="text-cobalt font-semibold">Reviewed: May 2026</span>
             </div>
           </div>
 
           {/* Right Column: Range-Strip Chart (One horizontal axis, one dot per publisher, coloured by unit) */}
-          <div className="lg:col-span-6 p-5 border border-hairline bg-surface rounded-xs shadow-2xs space-y-5">
-            <div className="flex items-baseline justify-between border-b border-hairline-subtle pb-2">
+          <div className="lg:col-span-6 p-5 border-2 border-ink bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] space-y-5">
+            <div className="flex items-baseline justify-between border-b-2 border-ink pb-2">
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
                 Published Counts Range Strip
               </span>
-              <span className="font-mono text-[11px] text-muted">
+              <span className="font-mono text-xs text-muted">
                 Axis: {axisMin.toLocaleString()} – {axisMax.toLocaleString()}
               </span>
             </div>
@@ -323,21 +323,21 @@ export function ReconcileClient({
             </div>
 
             {/* Strip Chart Legend */}
-            <div className="pt-2 border-t border-hairline-subtle flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-muted">
+            <div className="pt-2 border-t-2 border-ink flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-muted">
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-verdigris inline-block rounded-2xs" />
+                <span className="w-2.5 h-2.5 bg-coral inline-block rounded-2xs" />
                 <span>Parent Company</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-slate-700 dark:bg-slate-300 inline-block rounded-2xs" />
+                <span className="w-2.5 h-2.5 bg-marigold inline-block rounded-2xs" />
                 <span>Legal Entity</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-[#DC2626] inline-block rounded-2xs" />
+                <span className="w-2.5 h-2.5 bg-mint inline-block rounded-2xs" />
                 <span>Centre Unit</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-paper border border-muted inline-block rounded-2xs" />
+                <span className="w-2.5 h-2.5 bg-hatched border border-ink inline-block rounded-2xs" />
                 <span>Unstated Unit</span>
               </div>
             </div>
@@ -353,15 +353,15 @@ export function ReconcileClient({
         aria-labelledby="why-heading"
         className="scroll-mt-24 space-y-6"
       >
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-hairline pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b-2 border-ink pb-3">
           <div>
             <h2
               id="why-heading"
-              className="font-serif text-2xl sm:text-3xl font-bold text-ink"
+              className="font-display text-2xl sm:text-3xl font-bold text-ink"
             >
               Why the numbers differ
             </h2>
-            <p className="font-sans text-sm text-muted mt-1">
+            <p className="font-body text-base text-muted mt-1">
               Selecting a counting rule harmonizes published figures into an
               empirically verifiable baseline.
             </p>
@@ -377,35 +377,35 @@ export function ReconcileClient({
           <button
             type="button"
             onClick={() => setSelectedUnit("parent_company")}
-            className={`text-left p-5 border transition-all duration-normal flex flex-col justify-between space-y-3 rounded-xs relative ${
+            className={`text-left p-5 border-2 transition-all duration-normal flex flex-col justify-between space-y-3 rounded-xs relative cursor-pointer ${
               selectedUnit === "parent_company"
-                ? "border-verdigris bg-surface shadow-xs ring-1 ring-verdigris"
-                : "border-hairline bg-paper/40 hover:bg-surface hover:border-hairline"
+                ? "border-coral bg-surface shadow-[3px_3px_0px_var(--color-ink)]"
+                : "border-ink bg-surface/50 hover:bg-surface"
             }`}
           >
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-muted font-bold">
+                <span className="font-mono text-xs uppercase tracking-wider text-muted font-bold">
                   Rule 01
                 </span>
                 {selectedUnit === "parent_company" && (
-                  <span className="font-mono text-[10px] uppercase font-bold text-verdigris px-1.5 py-0.5 border border-verdigris/40 bg-verdigris/10 rounded-xs">
+                  <span className="font-mono text-xs uppercase font-bold text-coral px-2 py-0.5 border border-coral/40 bg-coral/10 rounded-full">
                     Active Rule
                   </span>
                 )}
               </div>
-              <h3 className="font-serif font-bold text-base text-ink">
+              <h3 className="font-display font-bold text-lg text-ink">
                 Parent Companies
               </h3>
-              <p className="font-sans text-xs text-muted leading-relaxed">
+              <p className="font-body text-sm text-muted leading-relaxed">
                 Distinct multinational parent corporations having one or more
                 captive centres in India.
               </p>
             </div>
 
-            <div className="pt-3 border-t border-hairline-subtle grid grid-cols-2 gap-2 text-xs font-mono">
+            <div className="pt-3 border-t border-rule-subtle grid grid-cols-2 gap-2 text-xs font-mono">
               <div>
-                <span className="text-muted block text-[10px] uppercase">
+                <span className="text-muted block text-xs uppercase">
                   Registry Count
                 </span>
                 <span className="font-bold text-ink text-base tabular-nums">
@@ -413,10 +413,10 @@ export function ReconcileClient({
                 </span>
               </div>
               <div>
-                <span className="text-muted block text-[10px] uppercase">
+                <span className="text-muted block text-xs uppercase">
                   Benchmark Est.
                 </span>
-                <span className="font-bold text-verdigris text-base tabular-nums">
+                <span className="font-bold text-coral text-base tabular-nums">
                   ~1,430
                 </span>
               </div>
@@ -427,35 +427,35 @@ export function ReconcileClient({
           <button
             type="button"
             onClick={() => setSelectedUnit("legal_entity")}
-            className={`text-left p-5 border transition-all duration-normal flex flex-col justify-between space-y-3 rounded-xs relative ${
+            className={`text-left p-5 border-2 transition-all duration-normal flex flex-col justify-between space-y-3 rounded-xs relative cursor-pointer ${
               selectedUnit === "legal_entity"
-                ? "border-verdigris bg-surface shadow-xs ring-1 ring-verdigris"
-                : "border-hairline bg-paper/40 hover:bg-surface hover:border-hairline"
+                ? "border-marigold bg-surface shadow-[3px_3px_0px_var(--color-ink)]"
+                : "border-ink bg-surface/50 hover:bg-surface"
             }`}
           >
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-muted font-bold">
+                <span className="font-mono text-xs uppercase tracking-wider text-muted font-bold">
                   Rule 02
                 </span>
                 {selectedUnit === "legal_entity" && (
-                  <span className="font-mono text-[10px] uppercase font-bold text-verdigris px-1.5 py-0.5 border border-verdigris/40 bg-verdigris/10 rounded-xs">
+                  <span className="font-mono text-xs uppercase font-bold text-ink px-2 py-0.5 border border-marigold/60 bg-marigold/20 rounded-full">
                     Active Rule
                   </span>
                 )}
               </div>
-              <h3 className="font-serif font-bold text-base text-ink">
+              <h3 className="font-display font-bold text-lg text-ink">
                 Legal Entities
               </h3>
-              <p className="font-sans text-xs text-muted leading-relaxed">
+              <p className="font-body text-sm text-muted leading-relaxed">
                 Corporate entities incorporated in India under the Companies Act
                 with unique Corporate Identification Numbers (CIN).
               </p>
             </div>
 
-            <div className="pt-3 border-t border-hairline-subtle grid grid-cols-2 gap-2 text-xs font-mono">
+            <div className="pt-3 border-t border-rule-subtle grid grid-cols-2 gap-2 text-xs font-mono">
               <div>
-                <span className="text-muted block text-[10px] uppercase">
+                <span className="text-muted block text-xs uppercase">
                   Registry Count
                 </span>
                 <span className="font-bold text-ink text-base tabular-nums">
@@ -463,10 +463,10 @@ export function ReconcileClient({
                 </span>
               </div>
               <div>
-                <span className="text-muted block text-[10px] uppercase">
+                <span className="text-muted block text-xs uppercase">
                   Benchmark Est.
                 </span>
-                <span className="font-bold text-verdigris text-base tabular-nums">
+                <span className="font-bold text-marigold text-base tabular-nums">
                   ~1,920
                 </span>
               </div>
@@ -477,35 +477,35 @@ export function ReconcileClient({
           <button
             type="button"
             onClick={() => setSelectedUnit("centre_unit")}
-            className={`text-left p-5 border transition-all duration-normal flex flex-col justify-between space-y-3 rounded-xs relative ${
+            className={`text-left p-5 border-2 transition-all duration-normal flex flex-col justify-between space-y-3 rounded-xs relative cursor-pointer ${
               selectedUnit === "centre_unit"
-                ? "border-verdigris bg-surface shadow-xs ring-1 ring-verdigris"
-                : "border-hairline bg-paper/40 hover:bg-surface hover:border-hairline"
+                ? "border-mint bg-surface shadow-[3px_3px_0px_var(--color-ink)]"
+                : "border-ink bg-surface/50 hover:bg-surface"
             }`}
           >
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-muted font-bold">
+                <span className="font-mono text-xs uppercase tracking-wider text-muted font-bold">
                   Rule 03
                 </span>
                 {selectedUnit === "centre_unit" && (
-                  <span className="font-mono text-[10px] uppercase font-bold text-verdigris px-1.5 py-0.5 border border-verdigris/40 bg-verdigris/10 rounded-xs">
+                  <span className="font-mono text-xs uppercase font-bold text-ink px-2 py-0.5 border border-mint/60 bg-mint/20 rounded-full">
                     Active Rule
                   </span>
                 )}
               </div>
-              <h3 className="font-serif font-bold text-base text-ink">
+              <h3 className="font-display font-bold text-lg text-ink">
                 Operational Centre Units
               </h3>
-              <p className="font-sans text-xs text-muted leading-relaxed">
+              <p className="font-body text-sm text-muted leading-relaxed">
                 Physical operational campuses or distinct municipal city
                 footprints established by a GCC entity.
               </p>
             </div>
 
-            <div className="pt-3 border-t border-hairline-subtle grid grid-cols-2 gap-2 text-xs font-mono">
+            <div className="pt-3 border-t border-rule-subtle grid grid-cols-2 gap-2 text-xs font-mono">
               <div>
-                <span className="text-muted block text-[10px] uppercase">
+                <span className="text-muted block text-xs uppercase">
                   Registry Count
                 </span>
                 <span className="font-bold text-ink text-base tabular-nums">
@@ -513,10 +513,10 @@ export function ReconcileClient({
                 </span>
               </div>
               <div>
-                <span className="text-muted block text-[10px] uppercase">
+                <span className="text-muted block text-xs uppercase">
                   Benchmark Est.
                 </span>
-                <span className="font-bold text-verdigris text-base tabular-nums">
+                <span className="font-bold text-mint text-base tabular-nums">
                   2,117 – 3,728
                 </span>
               </div>
@@ -525,13 +525,13 @@ export function ReconcileClient({
         </div>
 
         {/* One Citable Sentence & Audit Details (Requirement 9 & 3) */}
-        <div className="p-4 border border-hairline bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div className="font-serif italic text-ink/90 text-sm">
+        <div className="p-4 border-2 border-ink bg-surface rounded-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="font-body text-ink/90 text-sm">
             &ldquo;{gccs.length} parent companies sourced;{" "}
             {coverageResult.wellSourcedCount} have 3+ statutory filings.&rdquo;
           </div>
           <div className="flex items-center gap-4 text-xs font-mono text-muted flex-shrink-0">
-            <span>Last reviewed: May 2026</span>
+            <span>Reviewed: May 2026</span>
             <span>•</span>
             <span>Edition: May 2026</span>
           </div>
@@ -546,15 +546,15 @@ export function ReconcileClient({
         aria-labelledby="compare-heading"
         className="scroll-mt-24 space-y-4"
       >
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-hairline pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b-2 border-ink pb-3">
           <div>
             <h2
               id="compare-heading"
-              className="font-serif text-2xl sm:text-3xl font-bold text-ink"
+              className="font-display text-2xl sm:text-3xl font-bold text-ink"
             >
               Compare the published counts
             </h2>
-            <p className="font-sans text-sm text-muted mt-1">
+            <p className="font-body text-sm text-muted mt-1">
               Side-by-side audit of major research publications reporting India&apos;s
               GCC totals.
             </p>
@@ -563,32 +563,32 @@ export function ReconcileClient({
           {/* Unit Legend (Requirement 5) */}
           <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-muted">
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 bg-verdigris inline-block rounded-2xs" />
+              <span className="w-2.5 h-2.5 bg-coral inline-block rounded-2xs" />
               <span>Parent Company</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 bg-slate-700 dark:bg-slate-300 inline-block rounded-2xs" />
+              <span className="w-2.5 h-2.5 bg-marigold inline-block rounded-2xs" />
               <span>Legal Entity</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 bg-[#DC2626] inline-block rounded-2xs" />
+              <span className="w-2.5 h-2.5 bg-mint inline-block rounded-2xs" />
               <span>Centre Unit</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 bg-paper border border-muted inline-block rounded-2xs" />
+              <span className="w-2.5 h-2.5 bg-hatched border border-ink inline-block rounded-2xs" />
               <span>Unstated</span>
             </span>
           </div>
         </div>
 
         {/* Desktop Table View (>=640px) */}
-        <div className="hidden sm:block border border-hairline bg-surface overflow-x-auto">
-          <table className="w-full text-left border-collapse font-sans text-xs">
+        <div className="hidden sm:block border-2 border-ink bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] overflow-x-auto">
+          <table className="w-full text-left border-collapse font-sans text-sm">
             <caption className="sr-only">
               Comparison of published India GCC counts from major industry research bodies
             </caption>
             <thead>
-              <tr className="border-b-2 border-ink bg-paper/90 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <tr className="border-b-2 border-ink bg-paper font-mono text-xs uppercase tracking-wider text-muted">
                 <th scope="col" className="py-3 px-4 min-w-[220px]">
                   Publisher &amp; Survey
                 </th>
@@ -609,7 +609,7 @@ export function ReconcileClient({
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-hairline">
+            <tbody className="divide-y-2 divide-ink/10">
               {numericRows.map((row, idx) => {
                 const source = sourcesMap.get(row.source_id);
                 const countVal = row.count_value || 0;
@@ -625,11 +625,11 @@ export function ReconcileClient({
                     className="hover:bg-paper/40 transition-colors duration-fast"
                   >
                     {/* Publisher */}
-                    <td className="py-3.5 px-4 font-serif text-ink">
-                      <div className="font-bold text-sm text-ink font-sans">
+                    <td className="py-3.5 px-4 text-ink">
+                      <div className="font-bold text-sm text-ink font-display">
                         {row.publisher}
                       </div>
-                      <div className="text-[11px] text-muted italic font-serif line-clamp-1 mt-0.5">
+                      <div className="text-xs text-muted font-body line-clamp-1 mt-0.5">
                         {row.note}
                       </div>
                     </td>
@@ -641,12 +641,12 @@ export function ReconcileClient({
                           <span className="font-bold text-sm text-ink tabular-nums">
                             {row.headline_count}
                           </span>
-                          <span className="text-[10px] text-muted">
+                          <span className="text-xs text-muted">
                             {Math.round(barPct)}% of max
                           </span>
                         </div>
                         {/* Bar */}
-                        <div className="w-full h-2.5 bg-paper border border-hairline overflow-hidden rounded-2xs">
+                        <div className="w-full h-3 bg-paper border border-ink overflow-hidden rounded-xs">
                           <div
                             className={`h-full transition-all duration-slow ease-ledger ${
                               row.unit_type === "unknown"
@@ -662,7 +662,7 @@ export function ReconcileClient({
                     {/* Claimed Unit Badge */}
                     <td className="py-3.5 px-3">
                       <span
-                        className={`font-mono text-[11px] uppercase tracking-wider px-2 py-0.5 border rounded-2xs inline-block ${colors.badge}`}
+                        className={`font-mono text-xs uppercase tracking-wider px-2 py-0.5 border rounded-xs inline-block ${colors.badge}`}
                       >
                         {colors.label}
                       </span>
@@ -676,12 +676,12 @@ export function ReconcileClient({
                     {/* Rule Definition Known */}
                     <td className="py-3.5 px-3 font-mono text-xs">
                       {row.definition_known ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] text-verdigris font-semibold">
-                          <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={1.5} />
+                        <span className="inline-flex items-center gap-1 text-xs text-cobalt font-semibold">
+                          <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={2} />
                           <span>Explicit Rule</span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-[11px] text-muted">
+                        <span className="inline-flex items-center gap-1 text-xs text-muted">
                           <HelpCircle className="w-3.5 h-3.5 text-muted" strokeWidth={1.5} />
                           <span>Unstated</span>
                         </span>
@@ -805,7 +805,7 @@ export function ReconcileClient({
           {/* Factor 1 */}
           <div className="p-4 border border-hairline bg-surface space-y-2 rounded-xs">
             <div className="flex items-center justify-between font-mono text-xs">
-              <span className="font-bold text-verdigris">Factor 01</span>
+              <span className="font-bold text-cobalt">Factor 01</span>
               <span className="text-[10px] uppercase px-1 border border-hairline bg-paper/60 text-muted rounded-2xs">
                 Editorial
               </span>
@@ -824,7 +824,7 @@ export function ReconcileClient({
           {/* Factor 2 */}
           <div className="p-4 border border-hairline bg-surface space-y-2 rounded-xs">
             <div className="flex items-center justify-between font-mono text-xs">
-              <span className="font-bold text-verdigris">Factor 02</span>
+              <span className="font-bold text-cobalt">Factor 02</span>
               <span className="text-[10px] uppercase px-1 border border-hairline bg-paper/60 text-muted rounded-2xs">
                 Editorial
               </span>
@@ -843,7 +843,7 @@ export function ReconcileClient({
           {/* Factor 3 */}
           <div className="p-4 border border-hairline bg-surface space-y-2 rounded-xs">
             <div className="flex items-center justify-between font-mono text-xs">
-              <span className="font-bold text-verdigris">Factor 03</span>
+              <span className="font-bold text-cobalt">Factor 03</span>
               <span className="text-[10px] uppercase px-1 border border-hairline bg-paper/60 text-muted rounded-2xs">
                 Editorial
               </span>
@@ -861,7 +861,7 @@ export function ReconcileClient({
           {/* Factor 4 */}
           <div className="p-4 border border-hairline bg-surface space-y-2 rounded-xs">
             <div className="flex items-center justify-between font-mono text-xs">
-              <span className="font-bold text-verdigris">Factor 04</span>
+              <span className="font-bold text-cobalt">Factor 04</span>
               <span className="text-[10px] uppercase px-1 border border-hairline bg-paper/60 text-muted rounded-2xs">
                 Editorial
               </span>
@@ -922,7 +922,7 @@ export function ReconcileClient({
                         href={source.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-mono text-verdigris hover:underline min-h-[32px] px-2 py-1 border border-hairline bg-paper/50 rounded-xs"
+                        className="inline-flex items-center gap-1 text-xs font-mono text-cobalt hover:underline min-h-[32px] px-2 py-1 border border-hairline bg-paper/50 rounded-xs"
                       >
                         <span>Source</span>
                         <ExternalLink className="w-3 h-3" />

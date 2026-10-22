@@ -102,13 +102,13 @@ export function SubmitClient({
         <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Service Provider Firm:
               </label>
               <select
                 value={providerId}
                 onChange={(e) => setProviderId(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 min-h-[44px] focus-visible:outline-none focus:border-verdigris"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink min-h-[44px] focus-visible:outline-cobalt"
               >
                 {providers.map((p) => (
                   <option key={p.id} value={p.id}>
@@ -119,7 +119,7 @@ export function SubmitClient({
             </div>
 
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 GCC Client Organization:
               </label>
               <input
@@ -128,20 +128,20 @@ export function SubmitClient({
                 placeholder="e.g. Goldman Sachs India Services"
                 value={gccName}
                 onChange={(e) => setGccName(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px]"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Service Category:
               </label>
               <select
                 value={serviceCategory}
                 onChange={(e) => setServiceCategory(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 min-h-[44px] focus-visible:outline-none focus:border-verdigris"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink min-h-[44px] focus-visible:outline-cobalt"
               >
                 <option value="real_estate">Real Estate & Workplace</option>
                 <option value="advisory">Management Advisory</option>
@@ -153,7 +153,7 @@ export function SubmitClient({
             </div>
 
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Engagement Year:
               </label>
               <input
@@ -162,12 +162,12 @@ export function SubmitClient({
                 max="2026"
                 value={year}
                 onChange={(e) => setYear(Number(e.target.value))}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink focus-visible:outline-cobalt min-h-[44px]"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Your Corporate Role:
               </label>
               <input
@@ -176,14 +176,14 @@ export function SubmitClient({
                 placeholder="e.g. Head of Real Estate / VP Tech"
                 value={attesterRole}
                 onChange={(e) => setAttesterRole(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px]"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Attester Full Name:
               </label>
               <input
@@ -192,12 +192,12 @@ export function SubmitClient({
                 placeholder="e.g. Ramesh Kulkarni"
                 value={attesterName}
                 onChange={(e) => setAttesterName(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px]"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+              <label className="block text-xs uppercase text-muted font-bold mb-1">
                 Corporate Email (For Domain Proof):
               </label>
               <input
@@ -206,13 +206,13 @@ export function SubmitClient({
                 placeholder="ramesh@company.com"
                 value={attesterEmail}
                 onChange={(e) => setAttesterEmail(e.target.value)}
-                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt min-h-[44px]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
+            <label className="block text-xs uppercase text-muted font-bold mb-1">
               Scope Summary &amp; Deliverables:
             </label>
             <textarea
@@ -221,7 +221,7 @@ export function SubmitClient({
               placeholder="State the commercial project scope, campus location, square footage, or staffing milestone achieved..."
               value={projectSummary}
               onChange={(e) => setProjectSummary(e.target.value)}
-              className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris"
+              className="w-full py-2.5 px-3 border border-hairline bg-surface text-sm text-ink placeholder:text-muted focus-visible:outline-cobalt"
             />
           </div>
 
@@ -231,7 +231,7 @@ export function SubmitClient({
             </span>
             <button
               type="submit"
-              className="px-6 py-2.5 bg-ink text-paper text-xs uppercase tracking-wider font-semibold hover:bg-verdigris transition-colors duration-fast min-h-[44px]"
+              className="px-6 py-2.5 bg-ink text-paper text-xs uppercase tracking-wider font-semibold hover:bg-cobalt transition-colors duration-fast min-h-[44px]"
             >
               Submit Attestation
             </button>
@@ -239,7 +239,7 @@ export function SubmitClient({
         </form>
 
         {submittedItem && (
-          <div className="p-4 border border-verdigris bg-verdigris/10 text-xs font-mono text-verdigris flex items-center gap-2">
+          <div className="p-4 border border-cobalt bg-cobalt/10 text-xs font-mono text-cobalt flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4" />
             <span>Attestation successfully registered to the pending peer review queue.</span>
           </div>
@@ -284,7 +284,7 @@ export function SubmitClient({
                   <span
                     className={`inline-block font-mono text-[10px] uppercase font-bold px-2 py-0.5 border ${
                       a.status === "verified"
-                        ? "border-verdigris text-verdigris bg-verdigris/10"
+                        ? "border-cobalt text-cobalt bg-cobalt/10"
                         : "border-hairline text-muted bg-paper/50"
                     }`}
                   >

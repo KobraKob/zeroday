@@ -82,8 +82,8 @@ export function DataTable<T>({
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-left border-collapse font-sans text-xs">
           {caption && <caption className="sr-only">{caption}</caption>}
-          <thead>
-            <tr className="border-b border-ink bg-paper/80 font-mono text-[11px] uppercase tracking-wider text-muted">
+          <thead className="sticky top-16 z-20 bg-surface shadow-xs">
+            <tr className="border-b-2 border-ink bg-surface font-sans text-xs font-semibold text-muted whitespace-nowrap">
               {expandedRowRender && (
                 <th scope="col" className="w-8 py-3 px-3 text-center">
                   <span className="sr-only">Expand</span>
@@ -103,8 +103,8 @@ export function DataTable<T>({
                     key={col.key}
                     scope="col"
                     onClick={() => handleSort(col)}
-                    className={`py-3 px-3.5 font-semibold select-none ${alignClass} ${
-                      col.sortable ? "cursor-pointer hover:text-ink hover:bg-paper" : ""
+                    className={`py-3 px-3.5 font-semibold select-none whitespace-nowrap ${alignClass} ${
+                      col.sortable ? "cursor-pointer hover:text-ink hover:bg-paper/60" : ""
                     } ${col.className || ""}`}
                   >
                     <div
@@ -114,15 +114,15 @@ export function DataTable<T>({
                     >
                       <span>{col.header}</span>
                       {col.sortable && (
-                        <span className="text-muted">
+                        <span className="flex-shrink-0">
                           {isSorted ? (
                             sortDirection === "asc" ? (
-                              <ArrowUp className="w-3 h-3 text-verdigris" />
+                              <ArrowUp className="w-4 h-4 text-cobalt stroke-[2.25]" />
                             ) : (
-                              <ArrowDown className="w-3 h-3 text-verdigris" />
+                              <ArrowDown className="w-4 h-4 text-cobalt stroke-[2.25]" />
                             )
                           ) : (
-                            <ArrowUpDown className="w-2.5 h-2.5 opacity-40 hover:opacity-100" />
+                            <ArrowUpDown className="w-4 h-4 text-muted opacity-30 hover:opacity-100 transition-opacity" />
                           )}
                         </span>
                       )}
@@ -152,12 +152,12 @@ export function DataTable<T>({
                             type="button"
                             aria-expanded={isExpanded}
                             aria-label={isExpanded ? "Collapse row details" : "Expand row details"}
-                            className="w-6 h-6 inline-flex items-center justify-center text-muted hover:text-ink focus-visible:outline-verdigris"
+                            className="w-6 h-6 inline-flex items-center justify-center text-muted hover:text-ink focus-visible:outline-cobalt"
                           >
                             {isExpanded ? (
-                              <ChevronDown className="w-3.5 h-3.5 text-verdigris" />
+                              <ChevronDown className="w-4 h-4 text-cobalt" />
                             ) : (
-                              <ChevronRight className="w-3.5 h-3.5" />
+                              <ChevronRight className="w-4 h-4" />
                             )}
                           </button>
                         </td>
@@ -185,7 +185,7 @@ export function DataTable<T>({
                       <tr className="bg-paper/40 border-b border-hairline">
                         <td
                           colSpan={columns.length + 1}
-                          className="p-4 border-l-2 border-verdigris"
+                          className="p-4 border-l-2 border-cobalt"
                         >
                           {expandedRowRender(item)}
                         </td>
@@ -198,7 +198,7 @@ export function DataTable<T>({
               <tr>
                 <td
                   colSpan={columns.length + (Boolean(expandedRowRender) ? 1 : 0)}
-                  className="py-12 px-4 text-center text-muted font-serif italic text-sm"
+                  className="py-12 px-4 text-center text-muted font-body italic text-sm"
                 >
                   {emptyState || "No records in current view. Sourced benchmarks pending."}
                 </td>
@@ -241,7 +241,7 @@ export function DataTable<T>({
                       className="min-h-[44px] min-w-[44px] flex items-center justify-end text-muted hover:text-ink"
                     >
                       {isExpanded ? (
-                        <ChevronDown className="w-4 h-4 text-verdigris" />
+                        <ChevronDown className="w-4 h-4 text-cobalt" />
                       ) : (
                         <ChevronRight className="w-4 h-4" />
                       )}

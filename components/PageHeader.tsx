@@ -25,11 +25,11 @@ export function PageHeader({
   className = "",
 }: PageHeaderProps) {
   return (
-    <header className={`border-b border-hairline pb-6 pt-2 space-y-4 ${className}`}>
+    <header className={`border-b-2 border-ink pb-6 pt-2 space-y-4 ${className}`}>
       {/* Top Rubric Line */}
       <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
         <div className="flex items-center gap-2">
-          <span className="uppercase font-bold tracking-wider text-verdigris">
+          <span className="uppercase font-bold tracking-wider text-cobalt">
             {rubric}
           </span>
           <span className="text-muted">• Citable Record</span>
@@ -44,10 +44,10 @@ export function PageHeader({
 
       {/* Main Finding Headline */}
       <div className="max-w-prose space-y-2">
-        <h1 className="font-display text-2xl sm:text-4xl lg:text-[2.6rem] font-bold text-ink leading-[1.18] tracking-tight">
+        <h1 className="font-display text-3xl sm:text-4xl lg:text-[40px] font-bold text-ink leading-tight tracking-tight">
           {findingHeadline}
         </h1>
-        <p className="font-sans text-sm sm:text-base text-muted leading-relaxed">
+        <p className="font-body text-base text-muted leading-relaxed">
           {findingDescription}
         </p>
       </div>

@@ -83,7 +83,6 @@
     "confidence": "B",
     "note": "GCCs pay a 15% to 22% compensation premium over legacy IT services firms for equivalent tech talent."
   },
-
   {
     "id": "clm-city-blr-units",
     "subject_type": "city",
@@ -144,7 +143,6 @@
     "confidence": "B",
     "note": "Baseline benchmark market for tech and AI compensation."
   },
-
   {
     "id": "clm-city-hyd-units",
     "subject_type": "city",
@@ -204,7 +202,6 @@
     "confidence": "B",
     "note": "Average 8% - 10% lower cost-to-company compared to equivalent roles in Bengaluru."
   },
-
   {
     "id": "clm-city-pun-units",
     "subject_type": "city",
@@ -263,7 +260,6 @@
     "confidence": "B",
     "note": "Strong engineering talent pipeline from Maharashtra engineering colleges."
   },
-
   {
     "id": "clm-city-chn-units",
     "subject_type": "city",
@@ -322,7 +318,6 @@
     "confidence": "B",
     "note": "High loyalty and lowest industry attrition rates across top Tier-1 hubs."
   },
-
   {
     "id": "clm-city-ggn-units",
     "subject_type": "city",
@@ -368,7 +363,6 @@
     "source_id": "src-teamlease-gcc-hiring",
     "confidence": "B"
   },
-
   {
     "id": "clm-city-noi-units",
     "subject_type": "city",
@@ -414,7 +408,6 @@
     "source_id": "src-teamlease-gcc-hiring",
     "confidence": "B"
   },
-
   {
     "id": "clm-city-mum-units",
     "subject_type": "city",
@@ -461,7 +454,6 @@
     "source_id": "src-teamlease-gcc-hiring",
     "confidence": "B"
   },
-
   {
     "id": "clm-city-cbe-units",
     "subject_type": "city",
@@ -491,7 +483,7 @@
     "subject_type": "city",
     "subject_id": "city-cbe",
     "field": "office_vacancy_rate",
-    "value": 15.0,
+    "value": 15,
     "unit": "%",
     "as_of": "2026",
     "source_id": "src-nlb-gcc-report",
@@ -509,7 +501,6 @@
     "confidence": "B",
     "note": "30% - 35% lower cost-to-company compared to Bengaluru with high graduate retention."
   },
-
   {
     "id": "clm-city-ahd-units",
     "subject_type": "city",
@@ -556,7 +547,6 @@
     "source_id": "src-teamlease-gcc-hiring",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-goog-est",
     "subject_type": "gcc",
@@ -575,7 +565,7 @@
     "field": "cin",
     "value": "U72900KA2003PTC033028",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-google",
     "confidence": "A"
   },
   {
@@ -598,7 +588,6 @@
     "source_id": "src-jll-office-2026",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-msft-est",
     "subject_type": "gcc",
@@ -616,7 +605,7 @@
     "field": "cin",
     "value": "U72200TG1998PTC029414",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-msft",
     "confidence": "A"
   },
   {
@@ -629,7 +618,6 @@
     "source_id": "src-msft-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-amzn-est",
     "subject_type": "gcc",
@@ -647,7 +635,7 @@
     "field": "cin",
     "value": "U72200KA2004FTC034233",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-amzn",
     "confidence": "A"
   },
   {
@@ -660,7 +648,6 @@
     "source_id": "src-amzn-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-jpmc-est",
     "subject_type": "gcc",
@@ -678,7 +665,7 @@
     "field": "cin",
     "value": "U72900MH2000PTC124563",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-jpmc",
     "confidence": "A"
   },
   {
@@ -691,7 +678,6 @@
     "source_id": "src-jpmc-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-wells-est",
     "subject_type": "gcc",
@@ -709,7 +695,7 @@
     "field": "cin",
     "value": "U72200TG2006FTC051401",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-wells",
     "confidence": "A"
   },
   {
@@ -722,7 +708,6 @@
     "source_id": "src-wells-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-gs-est",
     "subject_type": "gcc",
@@ -740,7 +725,7 @@
     "field": "cin",
     "value": "U72200KA2003FTC032644",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-gs",
     "confidence": "A"
   },
   {
@@ -753,7 +738,6 @@
     "source_id": "src-gs-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-walmart-est",
     "subject_type": "gcc",
@@ -771,7 +755,7 @@
     "field": "cin",
     "value": "U72200KA2011FTC061730",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-walmart",
     "confidence": "A"
   },
   {
@@ -784,7 +768,6 @@
     "source_id": "src-walmart-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-target-est",
     "subject_type": "gcc",
@@ -802,10 +785,9 @@
     "field": "cin",
     "value": "U74900KA2004FTC035028",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-target",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-boeing-est",
     "subject_type": "gcc",
@@ -823,7 +805,7 @@
     "field": "cin",
     "value": "U74999DL2003FTC123616",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-boeing",
     "confidence": "A"
   },
   {
@@ -836,7 +818,6 @@
     "source_id": "src-boeing-bietc",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-airbus-est",
     "subject_type": "gcc",
@@ -854,10 +835,9 @@
     "field": "cin",
     "value": "U74140KA2006FTC041285",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-airbus",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-schneider-est",
     "subject_type": "gcc",
@@ -875,10 +855,9 @@
     "field": "cin",
     "value": "U74899DL1995PTC065815",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-schneider",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-bosch-est",
     "subject_type": "gcc",
@@ -896,7 +875,7 @@
     "field": "cin",
     "value": "U72400KA1997PTC023164",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-bosch",
     "confidence": "A"
   },
   {
@@ -909,7 +888,6 @@
     "source_id": "src-bosch-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-intel-est",
     "subject_type": "gcc",
@@ -927,7 +905,7 @@
     "field": "cin",
     "value": "U72900KA1998PTC024522",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-intel",
     "confidence": "A"
   },
   {
@@ -940,7 +918,6 @@
     "source_id": "src-intel-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-qualcomm-est",
     "subject_type": "gcc",
@@ -958,10 +935,9 @@
     "field": "cin",
     "value": "U64202DL1996PTC077750",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-qualcomm",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-cisco-est",
     "subject_type": "gcc",
@@ -979,10 +955,9 @@
     "field": "cin",
     "value": "U31909KA1995PTC019505",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-cisco",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-sap-est",
     "subject_type": "gcc",
@@ -1000,7 +975,7 @@
     "field": "cin",
     "value": "U72200KA1998PTC024440",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-sap",
     "confidence": "A"
   },
   {
@@ -1013,7 +988,6 @@
     "source_id": "src-sap-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-barclays-est",
     "subject_type": "gcc",
@@ -1031,7 +1005,7 @@
     "field": "cin",
     "value": "U72900PN2006FTC129486",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-barclays",
     "confidence": "A"
   },
   {
@@ -1044,7 +1018,6 @@
     "source_id": "src-barclays-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-hsbc-est",
     "subject_type": "gcc",
@@ -1062,10 +1035,9 @@
     "field": "cin",
     "value": "U72200TG2000PTC035465",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-hsbc",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-sc-est",
     "subject_type": "gcc",
@@ -1083,10 +1055,9 @@
     "field": "cin",
     "value": "U72900TN2000PTC044738",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-sc",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-fidelity-est",
     "subject_type": "gcc",
@@ -1104,10 +1075,9 @@
     "field": "cin",
     "value": "U72200KA2001FTC028445",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-fidelity",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-lowes-est",
     "subject_type": "gcc",
@@ -1125,10 +1095,9 @@
     "field": "cin",
     "value": "U72900KA2014FTC074213",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-lowes",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-pepsi-est",
     "subject_type": "gcc",
@@ -1146,10 +1115,9 @@
     "field": "cin",
     "value": "U74999TG2019FTC134812",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-pepsi",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-astra-est",
     "subject_type": "gcc",
@@ -1167,10 +1135,9 @@
     "field": "cin",
     "value": "U24231KA1979PTC003563",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-astra",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-novartis-est",
     "subject_type": "gcc",
@@ -1188,10 +1155,9 @@
     "field": "cin",
     "value": "U73100TG2007FTC055416",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-novartis",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-pfizer-est",
     "subject_type": "gcc",
@@ -1209,10 +1175,9 @@
     "field": "cin",
     "value": "U24231TN2009FTC072790",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-pfizer",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-shell-est",
     "subject_type": "gcc",
@@ -1230,10 +1195,9 @@
     "field": "cin",
     "value": "U23201TN2004PTC053147",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-shell",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-mbrdi-est",
     "subject_type": "gcc",
@@ -1251,10 +1215,9 @@
     "field": "cin",
     "value": "U72200KA1996FTC020583",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-mercedes",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-continental-est",
     "subject_type": "gcc",
@@ -1272,10 +1235,9 @@
     "field": "cin",
     "value": "U29309KA2007PTC044439",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-continental",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-volvo-est",
     "subject_type": "gcc",
@@ -1293,10 +1255,9 @@
     "field": "cin",
     "value": "U35923KA1997PTC022062",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-volvo",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-3m-est",
     "subject_type": "gcc",
@@ -1314,10 +1275,9 @@
     "field": "cin",
     "value": "L31300KA1987PLC035230",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-bse-3m",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-abbott-est",
     "subject_type": "gcc",
@@ -1335,10 +1295,9 @@
     "field": "cin",
     "value": "L24239MH1944PLC007330",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-bse-abbott",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-philips-est",
     "subject_type": "gcc",
@@ -1356,10 +1315,9 @@
     "field": "cin",
     "value": "U31902WB1930PLC006663",
     "as_of": "2026",
-    "source_id": "src-mca-portal",
+    "source_id": "src-mca-philips",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-siemens-est",
     "subject_type": "gcc",
@@ -1380,7 +1338,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-deere-est",
     "subject_type": "gcc",
@@ -1401,7 +1358,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-caterpillar-est",
     "subject_type": "gcc",
@@ -1422,7 +1378,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-ford-est",
     "subject_type": "gcc",
@@ -1443,7 +1398,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-amex-est",
     "subject_type": "gcc",
@@ -1474,7 +1428,6 @@
     "source_id": "src-amex-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-citi-est",
     "subject_type": "gcc",
@@ -1505,7 +1458,6 @@
     "source_id": "src-citi-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-ms-est",
     "subject_type": "gcc",
@@ -1536,7 +1488,6 @@
     "source_id": "src-ms-in",
     "confidence": "B"
   },
-
   {
     "id": "clm-gcc-bny-est",
     "subject_type": "gcc",
@@ -1544,7 +1495,7 @@
     "field": "established_year",
     "value": 2000,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-bny-in",
     "confidence": "A"
   },
   {
@@ -1557,7 +1508,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-statestreet-est",
     "subject_type": "gcc",
@@ -1565,7 +1515,7 @@
     "field": "established_year",
     "value": 2007,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-statestreet-in",
     "confidence": "A"
   },
   {
@@ -1578,7 +1528,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-ubs-est",
     "subject_type": "gcc",
@@ -1586,7 +1535,7 @@
     "field": "established_year",
     "value": 2006,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-ubs-in",
     "confidence": "A"
   },
   {
@@ -1599,7 +1548,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-ansys-est",
     "subject_type": "gcc",
@@ -1607,7 +1555,7 @@
     "field": "established_year",
     "value": 1996,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-ansys-in",
     "confidence": "A"
   },
   {
@@ -1620,7 +1568,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-cadence-est",
     "subject_type": "gcc",
@@ -1628,7 +1575,7 @@
     "field": "established_year",
     "value": 1987,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-cadence-in",
     "confidence": "A"
   },
   {
@@ -1641,7 +1588,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-synopsys-est",
     "subject_type": "gcc",
@@ -1649,7 +1595,7 @@
     "field": "established_year",
     "value": 1995,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-synopsys-in",
     "confidence": "A"
   },
   {
@@ -1662,7 +1608,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-dell-est",
     "subject_type": "gcc",
@@ -1670,7 +1615,7 @@
     "field": "established_year",
     "value": 1996,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-dell-in",
     "confidence": "A"
   },
   {
@@ -1683,7 +1628,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-hpe-est",
     "subject_type": "gcc",
@@ -1704,7 +1648,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-honeywell-est",
     "subject_type": "gcc",
@@ -1712,7 +1655,7 @@
     "field": "established_year",
     "value": 1994,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-honeywell-in",
     "confidence": "A"
   },
   {
@@ -1725,7 +1668,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-amat-est",
     "subject_type": "gcc",
@@ -1733,7 +1675,7 @@
     "field": "established_year",
     "value": 2003,
     "as_of": "2024",
-    "source_id": "src-mca-portal",
+    "source_id": "src-amat-in",
     "confidence": "A"
   },
   {
@@ -1746,7 +1688,6 @@
     "source_id": "src-mca-portal",
     "confidence": "A"
   },
-
   {
     "id": "clm-gcc-lam-est",
     "subject_type": "gcc",

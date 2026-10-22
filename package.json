@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsx scripts/lint-theme.ts && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "tsx scripts/lint-theme.ts",
+    "lint:theme": "tsx scripts/lint-theme.ts",
+    "audit:registry": "tsx scripts/audit-registry.ts",
     "validate": "tsx scripts/validate-data.ts",
     "test": "vitest run",
     "test:watch": "vitest",

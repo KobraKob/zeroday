@@ -5,16 +5,16 @@ import './StarBorder.css';
 
 const THEMES: Record<string, Record<string, string>> = {
   dark: {
-    surface: '#0F172A',
-    text: '#F8FAFC',
-    track: 'rgba(20, 184, 166, 0.25)',
-    light: '#14B8A6'
+    surface: '#0E1026',
+    text: '#FFF6E5',
+    track: 'rgba(37, 54, 232, 0.25)',
+    light: '#2536E8'
   },
   light: {
-    surface: '#FFFFFF',
-    text: '#0F172A',
-    track: 'rgba(15, 118, 110, 0.2)',
-    light: '#0F766E'
+    surface: '#FFF6E5',
+    text: '#15183A',
+    track: 'rgba(37, 54, 232, 0.2)',
+    light: '#2536E8'
   }
 };
 

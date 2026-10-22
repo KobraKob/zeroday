@@ -79,11 +79,11 @@ export function ReviewClient({ initialClaims, sources }: ReviewClientProps) {
         </div>
         <div>
           <span className="text-muted text-[10px] uppercase block">Pending Audit</span>
-          <span className="font-bold text-lg text-vermilion tabular-nums">{pending}</span>
+          <span className="font-bold text-lg text-coral tabular-nums">{pending}</span>
         </div>
         <div>
           <span className="text-muted text-[10px] uppercase block">Approved Claims</span>
-          <span className="font-bold text-lg text-verdigris tabular-nums">{approved}</span>
+          <span className="font-bold text-lg text-cobalt tabular-nums">{approved}</span>
         </div>
         <div>
           <span className="text-muted text-[10px] uppercase block">Acceptance Rate</span>
@@ -129,7 +129,7 @@ export function ReviewClient({ initialClaims, sources }: ReviewClientProps) {
                   <td className="py-3.5 px-4 font-serif italic text-muted text-xs leading-relaxed max-w-xs">
                     &ldquo;{item.exact_quote}&rdquo;
                     {item.source_url && (
-                      <div className="font-mono not-italic text-[10px] text-verdigris mt-1 flex items-center gap-1">
+                      <div className="font-mono not-italic text-[10px] text-cobalt mt-1 flex items-center gap-1">
                         <a
                           href={item.source_url}
                           target="_blank"
@@ -149,14 +149,14 @@ export function ReviewClient({ initialClaims, sources }: ReviewClientProps) {
                         <button
                           type="button"
                           onClick={() => handleApprove(item.id)}
-                          className="px-2.5 py-1 bg-ink text-paper uppercase font-bold hover:bg-verdigris transition-colors duration-fast"
+                          className="px-2.5 py-1 bg-ink text-paper uppercase font-bold hover:bg-cobalt transition-colors duration-fast"
                         >
                           Approve
                         </button>
                         <button
                           type="button"
                           onClick={() => setSelectedClaim(item)}
-                          className="px-2 py-1 border border-hairline text-muted hover:border-vermilion hover:text-vermilion transition-colors duration-fast"
+                          className="px-2 py-1 border border-hairline text-muted hover:border-coral hover:text-coral transition-colors duration-fast"
                         >
                           Reject
                         </button>
@@ -165,8 +165,8 @@ export function ReviewClient({ initialClaims, sources }: ReviewClientProps) {
                       <span
                         className={`font-mono text-[10px] uppercase font-bold px-2 py-0.5 border ${
                           item.status === "approved"
-                            ? "border-verdigris text-verdigris bg-verdigris/10"
-                            : "border-vermilion text-vermilion bg-vermilion/10"
+                            ? "border-cobalt text-cobalt bg-cobalt/10"
+                            : "border-coral text-coral bg-coral/10"
                         }`}
                       >
                         {item.status}
@@ -199,7 +199,7 @@ export function ReviewClient({ initialClaims, sources }: ReviewClientProps) {
               value={rejectReason}
               onChange={(e) => setRejectReason(e.target.value)}
               placeholder="e.g. Unverified secondary blog; conflicting MCA entity CIN..."
-              className="w-full p-2.5 border border-hairline bg-paper/50 font-mono text-xs text-ink focus-visible:outline-verdigris"
+              className="w-full p-2.5 border border-hairline bg-paper/50 font-mono text-xs text-ink focus-visible:outline-cobalt"
             />
             <div className="flex items-center justify-end gap-2 font-mono text-xs">
               <button
@@ -212,7 +212,7 @@ export function ReviewClient({ initialClaims, sources }: ReviewClientProps) {
               <button
                 type="button"
                 onClick={() => handleReject(selectedClaim.id)}
-                className="px-4 py-1.5 bg-vermilion text-paper uppercase font-bold"
+                className="px-4 py-1.5 bg-coral text-paper uppercase font-bold"
               >
                 Confirm Rejection
               </button>

@@ -135,7 +135,7 @@ export function CompareClient({
       {/* Statutory Gazette Policy Comparison Note */}
       <section className="border border-hairline bg-paper/40 p-6 space-y-3">
         <div className="flex items-center gap-2 font-mono text-[10px] uppercase font-bold text-ink">
-          <Shield className="w-3.5 h-3.5 text-verdigris" strokeWidth={1.5} />
+          <Shield className="w-3.5 h-3.5 text-cobalt" strokeWidth={1.5} />
           <span>Statutory Gazette Verification Rule</span>
         </div>
         <p className="font-serif italic text-xs text-muted leading-relaxed max-w-prose">

@@ -147,13 +147,13 @@ export function AdvisorClient({
                 onClick={() => window.print()}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium border border-hairline bg-surface hover:bg-paper transition-colors text-ink min-h-[36px]"
               >
-                <Printer className="w-3.5 h-3.5 text-verdigris" />
+                <Printer className="w-3.5 h-3.5 text-cobalt" />
                 <span>Print Dossier</span>
               </button>
               <button
                 type="button"
                 onClick={() => setBriefingGenerated(false)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium bg-ink text-paper hover:bg-verdigris transition-colors min-h-[36px]"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium bg-ink text-paper hover:bg-cobalt transition-colors min-h-[36px]"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Reconfigure</span>
@@ -311,7 +311,7 @@ export function AdvisorClient({
                       }`}
                     >
                       <span>{fn}</span>
-                      {isChecked && <CheckCircle2 className="w-4 h-4 text-verdigris shrink-0" />}
+                      {isChecked && <CheckCircle2 className="w-4 h-4 text-cobalt shrink-0" />}
                     </button>
                   );
                 })}
@@ -435,7 +435,7 @@ export function AdvisorClient({
               <button
                 type="button"
                 onClick={() => setStep(step + 1)}
-                className="inline-flex items-center gap-1.5 px-5 py-2 bg-ink text-paper uppercase font-semibold hover:bg-verdigris transition-colors min-h-[44px]"
+                className="inline-flex items-center gap-1.5 px-5 py-2 bg-ink text-paper uppercase font-semibold hover:bg-cobalt transition-colors min-h-[44px]"
               >
                 <span>Continue</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -444,7 +444,7 @@ export function AdvisorClient({
               <button
                 type="button"
                 onClick={handleGenerate}
-                className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-verdigris text-paper uppercase font-bold tracking-wider hover:opacity-90 transition-opacity min-h-[44px]"
+                className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-cobalt text-paper uppercase font-bold tracking-wider hover:opacity-90 transition-opacity min-h-[44px]"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Generate Verified Entry Briefing</span>
@@ -458,7 +458,7 @@ export function AdvisorClient({
           {/* Briefing Masthead */}
           <div className="p-6 sm:p-8 border border-hairline bg-paper/60 space-y-3 font-mono">
             <div className="flex items-center justify-between text-xs text-muted">
-              <span className="uppercase tracking-widest text-verdigris font-bold">
+              <span className="uppercase tracking-widest text-cobalt font-bold">
                 Executive Strategy Briefing
               </span>
               <span>Grounding: 100% Stored Claims</span>
@@ -475,7 +475,7 @@ export function AdvisorClient({
           <section className="border border-hairline bg-surface p-6 space-y-4">
             <div className="border-b border-hairline pb-2 flex items-baseline justify-between">
               <h3 className="font-display text-lg font-bold text-ink flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-verdigris" />
+                <MapPin className="w-4 h-4 text-cobalt" />
                 1. Shortlisted Municipal Hubs &amp; Grounded Metrics
               </h3>
               <span className="font-mono text-xs text-muted">Primary Benchmarks</span>
@@ -511,7 +511,7 @@ export function AdvisorClient({
                         </div>
                         <div className="text-[10px] text-muted">{state?.name}</div>
                       </div>
-                      <span className="text-xs font-bold text-verdigris">
+                      <span className="text-xs font-bold text-cobalt">
                         Rank #{idx + 1}
                       </span>
                     </div>
@@ -546,8 +546,8 @@ export function AdvisorClient({
           </section>
 
           {/* Section 2: What We Could Not Independently Verify */}
-          <div className="p-4 border border-vermilion bg-vermilion/5 text-xs space-y-1 font-mono">
-            <div className="flex items-center gap-2 font-bold text-vermilion text-[11px] uppercase">
+          <div className="p-4 border border-coral bg-coral/5 text-xs space-y-1 font-mono">
+            <div className="flex items-center gap-2 font-bold text-coral text-[11px] uppercase">
               <Shield className="w-3.5 h-3.5" />
               <span>Explicit Methodological Disclosure: What We Could Not Verify</span>
             </div>
@@ -560,7 +560,7 @@ export function AdvisorClient({
           <section className="border border-hairline bg-surface p-6 space-y-4">
             <div className="border-b border-hairline pb-2 flex items-baseline justify-between">
               <h3 className="font-display text-lg font-bold text-ink flex items-center gap-2">
-                <Building className="w-4 h-4 text-verdigris" />
+                <Building className="w-4 h-4 text-cobalt" />
                 2. Audited Peer GCCs in Sector ({sector})
               </h3>
               <span className="font-mono text-xs text-muted">Primary Registry</span>
@@ -575,7 +575,7 @@ export function AdvisorClient({
                   <div className="flex items-center justify-between">
                     <Link
                       href={`/gcc/${gcc.slug}`}
-                      className="font-display font-bold text-ink hover:text-verdigris hover:underline text-sm"
+                      className="font-display font-bold text-ink hover:text-cobalt hover:underline text-sm"
                     >
                       {gcc.name}
                     </Link>
@@ -598,7 +598,7 @@ export function AdvisorClient({
           <section className="border border-hairline bg-surface p-6 space-y-4">
             <div className="border-b border-hairline pb-2 flex items-baseline justify-between">
               <h3 className="font-display text-lg font-bold text-ink flex items-center gap-2">
-                <FileCheck className="w-4 h-4 text-verdigris" />
+                <FileCheck className="w-4 h-4 text-cobalt" />
                 3. Applicable Statutory State Incentives
               </h3>
               <span className="font-mono text-xs text-muted">Gazette Orders</span>
@@ -625,7 +625,7 @@ export function AdvisorClient({
                           key={iIdx}
                           className="p-2.5 border border-hairline bg-surface space-y-1"
                         >
-                          <div className="text-[10px] uppercase font-bold text-verdigris">
+                          <div className="text-[10px] uppercase font-bold text-cobalt">
                             {inc.type.replace(/_/g, " ")} — {inc.amount_or_rate}
                           </div>
                           <p className="text-[11px] text-muted font-sans leading-relaxed">
@@ -644,7 +644,7 @@ export function AdvisorClient({
           <section className="border border-hairline bg-surface p-6 space-y-4">
             <div className="border-b border-hairline pb-2 flex items-baseline justify-between">
               <h3 className="font-display text-lg font-bold text-ink flex items-center gap-2">
-                <FileCheck className="w-4 h-4 text-verdigris" />
+                <FileCheck className="w-4 h-4 text-cobalt" />
                 4. Statutory Setup Roadmap Checklist
               </h3>
               <span className="font-mono text-xs text-muted">Regulatory Milestones</span>
@@ -667,7 +667,7 @@ export function AdvisorClient({
                     {chk.items.map((it, idx) => (
                       <div key={idx} className="text-[11px] space-y-0.5">
                         <div className="font-semibold text-ink flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-verdigris shrink-0" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cobalt shrink-0" />
                           <span>{it.title}</span>
                         </div>
                         <p className="text-muted pl-5 font-serif italic">

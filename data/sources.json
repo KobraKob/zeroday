@@ -648,5 +648,435 @@
     "published_at": "2026-01-01",
     "retrieved_at": "2026-10-21",
     "license_note": "Official statutory public register"
+  },
+  {
+    "id": "src-bny-in",
+    "name": "BNY Technology and Operations Centres in Pune and Chennai",
+    "type": "company",
+    "url": "https://www.bny.com/global/en/about-us/global-presence/india.html",
+    "publisher": "Bank of New York Mellon Corporation",
+    "published_at": "2024-06-15",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate location disclosure"
+  },
+  {
+    "id": "src-statestreet-in",
+    "name": "State Street India Technology and Operations Hubs Bengaluru & Hyderabad",
+    "type": "company",
+    "url": "https://www.statestreet.com/in/en/asset-manager/about/locations/india",
+    "publisher": "State Street Corporation",
+    "published_at": "2024-03-20",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate locations directory"
+  },
+  {
+    "id": "src-ubs-in",
+    "name": "UBS Business Solutions India Operating Footprint in Pune and Mumbai",
+    "type": "company",
+    "url": "https://www.ubs.com/in/en/about-us/ubs-in-india.html",
+    "publisher": "UBS Group AG",
+    "published_at": "2024-01-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official enterprise presence page"
+  },
+  {
+    "id": "src-ansys-in",
+    "name": "Ansys India Engineering Innovation and Simulation R&D Centers",
+    "type": "company",
+    "url": "https://www.ansys.com/about-ansys/locations",
+    "publisher": "Ansys, Inc.",
+    "published_at": "2024-05-12",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Corporate global operations index"
+  },
+  {
+    "id": "src-cadence-in",
+    "name": "Cadence Design Systems India Engineering Centers Noida and Bengaluru",
+    "type": "company",
+    "url": "https://www.cadence.com/en_US/home/company/locations.html",
+    "publisher": "Cadence Design Systems, Inc.",
+    "published_at": "2024-04-18",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official R&D campus index"
+  },
+  {
+    "id": "src-synopsys-in",
+    "name": "Synopsys India Semiconductor Design & Engineering Centers",
+    "type": "company",
+    "url": "https://www.synopsys.com/company/contact-us.html",
+    "publisher": "Synopsys, Inc.",
+    "published_at": "2024-02-14",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official global presence portal"
+  },
+  {
+    "id": "src-dell-in",
+    "name": "Dell Technologies India R&D and Global Center of Excellence Bengaluru",
+    "type": "company",
+    "url": "https://www.dell.com/en-in/dt/corporate/about-us/who-we-are/locations.htm",
+    "publisher": "Dell Technologies Inc.",
+    "published_at": "2024-08-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate facility directory"
+  },
+  {
+    "id": "src-hpe-in",
+    "name": "Hewlett Packard Enterprise India R&D Center Bengaluru Campus",
+    "type": "company",
+    "url": "https://www.hpe.com/in/en/about/locations.html",
+    "publisher": "Hewlett Packard Enterprise Company",
+    "published_at": "2024-07-15",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official worldwide locations registry"
+  },
+  {
+    "id": "src-honeywell-in",
+    "name": "Honeywell Technology Solutions (HTS) India Operations across Tech Hubs",
+    "type": "company",
+    "url": "https://www.honeywell.com/in/en/company/hts",
+    "publisher": "Honeywell International Inc.",
+    "published_at": "2024-03-30",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Corporate technical solutions center profile"
+  },
+  {
+    "id": "src-amat-in",
+    "name": "Applied Materials India Center of Excellence & Engineering Innovation",
+    "type": "company",
+    "url": "https://www.appliedmaterials.com/in/en/about/locations.html",
+    "publisher": "Applied Materials, Inc.",
+    "published_at": "2024-05-20",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate location directory"
+  },
+  {
+    "id": "src-lam-in",
+    "name": "Lam Research India Center for Engineering (ICE) Bengaluru Campus",
+    "type": "company",
+    "url": "https://www.lamresearch.com/locations/india/",
+    "publisher": "Lam Research Corporation",
+    "published_at": "2024-09-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate R&D operations profile"
+  },
+  {
+    "id": "src-mca-google",
+    "name": "Ministry of Corporate Affairs Company Master Data — Google India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-msft",
+    "name": "Ministry of Corporate Affairs Company Master Data — Microsoft India (R&D) Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-amzn",
+    "name": "Ministry of Corporate Affairs Company Master Data — Amazon Development Centre (India) Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-jpmc",
+    "name": "Ministry of Corporate Affairs Company Master Data — J.P. Morgan Services India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-wells",
+    "name": "Ministry of Corporate Affairs Company Master Data — Wells Fargo International Solutions Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-gs",
+    "name": "Ministry of Corporate Affairs Company Master Data — Goldman Sachs Services (India) Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-walmart",
+    "name": "Ministry of Corporate Affairs Company Master Data — Walmart Global Technology Services India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-target",
+    "name": "Ministry of Corporate Affairs Company Master Data — Target Corporation India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-boeing",
+    "name": "Ministry of Corporate Affairs Company Master Data — Boeing India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-airbus",
+    "name": "Ministry of Corporate Affairs Company Master Data — Airbus India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-schneider",
+    "name": "Ministry of Corporate Affairs Company Master Data — Schneider Electric India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-bosch",
+    "name": "Ministry of Corporate Affairs Company Master Data — Bosch Global Software Technologies Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-intel",
+    "name": "Ministry of Corporate Affairs Company Master Data — Intel Technology India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-qualcomm",
+    "name": "Ministry of Corporate Affairs Company Master Data — Qualcomm India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-cisco",
+    "name": "Ministry of Corporate Affairs Company Master Data — Cisco Systems (India) Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-sap",
+    "name": "Ministry of Corporate Affairs Company Master Data — SAP Labs India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-barclays",
+    "name": "Ministry of Corporate Affairs Company Master Data — Barclays Global Service Centre India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-hsbc",
+    "name": "Ministry of Corporate Affairs Company Master Data — HSBC Electronic Data Processing India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-sc",
+    "name": "Ministry of Corporate Affairs Company Master Data — Standard Chartered Global Business Services Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-fidelity",
+    "name": "Ministry of Corporate Affairs Company Master Data — Fidelity Business Services India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-lowes",
+    "name": "Ministry of Corporate Affairs Company Master Data — Lowe's Services India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-pepsi",
+    "name": "Ministry of Corporate Affairs Company Master Data — PepsiCo India GBS Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-astra",
+    "name": "Ministry of Corporate Affairs Company Master Data — AstraZeneca India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-novartis",
+    "name": "Ministry of Corporate Affairs Company Master Data — Novartis Healthcare Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-pfizer",
+    "name": "Ministry of Corporate Affairs Company Master Data — Pfizer Healthcare India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-shell",
+    "name": "Ministry of Corporate Affairs Company Master Data — Shell India Markets Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-mercedes",
+    "name": "Ministry of Corporate Affairs Company Master Data — Mercedes-Benz Research and Development India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-continental",
+    "name": "Ministry of Corporate Affairs Company Master Data — Continental Automotive Components (India) Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-volvo",
+    "name": "Ministry of Corporate Affairs Company Master Data — Volvo Group India Private Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-bse-3m",
+    "name": "Ministry of Corporate Affairs Company Master Data — 3M India Limited",
+    "type": "government",
+    "url": "https://www.bseindia.com/stock-share-price/3m-india-ltd/3mindia/523395/",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-bse-abbott",
+    "name": "Ministry of Corporate Affairs Company Master Data — Abbott India Limited",
+    "type": "government",
+    "url": "https://www.bseindia.com/stock-share-price/abbott-india-ltd/abbott/500488/",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
+  },
+  {
+    "id": "src-mca-philips",
+    "name": "Ministry of Corporate Affairs Company Master Data — Philips India Limited",
+    "type": "government",
+    "url": "https://www.mca.gov.in/mcafoportal/companyMasterData.do",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2024-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Statutory public company master data record"
   }
 ]

@@ -5,24 +5,39 @@
 @tailwind utilities;
 
 :root {
-  /* GCC Atlas Preview v2 Visual System Tokens */
-  --color-cream: #FFF6E5;          /* Warm Cream Canvas */
-  --color-paper: #FFF6E5;          /* Warm Cream Paper */
-  --color-surface: #FFFFFF;        /* Pure White Cards */
-  --color-ink: #15183A;            /* Deep Ink Navy */
-  --color-muted: #525875;          /* High-legibility muted ink (WCAG AA > 5.5:1) */
-  --color-hairline: #15183A;       /* 2px Ink Outlines */
-  --color-hairline-subtle: #E8DEC8;/* Cream border */
+  /* GCC Atlas Design System Tokens (Light Default) */
+  --paper: #FFF6E5;                /* Warm Cream Canvas */
+  --color-paper: #FFF6E5;
+  --surface: #FFFFFF;              /* Pure White Card */
+  --color-surface: #FFFFFF;
+  --card: #FFFFFF;
+  --color-card: #FFFFFF;
+  --cream: #FFF6E5;
+  --color-cream: #FFF6E5;
+
+  --ink: #15183A;                  /* Deep Ink Navy */
+  --color-ink: #15183A;
+  --muted: #525875;                /* High-legibility muted ink (WCAG AA > 5.5:1) */
+  --color-muted: #525875;
+
+  --rule: #15183A;                 /* 2px Ink Outlines */
+  --color-rule: #15183A;
+  --rule-subtle: #E8DEC8;          /* Subtle Cream Border */
+  --color-rule-subtle: #E8DEC8;
+  --hairline: #15183A;
+  --color-hairline: #15183A;
+  --hairline-subtle: #E8DEC8;
+  --color-hairline-subtle: #E8DEC8;
 
   /* Palette Accents */
-  --color-cobalt: #2536E8;         /* Primary Action / Brand */
-  --color-marigold: #FFC21A;       /* Legal Entity */
-  --color-coral: #FF6B4A;          /* Parent Company */
-  --color-mint: #5FE0B0;           /* Centre Unit */
-
-  /* Fallback aliases */
-  --color-verdigris: #2536E8;      /* Cobalt action fallback */
-  --color-vermilion: #FF6B4A;      /* Coral alert fallback */
+  --cobalt: #2536E8;               /* Primary Action / Brand */
+  --color-cobalt: #2536E8;
+  --marigold: #FFC21A;             /* Legal Entity */
+  --color-marigold: #FFC21A;
+  --coral: #FF6B4A;                /* Parent Company */
+  --color-coral: #FF6B4A;
+  --mint: #5FE0B0;                 /* Centre Unit */
+  --color-mint: #5FE0B0;
 
   /* Typography */
   --font-display: "Bricolage Grotesque", sans-serif;
@@ -35,22 +50,39 @@
 }
 
 .dark {
-  /* Dark Mode equivalent with same hues tuned for dark backgrounds */
-  --color-cream: #0E1026;
+  /* Dark Variant: Ink-Navy Background, Cream Text, Same Accents */
+  --paper: #0E1026;                /* Deep Ink-Navy Canvas */
   --color-paper: #0E1026;
-  --color-surface: #171A3B;
+  --surface: #15183A;              /* Card Surface */
+  --color-surface: #15183A;
+  --card: #15183A;
+  --color-card: #15183A;
+  --cream: #FFF6E5;
+  --color-cream: #FFF6E5;
+
+  --ink: #FFF6E5;                  /* Warm Cream Text & Borders */
   --color-ink: #FFF6E5;
+  --muted: #A3A9C7;                /* High contrast muted in dark mode */
   --color-muted: #A3A9C7;
+
+  --rule: #3D4472;                 /* Navy Rule */
+  --color-rule: #3D4472;
+  --rule-subtle: #252A4E;
+  --color-rule-subtle: #252A4E;
+  --hairline: #3D4472;
   --color-hairline: #3D4472;
+  --hairline-subtle: #252A4E;
   --color-hairline-subtle: #252A4E;
 
+  /* Accent Tokens: Same Accents tuned for high contrast on dark */
+  --cobalt: #4A58FF;
   --color-cobalt: #4A58FF;
-  --color-marigold: #FFD154;
-  --color-coral: #FF876C;
-  --color-mint: #7DF3C7;
-
-  --color-verdigris: #4A58FF;
-  --color-vermilion: #FF876C;
+  --marigold: #FFC21A;
+  --color-marigold: #FFC21A;
+  --coral: #FF6B4A;
+  --color-coral: #FF6B4A;
+  --mint: #5FE0B0;
+  --color-mint: #5FE0B0;
 
   --shadow-panel: -8px 0 36px rgba(0, 0, 0, 0.6);
   --shadow-sheet: 0 -12px 40px rgba(0, 0, 0, 0.7);
@@ -85,9 +117,9 @@ table td,
   font-feature-settings: "tnum" 1, "lnum" 1;
 }
 
-/* Focus Rings in Verdigris */
+/* Focus Rings in Cobalt */
 :focus-visible {
-  outline: 2px solid var(--color-verdigris);
+  outline: 2px solid var(--color-cobalt);
   outline-offset: 2px;
 }
 
@@ -129,7 +161,7 @@ small,
 
 /* Text Selection */
 ::selection {
-  background-color: var(--color-verdigris);
+  background-color: var(--color-cobalt);
   color: #FFFFFF;
 }
 
@@ -198,6 +230,24 @@ small,
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-muted);
+}
+
+/* Responsive visibility guarantees for Registry */
+@media (min-width: 768px) {
+  .registry-mobile-cards {
+    display: none !important;
+  }
+  .registry-desktop-table {
+    display: block !important;
+  }
+}
+@media (max-width: 767px) {
+  .registry-desktop-table {
+    display: none !important;
+  }
+  .registry-mobile-cards {
+    display: block !important;
+  }
 }
 
 /* Motion Accessibility */
