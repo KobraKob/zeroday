@@ -6,10 +6,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Search } from "lucide-react";
 import { CommandPalette } from "./CommandPalette";
 import GooeyNav, { NavItem } from "./GooeyNav";
+import { useAsk } from "./AskContext";
 
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { openAskDrawer } = useAsk();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [tickerVisible, setTickerVisible] = useState(true);
@@ -34,6 +36,11 @@ export function Navbar() {
   // Global keyboard shortcut to open Command Palette (Cmd+K or Ctrl+K or '/')
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // If currently on /ask, let Ask page focus its own pinned input on Cmd+K
+      if (pathname === "/ask" && (e.metaKey || e.ctrlKey) && e.key === "k") {
+        return;
+      }
+
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setCommandPaletteOpen((prev) => !prev);
@@ -49,7 +56,7 @@ export function Navbar() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [pathname]);
 
   // Primary nav: max 5 items
   const primaryNavLinks: NavItem[] = [
@@ -154,13 +161,21 @@ export function Navbar() {
                 <Search className="w-4 h-4" strokeWidth={1.75} />
               </button>
 
-              {/* Ask: Secondary, outlined button (No model badge) */}
-              <Link
-                href="/ask"
-                className="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 text-xs font-mono font-medium border border-hairline bg-transparent text-ink hover:border-ink hover:bg-paper transition-colors duration-fast rounded-xs min-h-[36px] focus-visible:outline-verdigris"
+              {/* Ask: Secondary, outlined button (Opens drawer from any page, or focuses if on /ask) */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (pathname === "/ask") {
+                    document.getElementById("ask-main-input")?.focus();
+                  } else {
+                    openAskDrawer();
+                  }
+                }}
+                className="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 text-xs font-mono font-medium border-2 border-ink bg-cream text-ink hover:bg-surface hover:shadow-[2px_2px_0px_#15183A] transition-all duration-fast rounded-full min-h-[36px] focus-visible:outline-cobalt"
+                aria-label="Ask the record"
               >
                 Ask
-              </Link>
+              </button>
 
               {/* Attest: ONE primary button (filled, high-contrast) */}
               <Link
@@ -216,13 +231,20 @@ export function Navbar() {
             </nav>
 
             <div className="pt-3 border-t border-hairline grid grid-cols-2 gap-2">
-              <Link
-                href="/ask"
-                onClick={() => setMobileMenuOpen(false)}
-                className="min-h-[44px] flex items-center justify-center text-xs font-mono border border-hairline bg-surface text-ink text-center rounded-xs"
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (pathname === "/ask") {
+                    document.getElementById("ask-main-input")?.focus();
+                  } else {
+                    openAskDrawer();
+                  }
+                }}
+                className="min-h-[44px] flex items-center justify-center text-xs font-mono font-bold border-2 border-ink bg-cream text-ink text-center rounded-full"
               >
-                Ask Assistant
-              </Link>
+                Ask
+              </button>
               <Link
                 href="/submit"
                 onClick={() => setMobileMenuOpen(false)}

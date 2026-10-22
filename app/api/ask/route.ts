@@ -156,8 +156,10 @@ export async function POST(req: NextRequest) {
       q.includes("diverge") ||
       q.includes("conflict") ||
       q.includes("reconcile") ||
-      q.includes("why do published counts vary") ||
-      q.includes("difference") ||
+      q.includes("vary") ||
+      q.includes("discrepan") ||
+      q.includes("differ") ||
+      (q.includes("published") && q.includes("count")) ||
       (q.includes("how many") && q.includes("count") && q.includes("india"));
 
     const disagreements: SourceDisagreement[] = hasDisagreementTopic
@@ -370,16 +372,22 @@ MANDATORY RULES:
       const cityClaims = allClaims.filter(
         (c) => c.subject_id === `city-${matchedCity.id}`
       );
-      const blockClaims: string[] = [];
-      let text = `${matchedCity.name} (${matchedCity.tier} hub) currently operates ${matchedCity.total_gccs} verified GCC units. `;
-
+      const unitsClaim = cityClaims.find((c) => c.field === "gcc_unit_count");
       const rentClaim = cityClaims.find((c) => c.field === "office_rent_range");
       const vacClaim = cityClaims.find(
         (c) => c.field === "office_vacancy_rate"
       );
-      const unitsClaim = cityClaims.find((c) => c.field === "gcc_unit_count");
-
+      const shareClaim = cityClaims.find(
+        (c) => c.field === "market_share_national"
+      );
+      const blockClaims: string[] = [];
+      let text = `${matchedCity.name} currently operates ${unitsClaim ? unitsClaim.value : "verified"} GCC units`;
       if (unitsClaim) blockClaims.push(unitsClaim.id);
+      if (shareClaim) {
+        text += ` (accounting for approximately ${shareClaim.value} of national GCC operations)`;
+        blockClaims.push(shareClaim.id);
+      }
+      text += `. `;
       if (rentClaim) {
         text += `Grade A commercial rents range from ${rentClaim.value} per sq ft per month. `;
         blockClaims.push(rentClaim.id);

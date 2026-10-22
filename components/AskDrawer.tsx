@@ -265,7 +265,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                 type="text"
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
-                placeholder="Ask about GCCs, cities, incentives, providers..."
+                placeholder="Ask anything about India's GCC ecosystem... (e.g. 'How many GCCs in Bengaluru?', 'What does ANSR claim?')"
                 className="w-full py-3 pl-4 pr-24 border-2 border-ink rounded-full bg-cream text-ink text-sm sm:text-base font-body placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-cobalt min-h-[50px] shadow-inner"
               />
               <div className="absolute right-2 flex items-center gap-1.5">

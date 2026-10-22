@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Claim, Source, Gcc, City, StatePolicy, Provider } from "../../lib/schema";
+import { Claim, Source, Gcc, City, State, Provider } from "../../lib/schema";
 import { useSourceDrawer } from "../../components/SourceDrawerContext";
 import { ConfidenceStamp } from "../../components/ConfidenceStamp";
 import {
@@ -51,7 +51,7 @@ interface AskClientProps {
   sources: Source[];
   gccs: Gcc[];
   cities: City[];
-  states: StatePolicy[];
+  states: State[];
   providers: Provider[];
 }
 
@@ -82,7 +82,7 @@ export function AskClient({
 
   const claimsMap = useMemo(() => {
     const map = new Map<string, Claim>();
-    claims.forEach((c) => claimsMap.set(c.id, c));
+    claims.forEach((c) => map.set(c.id, c));
     return map;
   }, [claims]);
 
@@ -253,7 +253,7 @@ export function AskClient({
               type="text"
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
-              placeholder="Ask about GCCs, cities, incentives, providers..."
+              placeholder="Ask anything about India's GCC ecosystem... (e.g. 'How many GCCs in Bengaluru?', 'What does ANSR claim?')"
               className="w-full py-3.5 pl-5 pr-28 border-2 border-ink rounded-full bg-cream text-ink text-base sm:text-lg font-body placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-cobalt min-h-[56px] shadow-inner"
             />
             <div className="absolute right-2.5 flex items-center gap-2">
@@ -713,7 +713,7 @@ export function AskClient({
               </div>
             </div>
           )}
-        </div>
+        </aside>
       </div>
 
       {/* Mobile Bottom Sheet for Sources (<1024px, Requirement 2) */}
