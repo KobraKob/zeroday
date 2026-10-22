@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Shield } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Footer() {
   return (
@@ -16,11 +17,14 @@ export function Footer() {
                 ZD
               </div>
               <span className="font-serif font-bold text-ink text-sm tracking-tight uppercase">
-                GCC Atlas
+                ZeroDay
               </span>
             </div>
+            <p className="text-[12px] font-mono uppercase tracking-widest text-muted">
+              Independent Archival Record of India
+            </p>
             <p className="font-serif italic text-sm text-ink/80 max-w-md leading-relaxed">
-              &ldquo;The independent, citable record of India&apos;s Global Capability Centre ecosystem. Every number traced to a primary source.&rdquo;
+              &ldquo;The independent, citable record of India&apos;s Global Capability Centre ecosystem. Every number traced to a primary statutory source.&rdquo;
             </p>
             <div className="flex items-center gap-2 pt-2 text-[11px] font-mono text-muted">
               <Shield className="w-3.5 h-3.5 text-verdigris" strokeWidth={1.5} />
@@ -59,6 +63,11 @@ export function Footer() {
                   Proof-Backed Directory
                 </Link>
               </li>
+              <li>
+                <Link href="/advisor" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
+                  India Entry Advisor
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -70,7 +79,7 @@ export function Footer() {
             <ul className="space-y-1.5 font-mono text-[11px]">
               <li>
                 <Link href="/methodology" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Rubric & Confidence Grades
+                  Methodology & Rubric
                 </Link>
               </li>
               <li>
@@ -92,15 +101,19 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Hairline Colophon Rule */}
+        {/* Hairline Colophon Rule with Theme Toggle */}
         <div className="pt-6 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-muted">
           <div>
             &copy; 2026 ZeroDay Research Archive. Data is citable under Open Attribution.
           </div>
           <div className="flex items-center gap-4">
             <span>Edition: 2026-Q1</span>
-            <span>Cartographic Hash: #1F6F63</span>
             <span className="text-verdigris">Status: Audited</span>
+            {/* Theme Toggle moved to footer as requested */}
+            <div className="flex items-center gap-2 pl-2 border-l border-hairline">
+              <span className="text-[10px] uppercase tracking-wider text-muted hidden sm:inline">Theme:</span>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>
