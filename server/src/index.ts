@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const GROQ_API_KEY =
   process.env.GROQ_API_KEY ||
-  "your_groq_api_key_placeholder_environment_variables_here";
+  "";
 const GROQ_MODEL = process.env.GROQ_MODEL || "openai/gpt-oss-120b";
 
 app.use(cors({ origin: "*" }));

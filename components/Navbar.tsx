@@ -61,21 +61,23 @@ export function Navbar() {
     <>
       {/* Ticker strip above header: scrolls away naturally with document scroll (NOT sticky) */}
       {tickerVisible && (
-        <div className="hidden sm:flex h-8 items-center justify-between px-4 sm:px-6 lg:px-8 bg-surface text-ink text-xs font-mono tracking-tight border-b-2 border-ink overflow-hidden whitespace-nowrap select-none">
-          <div className="flex items-center gap-2 truncate">
-            <span className="w-2 h-2 bg-cobalt inline-block rounded-full flex-shrink-0 animate-pulse" />
-            <span className="uppercase tracking-wider font-medium truncate">
-              GCC Atlas • India&apos;s GCC Archival Record • Every number traced to a source
-            </span>
+        <div className="hidden sm:block h-8 bg-surface text-ink text-xs font-mono tracking-tight border-b-2 border-ink overflow-hidden whitespace-nowrap select-none">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+            <div className="flex items-center gap-2 truncate">
+              <span className="w-2 h-2 bg-cobalt inline-block rounded-full flex-shrink-0 animate-pulse" />
+              <span className="uppercase tracking-wider font-medium truncate">
+                GCC Atlas • India&apos;s GCC Archival Record • Every number traced to a source
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setTickerVisible(false)}
+              className="text-muted hover:text-ink p-1 ml-2 flex-shrink-0 transition-colors focus-visible:outline-cobalt cursor-pointer"
+              aria-label="Dismiss banner"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={() => setTickerVisible(false)}
-            className="text-muted hover:text-ink p-1 ml-2 flex-shrink-0 transition-colors focus-visible:outline-cobalt cursor-pointer"
-            aria-label="Dismiss banner"
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
         </div>
       )}
 
