@@ -14,10 +14,10 @@ export function Footer() {
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 border border-ink text-ink flex items-center justify-center font-serif font-bold text-xs bg-surface">
-                ZD
+                GA
               </div>
               <span className="font-serif font-bold text-ink text-sm tracking-tight uppercase">
-                ZeroDay
+                GCC Atlas
               </span>
             </div>
             <p className="text-[12px] font-mono uppercase tracking-widest text-muted">
@@ -71,30 +71,30 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Governance */}
+          {/* Governance & Methodology */}
           <div className="space-y-2">
             <div className="font-mono uppercase text-ink text-[11px] font-bold tracking-wider">
-              Governance & Protocols
+              Governance & Methodology
             </div>
             <ul className="space-y-1.5 font-mono text-[11px]">
               <li>
                 <Link href="/methodology" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Methodology & Rubric
+                  Methodology &amp; Rubric
                 </Link>
               </li>
               <li>
                 <Link href="/methodology#disputes" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Correction & Dispute Protocol
+                  Correction &amp; Dispute Protocol
                 </Link>
               </li>
               <li>
                 <Link href="/submit" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Statutory Attestation Filing
+                  Submit Provider Attestation
                 </Link>
               </li>
               <li>
                 <Link href="/admin/review" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  Peer Review Ledger
+                  Review Queue
                 </Link>
               </li>
             </ul>
@@ -104,11 +104,11 @@ export function Footer() {
         {/* Hairline Colophon Rule with Theme Toggle */}
         <div className="pt-6 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-muted">
           <div>
-            &copy; 2026 ZeroDay Research Archive. Data is citable under Open Attribution.
+            &copy; 2026 GCC Atlas. Data is citable under Open Attribution.
           </div>
           <div className="flex items-center gap-4">
-            <span>Edition: 2026-Q1</span>
-            <span className="text-verdigris">Status: Audited</span>
+            <span>Edition: May 2026</span>
+            <span className="text-verdigris">Last reviewed: May 2026</span>
             {/* Theme Toggle moved to footer as requested */}
             <div className="flex items-center gap-2 pl-2 border-l border-hairline">
               <span className="text-[10px] uppercase tracking-wider text-muted hidden sm:inline">Theme:</span>

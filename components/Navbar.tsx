@@ -2,15 +2,34 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Search } from "lucide-react";
 import { CommandPalette } from "./CommandPalette";
+import GooeyNav, { NavItem } from "./GooeyNav";
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [tickerVisible, setTickerVisible] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+
+  // Synchronize theme state with documentElement class list
+  useEffect(() => {
+    const updateTheme = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+    updateTheme();
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Global keyboard shortcut to open Command Palette (Cmd+K or Ctrl+K or '/')
   useEffect(() => {
@@ -33,7 +52,7 @@ export function Navbar() {
   }, []);
 
   // Primary nav: max 5 items
-  const primaryNavLinks = [
+  const primaryNavLinks: NavItem[] = [
     { href: "/reconcile", label: "Reconcile" },
     { href: "/registry", label: "Registry" },
     { href: "/radar", label: "Radar" },
@@ -48,78 +67,83 @@ export function Navbar() {
     { href: "/methodology", label: "Methodology" },
   ];
 
+  const activeIndex = primaryNavLinks.findIndex(
+    (item) =>
+      item.href &&
+      (pathname === item.href ||
+        (item.href !== "/" && pathname.startsWith(item.href)))
+  );
+
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-surface border-b border-hairline font-sans">
-        {/* Ticker strip above header: fixed height 32px, overflow: hidden, vertically centred, no clipping */}
-        {tickerVisible && (
-          <div className="hidden sm:flex h-8 items-center justify-between px-4 sm:px-6 lg:px-8 bg-[#0F172A] text-[#F8FAFC] text-[11px] font-mono tracking-tight border-b border-[#1E293B] overflow-hidden whitespace-nowrap select-none">
-            <div className="flex items-center gap-2 truncate">
-              <span className="w-1.5 h-1.5 bg-verdigris inline-block rounded-full flex-shrink-0 animate-pulse" />
-              <span className="uppercase tracking-wider font-medium truncate">
-                ZeroDay • India&apos;s GCC Archival Record • Every claim sourced &amp; ground in truth
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => setTickerVisible(false)}
-              className="text-slate-400 hover:text-white p-1 ml-2 flex-shrink-0 transition-colors focus-visible:outline-verdigris"
-              aria-label="Dismiss banner"
-            >
-              <X className="w-3 h-3" />
-            </button>
+      {/* Ticker strip above header: scrolls away naturally with document scroll (NOT sticky) */}
+      {tickerVisible && (
+        <div className="hidden sm:flex h-8 items-center justify-between px-4 sm:px-6 lg:px-8 bg-[#0F172A] text-[#F8FAFC] text-[11px] font-mono tracking-tight border-b border-[#1E293B] overflow-hidden whitespace-nowrap select-none">
+          <div className="flex items-center gap-2 truncate">
+            <span className="w-1.5 h-1.5 bg-verdigris inline-block rounded-full flex-shrink-0 animate-pulse" />
+            <span className="uppercase tracking-wider font-medium truncate">
+              GCC Atlas • India&apos;s GCC Archival Record • Every number traced to a primary source
+            </span>
           </div>
-        )}
+          <button
+            type="button"
+            onClick={() => setTickerVisible(false)}
+            className="text-slate-400 hover:text-white p-1 ml-2 flex-shrink-0 transition-colors focus-visible:outline-verdigris"
+            aria-label="Dismiss banner"
+          >
+            <X className="w-3 h-3" />
+          </button>
+        </div>
+      )}
 
-        {/* Desktop single-row header: fixed height 64px, 3 CSS grid zones */}
+      {/* Single-row header (sticky top-0, 64px, 3 CSS grid zones) */}
+      <header className="sticky top-0 z-50 w-full bg-surface border-b border-hairline font-sans shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6 h-16 whitespace-nowrap min-w-0">
-            {/* Zone 1: Left - Logo mark + wordmark only (no subtitle) */}
+            {/* Zone 1: Left - Logo mark + wordmark only (One brand name: GCC Atlas) */}
             <div className="flex items-center flex-shrink-0">
               <Link
                 href="/"
                 className="flex items-center gap-2.5 group min-h-[44px] focus-visible:outline-verdigris"
-                aria-label="ZeroDay Home"
+                aria-label="GCC Atlas Home"
               >
                 <div className="w-7 h-7 border border-ink text-ink flex items-center justify-center font-serif font-black text-xs tracking-tighter bg-surface group-hover:bg-ink group-hover:text-surface transition-colors duration-fast">
-                  ZD
+                  GA
                 </div>
                 <span className="font-serif font-bold text-base tracking-tight text-ink uppercase">
-                  ZeroDay
+                  GCC Atlas
                 </span>
               </Link>
             </div>
 
-            {/* Zone 2: Centre - Primary nav (max 5 items, 2px underline in accent color, item padding 12px 14px, 14px 500 weight) */}
-            <nav
-              aria-label="Primary"
-              className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 h-full min-w-0"
-            >
-              {primaryNavLinks.map((item) => {
-                const isActive =
-                  pathname === item.href ||
-                  (item.href !== "/" && pathname.startsWith(item.href));
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`h-16 px-3.5 py-3 text-[14px] font-medium inline-flex items-center transition-colors duration-fast border-b-2 whitespace-nowrap focus-visible:outline-verdigris ${
-                      isActive
-                        ? "border-verdigris text-ink"
-                        : "border-transparent text-muted hover:text-ink hover:border-hairline"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
+            {/* Zone 2: Centre - Primary nav (max 5 items, animated pill, single line, no wrapping) */}
+            <div className="hidden lg:flex items-center justify-center min-w-0">
+              <GooeyNav
+                items={primaryNavLinks}
+                activeIndex={activeIndex >= 0 ? activeIndex : 0}
+                onChange={(_idx, item) => {
+                  if (item.href) {
+                    router.push(item.href);
+                  }
+                }}
+                theme={isDark ? "dark" : "light"}
+                size="sm"
+                color={isDark ? "#14B8A6" : "#0F766E"}
+                colors={["#0F766E", "#14B8A6", "#2DD4BF"]}
+                particleCount={12}
+                spread={40}
+                animationTime={450}
+                timeVariance={200}
+                gooeyness={0.45}
+                wobble={0.35}
+                frame={true}
+                hoverEffect={true}
+              />
+            </div>
 
             {/* Zone 3: Right - Search icon, Outlined "Ask", Filled primary "Attest", Mobile Toggle */}
             <div className="flex items-center justify-end gap-2 sm:gap-3 flex-shrink-0">
-              {/* Search as an icon button that opens Command Palette (⌘K) */}
+              {/* Search icon button that opens Command Palette (⌘K) */}
               <button
                 type="button"
                 onClick={() => setCommandPaletteOpen(true)}
@@ -130,7 +154,7 @@ export function Navbar() {
                 <Search className="w-4 h-4" strokeWidth={1.75} />
               </button>
 
-              {/* Ask: Secondary, outlined button */}
+              {/* Ask: Secondary, outlined button (No model badge) */}
               <Link
                 href="/ask"
                 className="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 text-xs font-mono font-medium border border-hairline bg-transparent text-ink hover:border-ink hover:bg-paper transition-colors duration-fast rounded-xs min-h-[36px] focus-visible:outline-verdigris"
@@ -170,12 +194,13 @@ export function Navbar() {
             <nav aria-label="Mobile Navigation" className="space-y-1">
               {mobileNavLinks.map((item) => {
                 const isActive =
-                  pathname === item.href ||
-                  (item.href !== "/" && pathname.startsWith(item.href));
+                  item.href &&
+                  (pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(item.href)));
                 return (
                   <Link
-                    key={item.href}
-                    href={item.href}
+                    key={item.label}
+                    href={item.href || "#"}
                     aria-current={isActive ? "page" : undefined}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`min-h-[44px] px-3 py-2 text-sm font-medium flex items-center border-l-2 transition-colors ${
@@ -196,7 +221,7 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="min-h-[44px] flex items-center justify-center text-xs font-mono border border-hairline bg-surface text-ink text-center rounded-xs"
               >
-                Ask Zero AI
+                Ask Assistant
               </Link>
               <Link
                 href="/submit"

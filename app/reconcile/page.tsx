@@ -7,7 +7,7 @@ import { sourcesRepo } from "../../lib/repo/sourcesRepo";
 import { ReconcileClient } from "./ReconcileClient";
 
 export const metadata: Metadata = {
-  title: "Reconcile — ZeroDay",
+  title: "Reconcile — GCC Atlas",
   description:
     "Why do reports disagree on how many GCCs India has? Compare published numbers, recompute counts under parent vs legal entity vs centre rules, and inspect primary citations.",
 };
