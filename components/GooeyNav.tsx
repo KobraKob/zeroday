@@ -479,10 +479,10 @@ export const GooeyNav = ({
       const smooth = height * (0.18 + 0.5 * clamp01(s.gooeyness));
       const boxes: any[] = [];
       const blobs: any[] = [];
-      for (const [index, state] of pills) {
+      Array.from(pills.entries()).forEach(([index, state]) => {
         const box = shape(index, state.scale);
         if (box) boxes.push({ cx: box.x + box.w / 2, cy: box.y + box.h / 2, hw: box.w / 2, hh: box.h / 2 });
-      }
+      });
       for (const drop of drops) {
         if (drop.state === 'waiting') continue;
         const radius = 0.26 * height * drop.size * Math.min(drop.emerged, 1 - drop.absorbed);
@@ -620,7 +620,7 @@ export const GooeyNav = ({
       const omega = 26;
       const steps = Math.max(1, Math.ceil(dt / (1 / 240)));
       const h = dt / steps;
-      for (const [index, state] of pills) {
+      Array.from(pills.entries()).forEach(([index, state]) => {
         for (let n = 0; n < steps; n++) {
           state.velocity += (omega * omega * (state.mass - state.scale) - 2 * zeta * omega * state.velocity) * h;
           state.scale += state.velocity * h;
@@ -628,7 +628,7 @@ export const GooeyNav = ({
         if (index !== target && state.mass <= 0.002 && state.outgoing <= 0.002 && Math.abs(state.scale) < 0.004) {
           pills.delete(index);
         }
-      }
+      });
 
       if (hover.index >= 0 && rects[hover.index]) {
         const rect = rects[hover.index];
