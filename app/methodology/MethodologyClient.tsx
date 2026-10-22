@@ -217,10 +217,10 @@ export function MethodologyClient() {
           If any datapoint, headcount estimate, or entity attribution in the Atlas is inaccurate, submit a primary statutory correction below:
         </p>
 
-        <form onSubmit={handleSubmitReport} className="p-6 border border-hairline bg-surface space-y-4 font-mono text-xs">
+        <form onSubmit={handleSubmitReport} className="p-6 border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-4 font-sans text-xs">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[10px] uppercase text-muted font-bold mb-1">
+              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
                 Target GCC or Provider:
               </label>
               <input
@@ -229,12 +229,12 @@ export function MethodologyClient() {
                 placeholder="e.g. JPMorgan Chase India"
                 value={reportGcc}
                 onChange={(e) => setReportGcc(e.target.value)}
-                className="w-full py-2 px-3 border border-hairline bg-paper/50 text-xs text-ink focus-visible:outline-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase text-muted font-bold mb-1">
+              <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
                 Disputed Field / Metric:
               </label>
               <input
@@ -243,13 +243,13 @@ export function MethodologyClient() {
                 placeholder="e.g. Establishment Year / CIN / Headcount"
                 value={reportField}
                 onChange={(e) => setReportField(e.target.value)}
-                className="w-full py-2 px-3 border border-hairline bg-paper/50 text-xs text-ink focus-visible:outline-verdigris min-h-[44px]"
+                className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] uppercase text-muted font-bold mb-1">
+            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
               Public Primary Source URL:
             </label>
             <input
@@ -258,12 +258,12 @@ export function MethodologyClient() {
               placeholder="https://mca.gov.in/... or official SEC 10-K filing"
               value={reportUrl}
               onChange={(e) => setReportUrl(e.target.value)}
-              className="w-full py-2 px-3 border border-hairline bg-paper/50 text-xs text-ink focus-visible:outline-verdigris min-h-[44px]"
+              className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
             />
           </div>
 
           <div>
-            <label className="block text-[10px] uppercase text-muted font-bold mb-1">
+            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 font-bold mb-1">
               Audited Correction Note:
             </label>
             <textarea
@@ -272,7 +272,7 @@ export function MethodologyClient() {
               placeholder="Explain the discrepancy and quote the exact passage in the primary document..."
               value={reportNote}
               onChange={(e) => setReportNote(e.target.value)}
-              className="w-full py-2 px-3 border border-hairline bg-paper/50 text-xs text-ink focus-visible:outline-verdigris"
+              className="w-full py-2.5 px-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris"
             />
           </div>
 

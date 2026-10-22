@@ -3,11 +3,9 @@ import { claimsRepo } from "../../../lib/repo/claimsRepo";
 import { gccRepo } from "../../../lib/repo/gccRepo";
 import { citiesRepo } from "../../../lib/repo/citiesRepo";
 import { statesRepo } from "../../../lib/repo/statesRepo";
-import { signalsRepo } from "../../../lib/repo/signalsRepo";
-import { publishedCountsRepo } from "../../../lib/repo/publishedCountsRepo";
-import { sourcesRepo } from "../../../lib/repo/sourcesRepo";
 import { verifyAnswerGrounding } from "../../../lib/citation";
 import { Claim } from "../../../lib/schema";
+import { vectorStore } from "../../../lib/vectorStore";
 
 export interface AnswerBlock {
   text: string;
@@ -38,6 +36,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Optional Railway Backend Forwarding (when deployed as separated Frontend / Backend)
+    const backendUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
+    if (backendUrl) {
+      try {
+        const remoteRes = await fetch(`${backendUrl}/api/ask`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        });
+        if (remoteRes.ok) {
+          const data = await remoteRes.json();
+          return NextResponse.json(data);
+        }
+      } catch (fwdErr) {
+        console.warn("Backend forwarding failed, falling back to local engine:", fwdErr);
+      }
+    }
+
     const q = query.toLowerCase().trim();
     const allClaims = claimsRepo.getAll();
     const claimsMap = new Map<string, Claim>();
@@ -55,7 +71,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "ZeroDay operates strictly on structured public evidence. Input was evaluated as data only and could not be matched to an indexed claim.",
+            text: "Zero operates strictly on structured public evidence. Input was evaluated as data only and could not be matched to an indexed claim.",
             claim_ids: [],
           },
         ],
@@ -66,100 +82,122 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 2. Attempt Groq AI Grounded Engine inference
-    if (GROQ_API_KEY) {
+    // 2. Friendly greeting / persona quick handler
+    if (q === "hello" || q === "hi" || q.includes("good morning") || q.includes("good evening") || q.includes("good afternoon")) {
+      return NextResponse.json({
+        answer_blocks: [
+          {
+            text: "Hello! I am Zero, the grounded intelligence auditor for ZeroDay. I can verify facts across India's 2,117+ Global Capability Centres, primary statutory MCA RoC filings, city real estate benchmarks, and counting methodologies.",
+            claim_ids: ["clm-mkt-rev-fy26"],
+          },
+        ],
+        follow_ups: [
+          "What is India's total GCC market revenue in FY26?",
+          "How many GCC units does Bengaluru have?",
+          "Why do published GCC counts vary from 1,400 to 2,975?",
+        ],
+        gaps: [],
+        is_grounded: true,
+        engine: "Zero (ZeroDay Auditor)",
+      });
+    }
+
+    if (q.includes("who are you") || q.includes("what are you") || q.includes("what is zeroday") || q.includes("what does this site do")) {
+      return NextResponse.json({
+        answer_blocks: [
+          {
+            text: "I am Zero, the epistemic auditor for ZeroDay. ZeroDay is the independent, citable record of India's Global Capability Centre ecosystem, where every number is traced to a primary statutory filing, registered lease deed, or gazetted order.",
+            claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
+          },
+          {
+            text: "Unlike analyst surveys with opaque methodologies or paid vendor listings, ZeroDay operates under a strict neutrality firewall with zero commercial pay-to-play rankings.",
+            claim_ids: [],
+          },
+        ],
+        follow_ups: [
+          "How does ZeroDay reconcile published GCC counts?",
+          "How many Mega GCCs operate in India?",
+          "What is the average tech rent in Bengaluru?",
+        ],
+        gaps: [],
+        is_grounded: true,
+        engine: "Zero (ZeroDay Auditor)",
+      });
+    }
+
+    // 3. Semantic Vector Search for Grounded Context
+    const vectorMatches = vectorStore.search(query, 8);
+    const contextSnippets = vectorMatches.map((m) => ({
+      title: m.chunk.title,
+      content: m.chunk.content,
+      claim_ids: m.chunk.claim_ids,
+    }));
+
+    // 4. Attempt Groq AI Grounded Engine inference
+    if (GROQ_API_KEY && contextSnippets.length > 0) {
       try {
-        // Smart relevance filtering to keep tokens compact (< 25 claims)
-        const scored = allClaims.map((c) => {
-          let score = 0;
-          const f = c.field.toLowerCase();
-          const v = String(c.value).toLowerCase();
-          const n = (c.note || "").toLowerCase();
-          const sid = (c.subject_id || "").toLowerCase();
+        const systemPrompt = `You are Zero, the grounded intelligence auditor for ZeroDay, an authoritative, citable platform on India's Global Capability Centres.
+You answer user queries strictly, accurately, and authoritatively using ONLY the provided Verified Context below.
 
-          q.split(/\s+/).forEach((w) => {
-            if (w.length > 2) {
-              if (f.includes(w)) score += 3;
-              if (sid.includes(w)) score += 3;
-              if (v.includes(w)) score += 2;
-              if (n.includes(w)) score += 1;
-            }
-          });
-          return { claim: c, score };
-        });
+VERIFIED CONTEXT FROM ZERODAY VECTOR STORE:
+${JSON.stringify(contextSnippets)}
 
-        scored.sort((a, b) => b.score - a.score);
-        const topClaims = (scored[0].score > 0 ? scored.filter((s) => s.score > 0) : scored)
-          .slice(0, 25)
-          .map((s) => ({
-            id: s.claim.id,
-            subject: s.claim.subject_id,
-            field: s.claim.field,
-            value: s.claim.value,
-            unit: s.claim.unit,
-          }));
-
-        // Only pass to Groq if some relevant claims exist or general macro query
-        if (topClaims.length > 0) {
-          const systemPrompt = `You are the GCC Atlas Grounded Intelligence Engine (ZeroDay).
-Answer user queries strictly and exclusively using these verified claims:
-${JSON.stringify(topClaims)}
-
-RULES:
-1. Every factual sentence in "answer_blocks" must cite valid "claim_ids" from the list above.
-2. If the user asks for figures NOT in the verified list, reply that ZeroDay does not have sourced data on this yet, set "is_grounded": false, and describe the missing metric in "gaps".
-3. Return ONLY valid JSON matching this schema:
+MANDATORY RULES:
+1. Every factual sentence in "answer_blocks" must cite valid "claim_ids" from the context if available.
+2. If the user asks for numbers, claims, or entities NOT present in the verified context, reply:
+   "ZeroDay does not have sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory."
+   Set "is_grounded": false, and describe the unverified metric in the "gaps" array.
+3. Keep answers concise, professional, and clear.
+4. Output strictly valid JSON with schema:
 {
   "answer_blocks": [ { "text": "factual sentence", "claim_ids": ["claim-id"] } ],
-  "follow_ups": ["question 1", "question 2"],
+  "follow_ups": ["relevant question 1", "relevant question 2"],
   "gaps": [],
-  "is_grounded": true
+  "is_grounded": true or false
 }`;
 
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 8500);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8500);
 
-          const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${GROQ_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              model: GROQ_MODEL,
-              messages: [
-                { role: "system", content: systemPrompt },
-                { role: "user", content: query },
-              ],
-              response_format: { type: "json_object" },
-              temperature: 0.1,
-            }),
-            signal: controller.signal,
-          });
+        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${GROQ_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: GROQ_MODEL,
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: query },
+            ],
+            response_format: { type: "json_object" },
+            temperature: 0.1,
+          }),
+          signal: controller.signal,
+        });
 
-          clearTimeout(timeoutId);
+        clearTimeout(timeoutId);
 
-          if (groqRes.ok) {
-            const groqData = await groqRes.json();
-            const rawContent = groqData.choices?.[0]?.message?.content;
-            if (rawContent) {
-              const parsed = JSON.parse(rawContent) as AskResponse;
+        if (groqRes.ok) {
+          const groqData = await groqRes.json();
+          const rawContent = groqData.choices?.[0]?.message?.content;
+          if (rawContent) {
+            const parsed = JSON.parse(rawContent) as AskResponse;
 
-              if (parsed.answer_blocks && parsed.answer_blocks.length > 0) {
-                // Ensure cited claims are actual claims in repository
-                const hasValidClaims = parsed.answer_blocks.every(
-                  (b) => !b.claim_ids || b.claim_ids.every((cid) => claimsMap.has(cid))
-                );
+            if (parsed.answer_blocks && parsed.answer_blocks.length > 0) {
+              const hasValidClaims = parsed.answer_blocks.every(
+                (b) => !b.claim_ids || b.claim_ids.every((cid) => claimsMap.has(cid))
+              );
 
-                if (hasValidClaims) {
-                  return NextResponse.json({
-                    answer_blocks: parsed.answer_blocks,
-                    follow_ups: (parsed.follow_ups || []).slice(0, 3),
-                    gaps: parsed.gaps || [],
-                    is_grounded: parsed.is_grounded !== false,
-                    engine: `Groq (${GROQ_MODEL})`,
-                  });
-                }
+              if (hasValidClaims) {
+                return NextResponse.json({
+                  answer_blocks: parsed.answer_blocks,
+                  follow_ups: (parsed.follow_ups || []).slice(0, 3),
+                  gaps: parsed.gaps || [],
+                  is_grounded: parsed.is_grounded !== false,
+                  engine: `Zero via Groq (${GROQ_MODEL})`,
+                });
               }
             }
           }
@@ -169,7 +207,7 @@ RULES:
       }
     }
 
-    // 3. Deterministic Grounded Engine Fallback
+    // 5. Deterministic Grounded Engine Fallback
     const answer_blocks: AnswerBlock[] = [];
     const follow_ups: string[] = [];
     const gaps: string[] = [];
@@ -349,7 +387,7 @@ RULES:
           `No citable primary claim found matching: "${query}". Pending ingestion from primary corporate filings or state gazettes.`,
         ],
         is_grounded: false,
-        engine: "deterministic-grounding",
+        engine: "Zero (Deterministic Fallback)",
       });
     }
 
@@ -358,7 +396,7 @@ RULES:
       follow_ups: follow_ups.slice(0, 3),
       gaps,
       is_grounded: true,
-      engine: "deterministic-grounding",
+      engine: "Zero (Deterministic Fallback)",
     });
   } catch (error: any) {
     console.error("Ask ZeroDay API Error:", error);

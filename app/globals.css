@@ -85,6 +85,42 @@ table td,
   outline-offset: 2px;
 }
 
+/* Universal Form Input Contrast & Legibility Safeguards */
+input,
+textarea,
+select {
+  color: #0F172A !important;
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748B !important;
+  opacity: 0.85;
+}
+
+.dark input,
+.dark textarea,
+.dark select {
+  color: #F8FAFC !important;
+  background-color: #0F172A !important;
+  border-color: #334155 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #94A3B8 !important;
+  opacity: 0.85;
+}
+
+/* Prevent microscopic unreadable text */
+small,
+.text-xs {
+  font-size: 0.8125rem; /* 13px minimum for clear readability */
+  line-height: 1.25rem;
+}
+
 /* Text Selection */
 ::selection {
   background-color: var(--color-verdigris);

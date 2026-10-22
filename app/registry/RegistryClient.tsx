@@ -439,44 +439,44 @@ export function RegistryClient({
       {/* Filter & Search Bar */}
       <section
         aria-label="Filter Registry"
-        className="border border-hairline bg-surface p-4 shadow-xs space-y-3 font-sans"
+        className="border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs space-y-4 font-sans"
       >
         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted" strokeWidth={1.5} />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={1.5} />
             <input
               type="text"
               placeholder="Search by enterprise name, parent corporation, sector, or city..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-hairline bg-surface text-xs font-sans text-ink placeholder:text-muted focus-visible:outline-verdigris min-h-[44px]"
+              className="w-full pl-10 pr-4 py-2.5 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-sans text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:outline-none focus:border-verdigris min-h-[44px]"
             />
           </div>
 
           {/* Quick CIN Checkbox */}
-          <label className="flex items-center gap-2 text-xs font-mono text-ink cursor-pointer select-none px-2 min-h-[44px]">
+          <label className="flex items-center gap-2 text-xs font-mono text-slate-800 dark:text-slate-200 cursor-pointer select-none px-2 min-h-[44px]">
             <input
               type="checkbox"
               checked={filterHasCin}
               onChange={(e) => setFilterHasCin(e.target.checked)}
               className="accent-verdigris w-4 h-4"
             />
-            <span>Statutory CIN Only</span>
+            <span className="font-semibold">Statutory CIN Only</span>
           </label>
         </div>
 
         {/* Filter Dropdowns Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 pt-2 border-t border-hairline-subtle font-mono text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-3 border-t border-slate-200 dark:border-slate-800 font-sans text-xs">
           {/* City */}
           <div>
-            <label className="block text-[10px] uppercase text-muted mb-1 font-bold">
+            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 mb-1 font-bold">
               Campus City
             </label>
             <select
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
-              className="w-full py-1.5 px-2 text-xs border border-hairline bg-surface text-ink min-h-[38px] focus-visible:outline-verdigris"
+              className="w-full py-2 px-3 text-xs border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 min-h-[40px] focus-visible:outline-none focus:border-verdigris"
             >
               <option value="all">All Cities ({allCities.length})</option>
               {allCities.map((c) => (
@@ -489,13 +489,13 @@ export function RegistryClient({
 
           {/* Sector */}
           <div>
-            <label className="block text-[10px] uppercase text-muted mb-1 font-bold">
+            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 mb-1 font-bold">
               Sector
             </label>
             <select
               value={selectedSector}
               onChange={(e) => setSelectedSector(e.target.value)}
-              className="w-full py-1.5 px-2 text-xs border border-hairline bg-surface text-ink min-h-[38px] focus-visible:outline-verdigris"
+              className="w-full py-2 px-3 text-xs border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 min-h-[40px] focus-visible:outline-none focus:border-verdigris"
             >
               <option value="all">All Sectors ({allSectors.length})</option>
               {allSectors.map((s) => (
@@ -508,13 +508,13 @@ export function RegistryClient({
 
           {/* HQ Country */}
           <div>
-            <label className="block text-[10px] uppercase text-muted mb-1 font-bold">
+            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 mb-1 font-bold">
               Parent HQ
             </label>
             <select
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
-              className="w-full py-1.5 px-2 text-xs border border-hairline bg-surface text-ink min-h-[38px] focus-visible:outline-verdigris"
+              className="w-full py-2 px-3 text-xs border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 min-h-[40px] focus-visible:outline-none focus:border-verdigris"
             >
               <option value="all">All HQ Nations</option>
               {allCountries.map((c) => (
@@ -527,13 +527,13 @@ export function RegistryClient({
 
           {/* Headcount */}
           <div>
-            <label className="block text-[10px] uppercase text-muted mb-1 font-bold">
+            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 mb-1 font-bold">
               Headcount Band
             </label>
             <select
               value={selectedBand}
               onChange={(e) => setSelectedBand(e.target.value)}
-              className="w-full py-1.5 px-2 text-xs border border-hairline bg-surface text-ink min-h-[38px] focus-visible:outline-verdigris"
+              className="w-full py-2 px-3 text-xs border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 min-h-[40px] focus-visible:outline-none focus:border-verdigris"
             >
               <option value="all">All Bands</option>
               <option value="<500">&lt;500 Professionals</option>
@@ -545,13 +545,13 @@ export function RegistryClient({
 
           {/* Status */}
           <div>
-            <label className="block text-[10px] uppercase text-muted mb-1 font-bold">
+            <label className="block text-xs uppercase text-slate-600 dark:text-slate-400 mb-1 font-bold">
               Status
             </label>
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="w-full py-1.5 px-2 text-xs border border-hairline bg-surface text-ink min-h-[38px] focus-visible:outline-verdigris"
+              className="w-full py-2 px-3 text-xs border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 min-h-[40px] focus-visible:outline-none focus:border-verdigris"
             >
               <option value="all">All Statuses</option>
               <option value="operating">Operating</option>
