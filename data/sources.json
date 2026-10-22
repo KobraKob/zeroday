@@ -1,0 +1,652 @@
+[
+  {
+    "id": "src-bt-zinnov-fy26",
+    "name": "The Big Boom: How India's GCC story hits 2030 target 4 years early",
+    "type": "report",
+    "url": "https://www.businesstoday.in/amp/technology/news/story/the-big-boom-how-indias-gcc-story-hits-2030-target-4-years-early-530265-2026-05-07",
+    "publisher": "Business Today / nasscom-Zinnov",
+    "published_at": "2026-05-07",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public editorial coverage of joint nasscom-Zinnov GCC ecosystem report"
+  },
+  {
+    "id": "src-theprint-zinnov-fy24",
+    "name": "India's position as GCC capital of the world: nasscom-Zinnov study",
+    "type": "report",
+    "url": "https://theprint.in/economy/indias-position-as-gcc-capital-of-the-world-nasscom-zinnov-study/2268673/",
+    "publisher": "The Print / nasscom",
+    "published_at": "2024-09-18",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public news coverage of nasscom-Zinnov GCC 4.0 benchmark"
+  },
+  {
+    "id": "src-aim-explorer",
+    "name": "AIM Research GCC Explorer and Analytics Benchmark",
+    "type": "report",
+    "url": "https://reports.aimresearch.co/?p=4006",
+    "publisher": "AIM Research",
+    "published_at": "2026-01-15",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Publicly accessible executive summary and directory"
+  },
+  {
+    "id": "src-gcc-journal",
+    "name": "Comprehensive List of Global Capability Centers (GCC) in India",
+    "type": "report",
+    "url": "https://gccjournal.in/insights/list-of-global-capability-centers-gcc-in-india/",
+    "publisher": "GCC Journal",
+    "published_at": "2026-02-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public industry directory"
+  },
+  {
+    "id": "src-oceanfrogs",
+    "name": "Global Capability Centers Market Intelligence and Footprint",
+    "type": "report",
+    "url": "https://www.oceanfrogs.com/intel/gcc/",
+    "publisher": "OceanFrogs Intel",
+    "published_at": "2026-03-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public market research page"
+  },
+  {
+    "id": "src-flexiple-stats",
+    "name": "India Global Capability Centers (GCC) Statistics and Growth Trends",
+    "type": "report",
+    "url": "https://flexiple.com/gcc/statistics",
+    "publisher": "Flexiple",
+    "published_at": "2026-08-14",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public analytical compilation and meta-analysis"
+  },
+  {
+    "id": "src-fpj-market-rev",
+    "name": "India GCC Market Revenue Crosses $98 Billion Milestone in FY26",
+    "type": "press",
+    "url": "https://www.freepressjournal.in/business/india-gcc-market-crosses-98-billion-in-fy26-with-accelerated-tech-investments",
+    "publisher": "Free Press Journal",
+    "published_at": "2026-05-12",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public financial reporting"
+  },
+  {
+    "id": "src-commtoday-workforce",
+    "name": "India GCC Talent Base Expands to 2.36 Million Skilled Professionals",
+    "type": "press",
+    "url": "https://www.communicationstoday.co.in/india-gcc-workforce-reaches-2-36-million-in-2026-as-deep-tech-hiring-surges/",
+    "publisher": "Communications Today",
+    "published_at": "2026-06-04",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Industry press reporting"
+  },
+  {
+    "id": "src-bizofgcc-mega-leasing",
+    "name": "Mega GCC Dynamics and Office Leasing Surge Q1 2026",
+    "type": "report",
+    "url": "https://businessofgcc.com/insights/mega-gccs-office-leasing-surge-and-talent-premiums-2026",
+    "publisher": "Business of GCC / Zinnov",
+    "published_at": "2026-05-20",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Industry research digest"
+  },
+  {
+    "id": "src-kar-policy",
+    "name": "Karnataka Global Capability Centres (GCC) Policy 2024-2029",
+    "type": "policy",
+    "url": "https://karnataka.gov.in/itbt/policies/karnataka-gcc-policy-2024-2029.pdf",
+    "publisher": "Department of Electronics, IT, Bt and S&T, Government of Karnataka",
+    "published_at": "2024-09-27",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official state policy gazette notification"
+  },
+  {
+    "id": "src-tn-policy",
+    "name": "Tamil Nadu R&D and GCC Policy 2024-2027",
+    "type": "policy",
+    "url": "https://investingintamilnadu.com/wp-content/uploads/2024/02/Tamil_Nadu_RD_Policy_2024.pdf",
+    "publisher": "Guidance Tamil Nadu, Industries Department, Govt of Tamil Nadu",
+    "published_at": "2024-02-15",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official government policy document"
+  },
+  {
+    "id": "src-tg-policy",
+    "name": "Telangana ICT and GCC Growth Framework Policy",
+    "type": "policy",
+    "url": "https://it.telangana.gov.in/wp-content/uploads/2023/11/Telangana_ICT_Policy_Framework.pdf",
+    "publisher": "ITE&C Department, Government of Telangana",
+    "published_at": "2023-11-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official government policy framework"
+  },
+  {
+    "id": "src-mh-policy",
+    "name": "Maharashtra Information Technology & Information Technology Enabled Services (IT/ITeS) Policy 2023",
+    "type": "policy",
+    "url": "https://industry.maharashtra.gov.in/sites/default/files/IT-ITeS-Policy-2023.pdf",
+    "publisher": "Directorate of Industries, Government of Maharashtra",
+    "published_at": "2023-06-27",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official government gazette"
+  },
+  {
+    "id": "src-gj-policy",
+    "name": "Gujarat IT/ITeS Policy 2022-27 and GIFT City Global Tech Zone Guidelines",
+    "type": "policy",
+    "url": "https://dst.gujarat.gov.in/assets/downloads/Gujarat_IT_ITeS_Policy_2022-27.pdf",
+    "publisher": "Department of Science and Technology, Government of Gujarat",
+    "published_at": "2022-02-23",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official policy document"
+  },
+  {
+    "id": "src-up-policy",
+    "name": "Uttar Pradesh Information Technology & Global Capability Centres Policy 2024",
+    "type": "policy",
+    "url": "https://itpolicy.up.gov.in/documents/UP_IT_GCC_Policy_2024.pdf",
+    "publisher": "Department of IT and Electronics, Government of Uttar Pradesh",
+    "published_at": "2024-07-18",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official state policy order"
+  },
+  {
+    "id": "src-ap-policy",
+    "name": "Andhra Pradesh Information Technology Policy 4.0 (Visakhapatnam Focus)",
+    "type": "policy",
+    "url": "https://ited.ap.gov.in/policies/AP_IT_Policy_2024.pdf",
+    "publisher": "IT, E&C Department, Government of Andhra Pradesh",
+    "published_at": "2024-10-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official government notification"
+  },
+  {
+    "id": "src-jll-office-2026",
+    "name": "India Real Estate Pulse: GCC Office Absorption & Trends Q1 2026",
+    "type": "report",
+    "url": "https://www.jll.co.in/en/trends-and-insights/research/india-office-market-gcc-q1-2026",
+    "publisher": "JLL Research India",
+    "published_at": "2026-04-18",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public commercial real estate research report"
+  },
+  {
+    "id": "src-cbre-gcc-2026",
+    "name": "CBRE India GCC Market Monitor: Space Demand and Talent Clusters",
+    "type": "report",
+    "url": "https://www.cbre.co.in/insights/reports/india-gcc-real-estate-monitor-2026",
+    "publisher": "CBRE India Research",
+    "published_at": "2026-03-24",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public commercial property intelligence"
+  },
+  {
+    "id": "src-cw-office-2026",
+    "name": "Cushman & Wakefield: GCC Office Leasing Insights across Top 7 Cities",
+    "type": "report",
+    "url": "https://www.cushmanwakefield.com/en/india/insights/gcc-office-leasing-india-2026",
+    "publisher": "Cushman & Wakefield India",
+    "published_at": "2026-02-28",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public market report"
+  },
+  {
+    "id": "src-ansr-quarterly",
+    "name": "ANSR Quarterly GCC Tracker: India Entry Roadmap & Build-Operate-Transfer Trends",
+    "type": "report",
+    "url": "https://ansr.com/insights/quarterly-gcc-tracker-2026/",
+    "publisher": "ANSR Consulting",
+    "published_at": "2026-05-02",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public advisory whitepaper"
+  },
+  {
+    "id": "src-google-in",
+    "name": "Google India Operations and Development Centres Expansion",
+    "type": "company",
+    "url": "https://blog.google/around-the-globe/google-asia/google-in-india-technology-centers/",
+    "publisher": "Google Inc.",
+    "published_at": "2025-10-15",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate communications"
+  },
+  {
+    "id": "src-msft-in",
+    "name": "Microsoft India Development Center (IDC) Celebrates 25 Years of Innovation",
+    "type": "company",
+    "url": "https://news.microsoft.com/en-in/features/microsoft-india-development-center-milestone-25-years/",
+    "publisher": "Microsoft Corporation",
+    "published_at": "2024-03-12",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate feature"
+  },
+  {
+    "id": "src-amzn-in",
+    "name": "Amazon Expands Tech Hub Infrastructure Across Bengaluru and Hyderabad",
+    "type": "company",
+    "url": "https://www.aboutamazon.in/news/workplace/amazon-tech-development-centers-in-india",
+    "publisher": "Amazon.com",
+    "published_at": "2025-06-20",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official news release"
+  },
+  {
+    "id": "src-jpmc-in",
+    "name": "JPMorgan Chase Technology and Operations Capabilities in India",
+    "type": "company",
+    "url": "https://www.jpmorganchase.com/news-stories/india-global-service-centers-operations",
+    "publisher": "JPMorgan Chase & Co.",
+    "published_at": "2025-08-11",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate disclosures"
+  },
+  {
+    "id": "src-wells-in",
+    "name": "Wells Fargo India & Philippines Technology and Operations Centre",
+    "type": "company",
+    "url": "https://www.wellsfargo.com/about/corporate/india-presence/",
+    "publisher": "Wells Fargo & Company",
+    "published_at": "2024-11-05",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate overview"
+  },
+  {
+    "id": "src-gs-in",
+    "name": "Goldman Sachs Expands Hyderabad and Bengaluru Engineering Hubs",
+    "type": "company",
+    "url": "https://www.goldmansachs.com/our-firm/locations/india/",
+    "publisher": "Goldman Sachs Group, Inc.",
+    "published_at": "2025-03-14",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official firm location overview"
+  },
+  {
+    "id": "src-walmart-in",
+    "name": "Walmart Global Tech India Innovation & Retail Engineering Centers",
+    "type": "company",
+    "url": "https://walmartglobaltech.com/india-presence-tech-hubs",
+    "publisher": "Walmart Inc.",
+    "published_at": "2025-01-22",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate technology website"
+  },
+  {
+    "id": "src-target-in",
+    "name": "Target in India: Global Capability Center Strategy and Operations",
+    "type": "company",
+    "url": "https://corporate.target.com/about/purpose-history/target-in-india",
+    "publisher": "Target Corporation",
+    "published_at": "2024-08-30",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate backgrounder"
+  },
+  {
+    "id": "src-boeing-bietc",
+    "name": "Boeing Inaugurates State-of-the-art BIETC Campus in Bengaluru",
+    "type": "press",
+    "url": "https://www.boeing.co.in/news/press-releases/2024/january/boeing-inaugurates-new-engineering-and-technology-center-campus-in-bengaluru",
+    "publisher": "Boeing India",
+    "published_at": "2024-01-19",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press release"
+  },
+  {
+    "id": "src-airbus-in",
+    "name": "Airbus Expands India Engineering and Digital Capabilities Centre",
+    "type": "press",
+    "url": "https://www.airbus.com/en/newsroom/press-releases/2024-07-airbus-india-engineering-expansion-bengaluru",
+    "publisher": "Airbus SE",
+    "published_at": "2024-07-16",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official newsroom press statement"
+  },
+  {
+    "id": "src-schneider-in",
+    "name": "Schneider Electric Unveils New Sustainability & Engineering Hub in Bengaluru",
+    "type": "press",
+    "url": "https://www.se.com/in/en/about-us/newsroom/news/press-releases/schneider-electric-inaugurates-bengaluru-innovation-hub-2024.jsp",
+    "publisher": "Schneider Electric",
+    "published_at": "2024-05-28",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press release"
+  },
+  {
+    "id": "src-bosch-in",
+    "name": "Bosch Global Software Technologies (BGSW) India Footprint",
+    "type": "company",
+    "url": "https://www.bosch-softwaretechnologies.com/en/about-us/locations-india/",
+    "publisher": "Robert Bosch GmbH",
+    "published_at": "2025-02-17",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate website"
+  },
+  {
+    "id": "src-intel-in",
+    "name": "Intel India Research & Development Centres and Hardware Validation Labs",
+    "type": "company",
+    "url": "https://www.intel.in/content/www/in/en/company-overview/intel-in-india.html",
+    "publisher": "Intel Corporation",
+    "published_at": "2025-04-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate portal"
+  },
+  {
+    "id": "src-qualcomm-in",
+    "name": "Qualcomm Inaugurates New Design Center in Chennai and Expands Hyderabad",
+    "type": "press",
+    "url": "https://www.qualcomm.com/news/releases/2024/03/qualcomm-inaugurates-new-chennai-design-center-investment",
+    "publisher": "Qualcomm Incorporated",
+    "published_at": "2024-03-14",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press release"
+  },
+  {
+    "id": "src-cisco-in",
+    "name": "Cisco Systems India: Center of Excellence and Engineering Hub",
+    "type": "company",
+    "url": "https://www.cisco.com/c/en_in/about/cisco-in-india.html",
+    "publisher": "Cisco Systems, Inc.",
+    "published_at": "2024-12-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate page"
+  },
+  {
+    "id": "src-sap-in",
+    "name": "SAP Labs India: Deep Tech Hub and Second Campus at Devanahalli",
+    "type": "press",
+    "url": "https://news.sap.com/india/2024/11/sap-labs-india-expands-bengaluru-footprint-with-second-campus/",
+    "publisher": "SAP SE",
+    "published_at": "2024-11-21",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate press release"
+  },
+  {
+    "id": "src-barclays-in",
+    "name": "Barclays Global Service Centre India: Operations in Pune and Chennai",
+    "type": "company",
+    "url": "https://home.barclays/who-we-are/our-locations/india/",
+    "publisher": "Barclays PLC",
+    "published_at": "2025-02-09",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official bank website"
+  },
+  {
+    "id": "src-hsbc-in",
+    "name": "HSBC Technology & Services Centres India (HTSI)",
+    "type": "company",
+    "url": "https://www.hsbc.co.in/careers/about-hsbc-technology-and-services-india/",
+    "publisher": "HSBC Holdings plc",
+    "published_at": "2024-10-18",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official career and operations portal"
+  },
+  {
+    "id": "src-sc-in",
+    "name": "Standard Chartered GBS India (formerly Scope International)",
+    "type": "company",
+    "url": "https://www.sc.com/en/about/our-locations/india/global-business-services/",
+    "publisher": "Standard Chartered Bank",
+    "published_at": "2025-03-02",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company disclosures"
+  },
+  {
+    "id": "src-fidelity-in",
+    "name": "Fidelity Investments India: Technology and Operations Capability",
+    "type": "company",
+    "url": "https://www.fidelityrecruitment.com/india-presence/",
+    "publisher": "FMR LLC (Fidelity Investments)",
+    "published_at": "2025-01-14",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company site"
+  },
+  {
+    "id": "src-lowes-in",
+    "name": "Lowe's India Innovation Hub in Bengaluru",
+    "type": "company",
+    "url": "https://www.lowes.co.in/about-lowes-india/",
+    "publisher": "Lowe's Companies, Inc.",
+    "published_at": "2024-09-05",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate portal"
+  },
+  {
+    "id": "src-pepsi-in",
+    "name": "PepsiCo Global Business Services Hub Hyderabad",
+    "type": "press",
+    "url": "https://www.pepsico.com/our-stories/press-release/pepsico-inaugurates-global-business-services-hub-in-hyderabad",
+    "publisher": "PepsiCo, Inc.",
+    "published_at": "2023-11-28",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press release"
+  },
+  {
+    "id": "src-astra-in",
+    "name": "AstraZeneca India Global Innovation and Technology Centre (GITC) Chennai",
+    "type": "company",
+    "url": "https://www.astrazeneca.com/country-sites/india/about-us/chennai-gitc.html",
+    "publisher": "AstraZeneca PLC",
+    "published_at": "2024-06-12",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company page"
+  },
+  {
+    "id": "src-novartis-in",
+    "name": "Novartis Corporate Center Hyderabad: Capabilities in Development & Operations",
+    "type": "company",
+    "url": "https://www.novartis.com/in-en/about/locations/novartis-corporate-center-hyderabad",
+    "publisher": "Novartis AG",
+    "published_at": "2024-04-19",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company site"
+  },
+  {
+    "id": "src-pfizer-in",
+    "name": "Pfizer Global Drug Development Center at IIT Madras Research Park",
+    "type": "press",
+    "url": "https://www.pfizer.com/news/press-release/press-release-detail/pfizer-inaugurates-global-drug-development-center-chennai",
+    "publisher": "Pfizer Inc.",
+    "published_at": "2022-09-15",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press announcement"
+  },
+  {
+    "id": "src-shell-in",
+    "name": "Shell Technology Centre Bangalore (STCB): World-Class Innovation Facility",
+    "type": "company",
+    "url": "https://www.shell.in/about-us/shell-technology-centre-bangalore.html",
+    "publisher": "Shell plc",
+    "published_at": "2024-05-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company information"
+  },
+  {
+    "id": "src-mbrdi-in",
+    "name": "Mercedes-Benz Research and Development India (MBRDI) Bengaluru & Pune",
+    "type": "company",
+    "url": "https://www.mbrdi.co.in/about-us",
+    "publisher": "Mercedes-Benz Group AG",
+    "published_at": "2025-02-20",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company portal"
+  },
+  {
+    "id": "src-continental-in",
+    "name": "Continental Technical Center India (TCI) Expands in Bengaluru",
+    "type": "press",
+    "url": "https://www.continental.com/en-in/press/press-releases/2023-continental-technical-center-india-expansion/",
+    "publisher": "Continental AG",
+    "published_at": "2023-10-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press release"
+  },
+  {
+    "id": "src-volvo-in",
+    "name": "Volvo Group CampX and Connected Solutions Hub Bengaluru",
+    "type": "company",
+    "url": "https://www.volvogroup.com/en/about-us/our-locations/volvo-group-india.html",
+    "publisher": "Volvo Group",
+    "published_at": "2024-07-22",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate portal"
+  },
+  {
+    "id": "src-3m-in",
+    "name": "3M India Technology and Innovation Centre Bengaluru",
+    "type": "company",
+    "url": "https://www.3mindia.in/3M/en_IN/company-in/about-3m/innovation-centers/",
+    "publisher": "3M Company",
+    "published_at": "2023-12-05",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate website"
+  },
+  {
+    "id": "src-abbott-in",
+    "name": "Abbott Innovation & Development Center Mumbai and Bengaluru",
+    "type": "company",
+    "url": "https://www.abbott.co.in/about-abbott/abbott-in-india.html",
+    "publisher": "Abbott Laboratories",
+    "published_at": "2024-03-30",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official website"
+  },
+  {
+    "id": "src-philips-in",
+    "name": "Philips Innovation Campus Bengaluru Celebrates 28 Years",
+    "type": "company",
+    "url": "https://www.philips.co.in/a-w/about/news/archive/standard/news/press/2024/20240902-philips-innovation-campus-bengaluru-healthcare-tech.html",
+    "publisher": "Koninklijke Philips N.V.",
+    "published_at": "2024-09-02",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate press release"
+  },
+  {
+    "id": "src-siemens-in",
+    "name": "Siemens Healthineers Innovation Hub Bengaluru Campus",
+    "type": "press",
+    "url": "https://www.siemens-healthineers.com/en-in/press-room/press-releases/inauguration-innovation-center-bengaluru",
+    "publisher": "Siemens Healthineers AG",
+    "published_at": "2024-06-25",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press announcement"
+  },
+  {
+    "id": "src-deere-in",
+    "name": "John Deere India Technology and Engineering Center Pune",
+    "type": "company",
+    "url": "https://www.deere.co.in/en/our-company/about-john-deere-india/",
+    "publisher": "Deere & Company",
+    "published_at": "2024-08-11",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company information"
+  },
+  {
+    "id": "src-caterpillar-in",
+    "name": "Caterpillar Engineering Design Center Chennai and Bengaluru",
+    "type": "company",
+    "url": "https://www.caterpillar.com/en/company/global-footprint/eame/india.html",
+    "publisher": "Caterpillar Inc.",
+    "published_at": "2024-02-14",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company footprint report"
+  },
+  {
+    "id": "src-ford-in",
+    "name": "Ford Business Solutions India Tech Hub Chennai & Coimbatore",
+    "type": "press",
+    "url": "https://corporate.ford.com/operations/locations/india.html",
+    "publisher": "Ford Motor Company",
+    "published_at": "2024-09-13",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official Ford corporate website"
+  },
+  {
+    "id": "src-amex-in",
+    "name": "American Express Inaugurates State-of-the-Art Gurugram Campus",
+    "type": "press",
+    "url": "https://about.americanexpress.com/newsroom/press-releases/press-release-details/2024/American-Express-Inaugurates-New-Nearly-One-Million-Square-Foot-Campus-in-Gurugram-India/default.aspx",
+    "publisher": "American Express Company",
+    "published_at": "2024-04-29",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official press release"
+  },
+  {
+    "id": "src-citi-in",
+    "name": "Citi Solutions Centers India (CSCI) Mumbai, Pune, Chennai, Gurugram",
+    "type": "company",
+    "url": "https://www.citigroup.com/global/about-us/global-presence/india",
+    "publisher": "Citigroup Inc.",
+    "published_at": "2024-11-19",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official company page"
+  },
+  {
+    "id": "src-ms-in",
+    "name": "Morgan Stanley Solutions India Technology and Operations Hub",
+    "type": "company",
+    "url": "https://www.morganstanley.com/about-us/global-offices/india",
+    "publisher": "Morgan Stanley",
+    "published_at": "2025-01-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official corporate portal"
+  },
+  {
+    "id": "src-cushman-jll-deal-2025",
+    "name": "JLL Advisory on Fortune 500 GCC Lease Transactions in Bengaluru & Hyderabad",
+    "type": "press",
+    "url": "https://www.jll.co.in/en/newsroom/jll-advises-multinational-gcc-leasing-2025",
+    "publisher": "JLL India Press",
+    "published_at": "2025-07-15",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Commercial transaction report"
+  },
+  {
+    "id": "src-trilegal-gcc-advisory",
+    "name": "Trilegal Corporate & Inward Investment Practice GCC Legal Structuring",
+    "type": "company",
+    "url": "https://trilegal.com/practice-areas/corporate-gcc-structuring/",
+    "publisher": "Trilegal",
+    "published_at": "2025-05-18",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Legal advisory publication"
+  },
+  {
+    "id": "src-khaitan-gcc",
+    "name": "Khaitan & Co: Structuring Global Capability Centres in India Under Companies Act 2013",
+    "type": "company",
+    "url": "https://www.khaitanco.com/thought-leadership/structuring-gccs-in-india",
+    "publisher": "Khaitan & Co",
+    "published_at": "2024-12-10",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Legal advisory whitepaper"
+  },
+  {
+    "id": "src-teamlease-gcc-hiring",
+    "name": "TeamLease Digital: GCC Talent and Compensation Trends Report 2026",
+    "type": "report",
+    "url": "https://www.teamleasegroup.com/reports/gcc-talent-salary-benchmark-2026",
+    "publisher": "TeamLease Digital",
+    "published_at": "2026-03-11",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public industry staffing survey"
+  },
+  {
+    "id": "src-nlb-gcc-report",
+    "name": "NLB Services: Next-Gen Talent Hotspots in India for Global Enterprises",
+    "type": "report",
+    "url": "https://www.nlbservices.com/insights/gcc-talent-hotspots-india-2026/",
+    "publisher": "NLB Services",
+    "published_at": "2026-04-02",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Public talent advisory report"
+  },
+  {
+    "id": "src-mca-portal",
+    "name": "Ministry of Corporate Affairs Company Master Data Public Registry",
+    "type": "government",
+    "url": "https://www.mca.gov.in/content/mca/global/en/home.html",
+    "publisher": "Ministry of Corporate Affairs, Government of India",
+    "published_at": "2026-01-01",
+    "retrieved_at": "2026-10-21",
+    "license_note": "Official statutory public register"
+  }
+]

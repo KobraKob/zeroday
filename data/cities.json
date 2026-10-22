@@ -1,0 +1,105 @@
+[
+  {
+    "id": "city-blr",
+    "name": "Bengaluru",
+    "state_id": "state-ka",
+    "claim_ids": [
+      "clm-city-blr-units",
+      "clm-city-blr-share",
+      "clm-city-blr-rent",
+      "clm-city-blr-vacancy",
+      "clm-city-blr-talent"
+    ]
+  },
+  {
+    "id": "city-hyd",
+    "name": "Hyderabad",
+    "state_id": "state-tg",
+    "claim_ids": [
+      "clm-city-hyd-units",
+      "clm-city-hyd-share",
+      "clm-city-hyd-rent",
+      "clm-city-hyd-vacancy",
+      "clm-city-hyd-talent"
+    ]
+  },
+  {
+    "id": "city-pun",
+    "name": "Pune",
+    "state_id": "state-mh",
+    "claim_ids": [
+      "clm-city-pun-units",
+      "clm-city-pun-share",
+      "clm-city-pun-rent",
+      "clm-city-pun-vacancy",
+      "clm-city-pun-talent"
+    ]
+  },
+  {
+    "id": "city-chn",
+    "name": "Chennai",
+    "state_id": "state-tn",
+    "claim_ids": [
+      "clm-city-chn-units",
+      "clm-city-chn-share",
+      "clm-city-chn-rent",
+      "clm-city-chn-vacancy",
+      "clm-city-chn-talent"
+    ]
+  },
+  {
+    "id": "city-ggn",
+    "name": "Gurugram (Delhi-NCR)",
+    "state_id": "state-up",
+    "claim_ids": [
+      "clm-city-ggn-units",
+      "clm-city-ggn-rent",
+      "clm-city-ggn-vacancy",
+      "clm-city-ggn-talent"
+    ]
+  },
+  {
+    "id": "city-noi",
+    "name": "Noida (Delhi-NCR)",
+    "state_id": "state-up",
+    "claim_ids": [
+      "clm-city-noi-units",
+      "clm-city-noi-rent",
+      "clm-city-noi-vacancy",
+      "clm-city-noi-talent"
+    ]
+  },
+  {
+    "id": "city-mum",
+    "name": "Mumbai",
+    "state_id": "state-mh",
+    "claim_ids": [
+      "clm-city-mum-units",
+      "clm-city-mum-rent",
+      "clm-city-mum-vacancy",
+      "clm-city-mum-talent"
+    ]
+  },
+  {
+    "id": "city-cbe",
+    "name": "Coimbatore (Tier-2)",
+    "state_id": "state-tn",
+    "claim_ids": [
+      "clm-city-cbe-units",
+      "clm-city-cbe-rent",
+      "clm-city-cbe-vacancy",
+      "clm-city-cbe-talent"
+    ]
+  },
+  {
+    "id": "city-ahd",
+    "name": "Ahmedabad / GIFT City (Tier-2)",
+    "state_id": "state-gj",
+    "claim_ids": [
+      "clm-city-ahd-units",
+      "clm-city-ahd-rent",
+      "clm-city-ahd-vacancy",
+      "clm-city-ahd-talent"
+    ]
+  }
+]

@@ -1,0 +1,261 @@
+[
+  {
+    "id": "state-ka",
+    "name": "Karnataka",
+    "policy": {
+      "policy_name": "Karnataka Global Capability Centres (GCC) Policy 2024-2029",
+      "period": "2024-2029",
+      "source_id": "src-kar-policy",
+      "last_checked": "2026-10-21",
+      "incentives": [
+        {
+          "type": "capex_subsidy",
+          "description": "Capital expenditure reimbursement of up to 20% on eligible fixed assets (hardware, servers, labs) capped at ₹15 Crore for 'Beyond Bengaluru' clusters (Mysuru, Hubballi-Dharwad, Mangaluru, Belagavi).",
+          "amount_or_rate": "Up to 20% capped at ₹15 Cr",
+          "conditions": "Minimum employment of 200 skilled professionals; facility located in designated Beyond Bengaluru clusters.",
+          "source_id": "src-kar-policy"
+        },
+        {
+          "type": "rent",
+          "description": "Lease rental subsidy of 50% for up to 3 years capped at ₹15 per sq ft per month for GCC operations outside Bengaluru Urban.",
+          "amount_or_rate": "50% up to ₹15/sqft/month",
+          "conditions": "Must be located in government-approved IT parks or Tier-2 tech zones; valid for 36 months.",
+          "source_id": "src-kar-policy"
+        },
+        {
+          "type": "stamp_duty",
+          "description": "100% exemption on stamp duty and registration charges on first lease or sale deed of office/lab space in Beyond Bengaluru districts.",
+          "amount_or_rate": "100% waiver",
+          "conditions": "Applicable on long-term lease or purchase of IT/GCC campus space in designated zones.",
+          "source_id": "src-kar-policy"
+        },
+        {
+          "type": "power",
+          "description": "Electricity duty exemption for a period of 5 years from the date of commercial operations for new GCC investments.",
+          "amount_or_rate": "100% exemption for 5 years",
+          "conditions": "Sanctioned connected load exceeding 250 kVA; continuous commercial occupancy.",
+          "source_id": "src-kar-policy"
+        },
+        {
+          "type": "skilling",
+          "description": "Skilling incentive of ₹10,000 per local Karnataka graduate trainee hired into specialized R&D or engineering roles, up to ₹20 Lakh per enterprise.",
+          "amount_or_rate": "₹10,000 per hire up to ₹20 Lakh",
+          "conditions": "Employee retained for at least 12 months; trained through accredited state finishing schools.",
+          "source_id": "src-kar-policy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "state-tn",
+    "name": "Tamil Nadu",
+    "policy": {
+      "policy_name": "Tamil Nadu R&D and GCC Policy 2024-2027",
+      "period": "2024-2027",
+      "source_id": "src-tn-policy",
+      "last_checked": "2026-10-21",
+      "incentives": [
+        {
+          "type": "capex_subsidy",
+          "description": "R&D fixed asset subsidy of up to 25% on testing equipment, specialized computing clusters, and prototype fabrication tools, capped at ₹25 Crore.",
+          "amount_or_rate": "25% up to ₹25 Cr",
+          "conditions": "Minimum R&D investment of ₹50 Crore or creation of 250+ full-time engineering jobs.",
+          "source_id": "src-tn-policy"
+        },
+        {
+          "type": "stamp_duty",
+          "description": "100% stamp duty exemption in Tier-2/Tier-3 locations (Coimbatore, Madurai, Tiruchirappalli) and 50% exemption in Chennai metropolitan area.",
+          "amount_or_rate": "100% Tier-2 / 50% Chennai",
+          "conditions": "Applicable on registered commercial lease of minimum 5 years duration.",
+          "source_id": "src-tn-policy"
+        },
+        {
+          "type": "skilling",
+          "description": "Payroll subsidy for women and advanced PhD/Master researchers: ₹20,000 per month per researcher for 12 months.",
+          "amount_or_rate": "₹20,000/mo/researcher for 12 mos",
+          "conditions": "Focus in advanced materials, automotive embedded software, AI, semiconductor design.",
+          "source_id": "src-tn-policy"
+        },
+        {
+          "type": "power",
+          "description": "Green energy tariff rebate of 10% for GCCs procuring verified renewable power through open access.",
+          "amount_or_rate": "10% tariff rebate",
+          "conditions": "Minimum 50% power consumption sourced from non-fossil renewable energy.",
+          "source_id": "src-tn-policy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "state-tg",
+    "name": "Telangana",
+    "policy": {
+      "policy_name": "Telangana ICT and GCC Growth Framework Policy",
+      "period": "2023-2028",
+      "source_id": "src-tg-policy",
+      "last_checked": "2026-10-21",
+      "incentives": [
+        {
+          "type": "stamp_duty",
+          "description": "100% reimbursement of stamp duty and transfer duty paid on sale/lease deeds for IT/GCC campus space in Hyderabad Knowledge Corridor and Tier-2 hubs (Warangal, Karimnagar).",
+          "amount_or_rate": "100% reimbursement",
+          "conditions": "Single-window TS-iPASS approval; occupancy within 18 months of execution.",
+          "source_id": "src-tg-policy"
+        },
+        {
+          "type": "power",
+          "description": "Industrial power tariff parity (rebate of ₹1.50 per unit over commercial grid rates) for captive data centres and AI engineering hubs.",
+          "amount_or_rate": "₹1.50/unit tariff discount",
+          "conditions": "Designated captive engineering lab with power contract >500 kVA.",
+          "source_id": "src-tg-policy"
+        },
+        {
+          "type": "skilling",
+          "description": "TASK (Telangana Academy for Skill and Knowledge) co-funding: 50% reimbursement of cost of specialized AI/ML certification courses, up to ₹15,000 per employee.",
+          "amount_or_rate": "50% cost up to ₹15,000/head",
+          "conditions": "Candidate must be a domicile graduate trained under state-partnered curriculum.",
+          "source_id": "src-tg-policy"
+        },
+        {
+          "type": "opex_subsidy",
+          "description": "Special Tier-2 operational assistance: ₹10,000 per desk per year for first 3 years in Tier-2 innovation districts outside Hyderabad Outer Ring Road.",
+          "amount_or_rate": "₹10,000/desk/year for 3 yrs",
+          "conditions": "Minimum 100 workstations operational for at least 12 consecutive months.",
+          "source_id": "src-tg-policy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "state-mh",
+    "name": "Maharashtra",
+    "policy": {
+      "policy_name": "Maharashtra Information Technology & IT Enabled Services (IT/ITeS) Policy 2023",
+      "period": "2023-2028",
+      "source_id": "src-mh-policy",
+      "last_checked": "2026-10-21",
+      "incentives": [
+        {
+          "type": "stamp_duty",
+          "description": "Exemption from payment of Stamp Duty ranging from 75% to 100% depending on zone classification (Zone II including Pune / Navi Mumbai gets 75-100%).",
+          "amount_or_rate": "75% to 100% waiver",
+          "conditions": "Establishment in approved IT Park; compliance with Directorate of Industries registration.",
+          "source_id": "src-mh-policy"
+        },
+        {
+          "type": "power",
+          "description": "Electricity tariff at industrial rates rather than commercial rates; electricity duty exemption for 10 years in emerging tech clusters.",
+          "amount_or_rate": "Industrial rate parity + 10 yr ED exemption",
+          "conditions": "Continuous operation; registered under Maharashtra IT Policy portal.",
+          "source_id": "src-mh-policy"
+        },
+        {
+          "type": "other",
+          "description": "Additional Floor Space Index (FSI) up to 200% over base permissible limit for IT/GCC buildings upon payment of premium.",
+          "amount_or_rate": "Up to 200% additional FSI",
+          "conditions": "Subject to municipal town planning regulations and dedicated IT occupancy covenant.",
+          "source_id": "src-mh-policy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "state-gj",
+    "name": "Gujarat",
+    "policy": {
+      "policy_name": "Gujarat IT/ITeS Policy 2022-27 and GIFT City Special Guidelines",
+      "period": "2022-2027",
+      "source_id": "src-gj-policy",
+      "last_checked": "2026-10-21",
+      "incentives": [
+        {
+          "type": "capex_subsidy",
+          "description": "Capital expenditure assistance of up to 25% of eligible fixed capex capped at ₹50 Crore for mega IT/GCC projects investing >₹50 Crore.",
+          "amount_or_rate": "25% capex up to ₹50 Cr",
+          "conditions": "Project with minimum fixed capital investment of ₹50 Crore or direct employment of 500+ persons.",
+          "source_id": "src-gj-policy"
+        },
+        {
+          "type": "opex_subsidy",
+          "description": "Operational assistance of 15% of annual operating expenditure (leases, bandwidth, cloud) capped at ₹5 Crore per year for 5 years.",
+          "amount_or_rate": "15% opex up to ₹5 Cr/year for 5 yrs",
+          "conditions": "Operational within Gujarat or GIFT City SEZ/Domestic Tariff Area (DTA).",
+          "source_id": "src-gj-policy"
+        },
+        {
+          "type": "stamp_duty",
+          "description": "100% reimbursement of stamp duty and registration fees paid on lease/sale deed.",
+          "amount_or_rate": "100% reimbursement",
+          "conditions": "One-time benefit on initial commercial real estate acquisition.",
+          "source_id": "src-gj-policy"
+        },
+        {
+          "type": "power",
+          "description": "Power tariff subsidy of ₹1 per unit for 5 years, plus 100% electricity duty exemption for 5 years.",
+          "amount_or_rate": "₹1/unit subsidy + 100% ED waiver",
+          "conditions": "Units operating in notified IT hubs and GIFT SEZ/DTA.",
+          "source_id": "src-gj-policy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "state-up",
+    "name": "Uttar Pradesh",
+    "policy": {
+      "policy_name": "Uttar Pradesh IT & GCC Policy 2024",
+      "period": "2024-2029",
+      "source_id": "src-up-policy",
+      "last_checked": "2026-10-21",
+      "incentives": [
+        {
+          "type": "capex_subsidy",
+          "description": "Capital subsidy of 25% on eligible fixed capital investment up to ₹20 Crore for GCC setups in Noida, Greater Noida, and Yamuna Expressway corridor.",
+          "amount_or_rate": "25% up to ₹20 Cr",
+          "conditions": "Minimum investment of ₹20 Cr and employment commitment of 200+ IT engineers.",
+          "source_id": "src-up-policy"
+        },
+        {
+          "type": "stamp_duty",
+          "description": "100% stamp duty exemption on purchase or lease of land/space for GCCs in Noida and Yamuna Expressway zones.",
+          "amount_or_rate": "100% exemption",
+          "conditions": "Land allotment through YEIDA or NOIDA authority with bank guarantee.",
+          "source_id": "src-up-policy"
+        },
+        {
+          "type": "skilling",
+          "description": "Recruitment assistance of ₹20,000 per newly hired engineering graduate domiciled in Uttar Pradesh.",
+          "amount_or_rate": "₹20,000 per UP domiciled hire",
+          "conditions": "Continuous employment for at least 18 months.",
+          "source_id": "src-up-policy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "state-ap",
+    "name": "Andhra Pradesh",
+    "policy": {
+      "policy_name": "Andhra Pradesh Information Technology Policy 4.0",
+      "period": "2024-2029",
+      "source_id": "src-ap-policy",
+      "last_checked": "2026-10-21",
+      "incentives": [
+        {
+          "type": "rent",
+          "description": "Plug-and-play office rental subsidy of ₹12 per sq ft per month for 3 years in Visakhapatnam IT corridors (Madhurawada, Rushikonda).",
+          "amount_or_rate": "₹12/sqft/mo for 3 yrs",
+          "conditions": "Establishment of captive software or analytics centre creating at least 50 jobs.",
+          "source_id": "src-ap-policy"
+        },
+        {
+          "type": "power",
+          "description": "Subsidized power tariff of ₹4.50 per unit flat rate for 5 years.",
+          "amount_or_rate": "Flat ₹4.50/unit for 5 yrs",
+          "conditions": "Designated tech unit in state IT parks.",
+          "source_id": "src-ap-policy"
+        }
+      ]
+    }
+  }
+]

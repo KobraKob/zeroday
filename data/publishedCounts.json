@@ -1,0 +1,74 @@
+[
+  {
+    "id": "pub-zinnov-fy26",
+    "publisher": "nasscom-Zinnov India GCC Landscape 2025/26",
+    "headline_count": "2,117 GCCs (3,728 units)",
+    "count_value": 2117,
+    "unit_claimed": "Parent GCCs and centre units",
+    "unit_type": "parent_company",
+    "as_of": "FY2026 (May 2026)",
+    "source_id": "src-bt-zinnov-fy26",
+    "note": "Milestone report: India crosses 2,100 GCC milestone 4 years ahead of 2030 vision. Cites 2,117 parent GCC enterprises operating 3,728 physical units nationwide.",
+    "definition_known": true
+  },
+  {
+    "id": "pub-zinnov-fy24",
+    "publisher": "nasscom-Zinnov India GCC 4.0 Study",
+    "headline_count": "1,700+ GCCs (2,975 units)",
+    "count_value": 1700,
+    "unit_claimed": "Parent GCCs and centre units",
+    "unit_type": "parent_company",
+    "as_of": "FY2024 (Sep 2024)",
+    "source_id": "src-theprint-zinnov-fy24",
+    "note": "Benchmarks India's GCC ecosystem at 1,700+ enterprises, 2,975 centre units, generating $64.6B in annual value and employing 1.66M professionals.",
+    "definition_known": true
+  },
+  {
+    "id": "pub-aim-explorer",
+    "publisher": "AIM Research GCC Explorer",
+    "headline_count": "~1,400 GCCs",
+    "count_value": 1400,
+    "unit_claimed": "Unspecified (Tech & Analytics Focused)",
+    "unit_type": "unknown",
+    "as_of": "2026 Current",
+    "source_id": "src-aim-explorer",
+    "note": "Tracks verified AI, data analytics, and high-complexity technology engineering captive centres. Restrictive criteria focus primarily on deep tech captives.",
+    "definition_known": false
+  },
+  {
+    "id": "pub-gcc-journal",
+    "publisher": "GCC Journal Directory",
+    "headline_count": "1,700+ GCCs",
+    "count_value": 1700,
+    "unit_claimed": "Compiled Directory of Indian Captives",
+    "unit_type": "unknown",
+    "as_of": "2026 Annual",
+    "source_id": "src-gcc-journal",
+    "note": "Aggregated trade directory listing corporate entities and operational captive centres across Tier-1 and Tier-2 Indian hubs.",
+    "definition_known": false
+  },
+  {
+    "id": "pub-oceanfrogs-intel",
+    "publisher": "OceanFrogs Market Intelligence",
+    "headline_count": "2,100+ to 2,800+ GCCs",
+    "count_value": 2450,
+    "unit_claimed": "Global Companies with India Engineering/Operations Footprint",
+    "unit_type": "unknown",
+    "as_of": "2026 Current",
+    "source_id": "src-oceanfrogs",
+    "note": "Broader detection rule tracking all foreign headquarters with direct engineering personnel or subsidiaries in India.",
+    "definition_known": false
+  },
+  {
+    "id": "pub-flexiple-stats",
+    "publisher": "Flexiple GCC Intelligence Hub",
+    "headline_count": "Analytical Comparative Review",
+    "count_value": 1900,
+    "unit_claimed": "Cross-benchmark Meta Analysis",
+    "unit_type": "unknown",
+    "as_of": "August 2026",
+    "source_id": "src-flexiple-stats",
+    "note": "Notes divergence across primary sources: reports frequently conflate parent company counts with multi-city physical centre units.",
+    "definition_known": true
+  }
+]

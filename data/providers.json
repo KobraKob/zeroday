@@ -1,0 +1,158 @@
+[
+  {
+    "id": "prov-jll",
+    "slug": "jll-india",
+    "name": "JLL India (Jones Lang LaSalle)",
+    "category": "real_estate",
+    "cities": ["Bengaluru", "Hyderabad", "Mumbai", "Pune", "Chennai", "Gurugram"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Transacted over 15M+ sq ft of Grade A commercial office space for GCCs in 2024-2025",
+      "Full lifecycle workplace strategy, fit-out project management, and lease restructuring",
+      "Comprehensive green building certification and ESG advisory for multinational occupiers"
+    ]
+  },
+  {
+    "id": "prov-cbre",
+    "slug": "cbre-india",
+    "name": "CBRE South Asia",
+    "category": "real_estate",
+    "cities": ["Bengaluru", "Hyderabad", "Mumbai", "Noida", "Gurugram", "Chennai", "Pune"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Largest commercial advisory advisory footprint across Tier-1 and emerging Tier-2 Indian hubs",
+      "Adviser on campus acquisition for marquee aerospace, tech, and financial enterprises",
+      "Proprietary workplace analytics benchmarking occupancy metrics across GCC clusters"
+    ]
+  },
+  {
+    "id": "prov-cw",
+    "slug": "cushman-wakefield-india",
+    "name": "Cushman & Wakefield India",
+    "category": "real_estate",
+    "cities": ["Bengaluru", "Hyderabad", "Pune", "Mumbai", "Chennai", "Gurugram"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Tenant representation specialist with dedicated GCC and Data Centre advisory practice",
+      "Market intelligence publisher covering commercial lease absorption across 8 primary cities",
+      "Turnkey project and development services for high-density engineering environments"
+    ]
+  },
+  {
+    "id": "prov-ansr",
+    "slug": "ansr-consulting",
+    "name": "ANSR",
+    "category": "bot",
+    "cities": ["Bengaluru", "Hyderabad"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Pioneer in establishing over 120 GCCs in India via Build-Operate-Transfer (BOT) model",
+      "End-to-end design, corporate entity structuring, talent acquisition, and facility fit-out",
+      "Curated ecosystem of co-working spaces and workspace technology partnerships"
+    ]
+  },
+  {
+    "id": "prov-zinnov",
+    "slug": "zinnov-consulting",
+    "name": "Zinnov Management Consulting",
+    "category": "advisory",
+    "cities": ["Bengaluru", "Gurugram", "Hyderabad", "Pune"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Premier management consulting authority on global capability center strategy and transformation",
+      "Annual co-author of the flagship nasscom-Zinnov India GCC Landscape report",
+      "Benchmarking compensation, talent pyramids, and maturity models for 500+ multinational firms"
+    ]
+  },
+  {
+    "id": "prov-trilegal",
+    "slug": "trilegal",
+    "name": "Trilegal",
+    "category": "legal",
+    "cities": ["Bengaluru", "Mumbai", "Gurugram"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Leading Indian corporate law firm specializing in inward FDI and transfer pricing frameworks",
+      "Comprehensive advisory on SEZ/STPI approvals, labor law compliance, and cross-border IP licensing",
+      "Structuring Indian wholly owned subsidiaries for global Fortune 500 enterprises"
+    ]
+  },
+  {
+    "id": "prov-khaitan",
+    "slug": "khaitan-and-co",
+    "name": "Khaitan & Co",
+    "category": "legal",
+    "cities": ["Bengaluru", "Mumbai", "Noida", "Chennai"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Tier-1 full service law firm with specialized corporate governance and real estate practice",
+      "Advising multinational boards on Companies Act statutory compliances and director fiduciary liability",
+      "Drafting commercial lease deeds, employment contracts, and IP assignment documentation"
+    ]
+  },
+  {
+    "id": "prov-ey",
+    "slug": "ey-india",
+    "name": "EY India (Ernst & Young)",
+    "category": "advisory",
+    "cities": ["Bengaluru", "Hyderabad", "Mumbai", "Gurugram", "Chennai", "Pune", "Kolkata"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Turnkey GCC advisory across tax structuring, entity incorporation, and operational blueprinting",
+      "Transfer pricing documentation, BEPS compliance, and APA (Advance Pricing Agreement) filings",
+      "Global shared services technology implementation and ERP deployment"
+    ]
+  },
+  {
+    "id": "prov-pwc",
+    "slug": "pwc-india",
+    "name": "PwC India (Price Waterhouse & Co)",
+    "category": "audit",
+    "cities": ["Bengaluru", "Hyderabad", "Mumbai", "Gurugram", "Chennai", "Pune", "Ahmedabad"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "End-to-end statutory audit, risk assurance, and forensic investigation services",
+      "State government policy incentive advisory and application support",
+      "Digital transformation, cloud migration, and cyber risk advisory for captive operations"
+    ]
+  },
+  {
+    "id": "prov-deloitte",
+    "slug": "deloitte-india",
+    "name": "Deloitte Touche Tohmatsu India",
+    "category": "advisory",
+    "cities": ["Hyderabad", "Bengaluru", "Mumbai", "Gurugram", "Chennai", "Pune", "Coimbatore"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Comprehensive GCC accelerator supporting rapid scaling from day 1 to 1,000+ engineers",
+      "Human capital strategy, talent acquisition, and workforce retention frameworks",
+      "Regulatory reporting, statutory compliance audits, and tax optimization"
+    ]
+  },
+  {
+    "id": "prov-teamlease",
+    "slug": "teamlease-digital",
+    "name": "TeamLease Digital",
+    "category": "recruitment",
+    "cities": ["Bengaluru", "Hyderabad", "Pune", "Chennai", "Mumbai", "Noida"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Specialized tech staffing and specialized GCC contract-to-hire recruitment",
+      "Niche lateral hiring across generative AI, data engineering, and automotive embedded tech",
+      "Comprehensive compensation benchmarks and talent market mapping across 12 Indian cities"
+    ]
+  },
+  {
+    "id": "prov-nlb",
+    "slug": "nlb-services",
+    "name": "NLB Services",
+    "category": "recruitment",
+    "cities": ["Noida", "Bengaluru", "Hyderabad", "Chennai"],
+    "claim_ids": [],
+    "marketed_claims": [
+      "Global technology talent solutions specializing in captive capability center scale-up",
+      "Dedicated recruitment pipelines for Tier-2 tech hubs (Coimbatore, Ahmedabad, Chandigarh)",
+      "High-volume executive search and mid-to-senior technical leadership placements"
+    ]
+  }
+]

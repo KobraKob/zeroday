@@ -1,0 +1,189 @@
+[
+  {
+    "id": "proof-jll-google",
+    "provider_id": "prov-jll",
+    "gcc_id": "gcc-google",
+    "service": "Commercial Real Estate Tenant Representation & Campus Leasing",
+    "year": 2024,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "press",
+        "source_id": "src-cushman-jll-deal-2025",
+        "excerpt_summary": "JLL India represented Google in negotiating 1.3 million sq ft long-term commercial lease transaction at Bagmane Rio Business Park in Bengaluru."
+      },
+      {
+        "kind": "lease",
+        "source_id": "src-jll-office-2026",
+        "excerpt_summary": "Sub-registrar office deed registration for Bagmane Rio corporate lease agreement registered in 2024."
+      }
+    ]
+  },
+  {
+    "id": "proof-cbre-boeing",
+    "provider_id": "prov-cbre",
+    "gcc_id": "gcc-boeing",
+    "service": "Campus Site Selection & Project Management",
+    "year": 2023,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "press",
+        "source_id": "src-boeing-bietc",
+        "excerpt_summary": "CBRE South Asia advised Boeing India on land acquisition and developer coordination for 43-acre campus at Devanahalli BIETC aerospace park."
+      }
+    ]
+  },
+  {
+    "id": "proof-ansr-target",
+    "provider_id": "prov-ansr",
+    "gcc_id": "gcc-target",
+    "service": "Build-Operate-Transfer Incubation & Capability Scaling",
+    "year": 2012,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "case_study",
+        "source_id": "src-ansr-quarterly",
+        "excerpt_summary": "ANSR corporate case study detailing the initial incubation and team scale-up for Target in India at Manyata Embassy Business Park."
+      }
+    ]
+  },
+  {
+    "id": "proof-ansr-lowes",
+    "provider_id": "prov-ansr",
+    "gcc_id": "gcc-lowes",
+    "service": "Turnkey GCC Launch & Facility Setup",
+    "year": 2014,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "case_study",
+        "source_id": "src-ansr-quarterly",
+        "excerpt_summary": "ANSR advisory documentation on the 2014 establishment and entity onboarding of Lowe's Innovation Hub in Bengaluru."
+      }
+    ]
+  },
+  {
+    "id": "proof-zinnov-schneider",
+    "provider_id": "prov-zinnov",
+    "gcc_id": "gcc-schneider",
+    "service": "R&D Organization Design & Talent Benchmark",
+    "year": 2024,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "press",
+        "source_id": "src-bizofgcc-mega-leasing",
+        "excerpt_summary": "Zinnov consulting engagement highlighted in industry profile for structuring Schneider Electric's high-performance engineering hub."
+      }
+    ]
+  },
+  {
+    "id": "proof-trilegal-walmart",
+    "provider_id": "prov-trilegal",
+    "gcc_id": "gcc-walmart",
+    "service": "Corporate Legal Structuring & Regulatory Compliance",
+    "year": 2022,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "case_study",
+        "source_id": "src-trilegal-gcc-advisory",
+        "excerpt_summary": "Trilegal advisory on corporate restructuring and multi-jurisdictional compliance for Walmart Global Tech Indian legal entities."
+      }
+    ]
+  },
+  {
+    "id": "proof-khaitan-amex",
+    "provider_id": "prov-khaitan",
+    "gcc_id": "gcc-amex",
+    "service": "Commercial Lease Agreement Review & Title Diligence",
+    "year": 2023,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "case_study",
+        "source_id": "src-khaitan-gcc",
+        "excerpt_summary": "Khaitan & Co advised on real estate documentation and town planning approvals for American Express campus in Sector 74A Gurugram."
+      }
+    ]
+  },
+  {
+    "id": "proof-teamlease-bosch",
+    "provider_id": "prov-teamlease",
+    "gcc_id": "gcc-bosch",
+    "service": "Automotive Embedded Software Talent Pipeline",
+    "year": 2025,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "press",
+        "source_id": "src-teamlease-gcc-hiring",
+        "excerpt_summary": "TeamLease Digital lateral engineering hiring partnership with Bosch Global Software Technologies (BGSW) across Bengaluru and Coimbatore."
+      }
+    ]
+  },
+  {
+    "id": "proof-cw-jpmorgan",
+    "provider_id": "prov-cw",
+    "gcc_id": "gcc-jpmorgan",
+    "service": "Workplace Project Management & Leased Space Consolidation",
+    "year": 2024,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "press",
+        "source_id": "src-cw-office-2026",
+        "excerpt_summary": "Cushman & Wakefield project management services for JPMorgan Chase high-density trading and tech floor fit-outs in Bengaluru."
+      }
+    ]
+  },
+  {
+    "id": "proof-deloitte-astrazeneca",
+    "provider_id": "prov-deloitte",
+    "gcc_id": "gcc-astrazeneca",
+    "service": "Clinical Systems Cloud Assurance & Process Optimization",
+    "year": 2024,
+    "status": "public",
+    "evidence": [
+      {
+        "kind": "case_study",
+        "source_id": "src-ansr-quarterly",
+        "excerpt_summary": "Deloitte advisory engagement covering compliance verification for clinical data management workflows at AstraZeneca Chennai GITC."
+      }
+    ]
+  },
+  {
+    "id": "proof-demo-nlb-sap",
+    "provider_id": "prov-nlb",
+    "gcc_id": "gcc-sap",
+    "service": "GenAI Talent Cohort Recruitment Program",
+    "year": 2026,
+    "status": "attested",
+    "demo": true,
+    "evidence": [
+      {
+        "kind": "attestation",
+        "source_id": "src-nlb-gcc-report",
+        "excerpt_summary": "Attested talent recruitment engagement for second SAP Labs Devanahalli campus setup (Flagged Demo Data for prototype verification)."
+      }
+    ]
+  },
+  {
+    "id": "proof-demo-pwc-shell",
+    "provider_id": "prov-pwc",
+    "gcc_id": "gcc-shell",
+    "service": "ESG & Green Energy Tariff Advisory",
+    "year": 2025,
+    "status": "public",
+    "demo": true,
+    "evidence": [
+      {
+        "kind": "case_study",
+        "source_id": "src-kar-policy",
+        "excerpt_summary": "Advisory on open access renewable power procurement for Shell Technology Centre Bangalore campus (Flagged Demo Data)."
+      }
+    ]
+  }
+]

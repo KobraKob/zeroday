@@ -1,0 +1,48 @@
+[
+  {
+    "id": "def-parent",
+    "label": "Parent Companies (Global Enterprises)",
+    "unit": "parent_company",
+    "rule_text": "Counts distinct multinational corporations having one or more captive capability centres in India, regardless of how many domestic legal entities or campus locations they operate.",
+    "includes": [
+      "Wholly owned captive tech and operations centres",
+      "R&D centres owned by foreign parent companies",
+      "Global business service (GBS) units of multinational corporations"
+    ],
+    "excludes": [
+      "Third-party IT services and BPO vendors (e.g. TCS, Infosys, Wipro)",
+      "Domestic Indian enterprises without foreign parentage",
+      "Multiple subsidiary entities under the same ultimate global parent"
+    ]
+  },
+  {
+    "id": "def-entity",
+    "label": "Legal Entities (RoC / CIN Registrations)",
+    "unit": "legal_entity",
+    "rule_text": "Counts distinct legal corporate entities incorporated in India under the Companies Act with a unique Corporate Identification Number (CIN) or registered as a foreign branch office.",
+    "includes": [
+      "Distinct Indian incorporated private/public limited subsidiaries of multinational parents",
+      "Separate legal entities created by the same parent for software, shared services, and IP holding",
+      "Branch offices registered with Ministry of Corporate Affairs (MCA)"
+    ],
+    "excludes": [
+      "Branch campus offices that operate under an existing incorporated company",
+      "Representative liaison offices not permitted to conduct commercial operations"
+    ]
+  },
+  {
+    "id": "def-centre",
+    "label": "Operational Centre Units (City Campuses)",
+    "unit": "centre_unit",
+    "rule_text": "Counts each physical operational campus, facility, or distinct municipal city footprint established by a GCC entity.",
+    "includes": [
+      "Each dedicated city campus or leased facility exceeding 25,000 sq ft or 100+ seats",
+      "Multi-city footprint of the same parent (e.g. Bengaluru campus + Hyderabad campus = 2 units)",
+      "Co-located specialized labs (e.g. AI lab, automotive test track) operated as distinct centres"
+    ],
+    "excludes": [
+      "Temporary serviced-office hot desks or co-working day passes",
+      "Sales or representative liaison suites"
+    ]
+  }
+]

@@ -1,0 +1,159 @@
+[
+  {
+    "id": "chk-entity",
+    "stage": "entity_formation",
+    "title": "Corporate Entity & Regulatory Setup",
+    "description": "Statutory steps required under Ministry of Corporate Affairs (MCA), RBI Foreign Exchange Management Act (FEMA), and direct taxation.",
+    "items": [
+      {
+        "step": "1. Name Approval & SPICe+ Part A",
+        "title": "Reserve Corporate Entity Name",
+        "description": "Apply for corporate name reservation via MCA SPICe+ portal ensuring compliance with Rule 8 of Companies (Incorporation) Rules.",
+        "official_url": "https://www.mca.gov.in/content/mca/global/en/home.html",
+        "timeline": "3 to 5 business days",
+        "mandatory": true
+      },
+      {
+        "step": "2. Digital Signature (DSC) & Director Identification (DIN)",
+        "title": "Procure Class-3 DSC & DIN for Directors",
+        "description": "Obtain Class 3 Digital Signature Certificates and DINs for proposed India resident and non-resident directors.",
+        "official_url": "https://www.mca.gov.in/content/mca/global/en/home.html",
+        "timeline": "2 to 4 business days",
+        "mandatory": true
+      },
+      {
+        "step": "3. SPICe+ Part B Incorporation Filing",
+        "title": "Submit Articles of Association & Memorandum",
+        "description": "Integrated filing for Certificate of Incorporation (CoI), PAN, TAN, EPFO, ESIC, and Profession Tax registration in a single submission.",
+        "official_url": "https://www.mca.gov.in/content/mca/global/en/home.html",
+        "timeline": "7 to 10 business days",
+        "mandatory": true
+      },
+      {
+        "step": "4. Bank Account & RBI FCGPR Reporting",
+        "title": "Foreign Inward Remittance & RBI Equity Allocation",
+        "description": "Inject paid-up foreign capital into Indian authorized dealer bank; submit Form FC-GPR to the Reserve Bank of India via FIRMS portal within 30 days.",
+        "official_url": "https://firms.rbi.org.in/",
+        "timeline": "14 to 30 days after incorporation",
+        "mandatory": true
+      },
+      {
+        "step": "5. GST & Transfer Pricing Framework",
+        "title": "Goods and Services Tax & Inter-Company Master Agreement",
+        "description": "Register for state GST; establish arm's length inter-company service agreement (typically Cost Plus 12-18% under safe harbor guidelines).",
+        "official_url": "https://www.gst.gov.in/",
+        "timeline": "10 to 14 business days",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "id": "chk-location",
+    "stage": "real_estate",
+    "title": "Real Estate & Campus Selection",
+    "description": "From search to lease execution, power connectivity, and turnkey workplace fit-outs.",
+    "items": [
+      {
+        "step": "1. Micro-Market & Tech Corridor Shortlisting",
+        "title": "Target Cluster Identification",
+        "description": "Evaluate micro-markets based on talent commute radius, metro transit accessibility, and power redundancy (e.g. ORR Bengaluru vs Financial District Hyderabad).",
+        "official_url": "https://karnataka.gov.in/itbt/",
+        "timeline": "2 to 4 weeks",
+        "mandatory": true
+      },
+      {
+        "step": "2. RFP Issuance & Title Diligence",
+        "title": "Commercial Developer RFP & Legal Verification",
+        "description": "Issue RFP to Grade A institutional tech park developers (Embassy, RMZ, Brookfield, Mindspace); perform title search and occupancy certificate (OC) checks.",
+        "timeline": "4 to 6 weeks",
+        "mandatory": true
+      },
+      {
+        "step": "3. Agreement to Lease (AtL) & Fit-Out Permitting",
+        "title": "Execute Lease Deed & Obtain Fit-out Clearances",
+        "description": "Execute registered lease deed, remit applicable stamp duty (utilizing state policy exemptions if applicable), and secure municipal fire NOC and environmental clearance.",
+        "timeline": "3 to 5 weeks",
+        "mandatory": true
+      },
+      {
+        "step": "4. High-Density IT Fit-Out & MEP Commissioning",
+        "title": "Workplace Fit-out, Data Labs, and Dual UPS Power",
+        "description": "Construct workstations, acoustic conference suites, server rooms with dual UPS backup and precision air conditioning.",
+        "timeline": "8 to 16 weeks",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "id": "chk-talent",
+    "stage": "talent_hiring",
+    "title": "Talent Acquisition & People Operations",
+    "description": "Leadership recruitment, employer branding, compensation bands, and employment law compliances.",
+    "items": [
+      {
+        "step": "1. Appoint India Managing Director / Center Head",
+        "title": "Anchor Leadership Executive Search",
+        "description": "Recruit senior GCC leader with proven track record in standing up capability centres and establishing local credibility with global stakeholders.",
+        "timeline": "8 to 12 weeks",
+        "mandatory": true
+      },
+      {
+        "step": "2. Define Talent Pyramids & Compensation Bands",
+        "title": "Benchmarking Salary & Equity Incentive Plans",
+        "description": "Calibrate compensation against local peers (accounting for the 15-22% GCC premium) and configure cross-border stock option (RSU/ESOP) compliance under Indian tax law.",
+        "timeline": "2 to 3 weeks",
+        "mandatory": true
+      },
+      {
+        "step": "3. Foundation Engineering Cohort Hiring",
+        "title": "Initial 25-50 Senior Engineers & Principal Architects",
+        "description": "Execute specialized lateral recruiting sprints for core engineering teams before initiating campus or high-volume hiring.",
+        "timeline": "6 to 10 weeks",
+        "mandatory": true
+      },
+      {
+        "step": "4. Local Statutory Employment Compliance",
+        "title": "POSH Committee, Gratuity Trust & Standing Orders",
+        "description": "Form Prevention of Sexual Harassment (POSH) internal committee, configure statutory Gratuity trust, and establish local employment contracts.",
+        "timeline": "Parallel with first hire",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "id": "chk-vendors",
+    "stage": "vendor_selection",
+    "title": "Provider Ecosystem & Vendor Selection",
+    "description": "Contracting specialized service providers across real estate, legal, audit, payroll, and facility management.",
+    "items": [
+      {
+        "step": "1. Corporate Legal & Tax Counsel",
+        "title": "Retain Tier-1 Indian Law Firm",
+        "description": "Engage counsel for day-to-day statutory advisory, board minutes, foreign exchange filings, and labor dispute representation.",
+        "timeline": "Pre-incorporation",
+        "mandatory": true
+      },
+      {
+        "step": "2. Statutory Auditor & Tax Advisory Firm",
+        "title": "Appoint Statutory Auditors",
+        "description": "Select accredited audit firm (under Companies Act Section 139) and transfer pricing advisory partner.",
+        "timeline": "Within 30 days of incorporation",
+        "mandatory": true
+      },
+      {
+        "step": "3. Payroll, EOR & Benefits Administration",
+        "title": "Select Payroll Engine & Group Health Insurance Provider",
+        "description": "Deploy local payroll engine (handling TDS, PF, ESI deductions) and procure corporate group medical insurance (minimum ₹5-10 Lakh family cover standard).",
+        "timeline": "2 to 4 weeks prior to first hire",
+        "mandatory": true
+      },
+      {
+        "step": "4. Facility Management & Corporate Security",
+        "title": "Physical Security, Transport & Pantry Operations",
+        "description": "Contract accredited Integrated Facility Management (IFM) partner with 24/7 security guard force and employee transport logistics.",
+        "timeline": "4 weeks prior to campus move-in",
+        "mandatory": true
+      }
+    ]
+  }
+]

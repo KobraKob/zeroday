@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Crisp Institutional Ledger & Architectural Atlas Palette */
+  --color-paper: #F8FAFC;          /* Pristine cool off-white canvas (Slate 50) */
+  --color-surface: #FFFFFF;        /* Pure white paper cards and sheets */
+  --color-ink: #0F172A;            /* Deep slate carbon ink (Slate 900) */
+  --color-muted: #475569;          /* High-legibility slate muted ink (Slate 600) */
+  --color-hairline: #E2E8F0;       /* Razor hairline rules (Slate 200) */
+  --color-hairline-subtle: #F1F5F9;/* Subtle dividers (Slate 100) */
+
+  /* Signature Accents */
+  --color-verdigris: #0F766E;        /* Deep academic verdigris teal (Teal 700) */
+  --color-verdigris-hover: #115E59;  /* Deepened verdigris (Teal 800) */
+  --color-verdigris-subtle: #F0FDFA; /* Soft verdigris wash (Teal 50) */
+  --color-vermilion: #DC2626;        /* Sharp statutory vermilion (Red 600) */
+  --color-vermilion-subtle: #FEF2F2; /* Soft vermilion wash (Red 50) */
+
+  /* Typography */
+  --font-display: "Newsreader", "Fraunces", "Georgia", "Cambria", serif;
+  --font-body: "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* Shadows */
+  --shadow-panel: -6px 0 28px rgba(15, 23, 42, 0.08);
+  --shadow-sheet: 0 -8px 32px rgba(15, 23, 42, 0.12);
+}
+
+.dark {
+  /* Obsidian Deep Archival Dark Palette */
+  --color-paper: #0B0F17;          /* Obsidian canvas */
+  --color-surface: #111827;        /* Crisp dark slate cards */
+  --color-ink: #F8FAFC;            /* Crisp off-white */
+  --color-muted: #94A3B8;          /* Slate 400 */
+  --color-hairline: #1E293B;       /* Slate 800 */
+  --color-hairline-subtle: #162032;/* Deep slate hairline */
+
+  /* Signature Accents Lightened for WCAG AA in dark mode */
+  --color-verdigris: #14B8A6;        /* Teal 400 */
+  --color-verdigris-hover: #2DD4BF;  /* Teal 300 */
+  --color-verdigris-subtle: #092625; /* Dark teal wash */
+  --color-vermilion: #F87171;        /* Red 400 */
+  --color-vermilion-subtle: #2C1214; /* Dark red wash */
+
+  --shadow-panel: -8px 0 36px rgba(0, 0, 0, 0.6);
+  --shadow-sheet: 0 -12px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Base Document Setup */
+html {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Tabular Figures for All Numerical Data */
+.tabular-nums,
+[data-tabular="true"],
+table td,
+.font-mono {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* Focus Rings in Verdigris */
+:focus-visible {
+  outline: 2px solid var(--color-verdigris);
+  outline-offset: 2px;
+}
+
+/* Text Selection */
+::selection {
+  background-color: var(--color-verdigris);
+  color: #FFFFFF;
+}
+
+/* Cartographer's Hatched Pattern for Missing Data */
+.bg-hatched {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    var(--color-hairline) 4px,
+    var(--color-hairline) 5px
+  );
+}
+
+.dark .bg-hatched {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    var(--color-hairline) 4px,
+    var(--color-hairline) 5px
+  );
+}
+
+/* Hairline Table Rules */
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.ledger-table th {
+  border-bottom: 1.5px solid var(--color-ink);
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.ledger-table td {
+  border-bottom: 1px solid var(--color-hairline);
+  padding: 10px 12px;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.ledger-table tr:hover td {
+  background-color: var(--color-surface);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 1px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

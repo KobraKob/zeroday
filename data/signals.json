@@ -1,0 +1,220 @@
+[
+  {
+    "id": "sig-stripe-inaug",
+    "company_name": "Stripe Technologies",
+    "type": "office_inauguration",
+    "date": "2026-09-15",
+    "city": "Bengaluru",
+    "source_id": "src-bt-zinnov-fy26",
+    "note": "Stripe formally inaugurated its permanent technology and engineering hub in Bengaluru following multi-year hiring burst."
+  },
+  {
+    "id": "sig-stripe-lease",
+    "company_name": "Stripe Technologies",
+    "type": "lease_announced",
+    "date": "2026-06-10",
+    "city": "Bengaluru",
+    "source_id": "src-jll-office-2026",
+    "note": "Announced lease execution for 120,000 sq ft Grade A commercial space at Outer Ring Road tech corridor."
+  },
+  {
+    "id": "sig-snowflake-lease",
+    "company_name": "Snowflake Inc.",
+    "type": "lease_announced",
+    "date": "2026-09-28",
+    "city": "Hyderabad",
+    "source_id": "src-cw-office-2026",
+    "note": "Signed long-term lease for 180,000 sq ft campus at Financial District, Hyderabad to expand core query engine engineering."
+  },
+  {
+    "id": "sig-snowflake-hiring",
+    "company_name": "Snowflake Inc.",
+    "type": "hiring_burst",
+    "date": "2026-08-15",
+    "city": "Hyderabad",
+    "source_id": "src-teamlease-gcc-hiring",
+    "note": "Opened 250+ engineering requisitions for distributed systems, compiler architecture, and database internals."
+  },
+  {
+    "id": "sig-snowflake-leader",
+    "company_name": "Snowflake Inc.",
+    "type": "leadership_hire",
+    "date": "2026-07-20",
+    "city": "Hyderabad",
+    "source_id": "src-bt-zinnov-fy26",
+    "note": "Appointed former AWS VP of Engineering as Vice President and India Managing Director."
+  },
+  {
+    "id": "sig-databricks-incorp",
+    "company_name": "Databricks",
+    "type": "incorporation",
+    "date": "2026-08-05",
+    "city": "Bengaluru",
+    "source_id": "src-mca-portal",
+    "note": "Incorporated dedicated subsidiary entity Databricks India Tech Services Pvt Ltd under RoC Bangalore."
+  },
+  {
+    "id": "sig-databricks-gst",
+    "company_name": "Databricks",
+    "type": "gst_registration",
+    "date": "2026-08-25",
+    "city": "Bengaluru",
+    "source_id": "src-mca-portal",
+    "note": "Completed statutory GST tax registration in Karnataka state IT tax circle."
+  },
+  {
+    "id": "sig-databricks-press",
+    "company_name": "Databricks",
+    "type": "press_intent",
+    "date": "2026-06-01",
+    "city": "Bengaluru",
+    "source_id": "src-fpj-market-rev",
+    "note": "Databricks executive leadership confirmed plans for a multi-million dollar R&D development centre in India."
+  },
+  {
+    "id": "sig-arm-mou",
+    "company_name": "Arm Holdings",
+    "type": "state_mou",
+    "date": "2026-09-02",
+    "city": "Chennai",
+    "source_id": "src-tn-policy",
+    "note": "Arm signed a Memorandum of Understanding (MoU) with Guidance Tamil Nadu for a semiconductor design centre in Chennai."
+  },
+  {
+    "id": "sig-arm-lease",
+    "company_name": "Arm Holdings",
+    "type": "lease_announced",
+    "date": "2026-09-20",
+    "city": "Chennai",
+    "source_id": "src-cbre-gcc-2026",
+    "note": "Committed to 85,000 sq ft lab space in OMR IT corridor for silicon IP verification."
+  },
+  {
+    "id": "sig-broadcom-mou",
+    "company_name": "Broadcom Inc.",
+    "type": "state_mou",
+    "date": "2026-07-14",
+    "city": "Hyderabad",
+    "source_id": "src-tg-policy",
+    "note": "Broadcom engaged with Telangana IT Department for expanding networking silicon design labs."
+  },
+  {
+    "id": "sig-broadcom-gst",
+    "company_name": "Broadcom Inc.",
+    "type": "gst_registration",
+    "date": "2026-08-11",
+    "city": "Hyderabad",
+    "source_id": "src-mca-portal",
+    "note": "Filed updated GST registration covering expanded commercial premises in HITEC City."
+  },
+  {
+    "id": "sig-revolut-leader",
+    "company_name": "Revolut Global",
+    "type": "leadership_hire",
+    "date": "2026-08-30",
+    "city": "Mumbai",
+    "source_id": "src-bt-zinnov-fy26",
+    "note": "Hired Head of Financial Crime Compliance and Head of India Technology Engineering."
+  },
+  {
+    "id": "sig-revolut-press",
+    "company_name": "Revolut Global",
+    "type": "press_intent",
+    "date": "2026-05-18",
+    "city": "Mumbai",
+    "source_id": "src-fpj-market-rev",
+    "note": "Revolut reiterated intention to scale Mumbai captive engineering and cross-border payments tech hub."
+  },
+  {
+    "id": "sig-spotify-incorp",
+    "company_name": "Spotify Technology",
+    "type": "incorporation",
+    "date": "2026-09-12",
+    "city": "Bengaluru",
+    "source_id": "src-mca-portal",
+    "note": "Incorporated Spotify India Technology and Shared Services Private Limited."
+  },
+  {
+    "id": "sig-spotify-press",
+    "company_name": "Spotify Technology",
+    "type": "press_intent",
+    "date": "2026-07-04",
+    "city": "Bengaluru",
+    "source_id": "src-bt-zinnov-fy26",
+    "note": "Announced exploration of dedicated algorithmic audio engineering centre in India."
+  },
+  {
+    "id": "sig-waymo-press",
+    "company_name": "Waymo LLC",
+    "type": "press_intent",
+    "date": "2026-06-25",
+    "city": "Bengaluru",
+    "source_id": "src-bizofgcc-mega-leasing",
+    "note": "Reported evaluation of India simulation engineering team for autonomous sensor processing pipelines."
+  },
+  {
+    "id": "sig-moderna-mou",
+    "company_name": "Moderna Inc.",
+    "type": "state_mou",
+    "date": "2026-08-22",
+    "city": "Hyderabad",
+    "source_id": "src-tg-policy",
+    "note": "Signed expression of interest with Telangana Life Sciences Grid for computational biology R&D facility in Genome Valley."
+  },
+  {
+    "id": "sig-moderna-incorp",
+    "company_name": "Moderna Inc.",
+    "type": "incorporation",
+    "date": "2026-09-29",
+    "city": "Hyderabad",
+    "source_id": "src-mca-portal",
+    "note": "Filed incorporation charter with RoC Hyderabad for Moderna Digital & Bio Analytics India Pvt Ltd."
+  },
+  {
+    "id": "sig-paloalto-burst",
+    "company_name": "Palo Alto Networks",
+    "type": "hiring_burst",
+    "date": "2026-09-10",
+    "city": "Bengaluru",
+    "source_id": "src-teamlease-gcc-hiring",
+    "note": "Over 180 cybersecurity engineering and cloud threat analysis positions posted for Bengaluru campus."
+  },
+  {
+    "id": "sig-intuit-lease",
+    "company_name": "Intuit Inc.",
+    "type": "lease_announced",
+    "date": "2026-05-15",
+    "city": "Bengaluru",
+    "source_id": "src-jll-office-2026",
+    "note": "Renewed and expanded Bellandur campus lease by an additional 150,000 sq ft for GenAI platform engineering."
+  },
+  {
+    "id": "sig-wayfair-press",
+    "company_name": "Wayfair LLC",
+    "type": "press_intent",
+    "date": "2026-04-12",
+    "city": "Bengaluru",
+    "source_id": "src-bt-zinnov-fy26",
+    "note": "Wayfair technology leaders highlighted plans to expand Bengaluru global supply chain optimization team."
+  },
+  {
+    "id": "sig-demo-anthropic",
+    "company_name": "Anthropic PBC",
+    "type": "press_intent",
+    "date": "2026-10-01",
+    "city": "Bengaluru",
+    "source_id": "src-flexiple-stats",
+    "note": "Exploring prospective engineering liaison hub in India for frontier model safety and multilingual evaluation (Flagged Demo Data).",
+    "demo": true
+  },
+  {
+    "id": "sig-demo-figma",
+    "company_name": "Figma Inc.",
+    "type": "press_intent",
+    "date": "2026-09-18",
+    "city": "Bengaluru",
+    "source_id": "src-flexiple-stats",
+    "note": "Trade press commentary speculating on potential developer tools engineering hub in South India (Flagged Demo Data).",
+    "demo": true
+  }
+]
