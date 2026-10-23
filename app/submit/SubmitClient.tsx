@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Provider } from "../../lib/schema";
 import { SubmittedAttestation } from "../../lib/repo/reviewsRepo";
 import {
@@ -174,8 +174,15 @@ export function SubmitClient({ providers, initialAttestations }: SubmitClientPro
     setAttesterEmail("");
     setYear(String(CURRENT_YEAR));
     setProjectSummary("");
-    document.getElementById("attest-result")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
   };
+
+  useEffect(() => {
+    if (!submittedItem) return;
+    document.getElementById("attest-result")?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "nearest",
+    });
+  }, [submittedItem]);
 
   const clearPreparedPreview = () => setSubmittedItem(null);
 
@@ -461,7 +468,7 @@ export function SubmitClient({ providers, initialAttestations }: SubmitClientPro
                   </div>
                   <div className="attest-ledger-status">
                     <span className={"attest-status-dot" + (attestation.status === "verified" ? " is-verified" : "")} />
-                    <span>{titleCase(attestation.status)}</span>
+                    <span>{isSessionPreview ? "Local preview" : titleCase(attestation.status)}</span>
                   </div>
                 </article>
               );
