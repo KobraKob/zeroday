@@ -33,7 +33,7 @@ export function MethodologyClient() {
   };
 
   return (
-    <div className="space-y-12 font-sans max-w-4xl mx-auto">
+    <div className="methodology-page space-y-12 font-sans max-w-4xl mx-auto">
       {/* Editorial Header */}
       <PageHeader
         rubric="Standards & Data Governance"
