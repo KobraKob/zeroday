@@ -38,6 +38,13 @@ let gccData: any[] = loadJson("gccs.json");
 let citiesData: any[] = loadJson("cities.json");
 let definitionsData: any[] = loadJson("definitions.json");
 let statesData: any[] = loadJson("states.json");
+let providersData: any[] = loadJson("providers.json");
+let proofLinksData: any[] = loadJson("proofLinks.json");
+let signalsData: any[] = loadJson("signals.json");
+let publishedCountsData: any[] = loadJson("publishedCounts.json");
+let checklistsData: any[] = loadJson("checklists.json");
+let sourcesData: any[] = loadJson("sources.json");
+let assistantGuideData: any[] = loadJson("assistant-guide.json");
 
 const DATABASE_URL =
   process.env.DATABASE_URL ||
@@ -168,8 +175,78 @@ class BackendVectorStore {
         id: `city-${city.id}`,
         category: "city",
         title: `City Hub: ${city.name} (${city.state_id})`,
-        content: `${city.name} (${city.state_id}) is a ${city.tier || "Tier-1"} tech cluster with ${city.total_gccs || "multiple"} operational GCC units. Micro-markets include ${corridors}. Commercial Grade A vacancy stands at ${city.stats?.vacancy_pct || "8-12"}% with monthly rents between ${city.stats?.avg_rent_range_inr_sqft || "₹80-140"}/sq ft.`,
-        claim_ids: city.claim_ids || [],
+        content: city.name + " (" + (city.state_id || "state not listed") + "). Tier: " + (city.tier || "not listed") + ". Listed micro-markets: " + (corridors || "not listed") + ". " + (city.total_gccs != null ? "Listed GCC units: " + city.total_gccs + ". " : "") + (city.stats?.vacancy_pct != null ? "Listed Grade A vacancy: " + city.stats.vacancy_pct + "%. " : "") + (city.stats?.avg_rent_range_inr_sqft != null ? "Listed average rent range: " + city.stats.avg_rent_range_inr_sqft + " per sq ft." : ""),
+        claim_ids: Array.isArray(city.claim_ids) ? city.claim_ids : [],
+      });
+    });
+
+
+    // Service providers: label marketing claims as provider-supplied, not independently audited.
+    providersData.forEach((provider) => {
+      const providerCities = Array.isArray(provider.cities) ? provider.cities.join(", ") : "";
+      const marketedClaims = Array.isArray(provider.marketed_claims) ? provider.marketed_claims.join("; ") : "";
+      this.chunks.push({
+        id: "provider-" + (provider.slug || provider.id),
+        category: "provider",
+        title: "Listed Service Provider: " + (provider.name || provider.id),
+        content: "Listed provider: " + (provider.name || "not listed") + ". Category: " + (provider.category || "not listed") + ". City footprint: " + (providerCities || "not listed") + ". Provider-supplied claims (not independently confirmed here): " + (marketedClaims || "none listed") + ".",
+        claim_ids: Array.isArray(provider.claim_ids) ? provider.claim_ids : []
+      });
+    });
+
+    proofLinksData.forEach((link) => {
+      const evidence = Array.isArray(link.evidence)
+        ? link.evidence.map((item: any) => String(item.kind || "evidence") + " from source " + String(item.source_id || "not linked") + ": " + String(item.excerpt_summary || "no excerpt summary")).join("; ")
+        : "no evidence detail listed";
+      this.chunks.push({
+        id: "proof-" + link.id,
+        category: "provider",
+        title: "Proof Link: " + String(link.service || "service not listed") + " (" + String(link.year == null ? "year not listed" : link.year) + ")",
+        content: "Listed engagement record: service " + String(link.service || "not listed") + "; client record ID " + String(link.gcc_id || "not listed") + "; provider record ID " + String(link.provider_id || "not listed") + "; year " + String(link.year == null ? "not listed" : link.year) + "; status " + String(link.status || "not listed") + ". Evidence items: " + evidence + ".",
+        claim_ids: Array.isArray(link.claim_ids) ? link.claim_ids : []
+      });
+    });
+
+    signalsData.forEach((signal) => {
+      this.chunks.push({
+        id: "signal-" + signal.id,
+        category: "signal",
+        title: "Signal: " + String(signal.company_name || signal.title || "Company not listed") + " — " + String(signal.type || "type not listed"),
+        content: "Signal company: " + String(signal.company_name || "not listed") + ". Type: " + String(signal.type || "not listed") + ". Date: " + String(signal.date || "not listed") + ". City: " + String(signal.city || "not listed") + ". Note: " + String(signal.note || signal.summary || "not listed") + ". Source ID: " + String(signal.source_id || "not listed") + ".",
+        claim_ids: Array.isArray(signal.claim_ids) ? signal.claim_ids : []
+      });
+    });
+
+    publishedCountsData.forEach((record) => {
+      this.chunks.push({
+        id: "published-count-" + record.id,
+        category: "published_count",
+        title: "Published GCC Count: " + String(record.publisher || "publisher not listed"),
+        content: "Publisher: " + String(record.publisher || "not listed") + ". Published headline: " + String(record.headline_count || "not listed") + ". Claimed unit: " + String(record.unit_claimed || "not listed") + ". Unit type: " + String(record.unit_type || "unknown") + ". As of: " + String(record.as_of || "not listed") + ". Definition known: " + String(record.definition_known) + ". Note: " + String(record.note || "") + ". Source ID: " + String(record.source_id || "not listed") + ".",
+        claim_ids: []
+      });
+    });
+
+    checklistsData.forEach((checklist) => {
+      const items = Array.isArray(checklist.items)
+        ? checklist.items.map((item: any) => String(item.title || "Step") + ": " + String(item.description || "") + (item.official_url ? " (official link: " + String(item.official_url) + ")" : "")).join("; ")
+        : "";
+      this.chunks.push({
+        id: "checklist-" + checklist.id,
+        category: "checklist",
+        title: "Entry Checklist: " + String(checklist.title || checklist.stage || checklist.id),
+        content: "Checklist stage: " + String(checklist.stage || "not listed") + ". " + String(checklist.title || "") + ". " + String(checklist.description || "") + ". Steps: " + items + ".",
+        claim_ids: []
+      });
+    });
+
+    sourcesData.forEach((source) => {
+      this.chunks.push({
+        id: "source-" + source.id,
+        category: "source",
+        title: "Source Record: " + String(source.name || source.id),
+        content: "Source: " + String(source.name || "not listed") + ". Publisher: " + String(source.publisher || "not listed") + ". Type: " + String(source.type || "not listed") + ". Published: " + String(source.published_at || "not listed") + ". Retrieved: " + String(source.retrieved_at || "not listed") + ". URL: " + String(source.url || "not listed") + ". Source ID: " + String(source.id) + ".",
+        claim_ids: []
       });
     });
 
