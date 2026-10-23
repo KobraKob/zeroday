@@ -236,7 +236,7 @@ export function HomeClient({
                         <circle cx={point.x} cy={point.y} r={radius + 4} className="atlas-city-halo" />
                         <circle cx={point.x} cy={point.y} r={radius} className="atlas-city-core" />
                         <text x={point.x + 11} y={point.y - 9} className="atlas-map-label" fontSize="10" fontWeight={active ? "700" : "500"}>{point.name}</text>
-                        {active && <text x={point.x + 11} y={point.y + 5} className="atlas-map-sub-label" fontSize="9">{point.count} records</text>}
+                        {active && <text x={point.x + 11} y={point.y + 5} className="atlas-map-sub-label" fontSize="10">{point.count} records</text>}
                       </g>
                     );
                   })}
