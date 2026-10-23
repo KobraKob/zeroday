@@ -5,7 +5,7 @@ import { ChangelogClient } from "./ChangelogClient";
 export const metadata: Metadata = {
   title: "Public Registry Changelog — ZeroDay",
   description:
-    "Live audit log of all ecosystem events: newly incorporated GCCs, verified claim changes, state policy gazettes, and confidence adjustments.",
+    "Review recorded ecosystem events, including GCC additions, claim changes, policy updates, freshness downgrades, and source checks. Seed records are labelled.",
 };
 
 // ISR with on-demand revalidation
