@@ -93,7 +93,7 @@ function getSupabaseClient() {
   return supabaseClient;
 }
 
-// In-Memory Vector Store for Railway Backend
+// In-memory vector store for the standalone API backend
 interface Chunk {
   id: string;
   category: string;
@@ -509,7 +509,7 @@ function unwrapJson(value: any) {
 }
 
 /**
- * Railway runs against persistent database records when DATABASE_URL exists.
+ * Production runs against persistent database records when DATABASE_URL exists.
  * JSON files are only a local/test fallback. Production must not silently boot
  * against bundled fixtures when a database has not been configured.
  */
@@ -605,7 +605,7 @@ async function initialiseDataSource(): Promise<"supabase-postgres" | "supabase-r
 
 // --- HTTP Routes ---
 
-// Healthcheck route for Railway deploy monitoring
+// Healthcheck route for Render and container orchestration
 app.get("/health", (_req: Request, res: Response) => {
   res.status(200).json({
     status: "healthy",
@@ -852,91 +852,8 @@ app.post("/api/ask", async (req: Request, res: Response) => {
       });
     }
 
-    // 3. Grounded Context Retrieval
-    const vectorMatches = vectorStore.search(query, 8);
-    const contextSnippets = vectorMatches.map((m) => ({
-      title: m.chunk.title,
-      content: m.chunk.content,
-      claim_ids: m.chunk.claim_ids,
-    }));
-
-    // 4. Groq LLM Inference
-    if (GROQ_API_KEY && contextSnippets.length > 0) {
-      try {
-        const systemPrompt = `You are Zero, the grounded intelligence auditor for ZeroDay, an authoritative, citable platform on India's Global Capability Centres.
-You answer user queries strictly, accurately, and authoritatively using ONLY the provided Verified Context below.
-
-VERIFIED CONTEXT FROM ZERODAY VECTOR STORE:
-${JSON.stringify(contextSnippets)}
-
-MANDATORY RULES:
-1. Every factual sentence in "answer_blocks" must cite valid "claim_ids" from the context if available.
-2. If the user asks for numbers, claims, or entities NOT present in the verified context, reply:
-   "ZeroDay does not have sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory."
-   Set "is_grounded": false, and describe the unverified metric in the "gaps" array.
-3. Keep answers concise, professional, and clear.
-4. Output strictly valid JSON with schema:
-{
-  "answer_blocks": [ { "text": "factual sentence", "claim_ids": ["claim-id"] } ],
-  "follow_ups": ["relevant question 1", "relevant question 2"],
-  "gaps": [],
-  "is_grounded": true or false
-}`;
-
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8500);
-
-        const groqRes = await fetch(
-          "https://api.groq.com/openai/v1/chat/completions",
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${GROQ_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              model: GROQ_MODEL,
-              messages: [
-                { role: "system", content: systemPrompt },
-                { role: "user", content: query },
-              ],
-              response_format: { type: "json_object" },
-              temperature: 0.1,
-            }),
-            signal: controller.signal,
-          }
-        );
-
-        clearTimeout(timeoutId);
-
-        if (groqRes.ok) {
-          const groqData = await groqRes.json();
-          const rawContent = groqData.choices?.[0]?.message?.content;
-          if (rawContent) {
-            const parsed = JSON.parse(rawContent);
-            if (parsed.answer_blocks && parsed.answer_blocks.length > 0) {
-              const hasValidClaims = parsed.answer_blocks.every(
-                (b: any) =>
-                  !b.claim_ids ||
-                  b.claim_ids.every((cid: string) => claimsMap.has(cid))
-              );
-
-              if (hasValidClaims) {
-                return res.status(200).json({
-                  answer_blocks: parsed.answer_blocks,
-                  follow_ups: (parsed.follow_ups || []).slice(0, 3),
-                  gaps: parsed.gaps || [],
-                  is_grounded: parsed.is_grounded !== false,
-                  engine: `Zero via Groq (${GROQ_MODEL})`,
-                });
-              }
-            }
-          }
-        }
-      } catch (err) {
-        console.warn("Groq inference error in backend:", err);
-      }
-    }
+    // The site-aware RAG call above is the only Groq path. Invalid or
+    // unsupported responses fall through to the deterministic refusal below.
 
     // 5. Fallback Refusal
     return res.status(200).json({
@@ -962,7 +879,7 @@ MANDATORY RULES:
 async function startServer() {
   const dataSource = await initialiseDataSource();
   app.listen(Number(PORT), () => {
-    console.log("ZeroDay Railway Backend listening on port " + PORT + " using " + dataSource + ".");
+    console.log("ZeroDay backend listening on port " + PORT + " using " + dataSource + ".");
   });
 }
 
