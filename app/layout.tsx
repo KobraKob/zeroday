@@ -31,8 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <script
+          id="zeroday-theme-init"
+          dangerouslySetInnerHTML={{
+            __html: `try { var savedTheme = localStorage.getItem("zeroday-theme"); if (savedTheme === "light") { document.documentElement.classList.remove("dark"); } else { document.documentElement.classList.add("dark"); } } catch (_) { document.documentElement.classList.add("dark"); }`,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
