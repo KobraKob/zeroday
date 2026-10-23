@@ -60,7 +60,7 @@ export function Navbar() {
     <>
 
       {/* Single-row header (sticky top-0, 64px, 3 CSS grid zones) */}
-      <header className="atlas-navbar sticky top-0 z-50 w-full border-b border-hairline-subtle bg-paper/95 font-sans shadow-[0_5px_20px_rgba(21,24,58,0.06)] backdrop-blur-md">
+      <header className="atlas-navbar sticky top-0 z-50 w-full border-b border-hairline-subtle bg-paper font-sans shadow-[0_5px_20px_rgba(21,24,58,0.06)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="atlas-navbar-inner grid grid-cols-[auto_1fr_auto] items-center gap-3 lg:gap-6 h-[72px] whitespace-nowrap min-w-0">
             {/* Zone 1: Left - Logo mark + wordmark only (One brand name: GCC Atlas) */}
@@ -139,7 +139,7 @@ export function Navbar() {
               {/* Attest: ONE primary button (filled cobalt, 44px high) */}
               <Link
                 href="/submit"
-                className="atlas-nav-primary inline-flex items-center justify-center px-5 h-11 text-xs font-mono font-bold uppercase tracking-wider bg-ink text-paper border border-ink hover:bg-[#267A68] hover:border-[#267A68] hover:shadow-[3px_3px_0px_#FF6B4A] transition-all duration-200 rounded-full min-h-[44px] focus-visible:outline-cobalt"
+                className="atlas-nav-primary hidden sm:inline-flex items-center justify-center px-5 h-11 text-xs font-mono font-bold uppercase tracking-wider bg-ink text-paper border border-ink hover:bg-[#267A68] hover:border-[#267A68] hover:shadow-[3px_3px_0px_#FF6B4A] transition-all duration-200 rounded-full min-h-[44px] focus-visible:outline-cobalt"
               >
                 Attest
               </Link>
@@ -202,7 +202,7 @@ export function Navbar() {
                 }}
                 className="min-h-[44px] h-11 flex items-center justify-center gap-2 text-xs font-mono font-bold border border-hairline-subtle bg-transparent text-ink text-center rounded-full cursor-pointer transition-colors duration-200 hover:bg-ink hover:text-paper"
               >
-                <Sparkles className="w-3.5 h-3.5 text-cobalt" />
+                <Sparkles className="w-3.5 h-3.5 text-[#267A68]" />
                 <span>Ask</span>
               </button>
               <Link
