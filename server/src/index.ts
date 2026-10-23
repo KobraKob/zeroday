@@ -5,6 +5,7 @@ import path from "path";
 import fs from "fs";
 import postgres from "postgres";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { buildAskKnowledge } from "./askKnowledge";
 
 dotenv.config();
 
@@ -684,10 +685,21 @@ app.post("/api/ask", async (req: Request, res: Response) => {
       });
     }
 
-    // Site-aware RAG: retrieve the site guide and matching records for every question.
-    const siteHelpQuestion = isSiteHelpQuestion(q);
-    const rag = buildRagContext(query, assistantGuideData as AssistantGuideEntry[], vectorStore.search(query, 18));
-    const ragContext = JSON.stringify(rag.snippets).slice(0, 18000);
+    // Use the shared retrieval layer so the API and backend answer from the same context.
+    const knowledge = buildAskKnowledge({
+      query: query.trim(),
+      claims: claimsData,
+      gccs: gccData,
+      cities: citiesData,
+      states: statesData,
+      vectorMatches: vectorStore.search(query.trim(), 18),
+    });
+    const siteHelpQuestion = knowledge.intent === "site_help";
+    const rag = {
+      allowedClaimIds: new Set(knowledge.allowedClaimIds),
+      hasRelevantRecords: knowledge.documents.some((document) => document.kind !== "site_manual"),
+    };
+    const ragContext = knowledge.context.slice(0, 18000);
 
     if (GROQ_API_KEY) {
       const controller = new AbortController();
