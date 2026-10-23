@@ -26,6 +26,28 @@ const pathways = [
 
 export function HomeClient({ gccs, claims, sources, definitions }: HomeClientProps) {
   const [selectedUnit, setSelectedUnit] = useState<"parent_company" | "legal_entity" | "centre_unit">("parent_company");
+  const [selectedCity, setSelectedCity] = useState("Bengaluru");
+  const cityPoints = [
+    { name: "Delhi NCR", x: 275, y: 70, color: "#FF704F" },
+    { name: "Mumbai", x: 190, y: 150, color: "#2536E8" },
+    { name: "Pune", x: 205, y: 172, color: "#2536E8" },
+    { name: "Hyderabad", x: 260, y: 185, color: "#16A67A" },
+    { name: "Chennai", x: 282, y: 235, color: "#FF704F" },
+    { name: "Bengaluru", x: 230, y: 220, color: "#16A67A" },
+    { name: "Kochi", x: 208, y: 268, color: "#2536E8" },
+    { name: "Kolkata", x: 350, y: 135, color: "#FF704F" },
+  ];
+  const cityStats = useMemo(() => cityPoints.map((point) => ({
+    ...point,
+    count: gccs.filter((gcc) => gcc.cities.some((city) => city.toLowerCase().includes(point.name.toLowerCase()) || (point.name === "Delhi NCR" && /delhi|gurugram|gurgaon|noida/i.test(city)))).length,
+  })), [gccs]);
+  const selectedCityStats = cityStats.find((city) => city.name === selectedCity) || cityStats[5];
+  const cityGccs = gccs.filter((gcc) => gcc.cities.some((city) => city.toLowerCase().includes(selectedCity.toLowerCase()) || (selectedCity === "Delhi NCR" && /delhi|gurugram|gurgaon|noida/i.test(city))));
+  const sectorStats = useMemo(() => {
+    const counts = new Map<string, number>();
+    cityGccs.forEach((gcc) => counts.set(gcc.sector, (counts.get(gcc.sector) || 0) + 1));
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+  }, [cityGccs]);
   const sourcesMap = useMemo(() => new Map(sources.map((source) => [source.id, source])), [sources]);
   const revClaim = claims.find((claim) => claim.field === "annual_revenue");
   const workforceClaim = claims.find((claim) => claim.field === "headcount_total");
@@ -62,28 +84,36 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
               <span className="inline-flex items-center gap-2"><Database size={14} className="text-[#267A68]" /> Explicit confidence grades</span>
             </div>
           </div>
-          <div className="atlas-map-panel relative min-h-[330px] overflow-hidden border border-hairline bg-[#EAEDE4] p-5 sm:min-h-[390px] sm:p-7">
-            <div className="flex items-start justify-between gap-4">
-              <div><p className="text-xs font-semibold text-[#3B514B]">The ecosystem, at a glance</p><p className="mt-1 text-xs text-[#63736C]">Major GCC research clusters</p></div>
-              <span className="border border-[#B9C8BD] bg-[#F4F5EF] px-2 py-1 text-[10px] text-[#3B514B]">INDIA / 2026</span>
+          <div className="atlas-map-panel relative overflow-hidden border border-[#DAD7CC] bg-[#F2F0E7] p-5 sm:p-7">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div><p className="font-display text-xl font-semibold tracking-tight text-[#15183A]">India, in motion.</p><p className="mt-1 text-sm text-[#525875]">Explore the registry by city cluster.</p></div>
+              <span className="border border-[#DAD7CC] bg-[#FFF6E5] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-[#525875]">Live registry view</span>
             </div>
-            <svg className="atlas-network mt-3 h-[220px] w-full sm:h-[255px]" viewBox="0 0 440 280" role="img" aria-label="Schematic network connecting India's major GCC research clusters">
-              <path d="M221 24 L270 49 L300 83 L321 120 L307 156 L282 182 L268 220 L228 250 L191 238 L161 211 L131 194 L105 158 L119 120 L135 86 L171 59 Z" fill="#DDE4D8" stroke="#9EADA0" strokeWidth="1.5" />
-              <path d="M221 24 L210 85 L245 115 L221 153 L228 250 M135 86 L180 126 L161 211 M300 83 L245 115 L307 156 L228 153 L131 194 M119 120 L180 126 L282 182" fill="none" stroke="#BAC8BC" strokeWidth="1" strokeDasharray="3 5" />
-              <g stroke="#267A68" strokeWidth="1.5" opacity=".7"><path d="M180 126 L245 115 L221 153 L161 211 L228 250" /><path d="M245 115 L307 156 M245 115 L300 83 M180 126 L135 86 M221 153 L282 182" /></g>
-              {[
-                {x:180,y:126,r:7,label:"Bengaluru",tx:137,ty:113},
-                {x:245,y:115,r:6,label:"Hyderabad",tx:253,ty:107},
-                {x:221,y:153,r:5,label:"Chennai",tx:229,ty:171},
-                {x:161,y:211,r:4,label:"Pune",tx:129,ty:228},
-                {x:228,y:250,r:4,label:"Coimbatore",tx:237,ty:268},
-                {x:300,y:83,r:4,label:"Gurugram",tx:307,ty:72},
-                {x:307,y:156,r:4,label:"Mumbai",tx:315,ty:171}
-              ].map((p) => <g key={p.label} className="atlas-node"><circle cx={p.x} cy={p.y} r={p.r + 6} fill="#267A68" opacity=".10" /><circle cx={p.x} cy={p.y} r={p.r} fill="#267A68" stroke="#F4F5EF" strokeWidth="2" /><text x={p.tx} y={p.ty} fontSize="10" fontFamily="Instrument Sans, sans-serif" fill="#354C44">{p.label}</text></g>)}
-              <circle cx="180" cy="126" r="14" fill="none" stroke="#267A68" strokeWidth="1" opacity=".6" className="atlas-ripple" />
-              <circle cx="245" cy="115" r="11" fill="none" stroke="#267A68" strokeWidth="1" opacity=".5" className="atlas-ripple atlas-ripple-delay" />
-            </svg>
-            <div className="flex items-center justify-between border-t border-[#C7D1C5] pt-3 text-[11px] text-[#52655B]"><span>Cluster network schematic</span><Link href="/compare" className="inline-flex items-center gap-1 font-semibold hover:text-[#267A68]">Compare locations <ArrowRight size={13} /></Link></div>
+            <div className="relative mt-3">
+              <svg className="atlas-network h-[280px] w-full sm:h-[330px]" viewBox="80 20 330 280" role="img" aria-label="Interactive schematic map of Indian GCC city clusters">
+                <path d="M214 22 L250 34 L282 56 L306 77 L328 92 L349 112 L338 140 L315 157 L308 188 L292 216 L280 245 L258 275 L236 294 L218 267 L202 235 L180 214 L157 198 L140 169 L145 143 L154 118 L170 91 L187 65 Z" fill="#E3E3D8" stroke="#C6C9B8" strokeWidth="1.5"/>
+                <path d="M214 22 L230 100 L260 185 L230 220 L258 275 M154 118 L205 172 L260 185 L315 157 L349 112 M145 143 L230 220 L282 235 L292 216 M187 65 L275 70 L315 157" fill="none" stroke="#C7CABB" strokeWidth="1.1" strokeDasharray="3 5"/>
+                <path d="M190 150 Q220 160 205 172 T260 185 T230 220 T282 235" fill="none" stroke="#2536E8" strokeWidth="2" strokeDasharray="4 5" opacity=".35"/>
+                {cityStats.map((point) => {
+                  const active = selectedCity === point.name;
+                  const radius = active ? 9 : Math.max(4, Math.min(7, 3 + point.count / 8));
+                  return <g key={point.name} role="button" tabIndex={0} aria-label={`Select ${point.name}, ${point.count} registry records`} onClick={() => setSelectedCity(point.name)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedCity(point.name); } }} className="atlas-city-node" style={{ cursor: "pointer", outline: "none" }}>
+                    {active && <circle cx={point.x} cy={point.y} r="19" fill={point.color} opacity=".14" className="atlas-city-pulse"/>}
+                    <circle cx={point.x} cy={point.y} r={radius + 4} fill={point.color} opacity={active ? ".22" : ".1"}/>
+                    <circle cx={point.x} cy={point.y} r={radius} fill={point.color} stroke="#FFF6E5" strokeWidth={active ? 3 : 2}/>
+                    <text x={point.x + 11} y={point.y - 9} fontSize="10" fontWeight={active ? "700" : "500"} fontFamily="Instrument Sans, sans-serif" fill="#15183A">{point.name}</text>
+                    {active && <text x={point.x + 11} y={point.y + 5} fontSize="9" fontFamily="DM Mono, monospace" fill="#525875">{point.count} records</text>}
+                  </g>;
+                })}
+              </svg>
+            </div>
+            <div className="grid grid-cols-[1fr_auto] items-end gap-4 border-t border-[#DAD7CC] pt-4">
+              <div><p className="font-mono text-[11px] uppercase tracking-wider text-[#525875]">Selected cluster</p><p className="mt-1 font-display text-2xl font-bold tracking-tight text-[#15183A]">{selectedCity}</p><p className="mt-1 text-sm text-[#525875]">{selectedCityStats?.count ?? 0} matching registry records</p></div>
+              <Link href="/compare" className="inline-flex min-h-11 items-center gap-2 bg-[#2536E8] px-4 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5">Compare cities <ArrowUpRight size={15}/></Link>
+            </div>
+            <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {cityStats.slice(0,4).map((city) => <button key={city.name} onClick={() => setSelectedCity(city.name)} className={`min-h-11 border px-3 py-2 text-left transition-all ${selectedCity === city.name ? "border-[#2536E8] bg-[#2536E8] text-white shadow-[3px_3px_0_#FF704F]" : "border-[#DAD7CC] bg-[#FFF6E5] text-[#15183A] hover:border-[#2536E8]"}`}><span className="block text-xs">{city.name}</span><span className={`mt-1 block font-mono text-sm font-semibold ${selectedCity === city.name ? "text-white" : "text-[#2536E8]"}`}>{city.count} records</span></button>)}
+            </div>
           </div>
         </div>
         <div className="mt-12 grid grid-cols-2 border-y border-hairline md:grid-cols-4">
@@ -91,6 +121,29 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
           <div className="border-b border-hairline-subtle py-5 pl-4 md:border-b-0 md:border-r md:px-5 md:py-6"><p className="text-xs text-muted">Direct workforce</p><p className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">1.9M+</p><p className="mt-1 text-xs text-muted">Professionals <SourceFootnote marker={3} source={workforceSource} claim={workforceClaim} fieldLabel="Total Direct Tech Workforce" showMarkerOnly /></p></div>
           <div className="border-r border-hairline-subtle py-5 pr-4 pt-5 md:px-5 md:py-6"><p className="text-xs text-muted">Direct export value</p><p className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">$64.6B</p><p className="mt-1 text-xs text-muted">FY26 benchmark <SourceFootnote marker={2} source={revSource} claim={revClaim} fieldLabel="FY26 Total GCC Revenue" showMarkerOnly /></p></div>
           <div className="py-5 pl-4 md:py-6 md:pl-5"><p className="text-xs text-muted">Office absorption</p><p className="mt-2 font-display text-3xl font-semibold tracking-tight text-[#267A68] sm:text-4xl">44.0%</p><p className="mt-1 text-xs text-muted">Q1 2026 share <SourceFootnote marker={4} source={leasingSource} claim={leasingClaim} fieldLabel="Q1 2026 GCC Office Absorption Share" showMarkerOnly /></p></div>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 gap-8 lg:grid-cols-[.8fr_1.2fr]">
+        <div className="bg-[#15183A] p-6 text-[#FFF6E5] sm:p-8">
+          <p className="font-mono text-xs uppercase tracking-[.18em] text-[#5FE0B0]">Cluster snapshot / 01</p>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-[-.04em] sm:text-4xl">Zoom in on <span className="text-[#5FE0B0]">{selectedCity}.</span></h2>
+          <p className="mt-4 max-w-sm text-sm leading-6 text-[#C4C8DE]">The chart updates from the registry records currently associated with this city cluster. It is a view of this dataset, not a claim about the entire market.</p>
+          <div className="mt-8 grid grid-cols-2 gap-4 border-t border-[#3D4472] pt-5">
+            <div><p className="text-xs text-[#C4C8DE]">Matching records</p><p className="mt-1 font-display text-4xl font-bold tabular-nums">{cityGccs.length}</p></div>
+            <div><p className="text-xs text-[#C4C8DE]">Sectors represented</p><p className="mt-1 font-display text-4xl font-bold tabular-nums">{new Set(cityGccs.map((gcc) => gcc.sector)).size}</p></div>
+          </div>
+          <Link href="/registry" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#5FE0B0] hover:text-white">Open matching registry <ArrowRight size={15}/></Link>
+        </div>
+        <div className="border border-[#DAD7CC] bg-white p-6 sm:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="font-mono text-xs uppercase tracking-[.16em] text-[#525875]">Registry composition</p><h3 className="mt-2 font-display text-2xl font-bold tracking-tight text-[#15183A]">What this cluster works on</h3></div><span className="border border-[#DAD7CC] px-2 py-1 font-mono text-xs text-[#525875]">TOP 5 SECTORS</span></div>
+          <div className="mt-7 space-y-5">
+            {sectorStats.length ? sectorStats.map(([sector, value], index) => <div key={sector}>
+              <div className="mb-2 flex items-center justify-between gap-3 text-sm"><span className="font-medium text-[#15183A]">{sector.replaceAll("_", " ")}</span><span className="font-mono text-xs text-[#525875]">{value}</span></div>
+              <div className="h-3 overflow-hidden bg-[#F0EFE8]"><div className={`atlas-bar-fill h-full ${index % 3 === 0 ? "bg-[#2536E8]" : index % 3 === 1 ? "bg-[#FF704F]" : "bg-[#16A67A]"}`} style={{ width: `${Math.max(4, value / Math.max(1, sectorStats[0][1]) * 100)}%`, animationDelay: `${index * 70}ms` }}/></div>
+            </div>) : <p className="border border-dashed border-[#DAD7CC] p-5 text-sm text-[#525875]">No matching sector records for this cluster in the current registry.</p>}
+          </div>
+          <p className="mt-6 border-t border-[#E8E6DD] pt-4 text-xs leading-5 text-[#525875]">Counts reflect records in ZeroDay's current registry. A company listed across multiple cities may appear in each relevant cluster.</p>
         </div>
       </section>
 
