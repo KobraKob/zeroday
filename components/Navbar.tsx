@@ -149,7 +149,7 @@ export function Navbar() {
 
         {/* Mobile menu drawer */}
         {mobileMenuOpen && (
-          <div id="zeroday-mobile-menu" className="atlas-mobile-panel xl:hidden border-t border-hairline-subtle bg-surface px-4 py-4 space-y-2 shadow-lg">
+          <div id="zeroday-mobile-menu" className="atlas-mobile-panel xl:hidden border-t border-hairline-subtle bg-surface px-4 py-4 space-y-2 shadow-lg" role="region" aria-label="Site menu">
             <nav aria-label="Mobile Navigation" className="space-y-1">
               {mobileNavLinks.map((item) => {
                 const isActive =
