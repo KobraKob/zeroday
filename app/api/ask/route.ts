@@ -25,6 +25,7 @@ export interface SourceDisagreement {
 }
 
 export interface AskResponse {
+  query?: string;
   answer_blocks: AnswerBlock[];
   follow_ups: string[];
   gaps: string[];
