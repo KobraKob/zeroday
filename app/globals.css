@@ -932,3 +932,59 @@ small,
 @media(prefers-reduced-motion:reduce) {
  .atlas-reconcile .atlas-reconcile-kpi,.atlas-reconcile .atlas-city-pill,.atlas-reconcile .atlas-reconcile-benchmark-row { transition:none!important; transform:none!important; }
 }
+
+/* Radar: evidence-led command surface */
+.radar-atlas{--radar-accent:var(--color-cobalt);color:var(--color-ink)}
+.radar-atlas .radar-command-center{display:grid;gap:18px}
+.radar-atlas .radar-landscape-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:4px 0 2px}
+.radar-atlas .radar-kicker{margin:0 0 7px;color:var(--cobalt-text);font:600 10px/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase}
+.radar-atlas .radar-landscape-heading h2{margin:0;max-width:620px;font:800 clamp(1.65rem,3vw,2.35rem)/1.02 var(--font-display);letter-spacing:-.055em;text-wrap:balance}
+.radar-atlas .radar-landscape-heading p:not(.radar-kicker){max-width:590px;margin:10px 0 0;color:var(--color-muted);font-size:14px;line-height:1.6}
+.radar-atlas .radar-model-chip{display:flex;align-items:center;gap:9px;flex-shrink:0;padding:9px 11px;border:1px solid var(--color-hairline);background:var(--color-surface);color:var(--color-muted);font:11px/1.3 var(--font-mono)}
+.radar-atlas .radar-live-mark{width:7px;height:7px;border-radius:50%;background:var(--color-mint);box-shadow:0 0 0 4px color-mix(in srgb,var(--color-mint) 14%,transparent)}
+.radar-atlas .radar-chip-divider{width:1px;height:15px;background:var(--color-hairline)}
+.radar-atlas .radar-metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.radar-atlas .radar-metric{position:relative;min-width:0;min-height:126px;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;padding:16px 17px;border:1px solid var(--color-hairline);background:var(--color-surface);transition:transform 180ms ease,border-color 180ms ease}
+.radar-atlas .radar-metric:hover{transform:translateY(-2px);border-color:var(--color-cobalt)}
+.radar-atlas .radar-metric--lead{background:var(--atlas-side-bg)}
+.radar-atlas .radar-metric--alert{border-top:2px solid var(--color-coral)}
+.radar-atlas .radar-metric-label{color:var(--color-muted);font:500 11px/1.4 var(--font-mono);text-transform:uppercase;letter-spacing:.06em}
+.radar-atlas .radar-metric strong{margin-top:13px;font:800 clamp(1.9rem,3vw,2.5rem)/.95 var(--font-display);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.radar-atlas .radar-metric-note{margin-top:8px;color:var(--color-muted);font-size:12px;line-height:1.4}
+.radar-atlas .radar-metric-ticks{position:absolute;right:13px;top:18px;display:flex;align-items:flex-end;gap:3px;height:24px;opacity:.7}
+.radar-atlas .radar-metric-ticks i{display:block;width:3px;background:var(--color-cobalt);animation:radar-tick 1.4s ease-in-out infinite alternate}
+.radar-atlas .radar-metric-ticks i:nth-child(3n+1){height:9px;animation-delay:-.5s}.radar-atlas .radar-metric-ticks i:nth-child(3n+2){height:17px;animation-delay:-.9s}.radar-atlas .radar-metric-ticks i:nth-child(3n){height:23px;animation-delay:-.2s}
+.radar-atlas .radar-insight-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:12px}
+.radar-atlas .radar-panel{min-width:0;padding:18px;border:1px solid var(--color-hairline);background:var(--color-surface)}
+.radar-atlas .radar-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.radar-atlas .radar-panel-head h3{margin:0;font:700 18px/1.15 var(--font-display);letter-spacing:-.025em}
+.radar-atlas .radar-panel-index{padding-top:2px;color:var(--color-muted);font:10px/1.4 var(--font-mono);white-space:nowrap;letter-spacing:.06em}
+.radar-atlas .radar-chart-wrap{height:142px;margin:16px 0 0;overflow:hidden}
+.radar-atlas .radar-line-chart{width:100%;height:100%;overflow:visible}
+.radar-atlas .radar-line-chart line{stroke:var(--color-hairline);stroke-width:1;stroke-dasharray:3 5}
+.radar-atlas .radar-chart-area{fill:color-mix(in srgb,var(--color-cobalt) 12%,transparent)}
+.radar-atlas .radar-chart-line{fill:none;stroke:var(--color-cobalt);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:radar-line-draw 1.2s ease-out forwards}
+.radar-atlas .radar-line-chart circle{fill:var(--color-surface);stroke:var(--color-cobalt);stroke-width:2.5;animation:radar-dot-in .35s ease-out both}
+.radar-atlas .radar-chart-labels{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;margin-top:3px}
+.radar-atlas .radar-chart-labels div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.radar-atlas .radar-chart-labels strong{font:600 12px/1.2 var(--font-mono)}.radar-atlas .radar-chart-labels span{color:var(--color-muted);font:10px/1.2 var(--font-mono)}
+.radar-atlas .radar-panel-footnote{margin:16px 0 0;color:var(--color-muted);font-size:11px;line-height:1.5}
+.radar-atlas .radar-city-list{display:grid;gap:2px;margin-top:15px}
+.radar-atlas .radar-city-row{display:grid;grid-template-columns:23px minmax(74px,1fr) minmax(45px,.8fr) 24px 14px;align-items:center;gap:8px;width:100%;min-height:38px;padding:5px 2px;border-bottom:1px solid var(--hairline-subtle);background:transparent;color:var(--color-ink);text-align:left;cursor:pointer;transition:background-color 160ms ease,padding 160ms ease}
+.radar-atlas .radar-city-row:hover,.radar-atlas .radar-city-row:focus-visible{padding-left:7px;background:var(--atlas-side-bg)}
+.radar-atlas .radar-city-rank{color:var(--color-muted);font:10px var(--font-mono)}.radar-atlas .radar-city-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:600}
+.radar-atlas .radar-city-track,.radar-atlas .radar-type-track{display:block;height:4px;overflow:hidden;background:var(--atlas-chart-track)}
+.radar-atlas .radar-city-track span{display:block;height:100%;background:var(--color-cobalt);transform-origin:left;animation:radar-bar-in .65s cubic-bezier(.2,.7,.2,1) both}
+.radar-atlas .radar-city-count{text-align:right;font:600 11px var(--font-mono)}.radar-atlas .radar-city-row>svg{color:var(--color-muted)}
+.radar-atlas .radar-type-panel{padding-bottom:17px}.radar-atlas .radar-type-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.radar-atlas .radar-type-item{min-width:0;display:grid;grid-template-columns:8px minmax(0,1fr);gap:10px;align-items:start;padding:12px;border:1px solid var(--hairline-subtle);background:var(--color-paper);color:var(--color-ink);text-align:left;cursor:pointer;transition:border-color 160ms ease,transform 160ms ease}
+.radar-atlas .radar-type-item:hover,.radar-atlas .radar-type-item:focus-visible{border-color:var(--color-cobalt);transform:translateY(-1px)}
+.radar-atlas .radar-type-mark{width:7px;height:7px;margin-top:4px;border-radius:1px;background:var(--color-cobalt)}.radar-atlas .radar-type-mark--1{background:var(--color-mint)}.radar-atlas .radar-type-mark--2{background:var(--color-coral)}.radar-atlas .radar-type-mark--3{background:var(--color-marigold)}
+.radar-atlas .radar-type-copy{display:flex;justify-content:space-between;align-items:baseline;gap:7px;min-width:0}.radar-atlas .radar-type-copy span{overflow:hidden;color:var(--color-muted);font-size:11px;line-height:1.4;text-transform:capitalize;text-overflow:ellipsis}.radar-atlas .radar-type-copy strong{font:600 12px var(--font-mono)}
+.radar-atlas .radar-type-track{grid-column:1/-1;height:3px;margin-top:3px}.radar-atlas .radar-type-fill{display:block;height:100%;background:var(--color-cobalt);animation:radar-bar-in .7s cubic-bezier(.2,.7,.2,1) both}.radar-atlas .radar-type-fill--1{background:var(--color-mint)}.radar-atlas .radar-type-fill--2{background:var(--color-coral)}.radar-atlas .radar-type-fill--3{background:var(--color-marigold)}
+.radar-atlas .radar-empty-state{display:grid;place-items:center;min-height:110px;padding:20px;color:var(--color-muted);font-size:12px;text-align:center}
+.radar-atlas [role=tablist] button{transition:background-color 160ms ease,color 160ms ease,border-color 160ms ease}
+@keyframes radar-tick{from{opacity:.45;transform:scaleY(.55)}to{opacity:1;transform:scaleY(1)}}@keyframes radar-line-draw{to{stroke-dashoffset:0}}@keyframes radar-dot-in{from{opacity:0}to{opacity:1}}@keyframes radar-bar-in{from{transform:scaleX(.2);opacity:.5}to{transform:scaleX(1);opacity:1}}
+@media(max-width:900px){.radar-atlas .radar-landscape-heading{align-items:flex-start;flex-direction:column;gap:14px}.radar-atlas .radar-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.radar-atlas .radar-insight-grid{grid-template-columns:1fr}.radar-atlas .radar-type-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.radar-atlas .radar-metric{min-height:112px;padding:13px}.radar-atlas .radar-metric-label{font-size:10px}.radar-atlas .radar-metric-note{font-size:11px}.radar-atlas .radar-panel{padding:14px}.radar-atlas .radar-panel-index{font-size:9px}.radar-atlas .radar-type-grid{grid-template-columns:1fr}.radar-atlas .radar-chart-labels span{font-size:9px}.radar-atlas .radar-model-chip{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.radar-atlas .radar-metric,.radar-atlas .radar-city-row,.radar-atlas .radar-type-item{transition:none!important;transform:none!important}.radar-atlas .radar-metric-ticks i,.radar-atlas .radar-chart-line,.radar-atlas .radar-line-chart circle,.radar-atlas .radar-city-track span,.radar-atlas .radar-type-fill{animation:none!important;stroke-dashoffset:0}}
