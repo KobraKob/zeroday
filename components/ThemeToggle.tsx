@@ -14,9 +14,9 @@ export function ThemeToggle() {
     <div
       title="ZeroDay Permanent Dark Mode"
       aria-label="ZeroDay Dark Mode Active"
-      className="w-10 h-10 border-2 border-ink rounded-full bg-surface text-ink flex items-center justify-center select-none"
+      className="atlas-nav-control w-11 h-11 border border-hairline-subtle rounded-full bg-surface text-ink flex items-center justify-center select-none min-h-[44px] min-w-[44px]"
     >
-      <Moon className="w-4 h-4 text-marigold" strokeWidth={2} />
+      <Moon className="w-4 h-4 text-mint" strokeWidth={2} />
     </div>
   );
 }
