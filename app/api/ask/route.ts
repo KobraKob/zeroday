@@ -363,11 +363,14 @@ export async function POST(req: NextRequest) {
             const parsed = JSON.parse(rawContent) as any;
             const rawBlocks = Array.isArray(parsed.answer_blocks) ? parsed.answer_blocks : [];
             const invalidCitation = rawBlocks.some((block: any) =>
-              Array.isArray(block.claim_ids) &&
-              block.claim_ids.some((id: unknown) => typeof id !== "string" || !rag.allowedClaimIds.has(id) || !claimsMap.has(id))
+              !block ||
+              typeof block !== "object" ||
+              (block.claim_ids !== undefined && !Array.isArray(block.claim_ids)) ||
+              (Array.isArray(block.claim_ids) &&
+                block.claim_ids.some((id: unknown) => typeof id !== "string" || !rag.allowedClaimIds.has(id) || !claimsMap.has(id)))
             );
             const answerBlocks: AnswerBlock[] = rawBlocks
-              .filter((block: any) => typeof block.text === "string" && block.text.trim())
+              .filter((block: any) => Boolean(block) && typeof block === "object" && typeof block.text === "string" && block.text.trim())
               .slice(0, 4)
               .map((block: any) => ({
                 text: block.text.trim().slice(0, 1800),
