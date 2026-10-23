@@ -407,10 +407,10 @@ export async function POST(req: NextRequest) {
                 query,
                 answer_blocks: blocks,
                 follow_ups: Array.isArray(parsed.follow_ups)
-                  ? parsed.follow_ups.filter((item: unknown): item is string => typeof item === "string" && item.trim().length > 0).slice(0, 3).map((item: string) => item.trim().slice(0, 180))
+                  ? parsed.follow_ups.filter((item: unknown): item is string => typeof item === "string" && item.trim().length > 0.length > 0).slice(0, 3).map((item: string) => item.trim().slice(0, 180))
                   : [],
                 gaps: Array.isArray(parsed.gaps)
-                  ? parsed.gaps.filter((item: unknown): item is string => typeof item === "string" && item.trim()).slice(0, 4).map((item: string) => item.trim().slice(0, 240))
+                  ? parsed.gaps.filter((item: unknown): item is string => typeof item === "string" && item.trim().length > 0).slice(0, 4).map((item: string) => item.trim().slice(0, 240))
                   : [],
                 is_grounded: grounded,
                 answer_kind: answerKind,
