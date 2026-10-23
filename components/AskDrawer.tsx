@@ -262,17 +262,17 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
         className="relative w-full sm:w-[520px] bg-paper border-l-2 border-rule h-full flex flex-col shadow-[-8px_0px_32px_rgba(0,0,0,0.35)] z-10 transition-transform duration-fast ease-out"
       >
         {/* Drawer Header: Compact, calm, authoritative */}
-        <div className="flex items-center justify-between px-5 py-4 border-b-2 border-rule bg-surface flex-shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 bg-cobalt rounded-full animate-pulse" />
-            <h2 className="font-display font-bold text-sm uppercase tracking-wider text-ink">
+        <div className="ask-drawer-header flex items-center justify-between px-5 py-4 border-b-2 border-rule bg-surface flex-shrink-0">
+          <div className="ask-drawer-heading flex items-center gap-2">
+            <div className="ask-drawer-signal w-2.5 h-2.5 bg-cobalt rounded-full animate-pulse" />
+            <h2 className="ask-drawer-title font-display font-bold text-sm uppercase tracking-wider text-ink">
               Ask ZeroDay
             </h2>
           </div>
           <button
             type="button"
             onClick={closeAskDrawer}
-            className="w-8 h-8 border border-rule rounded-full flex items-center justify-center text-muted hover:text-ink hover:bg-paper cursor-pointer transition-colors"
+            className="ask-drawer-close w-8 h-8 border border-rule rounded-full flex items-center justify-center text-muted hover:text-ink hover:bg-paper cursor-pointer transition-colors"
             aria-label="Close drawer"
           >
             <X className="w-4 h-4" />
