@@ -512,7 +512,9 @@ MANDATORY RULES:
         clearTimeout(timeoutId);
 
         if (groqRes.ok) {
-          const groqData = await groqRes.json();
+          const groqData = (await groqRes.json()) as {
+            choices?: Array<{ message?: { content?: string | null } }>;
+          };
           const rawContent = groqData.choices?.[0]?.message?.content;
           if (rawContent) {
             const parsed = JSON.parse(rawContent);
