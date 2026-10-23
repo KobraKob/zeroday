@@ -86,8 +86,20 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
     return companyScores.filter((c) => c.status === "Imminent").length;
   }, [companyScores]);
 
+  const signalLandscape = useMemo(() => {
+    const byCity = new Map<string, number>(); const byType = new Map<string, number>(); const byMonth = new Map<string, number>();
+    signals.forEach((signal) => { if (signal.city) byCity.set(signal.city, (byCity.get(signal.city) ?? 0) + 1); byType.set(signal.type, (byType.get(signal.type) ?? 0) + 1); const month = String(signal.date).slice(0, 7); if (month.length === 7) byMonth.set(month, (byMonth.get(month) ?? 0) + 1); });
+    const cities = Array.from(byCity.entries()).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)).slice(0, 5);
+    const types = Array.from(byType.entries()).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+    const timeline = Array.from(byMonth.entries()).sort(([a], [b]) => a.localeCompare(b)).slice(-6).map(([month, count]) => ({ month, count }));
+    return { cities, types, timeline };
+  }, [signals]);
+  const timelineMax = Math.max(1, ...signalLandscape.timeline.map((point) => point.count));
+  const timelinePoints = signalLandscape.timeline.map((point, index) => ({ ...point, x: signalLandscape.timeline.length <= 1 ? 12 : 12 + (index * 276) / (signalLandscape.timeline.length - 1), y: 82 - (point.count / timelineMax) * 62 }));
+  const timelinePath = timelinePoints.map((point, index) => (index === 0 ? 'M' : 'L') + ' ' + point.x + ' ' + point.y).join(' ');
+  const timelineArea = timelinePoints.length ? timelinePath + ' L ' + timelinePoints[timelinePoints.length - 1].x + ' 90 L ' + timelinePoints[0].x + ' 90 Z' : '';
   return (
-    <div className="space-y-8 font-sans">
+    <div className="radar-atlas space-y-8 font-sans">
       {/* Editorial Header */}
       <PageHeader
         rubric="Predictive Signal Intelligence"
@@ -97,6 +109,27 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
         path="/radar"
         metadata="60-Day Decay Model"
       />
+
+
+      <section className="radar-command-center" aria-labelledby="radar-landscape-title">
+        <div className="radar-landscape-heading"><div><p className="radar-kicker">THE SIGNAL LANDSCAPE</p><h2 id="radar-landscape-title">Read the market before it moves.</h2><p>Explore the evidence shaping each entry likelihood. Select a chart segment to inspect its underlying signals.</p></div><div className="radar-model-chip"><span className="radar-live-mark" /> 60-day decay model <span className="radar-chip-divider" /> Based on recorded evidence</div></div>
+        <div className="radar-metric-grid">
+          <article className="radar-metric radar-metric--lead"><span className="radar-metric-label">Recorded signals</span><strong>{signals.length.toLocaleString("en-IN")}</strong><span className="radar-metric-note">Evidence events in ledger</span><div className="radar-metric-ticks" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div></article>
+          <article className="radar-metric"><span className="radar-metric-label">Prospective entries</span><strong>{companyScores.length.toLocaleString("en-IN")}</strong><span className="radar-metric-note">Companies with scored signals</span></article>
+          <article className="radar-metric"><span className="radar-metric-label">Cities represented</span><strong>{signalCities.length.toLocaleString("en-IN")}</strong><span className="radar-metric-note">Locations named in the ledger</span></article>
+          <article className="radar-metric radar-metric--alert"><span className="radar-metric-label">Imminent index</span><strong>{imminentCount.toLocaleString("en-IN")}</strong><span className="radar-metric-note">Score at or above 75</span></article>
+        </div>
+        <div className="radar-insight-grid">
+          <article className="radar-panel radar-timeline-panel"><div className="radar-panel-head"><div><p className="radar-kicker">SIGNAL MOMENTUM</p><h3>Evidence by month</h3></div><span className="radar-panel-index">01 / TIMELINE</span></div>
+            {timelinePoints.length > 0 ? <><div className="radar-chart-wrap"><svg viewBox="0 0 300 104" role="img" aria-label="Monthly signal counts across the latest six months represented in the ledger" className="radar-line-chart" preserveAspectRatio="none"><line x1="8" y1="20" x2="292" y2="20" /><line x1="8" y1="50" x2="292" y2="50" /><line x1="8" y1="90" x2="292" y2="90" /><path className="radar-chart-area" d={timelineArea} /><path className="radar-chart-line" d={timelinePath} />{timelinePoints.map((point) => <circle key={point.month} cx={point.x} cy={point.y} r="3.2"><title>{point.month}: {point.count} signals</title></circle>)}</svg></div><div className="radar-chart-labels">{timelinePoints.map((point) => <div key={point.month}><strong>{point.count}</strong><span>{point.month.slice(5, 7)}/{point.month.slice(2, 4)}</span></div>)}</div><p className="radar-panel-footnote">Counts reflect recorded signal dates, not a forecast. Months without records are omitted.</p></> : <div className="radar-empty-state">No dated signals available for the timeline.</div>}
+          </article>
+          <article className="radar-panel radar-city-panel"><div className="radar-panel-head"><div><p className="radar-kicker">GEOGRAPHIC FOOTPRINT</p><h3>Where evidence clusters</h3></div><span className="radar-panel-index">02 / CITIES</span></div>
+            {signalLandscape.cities.length > 0 ? <div className="radar-city-list">{signalLandscape.cities.map((city, index) => <button type="button" key={city.name} className="radar-city-row" onClick={() => { setSelectedCity(city.name); setActiveTab("feed"); }} aria-label={"View " + city.count + " signals in " + city.name}><span className="radar-city-rank">0{index + 1}</span><span className="radar-city-name">{city.name}</span><span className="radar-city-track"><span style={{ width: Math.max(7, (city.count / Math.max(1, signalLandscape.cities[0].count)) * 100) + "%" }} /></span><strong className="radar-city-count">{city.count}</strong><ChevronRight size={14} aria-hidden="true" /></button>)}</div> : <div className="radar-empty-state">No city tags are present in the current signal set.</div>}
+            <p className="radar-panel-footnote">Select a city to open its chronological evidence ledger.</p>
+          </article>
+        </div>
+        <article className="radar-panel radar-type-panel"><div className="radar-panel-head"><div><p className="radar-kicker">EVIDENCE MIX</p><h3>Signals by source type</h3></div><span className="radar-panel-index">03 / CLASSIFICATION</span></div><div className="radar-type-grid">{signalLandscape.types.map((item, index) => <button type="button" key={item.name} className="radar-type-item" onClick={() => { setSelectedType(item.name); setActiveTab("feed"); }} title={"Filter ledger to " + item.name.replace(/_/g, " ")}><span className={"radar-type-mark radar-type-mark--" + (index % 4)} /><span className="radar-type-copy"><span>{item.name.replace(/_/g, " ")}</span><strong>{item.count}</strong></span><span className="radar-type-track"><span className={"radar-type-fill radar-type-fill--" + (index % 4)} style={{ width: Math.max(4, (item.count / Math.max(1, signalLandscape.types[0].count)) * 100) + "%" }} /></span></button>)}</div></article>
+      </section>
 
       {/* Tabs & View Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline">
