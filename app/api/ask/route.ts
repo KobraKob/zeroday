@@ -243,9 +243,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Optional Railway Backend Forwarding (when deployed as separated Frontend / Backend)
+    // Optional Render backend forwarding for a split frontend/backend deployment
     const backendUrl =
-      process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
+      process.env.BACKEND_URL;
     if (backendUrl) {
       try {
         const remoteRes = await fetch(`${backendUrl}/api/ask`, {
@@ -520,93 +520,8 @@ export async function POST(req: NextRequest) {
         ]
       : [];
 
-    // 3. Semantic Vector Search for Grounded Context
-    const vectorMatches = vectorStore.search(query, 8);
-    const contextSnippets = vectorMatches.map((m) => ({
-      title: m.chunk.title,
-      content: m.chunk.content,
-      claim_ids: m.chunk.claim_ids,
-    }));
-
-    // 4. Attempt Groq AI Grounded Engine inference
-    if (GROQ_API_KEY && contextSnippets.length > 0) {
-      try {
-        const systemPrompt = `You are the grounded intelligence system for ZeroDay, an authoritative, citable platform on India's Global Capability Centres.
-You answer user queries strictly, accurately, and authoritatively using ONLY the provided Verified Context below.
-
-VERIFIED CONTEXT FROM ZERODAY VECTOR STORE:
-${JSON.stringify(contextSnippets)}
-
-MANDATORY RULES:
-1. Every factual sentence in "answer_blocks" must cite valid "claim_ids" from the context if available.
-2. If the user asks for numbers, claims, or entities NOT present in the verified context, reply:
-   "ZeroDay has no sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory."
-   Set "is_grounded": false, and describe the unverified metric in the "gaps" array.
-3. Keep answers concise, professional, and clear.
-4. Output strictly valid JSON with schema:
-{
-  "answer_blocks": [ { "text": "factual sentence", "claim_ids": ["claim-id"] } ],
-  "follow_ups": ["relevant question 1", "relevant question 2"],
-  "gaps": [],
-  "is_grounded": true or false
-}`;
-
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8500);
-
-        const groqRes = await fetch(
-          "https://api.groq.com/openai/v1/chat/completions",
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${GROQ_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              model: GROQ_MODEL,
-              messages: [
-                { role: "system", content: systemPrompt },
-                { role: "user", content: query },
-              ],
-              response_format: { type: "json_object" },
-              temperature: 0.1,
-            }),
-            signal: controller.signal,
-          }
-        );
-
-        clearTimeout(timeoutId);
-
-        if (groqRes.ok) {
-          const groqData = await groqRes.json();
-          const rawContent = groqData.choices?.[0]?.message?.content;
-          if (rawContent) {
-            const parsed = JSON.parse(rawContent) as AskResponse;
-
-            if (parsed.answer_blocks && parsed.answer_blocks.length > 0) {
-              const hasValidClaims = parsed.answer_blocks.every(
-                (b) =>
-                  !b.claim_ids ||
-                  b.claim_ids.every((cid) => claimsMap.has(cid))
-              );
-
-              if (hasValidClaims) {
-                return NextResponse.json({
-                  answer_blocks: parsed.answer_blocks,
-                  follow_ups: (parsed.follow_ups || []).slice(0, 3),
-                  gaps: parsed.gaps || [],
-                  is_grounded: parsed.is_grounded !== false,
-                  disagreements:
-                    disagreements.length > 0 ? disagreements : undefined,
-                });
-              }
-            }
-          }
-        }
-      } catch (groqErr) {
-        console.warn("Groq inference fallback triggered:", groqErr);
-      }
-    }
+    // The site-aware RAG call above is the only Groq path. If it rejects a
+    // response, fall back to deterministic logic without a second, weaker prompt.
 
     // 5. Deterministic Grounded Engine Fallback
     const answer_blocks: AnswerBlock[] = [];
