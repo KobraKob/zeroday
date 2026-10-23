@@ -6,6 +6,7 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { AskProvider } from "../components/AskContext";
 import { AskDrawer } from "../components/AskDrawer";
+import { AskOrb } from "../components/AskOrb";
 import { HighlightToAsk } from "../components/HighlightToAsk";
 
 export const metadata: Metadata = {
@@ -52,6 +53,7 @@ export default function RootLayout({
             <Footer />
             <SourceDrawer />
             <AskDrawer />
+            <AskOrb />
             <HighlightToAsk />
           </AskProvider>
         </SourceDrawerProvider>
