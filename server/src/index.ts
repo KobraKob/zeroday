@@ -829,10 +829,12 @@ app.post("/api/ask", async (req: Request, res: Response) => {
       q.includes("what does this site do")
     ) {
       return res.status(200).json({
+        query,
+        answer_kind: "site_help",
         answer_blocks: [
           {
             text: "I am Zero, the epistemic auditor for ZeroDay. ZeroDay is the independent, citable record of India's Global Capability Centre ecosystem, where every number is traced to a primary statutory filing, registered lease deed, or gazetted order.",
-            claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
+            claim_ids: [],
           },
           {
             text: "Unlike analyst surveys with opaque methodologies or paid vendor listings, ZeroDay operates under a strict neutrality firewall with zero commercial pay-to-play rankings.",
@@ -846,7 +848,7 @@ app.post("/api/ask", async (req: Request, res: Response) => {
         ],
         gaps: [],
         is_grounded: true,
-        engine: "Zero (ZeroDay Auditor)",
+        engine: "Zero site guide",
       });
     }
 
