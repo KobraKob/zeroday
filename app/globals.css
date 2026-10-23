@@ -1921,3 +1921,172 @@ small,
   .proof-atlas .proof-metric:hover,
   .proof-atlas .proof-evidence-bar-row:hover { transform:none; }
 }
+
+
+/* Persistent, keyboard-accessible Ask Orb launcher. */
+.ask-orb-launcher {
+  position: fixed;
+  right: max(22px, env(safe-area-inset-right));
+  bottom: max(22px, env(safe-area-inset-bottom));
+  z-index: 44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+.ask-orb-trigger {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 78px;
+  height: 78px;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid color-mix(in srgb, var(--color-cobalt) 65%, var(--color-hairline));
+  border-radius: 50%;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28), 0 0 24px color-mix(in srgb, var(--color-cobalt) 23%, transparent);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ask-orb-trigger::before,
+.ask-orb-trigger::after {
+  position: absolute;
+  z-index: -1;
+  inset: -5px;
+  border: 1px solid color-mix(in srgb, var(--color-cobalt) 58%, transparent);
+  border-radius: 50%;
+  content: "";
+  opacity: .52;
+  pointer-events: none;
+  animation: ask-orb-ring 3.8s ease-in-out infinite;
+}
+.ask-orb-trigger::after {
+  inset: -10px;
+  border-color: color-mix(in srgb, var(--color-mint) 48%, transparent);
+  opacity: .22;
+  animation-delay: -1.9s;
+}
+.ask-orb-trigger:hover {
+  transform: translateY(-3px) scale(1.025);
+  border-color: var(--color-cobalt);
+  box-shadow: 0 12px 32px rgba(0,0,0,.34), 0 0 32px color-mix(in srgb, var(--color-cobalt) 30%, transparent);
+}
+.ask-orb-trigger:active {
+  transform: scale(.97);
+}
+.ask-orb-trigger:focus-visible {
+  outline: 3px solid var(--color-cobalt-text);
+  outline-offset: 6px;
+}
+.ask-orb-surface {
+  position: absolute;
+  z-index: 1;
+  inset: 2px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #3b82f6 0%, #4146dd 50%, #10152d 88%);
+  pointer-events: none;
+}
+.ask-orb-canvas,
+.ask-orb-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+.ask-orb-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.ask-orb-canvas canvas {
+  border-radius: 50%;
+}
+.ask-orb-core-mark {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.62);
+  border-radius: 50%;
+  background: rgba(13,16,34,.28);
+  color: #fff;
+  font: 800 9px/1 var(--font-mono);
+  letter-spacing: -.04em;
+  text-shadow: 0 1px 7px rgba(0,0,0,.4);
+  box-shadow: 0 0 16px rgba(255,255,255,.16);
+  pointer-events: none;
+}
+.ask-orb-tooltip {
+  position: absolute;
+  right: 93px;
+  top: 50%;
+  display: flex;
+  min-width: 174px;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  transform: translate(5px, -50%);
+  border: 1px solid var(--color-hairline);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 0 8px 24px rgba(0,0,0,.22);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+.ask-orb-tooltip strong {
+  font: 700 10px/1.2 var(--font-mono);
+  letter-spacing: .07em;
+}
+.ask-orb-tooltip small {
+  color: var(--color-muted);
+  font: 10px/1.35 var(--font-body);
+}
+.ask-orb-launcher:hover .ask-orb-tooltip,
+.ask-orb-launcher:focus-within .ask-orb-tooltip {
+  transform: translate(0, -50%);
+  opacity: 1;
+  visibility: visible;
+}
+@keyframes ask-orb-ring {
+  0%, 100% { transform: scale(.98); opacity: .22; }
+  50% { transform: scale(1.055); opacity: .62; }
+}
+@media (max-width: 640px) {
+  .ask-orb-launcher {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+  .ask-orb-trigger {
+    width: 66px;
+    height: 66px;
+  }
+  .ask-orb-tooltip {
+    right: 80px;
+    min-width: 158px;
+  }
+  .ask-orb-core-mark {
+    width: 23px;
+    height: 23px;
+    font-size: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ask-orb-trigger,
+  .ask-orb-tooltip {
+    transition: none !important;
+  }
+  .ask-orb-trigger::before,
+  .ask-orb-trigger::after {
+    animation: none !important;
+  }
+}
