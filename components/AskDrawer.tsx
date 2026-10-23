@@ -42,6 +42,8 @@ interface AnswerResult {
   follow_ups: string[];
   gaps: string[];
   is_grounded: boolean;
+  answer_kind?: "site_help" | "evidence" | "catalog";
+  engine?: string;
   disagreements?: SourceDisagreement[];
 }
 
@@ -391,10 +393,18 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                 <div className="ask-response-status">
                   <span className={"ask-source-status" + (result.is_grounded ? " is-grounded" : " is-limited")}>
                     {result.is_grounded ? <Check className="w-3.5 h-3.5" /> : <HelpCircle className="w-3.5 h-3.5" />}
-                    {result.is_grounded ? "Sourced answer" : "Coverage limited"}
+                    {result.answer_kind === "site_help"
+                      ? "Site guidance"
+                      : result.answer_kind === "catalog"
+                        ? "Registry data"
+                        : result.is_grounded
+                          ? "Source-backed answer"
+                          : "Evidence gap"}
                   </span>
                   <span className="ask-source-count">
-                    {linkedSourceCount} {linkedSourceCount === 1 ? "source" : "sources"} linked
+                    {result.answer_kind === "site_help"
+                      ? "ZeroDay site guide"
+                      : linkedSourceCount + " " + (linkedSourceCount === 1 ? "source" : "sources") + " linked"}
                   </span>
                 </div>
 
