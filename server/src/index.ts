@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
 import postgres from "postgres";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 dotenv.config();
 
@@ -43,8 +44,19 @@ const DATABASE_URL =
   process.env.SUPABASE_DATABASE_URL ||
   process.env.POSTGRES_URL ||
   "";
+const SUPABASE_URL =
+  process.env.SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  "";
+const SUPABASE_PUBLIC_KEY =
+  process.env.SUPABASE_PUBLISHABLE_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  process.env.SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "";
 
 let dbClient: ReturnType<typeof postgres> | null = null;
+let supabaseClient: SupabaseClient | null = null;
 
 function getDatabase() {
   if (!DATABASE_URL) return null;
@@ -58,6 +70,20 @@ function getDatabase() {
     });
   }
   return dbClient;
+}
+
+function getSupabaseClient() {
+  if (!SUPABASE_URL || !SUPABASE_PUBLIC_KEY) return null;
+  if (!supabaseClient) {
+    supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLIC_KEY, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+        detectSessionInUrl: false,
+      },
+    });
+  }
+  return supabaseClient;
 }
 
 // In-Memory Vector Store for Railway Backend
@@ -232,25 +258,67 @@ function unwrapJson(value: any) {
  * JSON files are only a local/test fallback. Production must not silently boot
  * against bundled fixtures when a database has not been configured.
  */
-async function initialiseDataSource(): Promise<"supabase-postgres" | "local-json"> {
+async function initialiseDataSource(): Promise<"supabase-postgres" | "supabase-rest" | "local-json"> {
   const database = getDatabase();
-  if (!database) {
+  const supabase = getSupabaseClient();
+
+  if (!database && !supabase) {
     if (process.env.NODE_ENV === "production") {
-      throw new Error("DATABASE_URL (or SUPABASE_DATABASE_URL) is required in production.");
+      throw new Error(
+        "Configure DATABASE_URL or both SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (or SUPABASE_ANON_KEY)."
+      );
     }
-    console.warn("DATABASE_URL missing; backend is using local JSON fixtures.");
+    console.warn("Supabase credentials missing; backend is using local JSON fixtures.");
     return "local-json";
   }
 
-  const [claimRows, gccRows, cityRows, stateRows] = await Promise.all([
-    database`select id, subject_type, subject_id, field, value, unit, as_of, source_id, confidence, status, exact_quote, note, demo
-      from public.claims
-      where status in ('approved', 'verified') and valid_to is null
-      order by subject_type, subject_id, field`,
-    database`select data from public.entities where type = 'gcc' order by name`,
-    database`select data from public.entities where type = 'city' order by name`,
-    database`select data from public.entities where type = 'state' order by name`,
-  ]);
+  let claimRows: any[];
+  let gccRows: any[];
+  let cityRows: any[];
+  let stateRows: any[];
+
+  if (database) {
+    [claimRows, gccRows, cityRows, stateRows] = await Promise.all([
+      database`select id, subject_type, subject_id, field, value, unit, as_of, source_id, confidence, status, exact_quote, note, demo
+        from public.claims
+        where status = 'approved' and valid_to is null
+        order by subject_type, subject_id, field`,
+      database`select data from public.entities where type = 'gcc' order by name`,
+      database`select data from public.entities where type = 'city' order by name`,
+      database`select data from public.entities where type = 'state' order by name`,
+    ]);
+  } else {
+    // Public, read-only queries. RLS remains authoritative; no service-role key
+    // is used or exposed by the public API service.
+    const [claimsResult, gccResult, cityResult, stateResult] = await Promise.all([
+      supabase!.from("claims")
+        .select("id,subject_type,subject_id,field,value,unit,as_of,source_id,confidence,status,exact_quote,note,demo")
+        .eq("status", "approved")
+        .is("valid_to", null)
+        .order("subject_type")
+        .order("subject_id")
+        .order("field"),
+      supabase!.from("entities").select("data").eq("type", "gcc").order("name"),
+      supabase!.from("entities").select("data").eq("type", "city").order("name"),
+      supabase!.from("entities").select("data").eq("type", "state").order("name"),
+    ]);
+
+    for (const [table, result] of [
+      ["claims", claimsResult],
+      ["GCC entities", gccResult],
+      ["city entities", cityResult],
+      ["state entities", stateResult],
+    ] as const) {
+      if (result.error) {
+        throw new Error("Supabase REST query failed for " + table + ": " + result.error.message);
+      }
+    }
+
+    claimRows = claimsResult.data || [];
+    gccRows = gccResult.data || [];
+    cityRows = cityResult.data || [];
+    stateRows = stateResult.data || [];
+  }
 
   claimsData = claimRows.map((row: any) => ({
     ...row,
@@ -262,21 +330,22 @@ async function initialiseDataSource(): Promise<"supabase-postgres" | "local-json
   citiesData = cityRows.map((row: any) => unwrapJson(row.data));
   statesData = stateRows.map((row: any) => unwrapJson(row.data));
 
-  // Rebuild retrieval vectors from DB records, not stale bundled JSON.
+  // Rebuild retrieval vectors from current database records.
   vectorStore = new BackendVectorStore();
   claimsMap = new Map<string, any>();
   claimsData.forEach((claim) => claimsMap.set(claim.id, claim));
 
   if (!gccData.length || !citiesData.length) {
-    console.warn("Supabase is connected, but GCC/city tables have no seeded records yet.");
+    console.warn("Supabase connected, but GCC/city tables currently have no seeded records.");
   }
-  console.log("Loaded live records from Supabase PostgreSQL.", JSON.stringify({
+  const dataSource = database ? "supabase-postgres" : "supabase-rest";
+  console.log("Loaded live records from " + dataSource + ".", JSON.stringify({
     claims: claimsData.length,
     gccs: gccData.length,
     cities: citiesData.length,
     states: statesData.length,
   }));
-  return "supabase-postgres";
+  return dataSource;
 }
 
 // --- HTTP Routes ---
@@ -292,7 +361,7 @@ app.get("/health", (_req: Request, res: Response) => {
       gccs: gccData.length,
       cities: citiesData.length,
     },
-    database: DATABASE_URL ? "configured" : "local-json",
+    database: DATABASE_URL ? "supabase-postgres" : (SUPABASE_URL && SUPABASE_PUBLIC_KEY ? "supabase-rest" : "local-json"),
     llm: {
       model: GROQ_MODEL,
       status: GROQ_API_KEY ? "connected" : "disabled",
