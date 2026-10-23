@@ -4,9 +4,9 @@ import { reviewsRepo } from "../../lib/repo/reviewsRepo";
 import { SubmitClient } from "./SubmitClient";
 
 export const metadata: Metadata = {
-  title: "Submit Client Attestation — ZeroDay",
+  title: "Attest an Engagement — ZeroDay",
   description:
-    "Direct client attestation form for GCC leaders to confirm service provider project deliveries with verified corporate credentials.",
+    "Evidence-first intake for GCC client engagements, with clear scope, identity details, and review status before anything enters the public record.",
 };
 
 export default function SubmitPage() {
