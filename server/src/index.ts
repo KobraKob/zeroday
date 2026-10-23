@@ -465,8 +465,9 @@ function buildRagContext(query: string, guide: AssistantGuideEntry[], matches: a
   };
 }
 
-function siteHelpFallback() {
+function siteHelpFallback(query: string) {
   return {
+    query,
     answer_blocks: [
       {
         text: "Start in the GCC Registry (/registry). Search for a company, then filter by city, sector, parent headquarters, size, operating status, or CIN availability. Open a record's citation to inspect its evidence.",
@@ -654,6 +655,10 @@ app.post("/api/ask", async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Query parameter is required" });
     }
 
+    if (query.length > 2000) {
+      return res.status(413).json({ error: "Question is too long. Keep it under 2,000 characters." });
+    }
+
     const q = query.toLowerCase().trim();
 
     // 1. Security & Prompt Injection Filter
@@ -785,12 +790,13 @@ app.post("/api/ask", async (req: Request, res: Response) => {
                   ? false
                   : citedIds.size > 0 || (answerKind === "catalog" && rag.hasRelevantRecords);
               return res.status(200).json({
+                query,
                 answer_blocks: blocks,
                 follow_ups: Array.isArray(parsed.follow_ups)
-                  ? parsed.follow_ups.filter((item: unknown): item is string => typeof item === "string" && item.trim()).slice(0, 3).map((item: string) => item.trim().slice(0, 180))
+                  ? parsed.follow_ups.filter((item: unknown): item is string => typeof item === "string" && item.trim().length > 0).slice(0, 3).map((item: string) => item.trim().slice(0, 180))
                   : [],
                 gaps: Array.isArray(parsed.gaps)
-                  ? parsed.gaps.filter((item: unknown): item is string => typeof item === "string" && item.trim()).slice(0, 4).map((item: string) => item.trim().slice(0, 240))
+                  ? parsed.gaps.filter((item: unknown): item is string => typeof item === "string" && item.trim().length > 0).slice(0, 4).map((item: string) => item.trim().slice(0, 240))
                   : [],
                 is_grounded: grounded,
                 answer_kind: answerKind,
@@ -809,7 +815,7 @@ app.post("/api/ask", async (req: Request, res: Response) => {
     }
 
     if (siteHelpQuestion) {
-      return res.status(200).json(siteHelpFallback());
+      return res.status(200).json(siteHelpFallback(query));
     }
 
     // 2. Identity Queries
