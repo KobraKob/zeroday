@@ -6,9 +6,7 @@ import { SubmittedAttestation } from "../../lib/repo/reviewsRepo";
 import {
   AlertCircle,
   ArrowDownRight,
-  ArrowRight,
   ArrowUpRight,
-  BadgeCheck,
   Building2,
   Check,
   CheckCircle2,
@@ -116,10 +114,36 @@ export function SubmitClient({ providers, initialAttestations }: SubmitClientPro
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setAttemptedSubmit(true);
-    if (Object.values(fieldErrors).some(Boolean)) return;
 
     const form = event.currentTarget;
-    if (!form.checkValidity() || !providerId || !selectedProvider || !serviceCategory) {
+    const hasInvalidValue =
+      !providerId ||
+      !selectedProvider ||
+      !gccName.trim() ||
+      !serviceCategory ||
+      !year ||
+      Number(year) < 2015 ||
+      Number(year) > CURRENT_YEAR ||
+      !attesterName.trim() ||
+      !attesterRole.trim() ||
+      !validEmail(attesterEmail) ||
+      projectSummary.trim().length < 24;
+
+    if (hasInvalidValue) {
+      const firstInvalidId =
+        !providerId || !selectedProvider ? "attest-provider" :
+        !gccName.trim() ? "attest-gcc" :
+        !serviceCategory ? "attest-service" :
+        !year || Number(year) < 2015 || Number(year) > CURRENT_YEAR ? "attest-year" :
+        !attesterName.trim() ? "attest-name" :
+        !attesterRole.trim() ? "attest-role" :
+        !validEmail(attesterEmail) ? "attest-email" :
+        "attest-summary";
+      document.getElementById(firstInvalidId)?.focus();
+      return;
+    }
+
+    if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
@@ -150,7 +174,7 @@ export function SubmitClient({ providers, initialAttestations }: SubmitClientPro
     setAttesterEmail("");
     setYear(String(CURRENT_YEAR));
     setProjectSummary("");
-    document.getElementById("attest-result")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    document.getElementById("attest-result")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
   };
 
   const clearPreparedPreview = () => setSubmittedItem(null);
@@ -184,7 +208,7 @@ export function SubmitClient({ providers, initialAttestations }: SubmitClientPro
             <span className="attest-journey-stamp">REVIEW PATH / 01</span>
           </div>
           <div className="attest-journey-track">
-            <div className="attest-journey-rule" aria-hidden="true"><span style={{ width: (completionPercent * 0.62) + "%" }} /></div>
+            <div className="attest-journey-rule" aria-hidden="true"><span style={{ height: completionPercent + "%" }} /></div>
             <div className={"attest-journey-step" + (engagementComplete ? " is-complete" : " is-current")}>
               <span className="attest-journey-node">{engagementComplete ? <Check size={14} /> : "01"}</span>
               <div><strong>Engagement</strong><small>Client · provider · service</small></div>
