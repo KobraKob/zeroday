@@ -30,8 +30,8 @@
   --color-hairline-subtle: #E8DEC8;
 
   /* Palette Accents */
-  --cobalt: #2536E8;               /* Primary Action / Brand */
-  --color-cobalt: #2536E8;
+  --cobalt: #15183A;               /* Primary Action / Brand */
+  --color-cobalt: #15183A;
   --marigold: #FFC21A;             /* Legal Entity */
   --color-marigold: #FFC21A;
   --coral: #FF6B4A;                /* Parent Company */
@@ -311,5 +311,103 @@ small,
 @media (prefers-reduced-motion: reduce) {
   .atlas-city-pulse, .atlas-bar-fill, .atlas-count {
     animation: none !important;
+  }
+}
+
+
+/* Navigation: one calm, tactile motion language across desktop and mobile. */
+.atlas-navbar {
+  isolation: isolate;
+  animation: atlas-nav-enter 420ms cubic-bezier(.2,.7,.2,1) both;
+}
+.atlas-navbar-inner {
+  animation: atlas-nav-content-enter 520ms cubic-bezier(.2,.7,.2,1) both;
+}
+.atlas-nav-link {
+  transform: translateY(0);
+}
+.atlas-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 999px;
+  background: #FF6B4A;
+  opacity: 0;
+  transition: left 180ms ease, right 180ms ease, opacity 180ms ease;
+}
+.atlas-nav-link:not(.atlas-nav-link-active):hover {
+  transform: translateY(-1px);
+}
+.atlas-nav-link:not(.atlas-nav-link-active):hover::after {
+  left: 14px;
+  right: 14px;
+  opacity: 1;
+}
+.atlas-nav-link-active {
+  position: relative;
+}
+.atlas-nav-link-active::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: 6px;
+  right: 7px;
+  border-radius: 50%;
+  background: #FF6B4A;
+  opacity: 1;
+}
+.atlas-nav-control:hover {
+  transform: translateY(-1px);
+}
+.atlas-nav-primary {
+  box-shadow: 0 0 0 rgba(21,24,58,0);
+}
+.atlas-nav-primary:hover {
+  transform: translateY(-1px);
+}
+.atlas-mobile-panel {
+  transform-origin: top;
+  animation: atlas-mobile-open 190ms cubic-bezier(.2,.7,.2,1) both;
+}
+.atlas-mobile-link {
+  animation: atlas-mobile-link-in 260ms cubic-bezier(.2,.7,.2,1) both;
+}
+.atlas-mobile-link:nth-child(2) { animation-delay: 20ms; }
+.atlas-mobile-link:nth-child(3) { animation-delay: 40ms; }
+.atlas-mobile-link:nth-child(4) { animation-delay: 60ms; }
+.atlas-mobile-link:nth-child(5) { animation-delay: 80ms; }
+.atlas-mobile-link:nth-child(6) { animation-delay: 100ms; }
+.atlas-mobile-link:nth-child(7) { animation-delay: 120ms; }
+
+@keyframes atlas-nav-enter {
+  from { opacity: .75; }
+  to { opacity: 1; }
+}
+@keyframes atlas-nav-content-enter {
+  from { opacity: .6; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes atlas-mobile-open {
+  from { opacity: 0; transform: scaleY(.96) translateY(-4px); }
+  to { opacity: 1; transform: scaleY(1) translateY(0); }
+}
+@keyframes atlas-mobile-link-in {
+  from { opacity: 0; transform: translateX(-5px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-navbar,
+  .atlas-navbar-inner,
+  .atlas-nav-link,
+  .atlas-nav-control,
+  .atlas-mobile-panel,
+  .atlas-mobile-link {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
   }
 }
