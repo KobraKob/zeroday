@@ -743,7 +743,9 @@ app.post("/api/ask", async (req: Request, res: Response) => {
         });
 
         if (groqRes.ok) {
-          const groqData = await groqRes.json();
+          const groqData = (await groqRes.json()) as {
+            choices?: Array<{ message?: { content?: string | null } }>;
+          };
           const rawContent = groqData.choices?.[0]?.message?.content;
           if (typeof rawContent === "string" && rawContent.trim()) {
             const parsed = JSON.parse(rawContent) as any;
