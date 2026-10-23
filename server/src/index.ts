@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
+import postgres from "postgres";
 
 dotenv.config();
 
@@ -31,11 +32,33 @@ function loadJson(filename: string): any {
   return [];
 }
 
-const claimsData: any[] = loadJson("claims.json");
-const gccData: any[] = loadJson("gccs.json");
-const citiesData: any[] = loadJson("cities.json");
-const definitionsData: any[] = loadJson("definitions.json");
-const statesData: any[] = loadJson("states.json");
+let claimsData: any[] = loadJson("claims.json");
+let gccData: any[] = loadJson("gccs.json");
+let citiesData: any[] = loadJson("cities.json");
+let definitionsData: any[] = loadJson("definitions.json");
+let statesData: any[] = loadJson("states.json");
+
+const DATABASE_URL =
+  process.env.DATABASE_URL ||
+  process.env.SUPABASE_DATABASE_URL ||
+  process.env.POSTGRES_URL ||
+  "";
+
+let dbClient: ReturnType<typeof postgres> | null = null;
+
+function getDatabase() {
+  if (!DATABASE_URL) return null;
+  if (!dbClient) {
+    dbClient = postgres(DATABASE_URL, {
+      max: Math.max(1, Number(process.env.DB_POOL_MAX || 5)),
+      idle_timeout: 20,
+      connect_timeout: 10,
+      prepare: false,
+      ssl: process.env.NODE_ENV === "production" ? "require" : false,
+    });
+  }
+  return dbClient;
+}
 
 // In-Memory Vector Store for Railway Backend
 interface Chunk {
@@ -191,9 +214,70 @@ class BackendVectorStore {
   }
 }
 
-const vectorStore = new BackendVectorStore();
-const claimsMap = new Map<string, any>();
+let vectorStore = new BackendVectorStore();
+let claimsMap = new Map<string, any>();
 claimsData.forEach((c) => claimsMap.set(c.id, c));
+
+function unwrapJson(value: any) {
+  if (typeof value !== "string") return value;
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
+}
+
+/**
+ * Railway runs against persistent database records when DATABASE_URL exists.
+ * JSON files are only a local/test fallback. Production must not silently boot
+ * against bundled fixtures when a database has not been configured.
+ */
+async function initialiseDataSource(): Promise<"supabase-postgres" | "local-json"> {
+  const database = getDatabase();
+  if (!database) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("DATABASE_URL (or SUPABASE_DATABASE_URL) is required in production.");
+    }
+    console.warn("DATABASE_URL missing; backend is using local JSON fixtures.");
+    return "local-json";
+  }
+
+  const [claimRows, gccRows, cityRows, stateRows] = await Promise.all([
+    database`select id, subject_type, subject_id, field, value, unit, as_of, source_id, confidence, status, exact_quote, note, demo
+      from public.claims
+      where status in ('approved', 'verified') and valid_to is null
+      order by subject_type, subject_id, field`,
+    database`select data from public.entities where type = 'gcc' order by name`,
+    database`select data from public.entities where type = 'city' order by name`,
+    database`select data from public.entities where type = 'state' order by name`,
+  ]);
+
+  claimsData = claimRows.map((row: any) => ({
+    ...row,
+    value: unwrapJson(row.value),
+    source_id: row.source_id || "MISSING",
+    demo: Boolean(row.demo),
+  }));
+  gccData = gccRows.map((row: any) => unwrapJson(row.data));
+  citiesData = cityRows.map((row: any) => unwrapJson(row.data));
+  statesData = stateRows.map((row: any) => unwrapJson(row.data));
+
+  // Rebuild retrieval vectors from DB records, not stale bundled JSON.
+  vectorStore = new BackendVectorStore();
+  claimsMap = new Map<string, any>();
+  claimsData.forEach((claim) => claimsMap.set(claim.id, claim));
+
+  if (!gccData.length || !citiesData.length) {
+    console.warn("Supabase is connected, but GCC/city tables have no seeded records yet.");
+  }
+  console.log("Loaded live records from Supabase PostgreSQL.", JSON.stringify({
+    claims: claimsData.length,
+    gccs: gccData.length,
+    cities: citiesData.length,
+    states: statesData.length,
+  }));
+  return "supabase-postgres";
+}
 
 // --- HTTP Routes ---
 
@@ -208,9 +292,10 @@ app.get("/health", (_req: Request, res: Response) => {
       gccs: gccData.length,
       cities: citiesData.length,
     },
+    database: DATABASE_URL ? "configured" : "local-json",
     llm: {
       model: GROQ_MODEL,
-      status: "connected",
+      status: GROQ_API_KEY ? "connected" : "disabled",
     },
   });
 });
@@ -407,6 +492,14 @@ MANDATORY RULES:
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`⚡ ZeroDay Railway Backend service running on port ${PORT}`);
+async function startServer() {
+  const dataSource = await initialiseDataSource();
+  app.listen(Number(PORT), () => {
+    console.log("ZeroDay Railway Backend listening on port " + PORT + " using " + dataSource + ".");
+  });
+}
+
+startServer().catch((error) => {
+  console.error("ZeroDay backend startup failed:", error);
+  process.exitCode = 1;
 });
