@@ -1,6 +1,6 @@
 /**
- * GCC Atlas Design Tokens
- * Concept: "The Atlas as a printed reference" — institutional ledger meets architectural cartography.
+ * ZeroDay Design Tokens
+ * Concept: "ZeroDay: The Grounded Ledger" — institutional ledger meets architectural cartography.
  * All values are anchored to CSS custom properties defined in globals.css.
  */
 

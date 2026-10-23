@@ -50,20 +50,20 @@ class VectorStore {
 
     // 1. Identity & Mandate
     this.chunks.push({
-      id: "identity-atlas",
+      id: "identity-zeroday",
       category: "identity",
-      title: "GCC Atlas Mandate & Record",
+      title: "ZeroDay Mandate & Record",
       content:
-        "GCC Atlas is the independent, citable record of India's Global Capability Centre (GCC) ecosystem. Facts are verified against primary statutory corporate filings (MCA CIN), registered lease deeds, and gazetted state policies. Answers come strictly from verified public evidence without speculation.",
+        "ZeroDay is the independent, citable record of India's Global Capability Centre (GCC) ecosystem. Facts are verified against primary statutory corporate filings (MCA CIN), registered lease deeds, and gazetted state policies. Answers come strictly from verified public evidence without speculation.",
       claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
     });
 
     this.chunks.push({
       id: "platform-purpose",
       category: "identity",
-      title: "What GCC Atlas Does",
+      title: "What ZeroDay Does",
       content:
-        "GCC Atlas provides an independent, citable record of India's Global Capability Centres. Every number is anchored to an immutable primary source with confidence grades (A to D) and an editorial neutrality firewall with zero commercial paid placement.",
+        "ZeroDay provides an independent, citable record of India's Global Capability Centres. Every number is anchored to an immutable primary source with confidence grades (A to D) and an editorial neutrality firewall with zero commercial paid placement.",
       claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
     });
 

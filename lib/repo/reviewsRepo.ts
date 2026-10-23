@@ -1,4 +1,7 @@
-import { Claim, ProofLink } from "../schema";
+import { Claim } from "../schema";
+import { claimsRepo } from "./claimsRepo";
+import { eventsRepo } from "./eventsRepo";
+import { getDb, schema } from "../db/client";
 
 export interface PendingReviewClaim {
   id: string;
@@ -11,6 +14,7 @@ export interface PendingReviewClaim {
   status: "pending" | "approved" | "rejected";
   reviewed_at?: string;
   rejection_reason?: string;
+  reviewer?: string;
 }
 
 export interface SubmittedAttestation {
@@ -27,7 +31,6 @@ export interface SubmittedAttestation {
   status: "pending_verification" | "verified" | "rejected";
 }
 
-// In-memory store initialized with seed review items
 const PENDING_CLAIMS: PendingReviewClaim[] = [
   {
     id: "rev-claim-1",
@@ -96,25 +99,147 @@ export const reviewsRepo = {
     return PENDING_CLAIMS;
   },
 
-  approveClaim(id: string): boolean {
-    const item = PENDING_CLAIMS.find((c) => c.id === id);
-    if (item) {
-      item.status = "approved";
-      item.reviewed_at = new Date().toISOString();
-      return true;
+  addPendingClaim(item: PendingReviewClaim): void {
+    const existingIndex = PENDING_CLAIMS.findIndex((c) => c.id === item.id);
+    if (existingIndex >= 0) {
+      PENDING_CLAIMS[existingIndex] = item;
+    } else {
+      PENDING_CLAIMS.unshift(item);
     }
-    return false;
   },
 
-  rejectClaim(id: string, reason: string): boolean {
+  approveClaim(id: string, reviewer: string = "admin"): boolean {
     const item = PENDING_CLAIMS.find((c) => c.id === id);
-    if (item) {
-      item.status = "rejected";
-      item.rejection_reason = reason;
-      item.reviewed_at = new Date().toISOString();
-      return true;
+    if (!item) return false;
+
+    item.status = "approved";
+    item.reviewed_at = new Date().toISOString();
+    item.reviewer = reviewer;
+
+    // Insert as approved into public claims repository
+    claimsRepo.createClaim({
+      ...item.claim,
+      status: "approved",
+      created_by: "human",
+    });
+
+    // Create public event
+    eventsRepo.createEvent(
+      "claim_change",
+      `${item.claim.subject_id} (${item.claim.field})`,
+      `Editorial review approved claim "${item.claim.field}: ${String(item.claim.value)}" against primary document.`
+    );
+
+    // Record decision in PostgreSQL
+    const database = getDb();
+    if (database) {
+      try {
+        database.insert(schema.reviewDecisions).values({
+          id: `dec-${Date.now()}-${id}`,
+          claim_id: item.claim.id,
+          decision: "approved",
+          reviewer,
+          reason: "Verified verbatim against primary source snapshot",
+          created_at: new Date(),
+        }).catch(() => {});
+      } catch {
+        // ignore
+      }
     }
-    return false;
+
+    return true;
+  },
+
+  editClaim(
+    id: string,
+    updatedField: string,
+    updatedValue: any,
+    reason: string = "Edited during review",
+    reviewer: string = "admin"
+  ): boolean {
+    const item = PENDING_CLAIMS.find((c) => c.id === id);
+    if (!item) return false;
+
+    item.status = "approved";
+    item.reviewed_at = new Date().toISOString();
+    item.reviewer = reviewer;
+    item.claim.field = updatedField;
+    item.claim.value = updatedValue;
+
+    // Check if an existing approved claim exists to supersede, or create new
+    const existingClaims = claimsRepo.getBySubject(item.claim.subject_type, item.claim.subject_id);
+    const existingTarget = existingClaims.find((c) => c.field === updatedField);
+
+    if (existingTarget) {
+      claimsRepo.supersedeClaim(existingTarget.id, {
+        value: updatedValue,
+        source_id: item.claim.source_id,
+        exact_quote: item.exact_quote,
+        confidence: item.claim.confidence,
+        created_by: "human",
+      });
+    } else {
+      claimsRepo.createClaim({
+        ...item.claim,
+        status: "approved",
+        created_by: "human",
+      });
+    }
+
+    // Create event
+    eventsRepo.createEvent(
+      "claim_change",
+      `${item.claim.subject_id} (${updatedField})`,
+      `Editorial review edited & approved claim: ${String(updatedValue)} (${reason})`
+    );
+
+    // Record review decision in DB
+    const database = getDb();
+    if (database) {
+      try {
+        database.insert(schema.reviewDecisions).values({
+          id: `dec-${Date.now()}-${id}`,
+          claim_id: item.claim.id,
+          decision: "edited",
+          reviewer,
+          reason,
+          edited_value: { field: updatedField, value: updatedValue },
+          created_at: new Date(),
+        }).catch(() => {});
+      } catch {
+        // ignore
+      }
+    }
+
+    return true;
+  },
+
+  rejectClaim(id: string, reason: string, reviewer: string = "admin"): boolean {
+    const item = PENDING_CLAIMS.find((c) => c.id === id);
+    if (!item) return false;
+
+    item.status = "rejected";
+    item.rejection_reason = reason;
+    item.reviewed_at = new Date().toISOString();
+    item.reviewer = reviewer;
+
+    const database = getDb();
+    if (database) {
+      try {
+        database.insert(schema.reviewDecisions).values({
+          id: `dec-${Date.now()}-${id}`,
+          claim_id: item.claim.id,
+          decision: "rejected",
+          reviewer,
+          reason,
+          created_at: new Date(),
+        }).catch(() => {});
+      } catch {
+        // ignore
+      }
+    }
+
+    return true;
   },
 
   getAttestations(): SubmittedAttestation[] {

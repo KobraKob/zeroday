@@ -302,7 +302,7 @@ export function RadarClient({ signals, sources }: RadarClientProps) {
               Receive Sourced Filing Notifications
             </h3>
             <p className="font-serif italic text-xs text-muted max-w-prose">
-              Dispatches when verified RoC entity incorporations or official state gazette decrees are recorded in the Atlas. No promotional newsletters.
+              Dispatches when verified RoC entity incorporations or official state gazette decrees are recorded in ZeroDay. No promotional newsletters.
             </p>
           </div>
 

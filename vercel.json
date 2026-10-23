@@ -1,0 +1,20 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/news-ingest",
+      "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/policy-monitor",
+      "schedule": "0 3 * * 1"
+    },
+    {
+      "path": "/api/cron/link-check",
+      "schedule": "0 4 * * 0"
+    },
+    {
+      "path": "/api/cron/freshness",
+      "schedule": "0 5 * * *"
+    }
+  ]
+}

@@ -38,8 +38,8 @@ export function MethodologyClient() {
       <PageHeader
         rubric="Standards & Data Governance"
         findingHeadline="Scientific Rubric: Statutory criteria, confidence stamps, and correction protocols"
-        findingDescription="Every fact in the GCC Atlas is anchored to an immutable claim with publisher provenance, confidence grading (Grades A through D), and a strict neutrality firewall."
-        pageTitle="GCC Atlas Methodology & Data Standards"
+        findingDescription="Every fact in ZeroDay is anchored to an immutable claim with publisher provenance, confidence grading (Grades A through D), and a strict neutrality firewall."
+        pageTitle="ZeroDay Methodology & Data Standards"
         path="/methodology"
         metadata="Revision 2026-Q1"
       />
@@ -91,7 +91,7 @@ export function MethodologyClient() {
         </div>
 
         <p className="text-xs sm:text-sm text-muted font-serif italic">
-          Every datapoint in the Atlas is tagged with an immutable confidence stamp reflecting source verification rigor:
+          Every datapoint in ZeroDay is tagged with an immutable confidence stamp reflecting source verification rigor:
         </p>
 
         <div className="border border-hairline bg-surface divide-y divide-hairline">
@@ -214,7 +214,7 @@ export function MethodologyClient() {
         </div>
 
         <p className="text-xs sm:text-sm text-muted font-serif italic">
-          If any datapoint, headcount estimate, or entity attribution in the Atlas is inaccurate, submit a primary statutory correction below:
+          If any datapoint, headcount estimate, or entity attribution in ZeroDay is inaccurate, submit a primary statutory correction below:
         </p>
 
         <form onSubmit={handleSubmitReport} className="p-6 border-2 border-ink bg-surface space-y-4 font-sans text-xs rounded-xs">

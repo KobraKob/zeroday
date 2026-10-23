@@ -7,24 +7,24 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export function Footer() {
   return (
-    <footer className="border-t-2 border-ink bg-paper/80 font-sans text-xs text-muted py-8 mt-6">
+    <footer className="border-t-2 border-rule bg-paper/80 font-sans text-xs text-muted py-8 mt-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Masthead Colophon */}
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 border-2 border-ink text-ink flex items-center justify-center font-display font-bold text-xs bg-surface rounded-xs">
-                GA
+              <div className="w-7 h-7 border-2 border-ink text-ink flex items-center justify-center font-display font-bold text-xs bg-surface rounded-xs">
+                ZD
               </div>
               <span className="font-display font-bold text-ink text-sm tracking-tight uppercase">
-                GCC Atlas
+                ZeroDay
               </span>
             </div>
             <p className="text-xs font-sans text-muted">
-              Independent archival record of India
+              Independent archival record of India&apos;s Global Capability Centres
             </p>
             <p className="font-body italic text-sm text-ink/80 max-w-md leading-relaxed">
-              &ldquo;The independent, citable record of India&apos;s Global Capability Centre ecosystem. Every number traced to a primary statutory source.&rdquo;
+              &ldquo;The independent, citable record of India&apos;s capability centre ecosystem. Every figure anchored to an audited filing, registered lease, or gazetted order.&rdquo;
             </p>
             <div className="flex items-center gap-2 pt-1 text-xs font-sans text-muted">
               <Shield className="w-3.5 h-3.5 text-cobalt flex-shrink-0" strokeWidth={1.5} />
@@ -64,8 +64,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/advisor" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
-                  India entry advisor
+                <Link href="/changelog" className="text-muted hover:text-ink hover:underline decoration-1 underline-offset-2 transition">
+                  Public changelog
                 </Link>
               </li>
             </ul>
@@ -101,14 +101,14 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Colophon Rule with Theme Toggle */}
+        {/* Colophon Rule with Dark Mode Indicator */}
         <div className="pt-6 border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
           <div>
-            &copy; <span className="font-mono">2026</span> GCC Atlas. Data is citable under Open Attribution.
+            &copy; <span className="font-mono">2026</span> ZeroDay. Data is citable under Open Attribution.
           </div>
           <div className="flex items-center gap-4">
-            <span>Edition: May <span className="font-mono">2026</span></span>
-            <span className="text-cobalt">Last reviewed: May <span className="font-mono">2026</span></span>
+            <span>Edition: 2026</span>
+            <span className="text-cobalt">Last checked: Today</span>
             <div className="flex items-center gap-2 pl-2 border-l border-hairline">
               <span className="text-xs text-muted hidden sm:inline">Theme:</span>
               <ThemeToggle />

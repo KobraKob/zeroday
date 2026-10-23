@@ -113,7 +113,7 @@ export function AskClient({
   // Load past questions from localStorage (local only, Requirement 5)
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("gcc-atlas-recent-queries");
+      const stored = localStorage.getItem("zeroday-recent-queries");
       if (stored) {
         setRecentQueries(JSON.parse(stored));
       }
@@ -128,7 +128,7 @@ export function AskClient({
     setRecentQueries((prev) => {
       const updated = [trimmed, ...prev.filter((q) => q !== trimmed)].slice(0, 6);
       try {
-        localStorage.setItem("gcc-atlas-recent-queries", JSON.stringify(updated));
+        localStorage.setItem("zeroday-recent-queries", JSON.stringify(updated));
       } catch {
         // Ignore
       }
@@ -224,13 +224,13 @@ export function AskClient({
       <div className="border-b-2 border-ink pb-6 space-y-2">
         <div className="flex items-center gap-2 text-xs font-mono text-muted uppercase tracking-wider">
           <span className="w-2.5 h-2.5 rounded-full bg-cobalt" />
-          <span>GCC Atlas Verification Engine • Edition: May 2026</span>
+          <span>ZeroDay Verification Engine • Edition: 2026</span>
         </div>
         <h1 className="font-display font-bold text-3xl sm:text-4xl text-ink tracking-tight">
           Ask the record
         </h1>
         <p className="font-body text-base text-muted max-w-2xl leading-relaxed">
-          Answers come only from sourced data in the Atlas. If we don&apos;t have it, we say so.
+          Answers come only from sourced data in ZeroDay. If we don&apos;t have it, we say so.
         </p>
       </div>
 
@@ -445,12 +445,12 @@ export function AskClient({
                   </div>
                 )}
 
-                {/* No-Answer State: "The Atlas has no sourced data on this yet" (Requirement 4) */}
+                {/* No-Answer State: "ZeroDay has no sourced data on this yet" (Requirement 4) */}
                 {!sheet.is_grounded && (
                   <div className="p-4 border-2 border-coral bg-coral/10 rounded-xs space-y-3 mt-4">
                     <div className="font-mono text-xs font-bold text-coral uppercase tracking-wider flex items-center gap-1.5">
                       <HelpCircle className="w-4 h-4" />
-                      <span>The Atlas has no sourced data on this yet</span>
+                      <span>ZeroDay has no sourced data on this yet</span>
                     </div>
                     <p className="font-body text-sm text-ink leading-relaxed">
                       This question asks for figures or claims that are not yet verified in our statutory repository. In accordance with our hard rules, we never guess.
@@ -489,10 +489,10 @@ export function AskClient({
                     )}
                   </div>
 
-                  {/* Block B: See in the Atlas pre-filtered links */}
+                  {/* Block B: See in ZeroDay pre-filtered links */}
                   <div className="space-y-1.5">
                     <span className="font-mono text-xs font-bold uppercase tracking-wider text-muted block">
-                      See in the Atlas:
+                      See in ZeroDay:
                     </span>
                     <div className="flex flex-wrap gap-2 text-xs font-mono">
                       <a
@@ -517,10 +517,10 @@ export function AskClient({
                         <ExternalLink className="w-3 h-3" />
                       </a>
                       <a
-                        href="/radar"
+                        href="/changelog"
                         className="inline-flex items-center gap-1 px-3 py-1 border border-ink bg-cream hover:bg-surface rounded-full shadow-2xs"
                       >
-                        <span>Radar Signals</span>
+                        <span>Changelog</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
@@ -534,7 +534,7 @@ export function AskClient({
                         onClick={() =>
                           handleCopy(
                             `cite-${sheet.id}`,
-                            `GCC Atlas Record: "${sheet.query}" — Retrieved from https://gccatlas.in/ask`
+                            `ZeroDay Record: "${sheet.query}" — Retrieved from https://zeroday.in/ask`
                           )
                         }
                         className="inline-flex items-center gap-1 hover:text-ink underline decoration-1"
@@ -556,7 +556,7 @@ export function AskClient({
                         onClick={() =>
                           handleCopy(
                             `full-${sheet.id}`,
-                            `Q: ${sheet.query}\nA: ${sheet.answer_blocks.map((b) => b.text).join(" ")}\n(Source: GCC Atlas Research Record)`
+                            `Q: ${sheet.query}\nA: ${sheet.answer_blocks.map((b) => b.text).join(" ")}\n(Source: ZeroDay Research Record)`
                           )
                         }
                         className="inline-flex items-center gap-1 hover:text-ink underline decoration-1"
@@ -575,7 +575,7 @@ export function AskClient({
                     </div>
 
                     <a
-                      href="mailto:audit@gccatlas.in?subject=Report%20Evidence%20Error"
+                      href="mailto:audit@zeroday.in?subject=Report%20Evidence%20Error"
                       className="hover:text-coral underline decoration-1"
                     >
                       Report an error

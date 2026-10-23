@@ -8,9 +8,9 @@ import { providersRepo } from "../../lib/repo/providersRepo";
 import { AskClient } from "./AskClient";
 
 export const metadata: Metadata = {
-  title: "Ask the record — GCC Atlas",
+  title: "Ask the record — ZeroDay",
   description:
-    "Answers come only from sourced data in the Atlas. If we don't have it, we say so.",
+    "Answers come only from sourced data in ZeroDay. If we don't have it, we say so.",
 };
 
 export default function AskPage() {

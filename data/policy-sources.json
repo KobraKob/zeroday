@@ -1,0 +1,52 @@
+[
+  {
+    "id": "policy-ka-gcc-2024",
+    "state_id": "state-ka",
+    "state_name": "Karnataka",
+    "policy_name": "Karnataka GCC Policy 2024-2029",
+    "url": "https://karnataka.gov.in/policies/gcc-policy-2024-2029",
+    "publisher": "Department of Electronics, IT, Bt and S&T, Government of Karnataka",
+    "check_interval": "weekly",
+    "enabled": true
+  },
+  {
+    "id": "policy-ts-ict-2026",
+    "state_id": "state-ts",
+    "state_name": "Telangana",
+    "policy_name": "Telangana 2nd ICT & Innovation Policy",
+    "url": "https://it.telangana.gov.in/policies/ict-policy",
+    "publisher": "ITE&C Department, Government of Telangana",
+    "check_interval": "weekly",
+    "enabled": true
+  },
+  {
+    "id": "policy-tn-gcc-2025",
+    "state_id": "state-tn",
+    "state_name": "Tamil Nadu",
+    "policy_name": "Tamil Nadu Global Capability Centres Policy",
+    "url": "https://guidance.tn.gov.in/policies/gcc-policy",
+    "publisher": "Guidance Tamil Nadu & IT Department, Government of Tamil Nadu",
+    "check_interval": "weekly",
+    "enabled": true
+  },
+  {
+    "id": "policy-mh-ites-2023",
+    "state_id": "state-mh",
+    "state_name": "Maharashtra",
+    "policy_name": "Maharashtra IT & ITeS Policy",
+    "url": "https://di.maharashtra.gov.in/policies/ites-policy",
+    "publisher": "Industries Department, Government of Maharashtra",
+    "check_interval": "weekly",
+    "enabled": true
+  },
+  {
+    "id": "policy-up-fdi-2024",
+    "state_id": "state-up",
+    "state_name": "Uttar Pradesh",
+    "policy_name": "Uttar Pradesh FDI & Fortune 500 GCC Incentive Scheme",
+    "url": "https://investup.org.in/policies/fdi-gcc-incentives",
+    "publisher": "Invest UP, Government of Uttar Pradesh",
+    "check_interval": "weekly",
+    "enabled": true
+  }
+]

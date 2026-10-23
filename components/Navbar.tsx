@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Menu, X, Search, Sparkles } from "lucide-react";
 import { CommandPalette } from "./CommandPalette";
 import { ThemeToggle } from "./ThemeToggle";
@@ -10,16 +10,13 @@ import { useAsk } from "./AskContext";
 
 export function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
   const { openAskDrawer } = useAsk();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-  const [tickerVisible, setTickerVisible] = useState(true);
 
   // Global keyboard shortcut to open Command Palette (Cmd+K or Ctrl+K or '/')
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // If currently on /ask, let Ask page focus its own pinned input on Cmd+K
       if (pathname === "/ask" && (e.metaKey || e.ctrlKey) && e.key === "k") {
         return;
       }
@@ -41,16 +38,17 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [pathname]);
 
-  // Primary nav: max 5 items
+  // Primary nav links
   const primaryNavLinks = [
     { href: "/reconcile", label: "Reconcile" },
     { href: "/registry", label: "Registry" },
     { href: "/radar", label: "Radar" },
     { href: "/compare", label: "Compare" },
     { href: "/providers", label: "Proof" },
+    { href: "/changelog", label: "Changelog" },
   ];
 
-  // Mobile menu links (includes Advisor & Methodology)
+  // Mobile menu links
   const mobileNavLinks = [
     ...primaryNavLinks,
     { href: "/advisor", label: "Advisor" },
@@ -59,49 +57,32 @@ export function Navbar() {
 
   return (
     <>
-      {/* Ticker strip above header: scrolls away naturally with document scroll (NOT sticky) */}
-      {tickerVisible && (
-        <div className="hidden sm:block h-8 bg-surface text-ink text-xs font-mono tracking-tight border-b-2 border-ink overflow-hidden whitespace-nowrap select-none">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-            <div className="flex items-center gap-2 truncate">
-              <span className="w-2 h-2 bg-cobalt inline-block rounded-full flex-shrink-0 animate-pulse" />
-              <span className="uppercase tracking-wider font-medium truncate">
-                GCC Atlas • India&apos;s GCC Archival Record • Every number traced to a source
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => setTickerVisible(false)}
-              className="text-muted hover:text-ink p-1 ml-2 flex-shrink-0 transition-colors focus-visible:outline-cobalt cursor-pointer"
-              aria-label="Dismiss banner"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Single-row header (sticky top-0, 64px, 3 CSS grid zones) */}
-      <header className="sticky top-0 z-50 w-full bg-surface border-b-2 border-ink font-sans shadow-xs">
+      {/* Sticky Navigation Header */}
+      <header className="sticky top-0 z-50 w-full bg-surface border-b-2 border-rule font-sans shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6 h-16 whitespace-nowrap min-w-0">
-            {/* Zone 1: Left - Logo mark + wordmark only (One brand name: GCC Atlas) */}
+            {/* Zone 1: Left - ZeroDay Brand Wordmark */}
             <div className="flex items-center flex-shrink-0">
               <Link
                 href="/"
                 className="flex items-center gap-2.5 group min-h-[44px] focus-visible:outline-cobalt"
-                aria-label="GCC Atlas Home"
+                aria-label="ZeroDay Home"
               >
-                <div className="w-7 h-7 border-2 border-ink text-ink flex items-center justify-center font-display font-black text-xs tracking-tighter bg-surface group-hover:bg-ink group-hover:text-paper transition-colors duration-fast rounded-xs">
-                  GA
+                <div className="w-8 h-8 border-2 border-ink text-ink flex items-center justify-center font-display font-black text-xs tracking-tighter bg-surface group-hover:bg-cobalt group-hover:text-paper group-hover:border-cobalt transition-colors duration-fast rounded-xs">
+                  ZD
                 </div>
-                <span className="font-display font-bold text-base tracking-tight text-ink uppercase">
-                  GCC Atlas
-                </span>
+                <div className="flex flex-col">
+                  <span className="font-display font-black text-base tracking-tight text-ink uppercase leading-none">
+                    ZeroDay
+                  </span>
+                  <span className="font-mono text-[9px] text-muted tracking-wider uppercase leading-none mt-1">
+                    Grounded Intelligence
+                  </span>
+                </div>
               </Link>
             </div>
 
-            {/* Zone 2: Centre - Primary nav (max 5 items, single row, active = filled ink pill with cream text) */}
+            {/* Zone 2: Centre - Primary Navigation */}
             <nav aria-label="Primary Navigation" className="hidden lg:flex items-center justify-center gap-1.5 min-w-0">
               {primaryNavLinks.map((item) => {
                 const isActive =
@@ -113,10 +94,10 @@ export function Navbar() {
                     key={item.label}
                     href={item.href || "#"}
                     aria-current={isActive ? "page" : undefined}
-                    className={`px-4 py-2 text-sm font-medium transition-all duration-fast rounded-full whitespace-nowrap ${
+                    className={`px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider transition-all duration-fast rounded-full whitespace-nowrap ${
                       isActive
-                        ? "bg-ink text-cream dark:text-paper shadow-xs font-semibold"
-                        : "text-muted hover:text-ink hover:bg-paper/70"
+                        ? "bg-ink text-surface shadow-xs font-bold"
+                        : "text-muted hover:text-ink hover:bg-paper/70 font-medium"
                     }`}
                   >
                     {item.label}
@@ -125,23 +106,23 @@ export function Navbar() {
               })}
             </nav>
 
-            {/* Zone 3: Right - Search icon, ThemeToggle, Outlined "Ask", Filled primary "Attest", Mobile Toggle */}
+            {/* Zone 3: Right - Search, Dark Mode Pill, Ask, Attest, Mobile Toggle */}
             <div className="flex items-center justify-end gap-2 sm:gap-2.5 flex-shrink-0">
-              {/* Search icon button that opens Command Palette (⌘K) */}
+              {/* Command Search */}
               <button
                 type="button"
                 onClick={() => setCommandPaletteOpen(true)}
-                aria-label="Search Atlas (Press ⌘K or /)"
-                title="Search Atlas (⌘K)"
-                className="w-11 h-11 border-2 border-ink rounded-full bg-surface hover:bg-paper text-muted hover:text-ink flex items-center justify-center transition-all cursor-pointer focus-visible:outline-cobalt"
+                aria-label="Search ZeroDay (Press ⌘K or /)"
+                title="Search ZeroDay (⌘K)"
+                className="w-10 h-10 border-2 border-rule rounded-full bg-surface hover:bg-paper text-muted hover:text-ink flex items-center justify-center transition-all cursor-pointer focus-visible:outline-cobalt"
               >
                 <Search className="w-4 h-4" strokeWidth={1.75} />
               </button>
 
-              {/* Theme Toggle Button */}
+              {/* Dark Mode Permanent Status Pill */}
               <ThemeToggle />
 
-              {/* Ask: Secondary, outlined button, 44px high with Sparkles icon & label */}
+              {/* Ask: Grounded Q&A Drawer */}
               <button
                 type="button"
                 onClick={() => {
@@ -151,17 +132,17 @@ export function Navbar() {
                     openAskDrawer();
                   }
                 }}
-                className="hidden sm:inline-flex items-center justify-center gap-2 px-4 h-11 text-xs font-mono font-medium border-2 border-ink bg-transparent text-ink hover:bg-ink hover:text-cream dark:hover:text-paper transition-all duration-fast rounded-full min-h-[44px] focus-visible:outline-cobalt cursor-pointer"
-                aria-label="Ask the record"
+                className="hidden sm:inline-flex items-center justify-center gap-2 px-4 h-10 text-xs font-mono font-medium border-2 border-rule bg-transparent text-ink hover:bg-ink hover:text-surface transition-all duration-fast rounded-full focus-visible:outline-cobalt cursor-pointer"
+                aria-label="Ask ZeroDay Grounded Intelligence"
               >
-                <Sparkles className="w-4 h-4 text-cobalt" />
+                <Sparkles className="w-3.5 h-3.5 text-cobalt" />
                 <span>Ask</span>
               </button>
 
-              {/* Attest: ONE primary button (filled cobalt, 44px high) */}
+              {/* Attest Button */}
               <Link
                 href="/submit"
-                className="inline-flex items-center justify-center px-5 h-11 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border-2 border-ink hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all duration-fast rounded-full min-h-[44px] focus-visible:outline-cobalt"
+                className="inline-flex items-center justify-center px-4 h-10 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border-2 border-rule hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all duration-fast rounded-full focus-visible:outline-cobalt"
               >
                 Attest
               </Link>
@@ -170,23 +151,23 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden w-11 h-11 border-2 border-ink rounded-full flex items-center justify-center text-ink bg-surface hover:bg-paper focus-visible:outline-cobalt"
+                className="lg:hidden w-10 h-10 border-2 border-rule rounded-full flex items-center justify-center text-ink bg-surface hover:bg-paper focus-visible:outline-cobalt"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? (
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 ) : (
-                  <Menu className="w-5 h-5" />
+                  <Menu className="w-4 h-4" />
                 )}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile menu drawer (<1024px) */}
+        {/* Mobile menu drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t-2 border-ink bg-surface px-4 py-4 space-y-2 shadow-lg">
+          <div className="lg:hidden border-t-2 border-rule bg-surface px-4 py-4 space-y-2 shadow-lg">
             <nav aria-label="Mobile Navigation" className="space-y-1">
               {mobileNavLinks.map((item) => {
                 const isActive =
@@ -199,9 +180,9 @@ export function Navbar() {
                     href={item.href || "#"}
                     aria-current={isActive ? "page" : undefined}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`min-h-[44px] px-3.5 py-2 text-sm font-medium flex items-center rounded-full transition-colors ${
+                    className={`min-h-[44px] px-3.5 py-2 text-xs font-mono uppercase tracking-wider flex items-center rounded-full transition-colors ${
                       isActive
-                        ? "bg-ink text-cream font-semibold shadow-xs"
+                        ? "bg-ink text-surface font-bold shadow-xs"
                         : "text-muted hover:text-ink hover:bg-paper/60"
                     }`}
                   >
@@ -211,7 +192,7 @@ export function Navbar() {
               })}
             </nav>
 
-            <div className="pt-3 border-t-2 border-ink grid grid-cols-2 gap-2">
+            <div className="pt-3 border-t-2 border-rule grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => {
@@ -222,7 +203,7 @@ export function Navbar() {
                     openAskDrawer();
                   }
                 }}
-                className="min-h-[44px] h-11 flex items-center justify-center gap-2 text-xs font-mono font-bold border-2 border-ink bg-transparent text-ink text-center rounded-full cursor-pointer hover:bg-ink hover:text-cream"
+                className="min-h-[44px] h-10 flex items-center justify-center gap-2 text-xs font-mono font-bold border-2 border-rule bg-transparent text-ink text-center rounded-full cursor-pointer hover:bg-ink hover:text-surface"
               >
                 <Sparkles className="w-3.5 h-3.5 text-cobalt" />
                 <span>Ask</span>
@@ -230,7 +211,7 @@ export function Navbar() {
               <Link
                 href="/submit"
                 onClick={() => setMobileMenuOpen(false)}
-                className="min-h-[44px] h-11 flex items-center justify-center text-xs font-mono font-bold bg-cobalt text-white border-2 border-ink text-center uppercase rounded-full"
+                className="min-h-[44px] h-10 flex items-center justify-center text-xs font-mono font-bold bg-cobalt text-white border-2 border-rule text-center uppercase rounded-full"
               >
                 + Attest
               </Link>

@@ -57,22 +57,38 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
   const [copiedType, setCopiedType] = useState<string | null>(null);
   const [suggestSent, setSuggestSent] = useState(false);
 
+  // Lazy loading citations if not passed via props (optimizes SSR bundle & eliminates lag)
+  const [loadedClaims, setLoadedClaims] = useState<Claim[]>(claims);
+  const [loadedSources, setLoadedSources] = useState<Source[]>(sources);
+
+  useEffect(() => {
+    if (isDrawerOpen && loadedClaims.length === 0) {
+      fetch("/api/claims/citations")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.claims) setLoadedClaims(data.claims);
+          if (data.sources) setLoadedSources(data.sources);
+        })
+        .catch(() => {});
+    }
+  }, [isDrawerOpen, loadedClaims.length]);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   const claimsMap = useMemo(() => {
     const map = new Map<string, Claim>();
-    claims.forEach((c) => map.set(c.id, c));
+    loadedClaims.forEach((c) => map.set(c.id, c));
     return map;
-  }, [claims]);
+  }, [loadedClaims]);
 
   const sourcesMap = useMemo(() => {
     const map = new Map<string, Source>();
-    sources.forEach((s) => map.set(s.id, s));
+    loadedSources.forEach((s) => map.set(s.id, s));
     return map;
-  }, [sources]);
+  }, [loadedSources]);
 
-  // Determine current page context & verified eval-list questions (Requirements 5 & 8)
+  // Determine current page context & verified eval-list questions
   const pageContext = (() => {
     if (pathname.includes("provider")) {
       return {
@@ -80,7 +96,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
         questions: [
           "Which real estate advisors represented Google India or Boeing in campus site selection?",
           "What services does ANSR provide for GCC incubation in India?",
-          "How are service providers evaluated and ranked in the Atlas?",
+          "How are service providers evaluated and ranked in ZeroDay?",
         ],
       };
     }
@@ -118,36 +134,48 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
       return {
         label: "You are viewing Compare",
         questions: [
-          "What is the commercial office rent range in Bengaluru?",
-          "What is the commercial office vacancy rate in Hyderabad?",
-          "What is the talent salary index for Pune relative to Bengaluru?",
+          "How does Bengaluru compare to Hyderabad on active GCC counts and state subsidies?",
+          "What are Karnataka's statutory incentives under the GCC Policy 2024-2029?",
+          "What are the top 3 sectors by headcount in Bengaluru vs Hyderabad?",
+        ],
+      };
+    }
+    if (pathname.includes("changelog")) {
+      return {
+        label: "You are viewing Changelog",
+        questions: [
+          "What are the most recent verified GCC incorporations in India?",
+          "Which policies have been gazetted in 2026?",
+          "How are stale claims handled in ZeroDay?",
         ],
       };
     }
     return {
-      label: "You are viewing GCC Atlas Record",
+      label: "You are viewing ZeroDay Record",
       questions: [
-        "What is India's total GCC market revenue in FY26?",
-        "How many professionals work in Indian GCCs in FY26?",
-        "Why do published GCC counts vary from 1,400 to 2,975?",
+        "Why do published GCC counts vary between NASSCOM and ANSR?",
+        "What is Karnataka's statutory incentive package for Mega GCCs?",
+        "How does ZeroDay reconcile published GCC counts?",
       ],
     };
   })();
 
-  // Synchronize prefilled query when drawer opens
+  // Focus input and handle prefill on open
   useEffect(() => {
     if (isDrawerOpen) {
       if (prefilledQuery) {
         setInputQuery(prefilledQuery);
         handleExecute(prefilledQuery);
+      } else {
+        setTimeout(() => inputRef.current?.focus(), 150);
       }
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 100);
+    } else {
+      setLoadingStep(null);
+      setErrorMsg(null);
     }
   }, [isDrawerOpen, prefilledQuery]);
 
-  // Handle Escape key to close
+  // Global Escape Key Listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isDrawerOpen) {
@@ -156,46 +184,39 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isDrawerOpen]);
+  }, [isDrawerOpen, closeAskDrawer]);
 
-  const handleExecute = async (queryToRun?: string) => {
-    const text = (queryToRun || inputQuery).trim();
-    if (!text) return;
+  const handleExecute = async (queryText?: string) => {
+    const query = (queryText !== undefined ? queryText : inputQuery).trim();
+    if (!query) return;
 
     setErrorMsg(null);
-    setSuggestSent(false);
-    addRecentQuestion(text);
-
-    // Progressive loading states (Requirement 4: no spinner dots)
     setLoadingStep("Searching claims");
-    const t1 = setTimeout(() => setLoadingStep("Found 7 claims"), 400);
-    const t2 = setTimeout(() => setLoadingStep("Writing the answer"), 900);
+    setResult(null);
+
+    addRecentQuestion(query);
+
+    const t1 = setTimeout(() => setLoadingStep("Searching claims"), 200);
+    const t2 = setTimeout(() => setLoadingStep("Verifying citations"), 500);
 
     try {
       const res = await fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: text }),
+        body: JSON.stringify({ query }),
       });
 
-      if (!res.ok) {
-        throw new Error(`HTTP Error ${res.status}`);
-      }
-
-      const data = await res.json();
       clearTimeout(t1);
       clearTimeout(t2);
-      setLoadingStep(null);
 
-      setResult({
-        query: text,
-        answer_blocks: data.answer_blocks || [],
-        follow_ups: data.follow_ups || [],
-        gaps: data.gaps || [],
-        is_grounded: data.is_grounded !== false,
-        disagreements: data.disagreements || [],
-      });
-    } catch {
+      if (!res.ok) {
+        throw new Error(`Engine returned status ${res.status}`);
+      }
+
+      const data: AnswerResult = await res.json();
+      setLoadingStep(null);
+      setResult(data);
+    } catch (err) {
       clearTimeout(t1);
       clearTimeout(t2);
       setLoadingStep(null);
@@ -203,8 +224,8 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
     }
   };
 
-  const handleCopy = (type: "citation" | "full", content: string) => {
-    navigator.clipboard.writeText(content);
+  const handleCopy = (type: string, text: string) => {
+    navigator.clipboard.writeText(text);
     setCopiedType(type);
     setTimeout(() => setCopiedType(null), 2000);
   };
@@ -215,110 +236,102 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Ask the record drawer"
-      className="fixed inset-0 z-50 flex justify-end"
+      aria-label="Ask ZeroDay Grounded Intelligence Drawer"
+      className="fixed inset-0 z-50 flex justify-end font-sans"
     >
-      {/* Backdrop */}
+      {/* Dimmed backdrop */}
       <div
-        className="fixed inset-0 bg-ink/40 backdrop-blur-xs transition-opacity duration-normal"
+        className="fixed inset-0 bg-paper/60 backdrop-blur-xs transition-opacity"
         onClick={closeAskDrawer}
+        aria-hidden="true"
       />
 
-      {/* Drawer Surface: single surface background = var(--paper), text = var(--ink), 2px var(--rule) border */}
+      {/* Drawer panel: full width on mobile, 520px on sm/desktop */}
       <div
         ref={drawerRef}
-        className="relative w-full sm:w-[580px] md:w-[680px] h-full bg-paper text-ink border-l-2 border-rule shadow-2xl flex flex-col z-10 overflow-hidden font-sans"
+        className="relative w-full sm:w-[520px] bg-paper border-l-2 border-rule h-full flex flex-col shadow-[-8px_0px_32px_rgba(0,0,0,0.35)] z-10 transition-transform duration-fast ease-out"
       >
-        {/* Header row: title "Ask the record" (display font, 28px), one-line subtitle, and a close button with a visible X icon (44x44, 2px outline, keyboard focus ring, Esc closes) */}
-        <div className="p-5 sm:p-6 border-b-2 border-rule bg-surface flex items-start justify-between gap-4 flex-shrink-0">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <span className="w-3 h-3 rounded-full bg-cobalt flex-shrink-0" />
-              <h2 className="font-display font-bold text-[28px] text-ink leading-tight">
-                Ask the record
-              </h2>
-            </div>
-            <p className="font-body text-sm text-muted mt-1 leading-snug">
-              Answers come only from sourced data in the Atlas. If we don&apos;t have it, we say so.
-            </p>
+        {/* Drawer Header: Compact, calm, authoritative */}
+        <div className="flex items-center justify-between px-5 py-4 border-b-2 border-rule bg-surface flex-shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="w-2.5 h-2.5 bg-cobalt rounded-full animate-pulse" />
+            <h2 className="font-display font-bold text-sm uppercase tracking-wider text-ink">
+              Ask ZeroDay
+            </h2>
+            <span className="font-mono text-[10px] text-muted border-l border-rule pl-2">
+              Edition: 2026
+            </span>
           </div>
           <button
             type="button"
             onClick={closeAskDrawer}
-            className="w-11 h-11 border-2 border-rule rounded-full bg-surface text-ink hover:bg-paper focus-visible:outline-cobalt focus-visible:ring-2 focus-visible:ring-cobalt flex items-center justify-center transition-all flex-shrink-0 shadow-[2px_2px_0px_var(--color-ink)] cursor-pointer"
+            className="w-8 h-8 border border-rule rounded-full flex items-center justify-center text-muted hover:text-ink hover:bg-paper cursor-pointer transition-colors"
             aria-label="Close drawer"
           >
-            <X className="w-5 h-5 text-ink" strokeWidth={2} />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Plain context line (min 14px, AA contrast): "You are viewing Providers" (no pale strip) */}
-        <div className="px-6 py-2.5 border-b border-rule-subtle bg-surface text-sm font-medium text-muted">
-          {pageContext.label}
+        {/* Current Page Context Pill */}
+        <div className="px-5 py-2.5 bg-paper border-b border-rule-subtle text-xs font-mono text-muted flex items-center justify-between flex-shrink-0">
+          <span className="truncate">{pageContext.label}</span>
+          <span className="text-[10px] text-cobalt uppercase font-bold tracking-wider">
+            Grounded Mode
+          </span>
         </div>
 
-        {/* Input: single 2px border (no double ring), min height 56px. Placeholder shortened. Enter hint below. Ask button filled cobalt, min 44px */}
-        <div className="p-5 sm:p-6 border-b-2 border-rule bg-surface flex-shrink-0">
+        {/* Pinned Input Bar */}
+        <div className="p-4 border-b-2 border-rule bg-surface flex-shrink-0">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleExecute();
             }}
-            className="space-y-1.5"
+            className="relative flex items-center"
           >
-            <label htmlFor="drawer-ask-input" className="sr-only">
-              Ask about GCCs, cities, providers
-            </label>
-            <div className="flex items-center gap-2">
-              <input
-                ref={inputRef}
-                id="drawer-ask-input"
-                type="text"
-                value={inputQuery}
-                onChange={(e) => setInputQuery(e.target.value)}
-                placeholder="Ask about GCCs, cities, providers..."
-                className="flex-1 py-3.5 px-5 border-2 border-rule rounded-full bg-surface text-ink text-base font-body placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-cobalt min-h-[56px]"
-              />
-              <button
-                type="submit"
-                disabled={!inputQuery.trim()}
-                className="min-h-[44px] px-6 bg-cobalt text-white border-2 border-rule rounded-full font-mono text-sm font-bold hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all flex-shrink-0 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                Ask
-              </button>
-            </div>
-            <p className="text-xs font-mono text-muted pl-4 pt-0.5">
-              Press Enter ↵ or click Ask
-            </p>
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputQuery}
+              onChange={(e) => setInputQuery(e.target.value)}
+              placeholder="Ask anything about India's GCC ecosystem..."
+              className="w-full pl-3.5 pr-20 py-2.5 text-sm font-body border-2 border-rule rounded-full bg-paper text-ink focus:outline-none focus:border-cobalt transition-colors"
+            />
+            <button
+              type="submit"
+              disabled={!inputQuery.trim() || Boolean(loadingStep)}
+              className="absolute right-1.5 px-3.5 py-1.5 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border-2 border-rule rounded-full hover:shadow-[1px_1px_0px_var(--color-ink)] disabled:opacity-40 transition-all cursor-pointer"
+            >
+              Ask
+            </button>
           </form>
         </div>
 
-        {/* Content Body (Scrollable Answer Sheet) */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6" aria-live="polite">
-          {/* Progress / Loading State (Requirement 4: no spinner dots) */}
+        {/* Scrollable Content Area */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-6">
+          {/* Calm Loading State */}
           {loadingStep && (
-            <div className="p-5 border-2 border-rule bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] space-y-3">
-              <div className="flex items-center gap-2.5">
-                <span className="w-3 h-3 rounded-full bg-cobalt animate-ping" />
-                <span className="font-mono text-xs font-bold text-cobalt uppercase tracking-wider">
-                  {loadingStep}
+            <div className="p-5 border-2 border-rule bg-surface rounded-xs space-y-3">
+              <div className="flex items-center justify-between text-xs font-mono text-ink">
+                <span className="font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 bg-cobalt inline-block rounded-full animate-ping" />
+                  {loadingStep}...
                 </span>
+                <span className="text-muted text-[10px]">VERIFYING CITATIONS</span>
               </div>
-              <div className="w-full h-2 bg-paper border border-rule overflow-hidden rounded-full">
+              <div className="w-full bg-paper border border-rule h-2 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-cobalt transition-all duration-normal"
+                  className="bg-cobalt h-full transition-all duration-300 rounded-full"
                   style={{
                     width:
                       loadingStep === "Searching claims"
-                        ? "35%"
-                        : loadingStep === "Found 7 claims"
-                        ? "70%"
-                        : "95%",
+                        ? "45%"
+                        : "85%",
                   }}
                 />
               </div>
               <p className="font-body text-xs text-muted">
-                Verifying claims and citation integrity against the Atlas repository...
+                Verifying claims and citation integrity against the ZeroDay repository...
               </p>
             </div>
           )}
@@ -342,7 +355,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
             </div>
           )}
 
-          {/* Empty State: Try asking 3 pill buttons, body font 15px, 1.5px outline, transparent background, hover = marigold tint, wrap to multiple lines */}
+          {/* Empty State */}
           {!result && !loadingStep && !errorMsg && (
             <div className="space-y-6">
               <div className="space-y-3">
@@ -358,7 +371,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                         setInputQuery(q);
                         handleExecute(q);
                       }}
-                      className="text-left px-4 py-2.5 border-[1.5px] border-rule rounded-full bg-transparent text-ink font-body text-[15px] hover:bg-marigold/20 transition-colors cursor-pointer leading-snug"
+                      className="text-left px-4 py-2.5 border-[1.5px] border-rule rounded-full bg-transparent text-ink font-body text-xs hover:bg-marigold/20 transition-colors cursor-pointer leading-snug"
                     >
                       {q}
                     </button>
@@ -366,9 +379,8 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                 </div>
               </div>
 
-              {/* Requirement B.9: Small line at the bottom */}
               <div className="pt-6 border-t border-rule-subtle text-xs font-body text-muted leading-relaxed">
-                Answers come only from sourced data in the Atlas. If we don&apos;t have it, we say so.
+                Answers come only from sourced data in ZeroDay. If we don&apos;t have it, we say so.
               </div>
             </div>
           )}
@@ -377,94 +389,81 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
           {result && !loadingStep && (
             <div className="space-y-6">
               <article className="p-5 sm:p-6 border-2 border-rule bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] space-y-4">
-                {/* Question as Heading */}
-                <h3 className="font-display font-bold text-xl sm:text-2xl text-ink leading-tight border-b-2 border-rule pb-3">
+                {/* Question Heading */}
+                <h3 className="font-display font-bold text-base text-ink leading-snug">
                   {result.query}
                 </h3>
 
-                {/* Sourced Short Paragraphs with Footnote Markers */}
-                <div className="space-y-3 font-body text-[16px] text-ink leading-relaxed max-w-[68ch]">
-                  {result.answer_blocks.map((block, bIdx) => (
-                    <p key={bIdx} className="relative">
-                      <span>{block.text}</span>
-                      {block.claim_ids && block.claim_ids.length > 0 && (
-                        <span className="inline-flex gap-1 ml-1.5 align-super">
-                          {block.claim_ids.map((cid, cIdx) => {
-                            const claim = claimsMap.get(cid);
-                            const source = claim ? sourcesMap.get(claim.source_id) : null;
-                            return (
-                              <button
-                                key={cid}
-                                type="button"
-                                onClick={() => {
-                                  if (source) {
-                                    openSourceDrawer(source, claim);
-                                  }
-                                }}
-                                className="inline-flex items-center justify-center w-5 h-5 text-[11px] font-mono font-bold bg-marigold border border-rule text-ink rounded-full hover:bg-cobalt hover:text-white transition-colors cursor-pointer shadow-2xs"
-                                title={`Inspect source citation for ${claim?.field || "claim"}`}
-                              >
-                                {cIdx + 1}
-                              </button>
-                            );
-                          })}
-                        </span>
-                      )}
+                {/* Grounded Badge / Neutrality */}
+                <div className="flex items-center gap-2 pt-1 pb-2 border-b border-rule-subtle text-[11px] font-mono text-muted">
+                  {result.is_grounded ? (
+                    <span className="text-mint font-bold flex items-center gap-1">
+                      <Check className="w-3.5 h-3.5" />
+                      100% Sourced Citations
+                    </span>
+                  ) : (
+                    <span className="text-marigold font-bold flex items-center gap-1">
+                      <HelpCircle className="w-3.5 h-3.5" />
+                      Data Gap Acknowledged
+                    </span>
+                  )}
+                  <span>•</span>
+                  <span>Zero Commercial Sponsorship</span>
+                </div>
+
+                {/* Answer Blocks with Footnote Numbers */}
+                <div className="space-y-3 text-sm font-body text-ink leading-relaxed">
+                  {result.answer_blocks.map((block, idx) => (
+                    <p key={idx} className="relative">
+                      {block.text}
+                      {block.claim_ids.map((cid, cIdx) => {
+                        const claim = claimsMap.get(cid);
+                        const source = claim ? sourcesMap.get(claim.source_id) : null;
+                        return (
+                          <button
+                            key={cIdx}
+                            type="button"
+                            onClick={() => openSourceDrawer(source, claim, claim?.field, cIdx + 1)}
+                            className="inline-flex items-center align-super ml-1 text-cobalt font-mono font-bold text-[10px] hover:underline cursor-pointer"
+                            title="Inspect primary source verification"
+                          >
+                            [{cIdx + 1}]
+                          </button>
+                        );
+                      })}
                     </p>
                   ))}
                 </div>
 
-                {/* Sources Disagree Box */}
+                {/* Sources Disagree Box (if present) */}
                 {result.disagreements && result.disagreements.length > 0 && (
-                  <div className="p-4 border-2 border-marigold bg-marigold/15 rounded-xs space-y-2 mt-4">
-                    <div className="flex items-center gap-2 font-mono text-xs font-bold text-ink">
-                      <AlertTriangle className="w-4 h-4 text-ink" />
+                  <div className="p-3 border-2 border-coral bg-coral/10 rounded-xs space-y-2">
+                    <div className="flex items-center gap-2 font-mono text-xs font-bold text-coral uppercase tracking-wide">
+                      <AlertTriangle className="w-4 h-4" />
                       <span>Sources Disagree on this Metric</span>
                     </div>
-                    {result.disagreements.map((dis, dIdx) => (
-                      <div key={dIdx} className="space-y-1.5 text-xs font-mono pt-1">
-                        <div className="p-2 border border-rule bg-surface rounded-xs flex items-center justify-between">
-                          <span>{dis.source_a}</span>
-                          <span className="font-bold">{dis.value_a} (Grade {dis.grade_a})</span>
+                    <div className="space-y-2 text-xs font-mono">
+                      {result.disagreements.map((d, dIdx) => (
+                        <div key={dIdx} className="grid grid-cols-2 gap-2 p-2 bg-surface border border-hairline rounded-xs">
+                          <div>
+                            <span className="text-muted text-[10px] block">{d.source_a}</span>
+                            <span className="font-bold text-ink">{d.value_a}</span>
+                          </div>
+                          <div>
+                            <span className="text-muted text-[10px] block">{d.source_b}</span>
+                            <span className="font-bold text-ink">{d.value_b}</span>
+                          </div>
                         </div>
-                        <div className="p-2 border border-rule bg-surface rounded-xs flex items-center justify-between">
-                          <span>{dis.source_b}</span>
-                          <span className="font-bold">{dis.value_b} (Grade {dis.grade_b})</span>
-                        </div>
-                        <p className="font-body text-xs text-muted pt-1">
-                          {dis.reason}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* No-Answer State: "The Atlas has no sourced data on this yet" */}
-                {!result.is_grounded && (
-                  <div className="p-4 border-2 border-coral bg-coral/10 rounded-xs space-y-3 mt-4">
-                    <div className="font-mono text-xs font-bold text-coral uppercase tracking-wider flex items-center gap-1.5">
-                      <HelpCircle className="w-4 h-4" />
-                      <span>The Atlas has no sourced data on this yet</span>
+                      ))}
                     </div>
-                    <p className="font-body text-sm text-ink leading-relaxed">
-                      In accordance with our hard rules, we never invent figures or answer from ungrounded memory.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setSuggestSent(true)}
-                      className="px-4 py-2 border-2 border-rule rounded-full bg-surface text-xs font-mono font-bold hover:bg-paper transition-all cursor-pointer"
-                    >
-                      {suggestSent ? "✓ Thank you! Source suggested." : "+ Suggest a source"}
-                    </button>
                   </div>
                 )}
 
-                {/* Under each answer: Three Required Blocks */}
-                <div className="pt-5 border-t-2 border-rule space-y-4">
-                  {/* Block A: What we could not verify */}
-                  <div className="p-3.5 border border-rule-subtle bg-surface rounded-xs space-y-1">
+                {/* Gaps / What ZeroDay Doesn't Know */}
+                <div className="pt-3 border-t border-rule-subtle space-y-3">
+                  <div className="p-3 border border-rule-subtle bg-paper rounded-xs space-y-1.5">
                     <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider block">
-                      What we could not verify
+                      What ZeroDay Does Not Know Yet:
                     </span>
                     {result.gaps && result.gaps.length > 0 ? (
                       <ul className="list-disc list-inside text-xs font-body text-ink space-y-0.5">
@@ -479,10 +478,10 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                     )}
                   </div>
 
-                  {/* Block B: See in the Atlas pre-filtered deep links */}
+                  {/* See in ZeroDay deep links */}
                   <div className="p-3 border border-rule-subtle bg-surface rounded-xs space-y-2">
                     <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider block">
-                      See in the Atlas
+                      See in ZeroDay
                     </span>
                     <div className="flex flex-wrap gap-2 text-xs font-mono">
                       <a
@@ -500,16 +499,16 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                         <ExternalLink className="w-3 h-3" />
                       </a>
                       <a
-                        href="/providers"
+                        href="/changelog"
                         className="inline-flex items-center gap-1 px-3 py-1 border border-rule bg-surface hover:bg-paper rounded-full"
                       >
-                        <span>Providers</span>
+                        <span>Changelog</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
                   </div>
 
-                  {/* Block C: Actions (Copy citation, Copy answer with sources, Report an error) */}
+                  {/* Actions */}
                   <div className="pt-2 border-t border-rule-subtle flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-muted">
                     <div className="flex items-center gap-2">
                       <button
@@ -517,7 +516,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                         onClick={() =>
                           handleCopy(
                             "citation",
-                            `GCC Atlas Record: "${result.query}" — Retrieved from https://gccatlas.in/ask`
+                            `ZeroDay Record: "${result.query}" — Retrieved from https://zeroday.in/ask`
                           )
                         }
                         className="inline-flex items-center gap-1 hover:text-ink underline decoration-1 cursor-pointer"
@@ -531,7 +530,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                         onClick={() =>
                           handleCopy(
                             "full",
-                            `Q: ${result.query}\nA: ${result.answer_blocks.map((b) => b.text).join(" ")}\n(Source: GCC Atlas Archival Record)`
+                            `Q: ${result.query}\nA: ${result.answer_blocks.map((b) => b.text).join(" ")}\n(Source: ZeroDay Archival Record)`
                           )
                         }
                         className="inline-flex items-center gap-1 hover:text-ink underline decoration-1 cursor-pointer"
@@ -542,7 +541,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                     </div>
 
                     <a
-                      href="mailto:audit@gccatlas.in?subject=Report%20Evidence%20Error"
+                      href="mailto:audit@zeroday.in?subject=Report%20Evidence%20Error"
                       className="hover:text-coral underline decoration-1"
                     >
                       Report an error
@@ -575,9 +574,8 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                 </div>
               )}
 
-              {/* Requirement B.9: Small line at the bottom */}
               <div className="pt-4 border-t border-rule-subtle text-xs font-body text-muted leading-relaxed text-center">
-                Answers come only from sourced data in the Atlas. If we don&apos;t have it, we say so.
+                Answers come only from sourced data in ZeroDay. If we don&apos;t have it, we say so.
               </div>
             </div>
           )}

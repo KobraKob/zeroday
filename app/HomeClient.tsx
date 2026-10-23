@@ -116,7 +116,7 @@ export function HomeClient({
             </h1>
 
             <p className="font-serif italic text-base sm:text-lg text-muted max-w-prose leading-relaxed">
-              Every figure in the Atlas is anchored to a primary regulatory filing, audited 10-K report, or gazetted state decree. No paid rankings, no inferred headcounts, no commercial sponsorships.
+              Every figure in ZeroDay is anchored to a primary regulatory filing, audited 10-K report, or gazetted state decree. No paid rankings, no inferred headcounts, no commercial sponsorships.
             </p>
           </div>
 

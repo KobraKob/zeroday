@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "GCC Atlas operates strictly on structured public evidence. Input was evaluated as data only and could not be matched to an indexed claim.",
+            text: "ZeroDay operates strictly on structured public evidence. Input was evaluated as data only and could not be matched to an indexed claim.",
             claim_ids: [],
           },
         ],
@@ -98,7 +98,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 2. Friendly greeting / about GCC Atlas
+    // 2. Friendly greeting / about ZeroDay
     if (
       q === "hello" ||
       q === "hi" ||
@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "Hello! GCC Atlas is the independent, citable record of India's Global Capability Centre ecosystem. Answers come strictly from primary statutory filings, registered lease deeds, and gazetted state policies.",
+            text: "Hello! ZeroDay is the independent, citable record of India's Global Capability Centre ecosystem. Answers come strictly from primary statutory filings, registered lease deeds, and gazetted state policies.",
             claim_ids: ["clm-mkt-rev-fy26"],
           },
         ],
@@ -132,16 +132,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "GCC Atlas is the independent, citable record of India's Global Capability Centre ecosystem, where every number is traced to a primary statutory filing, registered lease deed, or gazetted order.",
+            text: "ZeroDay is the independent, citable record of India's Global Capability Centre ecosystem, where every number is traced to a primary statutory filing, registered lease deed, or gazetted order.",
             claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
           },
           {
-            text: "Unlike analyst surveys with opaque methodologies or paid vendor listings, GCC Atlas operates under a strict neutrality firewall with zero commercial pay-to-play rankings.",
+            text: "Unlike analyst surveys with opaque methodologies or paid vendor listings, ZeroDay operates under a strict neutrality firewall with zero commercial pay-to-play rankings.",
             claim_ids: [],
           },
         ],
         follow_ups: [
-          "How does GCC Atlas reconcile published GCC counts?",
+          "How does ZeroDay reconcile published GCC counts?",
           "How many Mega GCCs operate in India?",
           "What is the average tech rent in Bengaluru?",
         ],
@@ -189,16 +189,16 @@ export async function POST(req: NextRequest) {
     // 4. Attempt Groq AI Grounded Engine inference
     if (GROQ_API_KEY && contextSnippets.length > 0) {
       try {
-        const systemPrompt = `You are the grounded intelligence system for GCC Atlas, an authoritative, citable platform on India's Global Capability Centres.
+        const systemPrompt = `You are the grounded intelligence system for ZeroDay, an authoritative, citable platform on India's Global Capability Centres.
 You answer user queries strictly, accurately, and authoritatively using ONLY the provided Verified Context below.
 
-VERIFIED CONTEXT FROM GCC ATLAS VECTOR STORE:
+VERIFIED CONTEXT FROM ZERODAY VECTOR STORE:
 ${JSON.stringify(contextSnippets)}
 
 MANDATORY RULES:
 1. Every factual sentence in "answer_blocks" must cite valid "claim_ids" from the context if available.
 2. If the user asks for numbers, claims, or entities NOT present in the verified context, reply:
-   "The Atlas has no sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory."
+   "ZeroDay has no sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory."
    Set "is_grounded": false, and describe the unverified metric in the "gaps" array.
 3. Keep answers concise, professional, and clear.
 4. Output strictly valid JSON with schema:
@@ -391,7 +391,7 @@ MANDATORY RULES:
           "What services does ANSR provide for GCC incubation in India?"
         );
         follow_ups.push(
-          "How are service providers evaluated and ranked in the Atlas?"
+          "How are service providers evaluated and ranked in ZeroDay?"
         );
       } else if (
         q.includes("ansr") ||
@@ -407,12 +407,12 @@ MANDATORY RULES:
           "Which real estate advisors represented Google India or Boeing in campus site selection?"
         );
         follow_ups.push(
-          "How are service providers evaluated and ranked in the Atlas?"
+          "How are service providers evaluated and ranked in ZeroDay?"
         );
       } else {
         const revClaim = allClaims.find((c) => c.field === "annual_revenue");
         answer_blocks.push({
-          text: "Service providers in GCC Atlas are evaluated strictly on documented proof links: verified lease deeds, enterprise client attestations, and documented advisories. Rankings are based on evidence depth; commercial payments never alter scores.",
+          text: "Service providers in ZeroDay are evaluated strictly on documented proof links: verified lease deeds, enterprise client attestations, and documented advisories. Rankings are based on evidence depth; commercial payments never alter scores.",
           claim_ids: revClaim ? [revClaim.id] : [],
         });
         follow_ups.push(
@@ -533,7 +533,7 @@ MANDATORY RULES:
       return NextResponse.json({
         answer_blocks: [
           {
-            text: "The Atlas has no sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory.",
+            text: "ZeroDay has no sourced data on this yet. In accordance with our hard rules, we never invent figures or answer from ungrounded memory.",
             claim_ids: [],
           },
         ],
@@ -557,7 +557,7 @@ MANDATORY RULES:
       disagreements: disagreements.length > 0 ? disagreements : undefined,
     });
   } catch (error: any) {
-    console.error("Ask GCC Atlas API Error:", error);
+    console.error("Ask ZeroDay API Error:", error);
     return NextResponse.json(
       { error: "Internal server error processing grounded query" },
       { status: 500 }

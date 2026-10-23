@@ -343,7 +343,7 @@ export function RegistryClient({
     link.setAttribute("href", url);
     link.setAttribute(
       "download",
-      `gcc_atlas_registry_${new Date().toISOString().split("T")[0]}.csv`
+      `zeroday_registry_${new Date().toISOString().split("T")[0]}.csv`
     );
     document.body.appendChild(link);
     link.click();
@@ -378,7 +378,7 @@ export function RegistryClient({
 
           <div className="flex items-center gap-2">
             <CitationButton
-              pageTitle="India GCC Registry — GCC Atlas"
+              pageTitle="India GCC Registry — ZeroDay"
               path="/registry"
             />
             <button
@@ -398,7 +398,7 @@ export function RegistryClient({
           {/* Left Column: Plain headline & Computed claim explainer */}
           <div className="space-y-2.5">
             <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight leading-tight">
-              {totalCentresCount} GCCs in the Atlas, so far
+              {totalCentresCount} GCCs in ZeroDay, so far
             </h1>
             <p className="font-body text-base text-muted leading-relaxed">
               {totalCentresCount} centres with a public source. {tracedCinCount} have a CIN we could trace.

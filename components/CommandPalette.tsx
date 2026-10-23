@@ -73,7 +73,8 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
     { name: "Site Selection Multi-City Compare", href: "/compare", type: "Page", category: "Analysis" },
     { name: "Proof-Backed Provider Directory", href: "/providers", type: "Page", category: "Directory" },
     { name: "Advisor Site Selection Tool", href: "/advisor", type: "Tool", category: "Tool" },
-    { name: "Ask GCC Atlas (Groq AI Grounded Engine)", href: "/ask", type: "AI", category: "Intelligence" },
+    { name: "Ask ZeroDay (Grounded Intelligence Engine)", href: "/ask", type: "AI", category: "Intelligence" },
+    { name: "Public Changelog (Live Provenance Stream)", href: "/changelog", type: "Ledger", category: "Indexes" },
     { name: "Attest / Submit Client Record", href: "/submit", type: "Form", category: "Governance" },
     { name: "Methodology & Statutory Rubric", href: "/methodology", type: "Page", category: "Standards" },
   ];
@@ -158,7 +159,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Universal GCC Atlas Command Search"
+      aria-label="Universal ZeroDay Command Search"
       className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-ink/50 backdrop-blur-xs animate-in fade-in duration-fast"
     >
       <div

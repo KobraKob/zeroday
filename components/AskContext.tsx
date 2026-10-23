@@ -21,7 +21,7 @@ export function AskProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("gcc-atlas-recent-queries");
+      const stored = localStorage.getItem("zeroday-recent-queries");
       if (stored) {
         setRecentQuestions(JSON.parse(stored));
       }
@@ -45,7 +45,7 @@ export function AskProvider({ children }: { children: React.ReactNode }) {
     setRecentQuestions((prev) => {
       const updated = [trimmed, ...prev.filter((q) => q !== trimmed)].slice(0, 8);
       try {
-        localStorage.setItem("gcc-atlas-recent-queries", JSON.stringify(updated));
+        localStorage.setItem("zeroday-recent-queries", JSON.stringify(updated));
       } catch {
         // Ignore localStorage write errors
       }
@@ -56,7 +56,7 @@ export function AskProvider({ children }: { children: React.ReactNode }) {
   const clearRecentQuestions = () => {
     setRecentQuestions([]);
     try {
-      localStorage.removeItem("gcc-atlas-recent-queries");
+      localStorage.removeItem("zeroday-recent-queries");
     } catch {
       // Ignore
     }

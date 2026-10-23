@@ -1,0 +1,30 @@
+[
+  {
+    "id": "feed-et-gcc",
+    "name": "Economic Times - GCC & Tech Centers",
+    "url": "https://economictimes.indiatimes.com/tech/ites/rssfeeds/13357564.cms",
+    "category": "press",
+    "enabled": true
+  },
+  {
+    "id": "feed-mint-tech",
+    "name": "Livemint - Technology & India Capabilities",
+    "url": "https://www.livemint.com/rss/technology",
+    "category": "press",
+    "enabled": true
+  },
+  {
+    "id": "feed-bs-companies",
+    "name": "Business Standard - Corporate & Tech Expansions",
+    "url": "https://www.business-standard.com/rss/companies-101.rss",
+    "category": "press",
+    "enabled": true
+  },
+  {
+    "id": "feed-hindubiz-info",
+    "name": "The Hindu BusinessLine - InfoTech",
+    "url": "https://www.thehindubusinessline.com/info-tech/feeder/default.rss",
+    "category": "press",
+    "enabled": true
+  }
+]
