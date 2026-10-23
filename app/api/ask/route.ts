@@ -188,8 +188,9 @@ function buildRagContext(
   };
 }
 
-function siteHelpFallback(): AskResponse {
+function siteHelpFallback(query: string): AskResponse {
   return {
+    query,
     answer_blocks: [
       {
         text: "Start in the GCC Registry (/registry). Search for a company, then filter by city, sector, parent headquarters, size, operating status, or CIN availability. Open a record's citation to inspect its evidence.",
@@ -231,6 +232,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: "Query parameter is required" },
         { status: 400 }
+      );
+    }
+
+    if (query.length > 2000) {
+      return NextResponse.json(
+        { error: "Question is too long. Keep it under 2,000 characters." },
+        { status: 413 }
       );
     }
 
@@ -396,9 +404,10 @@ export async function POST(req: NextRequest) {
                   : citedIds.size > 0 || (answerKind === "catalog" && rag.hasRelevantRecords);
 
               return NextResponse.json({
+                query,
                 answer_blocks: blocks,
                 follow_ups: Array.isArray(parsed.follow_ups)
-                  ? parsed.follow_ups.filter((item: unknown): item is string => typeof item === "string" && item.trim()).slice(0, 3).map((item: string) => item.trim().slice(0, 180))
+                  ? parsed.follow_ups.filter((item: unknown): item is string => typeof item === "string" && item.trim().length > 0).slice(0, 3).map((item: string) => item.trim().slice(0, 180))
                   : [],
                 gaps: Array.isArray(parsed.gaps)
                   ? parsed.gaps.filter((item: unknown): item is string => typeof item === "string" && item.trim()).slice(0, 4).map((item: string) => item.trim().slice(0, 240))
@@ -420,7 +429,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (siteHelpQuestion) {
-      return NextResponse.json(siteHelpFallback());
+      return NextResponse.json(siteHelpFallback(query));
     }
 
     // 2. Friendly greeting / about ZeroDay
