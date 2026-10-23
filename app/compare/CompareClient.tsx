@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { ArrowDownRight, ArrowUpRight, Check, ChevronDown, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
+import { Check, RotateCcw, Search, SlidersHorizontal } from "lucide-react";
 import { City, Claim, Source, State } from "../../lib/schema";
 import { CitationButton } from "../../components/CitationButton";
 import { CompareTable } from "../../components/CompareTable";
@@ -426,7 +426,7 @@ export function CompareClient({
                   aria-pressed={activeMetricKey === metric.key}
                 >
                   <span>{metric.label}</span>
-                  {activeMetricKey === metric.key && <ChevronDown size={13} aria-hidden="true" />}
+                  {activeMetricKey === metric.key && <Check size={13} aria-hidden="true" />}
                 </button>
               ))}
             </div>
