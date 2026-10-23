@@ -19,6 +19,10 @@ import {
   Shield,
   Clock,
   BookOpen,
+  Activity,
+  MapPin,
+  ChartNoAxesCombined,
+  Search,
 } from "lucide-react";
 
 interface ReconcileClientProps {
