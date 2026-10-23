@@ -1,7 +1,7 @@
 {
   "name": "zeroday-backend",
   "version": "1.0.0",
-  "description": "ZeroDay Grounded Intelligence & Vector API Server for Railway deployment",
+  "description": "ZeroDay Grounded Intelligence API Server for Render deployment",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc --pretty false",
@@ -12,7 +12,8 @@
     "cors": "2.8.5",
     "dotenv": "16.4.7",
     "express": "4.21.2",
-    "postgres": "3.4.9"
+    "postgres": "3.4.9",
+    "@supabase/supabase-js": "^2.57.4"
   },
   "devDependencies": {
     "@types/cors": "2.8.17",
