@@ -11,10 +11,14 @@ import statesData from "../data/states.json";
 import definitionsData from "../data/definitions.json";
 import providersData from "../data/providers.json";
 import proofLinksData from "../data/proofLinks.json";
+import signalsData from "../data/signals.json";
+import publishedCountsData from "../data/publishedCounts.json";
+import checklistsData from "../data/checklists.json";
+import sourcesData from "../data/sources.json";
 
 export interface DocumentChunk {
   id: string;
-  category: "identity" | "methodology" | "claim" | "gcc" | "city" | "policy" | "provider";
+  category: "identity" | "methodology" | "claim" | "gcc" | "city" | "policy" | "provider" | "signal" | "published_count" | "checklist" | "source";
   title: string;
   content: string;
   claim_ids: string[];
@@ -55,7 +59,7 @@ class VectorStore {
       title: "ZeroDay Mandate & Record",
       content:
         "ZeroDay is the independent, citable record of India's Global Capability Centre (GCC) ecosystem. Facts are verified against primary statutory corporate filings (MCA CIN), registered lease deeds, and gazetted state policies. Answers come strictly from verified public evidence without speculation.",
-      claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
+      claim_ids: [],
     });
 
     this.chunks.push({
@@ -64,7 +68,7 @@ class VectorStore {
       title: "What ZeroDay Does",
       content:
         "ZeroDay provides an independent, citable record of India's Global Capability Centres. Every number is anchored to an immutable primary source with confidence grades (A to D) and an editorial neutrality firewall with zero commercial paid placement.",
-      claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
+      claim_ids: [],
     });
 
     // 2. Methodology & Reconcile Logic
@@ -99,20 +103,25 @@ class VectorStore {
         id: `gcc-${gcc.slug || gcc.id}`,
         category: "gcc",
         title: `GCC Profile: ${gcc.name}`,
-        content: `${gcc.name} (Parent: ${gcc.parent_name}, HQ: ${gcc.parent_hq_country}). Statutory Entity: ${gcc.india_entity_name || "Statutory Entity"}. Corporate Identity Number (CIN): ${gcc.cin || "Pending filing"}. Operational campuses in ${citiesStr}. Primary functions: ${funcsStr}. Headcount band: ${gcc.headcount_band || "Undisclosed"}. Established year: ${gcc.established_year || "Audited"}. Current operational status: ${gcc.status}.`,
-        claim_ids: gcc.claim_ids || [],
+        content: `${gcc.name} (Parent: ${gcc.parent_name || "not listed"}, HQ: ${gcc.parent_hq_country || "not listed"}). Statutory Entity: ${gcc.india_entity_name || "not listed"}. Corporate Identification Number (CIN): ${gcc.cin || "not listed"}. Listed campuses: ${citiesStr || "not listed"}. Listed functions: ${funcsStr || "not listed"}. Headcount band: ${gcc.headcount_band || "not listed"}. Established year: ${gcc.established_year ?? "not listed"}. Status: ${gcc.status || "not listed"}. Sector: ${gcc.sector || "not listed"}.`,
+        claim_ids: Array.isArray(gcc.claim_ids) ? gcc.claim_ids : [],
       });
     });
 
     // 5. Tech Clusters & Real Estate
     (citiesData as any[]).forEach((city) => {
-      const corridors = Array.isArray(city.primary_corridors) ? city.primary_corridors.join(", ") : "tech parks";
+      const corridors = Array.isArray(city.primary_corridors) ? city.primary_corridors.join(", ") : "";
+      const cityMetrics = [
+        city.total_gccs != null ? `Listed GCC units: ${city.total_gccs}.` : "",
+        city.stats?.vacancy_pct != null ? `Listed Grade A vacancy: ${city.stats.vacancy_pct}%.` : "",
+        city.stats?.avg_rent_range_inr_sqft != null ? `Listed average rent range: ${city.stats.avg_rent_range_inr_sqft} per sq ft.` : "",
+      ].filter(Boolean).join(" ");
       this.chunks.push({
         id: `city-${city.id}`,
         category: "city",
         title: `City Hub: ${city.name} (${city.state_id})`,
-        content: `${city.name} (${city.state_id}) is a ${city.tier || "Tier-1"} tech cluster with ${city.total_gccs || "multiple"} operational GCC units. Major micro-markets include ${corridors}. Commercial Grade A vacancy stands at ${city.stats?.vacancy_pct || "8-12"}% with monthly rents ranging between ${city.stats?.avg_rent_range_inr_sqft || "₹80-140"}/sq ft.`,
-        claim_ids: city.claim_ids || [],
+        content: `${city.name} (${city.state_id || "state not listed"}). Tier: ${city.tier || "not listed"}. Listed micro-markets: ${corridors || "not listed"}. ${cityMetrics}`,
+        claim_ids: Array.isArray(city.claim_ids) ? city.claim_ids : [],
       });
     });
 
@@ -132,22 +141,74 @@ class VectorStore {
 
     // 7. Providers & Documented Proof Links
     (providersData as any[]).forEach((prov) => {
+      const providerCities = Array.isArray(prov.cities) ? prov.cities.join(", ") : "";
+      const marketedClaims = Array.isArray(prov.marketed_claims) ? prov.marketed_claims.join("; ") : "";
       this.chunks.push({
         id: `prov-${prov.slug || prov.id}`,
         category: "provider",
-        title: `Service Provider: ${prov.name}`,
-        content: `${prov.name} is a verified provider specializing in ${prov.category}. Documented engagements include campus leasing, legal structuring, and GCC incubation in India. Evidence score is computed strictly from verified proof links.`,
-        claim_ids: ["clm-mkt-rev-fy26"],
+        title: `Listed Service Provider: ${prov.name}`,
+        content: `Listed provider: ${prov.name}. Category: ${prov.category || "not listed"}. City footprint: ${providerCities || "not listed"}. Provider-supplied claims (not independently confirmed here): ${marketedClaims || "none listed"}.`,
+        claim_ids: Array.isArray(prov.claim_ids) ? prov.claim_ids : [],
       });
     });
 
     (proofLinksData as any[]).forEach((pl) => {
+      const evidenceSummary = Array.isArray(pl.evidence)
+        ? pl.evidence.map((item: any) => `${item.kind || "evidence"} from source ${item.source_id || "not linked"}: ${item.excerpt_summary || "no excerpt summary"}`).join("; ")
+        : "no evidence detail listed";
       this.chunks.push({
         id: `proof-${pl.id}`,
         category: "provider",
-        title: `Proof Link: ${pl.service} (${pl.year})`,
-        content: `Documented engagement: ${pl.service} for client ${pl.gcc_id} by provider ${pl.provider_id} in year ${pl.year}. Evidence status: ${pl.status}. Verified via lease records and client attestations.`,
-        claim_ids: ["clm-mkt-rev-fy26"],
+        title: `Proof Link: ${pl.service || "service not listed"} (${pl.year ?? "year not listed"})`,
+        content: `Listed engagement record: service ${pl.service || "not listed"}; client record ID ${pl.gcc_id || "not listed"}; provider record ID ${pl.provider_id || "not listed"}; year ${pl.year ?? "not listed"}; status ${pl.status || "not listed"}. Evidence items: ${evidenceSummary}.`,
+        claim_ids: Array.isArray(pl.claim_ids) ? pl.claim_ids : [],
+      });
+    });
+
+    // 8. Radar signals
+    (signalsData as any[]).forEach((signal) => {
+      this.chunks.push({
+        id: `signal-${signal.id}`,
+        category: "signal",
+        title: `Signal: ${signal.company_name || signal.title || "Company not listed"} — ${signal.type}`,
+        content: `Signal company: ${signal.company_name || "not listed"}. Type: ${signal.type}. Date: ${signal.date}. City: ${signal.city || "not listed"}. Note: ${signal.note || signal.summary || "not listed"}. Source ID: ${signal.source_id || "not listed"}.`,
+        claim_ids: Array.isArray(signal.claim_ids) ? signal.claim_ids : [],
+      });
+    });
+
+    // 9. Published estimates used by Reconcile
+    (publishedCountsData as any[]).forEach((record) => {
+      this.chunks.push({
+        id: `published-count-${record.id}`,
+        category: "published_count",
+        title: `Published GCC Count: ${record.publisher}`,
+        content: `Publisher: ${record.publisher}. Published headline: ${record.headline_count}. Claimed unit: ${record.unit_claimed}. Unit type: ${record.unit_type || "unknown"}. As of: ${record.as_of}. Definition known: ${record.definition_known}. Note: ${record.note || ""}. Source ID: ${record.source_id || "not listed"}.`,
+        claim_ids: [],
+      });
+    });
+
+    // 10. Guided market-entry checklists
+    (checklistsData as any[]).forEach((checklist) => {
+      const items = Array.isArray(checklist.items)
+        ? checklist.items.map((item: any) => `${item.title}: ${item.description}${item.official_url ? ` (official link: ${item.official_url})` : ""}`).join("; ")
+        : "";
+      this.chunks.push({
+        id: `checklist-${checklist.id}`,
+        category: "checklist",
+        title: `Entry Checklist: ${checklist.title || checklist.stage}`,
+        content: `Checklist stage: ${checklist.stage}. ${checklist.title}. ${checklist.description || ""}. Steps: ${items}.`,
+        claim_ids: [],
+      });
+    });
+
+    // 11. Source directory for provenance lookup
+    (sourcesData as any[]).forEach((source) => {
+      this.chunks.push({
+        id: `source-${source.id}`,
+        category: "source",
+        title: `Source Record: ${source.name}`,
+        content: `Source: ${source.name}. Publisher: ${source.publisher}. Type: ${source.type}. Published: ${source.published_at || "not listed"}. Retrieved: ${source.retrieved_at || "not listed"}. URL: ${source.url}. Source ID: ${source.id}.`,
+        claim_ids: [],
       });
     });
 
