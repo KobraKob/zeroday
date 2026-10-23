@@ -352,12 +352,20 @@ small,
 .atlas-nav-link-active::after {
   content: "";
   position: absolute;
+  left: auto;
+  right: 7px;
+  top: 6px;
+  bottom: auto;
   width: 5px;
   height: 5px;
-  top: 6px;
-  right: 7px;
   border-radius: 50%;
   background: #FF6B4A;
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+.atlas-nav-link:not(.atlas-nav-link-active):focus-visible::after {
+  left: 14px;
+  right: 14px;
   opacity: 1;
 }
 .atlas-nav-control:hover {
