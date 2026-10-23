@@ -358,13 +358,28 @@ export function RegistryClient({
   const tracedPercentage = Math.round((tracedCinCount / totalCentresCount) * 100);
   const totalCitiesCount = allCities.length;
   const totalSectorsCount = allSectors.length;
+  const sectorDistribution = useMemo(() => {
+    const counts = new Map<string, number>();
+    initialGccs.forEach((gcc) => {
+      const sector = getTopLevelSector(gcc.sector);
+      counts.set(sector, (counts.get(sector) || 0) + 1);
+    });
+    return Array.from(counts, ([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count).slice(0, 6);
+  }, [initialGccs]);
+  const cityDistribution = useMemo(() => {
+    const counts = new Map<string, number>();
+    initialGccs.forEach((gcc) => gcc.cities.forEach((city) => counts.set(city, (counts.get(city) || 0) + 1)));
+    return Array.from(counts, ([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count).slice(0, 7);
+  }, [initialGccs]);
+  const maxSectorCount = Math.max(1, ...sectorDistribution.map((item) => item.count));
+  const maxCityCount = Math.max(1, ...cityDistribution.map((item) => item.count));
 
   return (
-    <div className="space-y-6 font-sans">
+    <div className="atlas-registry space-y-6 font-sans">
       {/* 9. Hero Section: Left = Headline & Computed Explainer; Right = 3 Large Numerals Strip */}
       <section
         aria-label="Registry Overview"
-        className="border-b-2 border-ink pb-8 pt-2"
+        className="registry-hero border-b-2 border-ink pb-8 pt-2"
       >
         {/* Rubric and Quick Action Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono mb-4">
@@ -435,6 +450,56 @@ export function RegistryClient({
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="registry-pulse-grid" aria-label="Registry data overview">
+        <article className="registry-pulse-panel registry-city-panel">
+          <div className="registry-panel-heading">
+            <div>
+              <span className="registry-eyebrow">01 / Geographic footprint</span>
+              <h2>Where capability is concentrated</h2>
+              <p>Select a city to explore its registered centres.</p>
+            </div>
+            <span className="registry-panel-index">IND · 01</span>
+          </div>
+          <div className="registry-city-visual" aria-label="City distribution, proportional bars">
+            {cityDistribution.map((city, index) => (
+              <button type="button" key={city.name}
+                className={"registry-city-row " + (selectedCity === city.name ? "is-selected" : "")}
+                onClick={() => setSelectedCity((current) => current === city.name ? "all" : city.name)}
+                aria-pressed={selectedCity === city.name}>
+                <span className="registry-city-rank">{String(index + 1).padStart(2, "0")}</span>
+                <span className="registry-city-name">{city.name}</span>
+                <span className="registry-city-track"><span style={{ width: (city.count / maxCityCount * 100) + "%" }} /></span>
+                <strong>{city.count}</strong>
+              </button>
+            ))}
+          </div>
+          <div className="registry-panel-footnote"><span className="registry-live-dot" /> Counts reflect registry records and their listed city footprints.</div>
+        </article>
+        <article className="registry-pulse-panel registry-sector-panel">
+          <div className="registry-panel-heading">
+            <div>
+              <span className="registry-eyebrow">02 / Sector mix</span>
+              <h2>The work behind the footprint</h2>
+              <p>Choose a sector to narrow the registry.</p>
+            </div>
+            <span className="registry-panel-index">MIX · 02</span>
+          </div>
+          <div className="registry-sector-visual">
+            {sectorDistribution.map((sector, index) => (
+              <button type="button" key={sector.name}
+                className={"registry-sector-row " + (selectedSector === sector.name ? "is-selected" : "")}
+                onClick={() => setSelectedSector((current) => current === sector.name ? "all" : sector.name)}
+                aria-pressed={selectedSector === sector.name}>
+                <span className="registry-sector-label"><i>{String(index + 1).padStart(2, "0")}</i>{sector.name}</span>
+                <span className="registry-sector-track"><span style={{ width: (sector.count / maxSectorCount * 100) + "%" }} /></span>
+                <strong>{sector.count}</strong>
+              </button>
+            ))}
+          </div>
+          <div className="registry-panel-footnote">Ranked by records in the current registry dataset.</div>
+        </article>
       </section>
 
       {/* 10. Filters Section: One row of pill-style filters with custom popovers, search, toggle & removable chips */}
