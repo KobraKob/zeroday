@@ -230,13 +230,23 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
     setTimeout(() => setCopiedType(null), 2000);
   };
 
+  const linkedSourceCount = result
+    ? new Set(
+        result.answer_blocks.flatMap((block) =>
+          block.claim_ids
+            .map((claimId) => claimsMap.get(claimId)?.source_id)
+            .filter((sourceId): sourceId is string => Boolean(sourceId))
+        )
+      ).size
+    : 0;
+
   if (!isDrawerOpen) return null;
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Ask ZeroDay Grounded Intelligence Drawer"
+      aria-label="Ask ZeroDay"
       className="fixed inset-0 z-50 flex justify-end font-sans"
     >
       {/* Dimmed backdrop */}
@@ -258,9 +268,6 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
             <h2 className="font-display font-bold text-sm uppercase tracking-wider text-ink">
               Ask ZeroDay
             </h2>
-            <span className="font-mono text-[10px] text-muted border-l border-rule pl-2">
-              Edition: 2026
-            </span>
           </div>
           <button
             type="button"
@@ -272,16 +279,8 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
           </button>
         </div>
 
-        {/* Current Page Context Pill */}
-        <div className="px-5 py-2.5 bg-paper border-b border-rule-subtle text-xs font-mono text-muted flex items-center justify-between flex-shrink-0">
-          <span className="truncate">{pageContext.label}</span>
-          <span className="text-[10px] text-cobalt uppercase font-bold tracking-wider">
-            Grounded Mode
-          </span>
-        </div>
-
         {/* Pinned Input Bar */}
-        <div className="p-4 border-b-2 border-rule bg-surface flex-shrink-0">
+        <div className="ask-composer flex-shrink-0">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -295,12 +294,12 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
               value={inputQuery}
               onChange={(e) => setInputQuery(e.target.value)}
               placeholder="Ask anything about India's GCC ecosystem..."
-              className="w-full pl-3.5 pr-20 py-2.5 text-sm font-body border-2 border-rule rounded-full bg-paper text-ink focus:outline-none focus:border-cobalt transition-colors"
+              className="ask-composer-input w-full pl-3.5 pr-20 py-2.5 text-sm font-body border-2 border-rule rounded-full bg-paper text-ink focus:outline-none focus:border-cobalt transition-colors"
             />
             <button
               type="submit"
               disabled={!inputQuery.trim() || Boolean(loadingStep)}
-              className="absolute right-1.5 px-3.5 py-1.5 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border-2 border-rule rounded-full hover:shadow-[1px_1px_0px_var(--color-ink)] disabled:opacity-40 transition-all cursor-pointer"
+              className="ask-composer-submit absolute right-1.5 px-3.5 py-1.5 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border-2 border-rule rounded-full hover:shadow-[1px_1px_0px_var(--color-ink)] disabled:opacity-40 transition-all cursor-pointer"
             >
               Ask
             </button>
@@ -308,16 +307,16 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
         </div>
 
         {/* Scrollable Content Area */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-6">
+        <div className="ask-drawer-content flex-1 overflow-y-auto p-5 space-y-6">
           {/* Calm Loading State */}
           {loadingStep && (
-            <div className="p-5 border-2 border-rule bg-surface rounded-xs space-y-3">
+            <div className="ask-loading-state p-5 border-2 border-rule bg-surface rounded-xs space-y-3">
               <div className="flex items-center justify-between text-xs font-mono text-ink">
                 <span className="font-bold flex items-center gap-2">
                   <span className="w-2 h-2 bg-cobalt inline-block rounded-full animate-ping" />
                   {loadingStep}...
                 </span>
-                <span className="text-muted text-[10px]">VERIFYING CITATIONS</span>
+                <span className="text-muted text-[10px]">CHECKING SOURCES</span>
               </div>
               <div className="w-full bg-paper border border-rule h-2 rounded-full overflow-hidden">
                 <div
@@ -331,7 +330,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                 />
               </div>
               <p className="font-body text-xs text-muted">
-                Verifying claims and citation integrity against the ZeroDay repository...
+                Checking the available claims and linked sources...
               </p>
             </div>
           )}
@@ -385,36 +384,23 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
             </div>
           )}
 
-          {/* Answered State (Answer Sheet) */}
+          {/* Compact answer view */}
           {result && !loadingStep && (
-            <div className="space-y-6">
-              <article className="p-5 sm:p-6 border-2 border-rule bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] space-y-4">
-                {/* Question Heading */}
-                <h3 className="font-display font-bold text-base text-ink leading-snug">
-                  {result.query}
-                </h3>
-
-                {/* Grounded Badge / Neutrality */}
-                <div className="flex items-center gap-2 pt-1 pb-2 border-b border-rule-subtle text-[11px] font-mono text-muted">
-                  {result.is_grounded ? (
-                    <span className="text-mint font-bold flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5" />
-                      100% Sourced Citations
-                    </span>
-                  ) : (
-                    <span className="text-marigold font-bold flex items-center gap-1">
-                      <HelpCircle className="w-3.5 h-3.5" />
-                      Data Gap Acknowledged
-                    </span>
-                  )}
-                  <span>•</span>
-                  <span>Zero Commercial Sponsorship</span>
+            <div className="ask-response">
+              <article className="ask-response-card" aria-label="Answer from the ZeroDay record">
+                <div className="ask-response-status">
+                  <span className={"ask-source-status" + (result.is_grounded ? " is-grounded" : " is-limited")}>
+                    {result.is_grounded ? <Check className="w-3.5 h-3.5" /> : <HelpCircle className="w-3.5 h-3.5" />}
+                    {result.is_grounded ? "Sourced answer" : "Coverage limited"}
+                  </span>
+                  <span className="ask-source-count">
+                    {linkedSourceCount} {linkedSourceCount === 1 ? "source" : "sources"} linked
+                  </span>
                 </div>
 
-                {/* Answer Blocks with Footnote Numbers */}
-                <div className="space-y-3 text-sm font-body text-ink leading-relaxed">
+                <div className="ask-response-copy">
                   {result.answer_blocks.map((block, idx) => (
-                    <p key={idx} className="relative">
+                    <p key={idx}>
                       {block.text}
                       {block.claim_ids.map((cid, cIdx) => {
                         const claim = claimsMap.get(cid);
@@ -424,8 +410,9 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                             key={cIdx}
                             type="button"
                             onClick={() => openSourceDrawer(source, claim, claim?.field, cIdx + 1)}
-                            className="inline-flex items-center align-super ml-1 text-cobalt font-mono font-bold text-[10px] hover:underline cursor-pointer"
-                            title="Inspect primary source verification"
+                            className="ask-citation"
+                            title={source ? "Inspect source: " + source.name : "Inspect cited claim"}
+                            aria-label={"Open citation " + (cIdx + 1) + (source ? ": " + source.name : "")}
                           >
                             [{cIdx + 1}]
                           </button>
@@ -435,150 +422,126 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
                   ))}
                 </div>
 
-                {/* Sources Disagree Box (if present) */}
                 {result.disagreements && result.disagreements.length > 0 && (
-                  <div className="p-3 border-2 border-coral bg-coral/10 rounded-xs space-y-2">
-                    <div className="flex items-center gap-2 font-mono text-xs font-bold text-coral uppercase tracking-wide">
-                      <AlertTriangle className="w-4 h-4" />
-                      <span>Sources Disagree on this Metric</span>
-                    </div>
-                    <div className="space-y-2 text-xs font-mono">
-                      {result.disagreements.map((d, dIdx) => (
-                        <div key={dIdx} className="grid grid-cols-2 gap-2 p-2 bg-surface border border-hairline rounded-xs">
-                          <div>
-                            <span className="text-muted text-[10px] block">{d.source_a}</span>
-                            <span className="font-bold text-ink">{d.value_a}</span>
-                          </div>
-                          <div>
-                            <span className="text-muted text-[10px] block">{d.source_b}</span>
-                            <span className="font-bold text-ink">{d.value_b}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <section className="ask-response-disagreement" aria-label="Source disagreement">
+                    <strong><AlertTriangle className="w-3.5 h-3.5" /> Sources differ on this metric</strong>
+                    {result.disagreements.map((d, dIdx) => (
+                      <div className="ask-disagreement-row" key={dIdx}>
+                        <span><small>{d.source_a}</small><b>{d.value_a}</b></span>
+                        <span><small>{d.source_b}</small><b>{d.value_b}</b></span>
+                        {d.reason && <p>{d.reason}</p>}
+                      </div>
+                    ))}
+                  </section>
                 )}
 
-                {/* Gaps / What ZeroDay Doesn't Know */}
-                <div className="pt-3 border-t border-rule-subtle space-y-3">
-                  <div className="p-3 border border-rule-subtle bg-paper rounded-xs space-y-1.5">
-                    <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider block">
-                      What ZeroDay Does Not Know Yet:
-                    </span>
-                    {result.gaps && result.gaps.length > 0 ? (
-                      <ul className="list-disc list-inside text-xs font-body text-ink space-y-0.5">
-                        {result.gaps.map((g, idx) => (
-                          <li key={idx}>{g}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-xs font-body text-muted">
-                        No gaps found for this query. All claims are verified against sources.
-                      </p>
-                    )}
-                  </div>
+                {result.gaps && result.gaps.length > 0 && (
+                  <section className="ask-response-gaps" aria-label="Limits in available evidence">
+                    <strong>What remains unknown</strong>
+                    <ul>
+                      {result.gaps.map((gap, idx) => <li key={idx}>{gap}</li>)}
+                    </ul>
+                  </section>
+                )}
 
-                  {/* See in ZeroDay deep links */}
-                  <div className="p-3 border border-rule-subtle bg-surface rounded-xs space-y-2">
-                    <span className="font-mono text-[11px] font-bold text-muted uppercase tracking-wider block">
-                      See in ZeroDay
-                    </span>
-                    <div className="flex flex-wrap gap-2 text-xs font-mono">
-                      <a
-                        href="/reconcile"
-                        className="inline-flex items-center gap-1 px-3 py-1 border border-rule bg-surface hover:bg-paper rounded-full"
-                      >
-                        <span>Reconcile Ledger</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                      <a
-                        href="/registry"
-                        className="inline-flex items-center gap-1 px-3 py-1 border border-rule bg-surface hover:bg-paper rounded-full"
-                      >
-                        <span>GCC Registry</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                      <a
-                        href="/changelog"
-                        className="inline-flex items-center gap-1 px-3 py-1 border border-rule bg-surface hover:bg-paper rounded-full"
-                      >
-                        <span>Changelog</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
+                <details className="ask-related-records">
+                  <summary>
+                    <span>Explore related records</span>
+                    <span className="ask-related-hint">Optional</span>
+                  </summary>
+                  <div className="ask-related-links">
+                    <a href="/reconcile">Reconcile <ExternalLink className="w-3 h-3" /></a>
+                    <a href="/registry">GCC registry <ExternalLink className="w-3 h-3" /></a>
+                    <a href="/changelog">Changelog <ExternalLink className="w-3 h-3" /></a>
                   </div>
+                </details>
 
-                  {/* Actions */}
-                  <div className="pt-2 border-t border-rule-subtle flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-muted">
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleCopy(
-                            "citation",
-                            `ZeroDay Record: "${result.query}" — Retrieved from https://zeroday.in/ask`
-                          )
-                        }
-                        className="inline-flex items-center gap-1 hover:text-ink underline decoration-1 cursor-pointer"
-                      >
-                        {copiedType === "citation" ? <Check className="w-3 h-3 text-mint" /> : <Copy className="w-3 h-3" />}
-                        <span>{copiedType === "citation" ? "Copied citation!" : "Copy citation"}</span>
-                      </button>
-                      <span>•</span>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleCopy(
-                            "full",
-                            `Q: ${result.query}\nA: ${result.answer_blocks.map((b) => b.text).join(" ")}\n(Source: ZeroDay Archival Record)`
-                          )
-                        }
-                        className="inline-flex items-center gap-1 hover:text-ink underline decoration-1 cursor-pointer"
-                      >
-                        {copiedType === "full" ? <Check className="w-3 h-3 text-mint" /> : <Copy className="w-3 h-3" />}
-                        <span>{copiedType === "full" ? "Copied answer!" : "Copy answer with sources"}</span>
-                      </button>
-                    </div>
-
-                    <a
-                      href="mailto:audit@zeroday.in?subject=Report%20Evidence%20Error"
-                      className="hover:text-coral underline decoration-1"
-                    >
-                      Report an error
-                    </a>
-                  </div>
+                <div className="ask-response-actions" aria-label="Answer actions">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const sourceText = Array.from(new Set(
+                        result.answer_blocks.flatMap((block) => block.claim_ids
+                          .map((cid) => claimsMap.get(cid)?.source_id)
+                          .filter((sourceId): sourceId is string => Boolean(sourceId)))
+                      )).map((sourceId) => {
+                        const source = sourcesMap.get(sourceId);
+                        return source ? source.name + (source.url ? " — " + source.url : "") : sourceId;
+                      }).join("\n");
+                      handleCopy("full", "Question: " + result.query + "\n\nAnswer:\n" + result.answer_blocks.map((block) => block.text).join("\n\n") + "\n\nSources:\n" + (sourceText || "No source links were attached to this answer."));
+                    }}
+                  >
+                    {copiedType === "full" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedType === "full" ? "Copied answer" : "Copy answer + sources"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const sourceIds = Array.from(new Set(
+                        result.answer_blocks.flatMap((block) => block.claim_ids
+                          .map((cid) => claimsMap.get(cid)?.source_id)
+                          .filter((sourceId): sourceId is string => Boolean(sourceId)))
+                      ));
+                      const sourceText = sourceIds.map((sourceId) => {
+                        const source = sourcesMap.get(sourceId);
+                        return source ? source.name + (source.url ? " — " + source.url : "") : sourceId;
+                      }).join("\n");
+                      handleCopy("citation", "ZeroDay record: " + result.query + "\nSources:\n" + (sourceText || "No source links were attached."));
+                    }}
+                  >
+                    {copiedType === "citation" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copiedType === "citation" ? "Copied citation" : "Copy citation"}
+                  </button>
+                  <a href="mailto:audit@zeroday.in?subject=Report%20Evidence%20Error">
+                    Report issue
+                  </a>
                 </div>
               </article>
 
-              {/* Follow-up suggestions */}
               {result.follow_ups && result.follow_ups.length > 0 && (
-                <div className="space-y-2">
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-muted block">
-                    Follow-up Questions:
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {result.follow_ups.map((fu, fIdx) => (
-                      <button
-                        key={fIdx}
-                        type="button"
-                        onClick={() => {
-                          setInputQuery(fu);
-                          handleExecute(fu);
-                        }}
-                        className="px-4 py-2 border-2 border-rule rounded-full bg-surface text-ink text-xs font-body font-medium hover:bg-paper hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all cursor-pointer"
-                      >
-                        {fu}
-                      </button>
-                    ))}
+                <section className="ask-followups" aria-labelledby="ask-followups-title">
+                  <div className="ask-followups-heading">
+                    <h3 id="ask-followups-title">Ask next</h3>
+                    <span>Related questions</span>
                   </div>
-                </div>
+                  {result.follow_ups.slice(0, 2).map((followUp, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className="ask-followup-row"
+                      onClick={() => {
+                        setInputQuery(followUp);
+                        handleExecute(followUp);
+                      }}
+                    >
+                      <span>{followUp}</span>
+                      <span aria-hidden="true">↗</span>
+                    </button>
+                  ))}
+                  {result.follow_ups.length > 2 && (
+                    <details className="ask-more-followups">
+                      <summary>Show {result.follow_ups.length - 2} more questions</summary>
+                      {result.follow_ups.slice(2).map((followUp, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          className="ask-followup-row"
+                          onClick={() => {
+                            setInputQuery(followUp);
+                            handleExecute(followUp);
+                          }}
+                        >
+                          <span>{followUp}</span>
+                          <span aria-hidden="true">↗</span>
+                        </button>
+                      ))}
+                    </details>
+                  )}
+                </section>
               )}
-
-              <div className="pt-4 border-t border-rule-subtle text-xs font-body text-muted leading-relaxed text-center">
-                Answers come only from sourced data in ZeroDay. If we don&apos;t have it, we say so.
-              </div>
             </div>
           )}
+
         </div>
       </div>
     </div>
