@@ -33,7 +33,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-9 h-9 border-2 border-ink rounded-full bg-surface flex items-center justify-center text-muted opacity-40 min-h-[36px] min-w-[36px]" />
+      <div aria-hidden="true" className="w-11 h-11 border border-hairline-subtle rounded-full bg-surface flex items-center justify-center text-muted opacity-40 min-h-[44px] min-w-[44px]" />
     );
   }
 
@@ -43,10 +43,10 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="w-9 h-9 border-2 border-ink rounded-full bg-surface text-ink hover:bg-paper hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all flex items-center justify-center focus-visible:outline-cobalt min-h-[36px] min-w-[36px] cursor-pointer"
+      className="atlas-nav-control w-11 h-11 border border-hairline-subtle rounded-full bg-surface text-ink hover:bg-cream transition-all duration-200 flex items-center justify-center focus-visible:outline-cobalt min-h-[44px] min-w-[44px] cursor-pointer"
     >
       {isDark ? (
-        <Sun className="w-4 h-4 text-marigold" strokeWidth={2} />
+        <Sun className="w-4 h-4 text-[#FF6B4A]" strokeWidth={2} />
       ) : (
         <Moon className="w-4 h-4 text-ink" strokeWidth={2} />
       )}
