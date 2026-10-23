@@ -301,7 +301,7 @@ small,
   background: var(--color-surface);
   color: var(--color-muted);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: .08em;
   line-height: 1.2;
 }
@@ -569,7 +569,7 @@ small,
 }
 .atlas-stat-label {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 }
 .atlas-stat-number {
@@ -588,7 +588,7 @@ small,
   gap: 4px;
   margin-top: 10px;
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.5;
 }
 .atlas-insight-panel,
@@ -604,7 +604,7 @@ small,
   gap: 8px;
   color: var(--cobalt-text);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .14em;
   line-height: 1.5;
@@ -621,7 +621,7 @@ small,
 }
 .atlas-mini-stat span {
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 .atlas-mini-stat strong {
   color: var(--color-ink);
