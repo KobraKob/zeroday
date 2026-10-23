@@ -1,0 +1,174 @@
+[
+  {
+    "id": "site-identity",
+    "title": "What ZeroDay is",
+    "kind": "site_help",
+    "keywords": [
+      "about",
+      "what is zeroday",
+      "purpose",
+      "start",
+      "getting started"
+    ],
+    "content": "ZeroDay is an independent, citable record of India's Global Capability Centre (GCC) ecosystem. It helps users explore GCC entities and city footprints, compare published counts under explicit counting rules, inspect source-backed claims, review provider proof, track ecosystem signals, and understand methodology. It is an evidence-first research tool, not a paid provider ranking site. Never claim a model was trained on these records; the assistant retrieves relevant records at answer time."
+  },
+  {
+    "id": "site-getting-started",
+    "title": "Getting started with ZeroDay",
+    "kind": "site_help",
+    "keywords": [
+      "get started",
+      "start here",
+      "how to use",
+      "new user",
+      "begin",
+      "first steps",
+      "navigate"
+    ],
+    "content": "For a new user: 1) Open /registry to find GCCs by company, city, sector, parent headquarters, size band, status, and CIN availability. 2) Open a GCC profile or citation to inspect the record and its evidence links. 3) Use /reconcile to compare published GCC totals and see why counts differ when publishers count parent companies, legal entities, or centre units. 4) Use /compare to compare Indian cities and state policies, or /advisor for a guided market-entry briefing. 5) Use /radar for tracked signals, /providers for service-provider proof, and /methodology to understand definitions and confidence grades. Ask Zero questions in everyday language; ask a follow-up to narrow the question."
+  },
+  {
+    "id": "page-registry",
+    "title": "GCC Registry",
+    "kind": "site_help",
+    "keywords": [
+      "registry",
+      "gcc list",
+      "find company",
+      "search gcc",
+      "filter",
+      "city",
+      "sector",
+      "cin"
+    ],
+    "content": "The /registry page is the GCC directory. Use search to find a centre or parent company. Filter by city, sector, parent HQ, size band, operating status, and whether a CIN is present. Expand a row to inspect more detail. Click citation markers or source links to view provenance. Registry fields describe the listed entity; a field is not automatically a separately verified claim unless linked evidence supports it."
+  },
+  {
+    "id": "page-reconcile",
+    "title": "Reconcile Ledger",
+    "kind": "site_help",
+    "keywords": [
+      "reconcile",
+      "counts",
+      "numbers disagree",
+      "counting units",
+      "parent company",
+      "legal entity",
+      "centre unit"
+    ],
+    "content": "The /reconcile page compares published estimates of India's GCC ecosystem. It shows the publisher's count, its stated or implied unit, and the record's counting definitions. Totals can differ because one source counts parent companies, another legal entities, and another individual centres. Compare like with like before interpreting a difference. Open the source and the definition before drawing a conclusion."
+  },
+  {
+    "id": "page-compare",
+    "title": "City and State Compare",
+    "kind": "site_help",
+    "keywords": [
+      "compare cities",
+      "city comparison",
+      "state incentives",
+      "rent",
+      "vacancy",
+      "talent",
+      "policy"
+    ],
+    "content": "The /compare page places city and state information side by side, including available office rent ranges, vacancy metrics, talent cost indexes, and policy incentives. Use it to frame trade-offs, then inspect the claims and source records before treating any metric as decision-grade. The /advisor page provides a guided market-entry briefing and checklist-oriented exploration."
+  },
+  {
+    "id": "page-radar",
+    "title": "Radar Signals",
+    "kind": "site_help",
+    "keywords": [
+      "radar",
+      "signals",
+      "new office",
+      "incorporation",
+      "hiring",
+      "lease",
+      "expansion"
+    ],
+    "content": "The /radar page tracks signals such as incorporations, GST registrations, leadership hires, hiring bursts, state MOUs, lease announcements, press intent, and office inaugurations. A signal is a lead for investigation, not automatically a confirmed fact. Use its source and date to assess context."
+  },
+  {
+    "id": "page-providers",
+    "title": "Provider Proof",
+    "kind": "site_help",
+    "keywords": [
+      "provider",
+      "proof",
+      "advisor",
+      "service provider",
+      "attestation",
+      "ranking"
+    ],
+    "content": "The /providers page explores service providers and their documented proof links to GCC work. Look for the client, service, period, evidence kind, status, and source where present. Distinguish a provider's marketing claim from public evidence or a client attestation. ZeroDay does not sell paid rankings."
+  },
+  {
+    "id": "page-changelog",
+    "title": "Public Changelog",
+    "kind": "site_help",
+    "keywords": [
+      "changelog",
+      "history",
+      "what changed",
+      "audit log",
+      "updates"
+    ],
+    "content": "The /changelog page lists recorded changes to the public record, such as new entries, claim changes, policy updates, stale-claim downgrades, and source issues. Use it to understand what changed and why. Seeded or sample events should be treated as examples when explicitly labelled, not as independently verified events."
+  },
+  {
+    "id": "page-methodology",
+    "title": "Methodology and Governance",
+    "kind": "site_help",
+    "keywords": [
+      "methodology",
+      "confidence grade",
+      "A B C D",
+      "verified",
+      "source quality",
+      "governance"
+    ],
+    "content": "The /methodology page explains the counting definitions, confidence grading, source rubric, editorial governance, and neutrality rules. Confidence grades and source status are not interchangeable with certainty. Read the definition and source notes attached to a claim rather than interpreting a grade in isolation."
+  },
+  {
+    "id": "page-ask",
+    "title": "Ask ZeroDay",
+    "kind": "site_help",
+    "keywords": [
+      "ask",
+      "question",
+      "chat",
+      "assistant",
+      "how to ask",
+      "follow up",
+      "citations"
+    ],
+    "content": "Ask ZeroDay in ordinary language. Ask about GCCs, company profiles, city metrics, counting definitions, state policy, provider proof, signals, or how to use a page. The assistant searches relevant available records and provides linked claim citations when it uses approved claims. If the record lacks evidence, it must say so. For navigation questions, give practical steps based on the documented page features instead of incorrectly reporting a data gap."
+  },
+  {
+    "id": "page-attest",
+    "title": "Attest an Engagement",
+    "kind": "site_help",
+    "keywords": [
+      "attest",
+      "submit engagement",
+      "client review",
+      "attestation",
+      "form"
+    ],
+    "content": "The /submit page is the client-attestation intake interface. It asks for the provider, client organisation, service, engagement year, attester identity and role, work email, and a shareable engagement summary. In the current implementation, completing the form creates a session-only preview; it does not persist the submission or send automated email-domain verification. Never tell a user their attestation was saved or verified."
+  },
+  {
+    "id": "evidence-rules",
+    "title": "Evidence and answer rules",
+    "kind": "site_help",
+    "keywords": [
+      "sources",
+      "evidence",
+      "citations",
+      "unknown",
+      "neutrality",
+      "rules"
+    ],
+    "content": "Separate sourced claims from catalogue metadata, product instructions, and model inference. Cite factual answers using only claim IDs actually present in the supplied retrieved context and in the approved claims map. Never invent a citation, source URL, number, legal status, verification state, or user action. If a user asks for a metric not supported by the retrieved records, state the specific missing evidence and offer a useful next step. Answer site-navigation questions from this guide without pretending they require an external evidence claim."
+  }
+]
