@@ -217,7 +217,7 @@ export function AskDrawer({ claims = [], sources = [] }: AskDrawerProps) {
 
       const data: AnswerResult = await res.json();
       setLoadingStep(null);
-      setResult(data);
+      setResult({ ...data, query });
     } catch (err) {
       clearTimeout(t1);
       clearTimeout(t2);
