@@ -1,32 +1,30 @@
-# ZeroDay Railway Backend Dockerfile
+# ZeroDay Railway Backend
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy root data files and server package manifests
-COPY server/package*.json ./
-RUN npm ci
+# The service has its own pinned package manifest. A lockfile is not yet checked
+# in, so use npm install instead of npm ci (which requires a lockfile).
+COPY server/package.json ./
+RUN npm install --no-audit --no-fund
 
-# Copy server code and data
 COPY server/tsconfig.json ./
 COPY server/src ./src
-COPY data ../data
+COPY data /app/data
 
-# Build TypeScript to JavaScript
 RUN npm run build
 
-# Production image
 FROM node:20-alpine AS runner
 
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
 
-COPY server/package*.json ./
-RUN npm ci --only=production
+COPY server/package.json ./
+RUN npm install --omit=dev --no-audit --no-fund
 
 COPY --from=builder /app/dist ./dist
-COPY data /app/data
+COPY --from=builder /app/data ./data
 
 EXPOSE 8080
 
