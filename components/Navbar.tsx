@@ -68,7 +68,7 @@ export function Navbar() {
                 className="flex items-center gap-2.5 group min-h-[44px] focus-visible:outline-cobalt"
                 aria-label="ZeroDay Home"
               >
-                <div className="w-8 h-8 border-2 border-ink text-ink flex items-center justify-center font-display font-black text-xs tracking-tighter bg-surface group-hover:bg-cobalt group-hover:text-paper group-hover:border-cobalt transition-colors duration-fast rounded-xs">
+                <div className="w-8 h-8 border-2 border-ink text-ink flex items-center justify-center font-display font-black text-xs tracking-tighter bg-surface group-hover:bg-cobalt group-hover:text-white group-hover:border-cobalt transition-colors duration-fast rounded-xs">
                   ZD
                 </div>
                 <div className="flex flex-col">
@@ -142,7 +142,7 @@ export function Navbar() {
               {/* Attest Button */}
               <Link
                 href="/submit"
-                className="atlas-nav-primary inline-flex items-center justify-center px-4 h-11 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border border-cobalt hover:bg-[#5FE0B0] hover:text-[#0E1026] hover:border-[#5FE0B0] hover:shadow-[3px_3px_0px_#FF6B4A] transition-all duration-200 rounded-full min-h-[44px] focus-visible:outline-cobalt"
+                className="atlas-nav-primary inline-flex items-center justify-center px-4 h-11 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border border-cobalt hover:bg-mint hover:text-paper hover:border-mint hover:shadow-[3px_3px_0px_var(--color-coral)] transition-all duration-200 rounded-full min-h-[44px] focus-visible:outline-cobalt"
               >
                 Attest
               </Link>
@@ -212,7 +212,7 @@ export function Navbar() {
               <Link
                 href="/submit"
                 onClick={() => setMobileMenuOpen(false)}
-                className="atlas-nav-primary min-h-[44px] h-11 flex items-center justify-center text-xs font-mono font-bold bg-cobalt text-white border border-cobalt text-center uppercase rounded-full transition-all duration-200 hover:bg-[#5FE0B0] hover:text-[#0E1026] hover:shadow-[3px_3px_0px_#FF6B4A]"
+                className="atlas-nav-primary min-h-[44px] h-11 flex items-center justify-center text-xs font-mono font-bold bg-cobalt text-white border border-cobalt text-center uppercase rounded-full transition-all duration-200 hover:bg-mint hover:text-paper hover:shadow-[3px_3px_0px_var(--color-coral)]"
               >
                 + Attest
               </Link>
