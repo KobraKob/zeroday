@@ -261,3 +261,49 @@ small,
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Homepage-specific interaction: quiet, map-room motion rather than decorative effects. */
+.atlas-map-panel {
+  background-image: linear-gradient(rgba(75, 103, 84, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(75, 103, 84, 0.045) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.atlas-network .atlas-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.atlas-network .atlas-node:hover {
+  opacity: 0.78;
+}
+.atlas-ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: atlas-ripple 3.4s ease-out infinite;
+}
+.atlas-ripple-delay {
+  animation-delay: 1.7s;
+}
+.animate-atlas-pulse {
+  animation: atlas-pulse 2.8s ease-in-out infinite;
+}
+.atlas-count {
+  animation: atlas-count-in 220ms ease-out;
+}
+@keyframes atlas-ripple {
+  0% { transform: scale(.65); opacity: .6; }
+  75%, 100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes atlas-pulse {
+  0%, 100% { opacity: .55; }
+  50% { opacity: 1; }
+}
+@keyframes atlas-count-in {
+  from { opacity: .45; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atlas-ripple, .animate-atlas-pulse, .atlas-count {
+    animation: none !important;
+  }
+}
