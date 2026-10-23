@@ -28,14 +28,14 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
   const [selectedUnit, setSelectedUnit] = useState<"parent_company" | "legal_entity" | "centre_unit">("parent_company");
   const [selectedCity, setSelectedCity] = useState("Bengaluru");
   const cityPoints = [
-    { name: "Delhi NCR", x: 275, y: 70, color: "#FF704F" },
-    { name: "Mumbai", x: 190, y: 150, color: "#2536E8" },
-    { name: "Pune", x: 205, y: 172, color: "#2536E8" },
-    { name: "Hyderabad", x: 260, y: 185, color: "#16A67A" },
-    { name: "Chennai", x: 282, y: 235, color: "#FF704F" },
-    { name: "Bengaluru", x: 230, y: 220, color: "#16A67A" },
-    { name: "Kochi", x: 208, y: 268, color: "#2536E8" },
-    { name: "Kolkata", x: 350, y: 135, color: "#FF704F" },
+    { name: "Delhi NCR", x: 275, y: 70, color: "#FF6B4A" },
+    { name: "Mumbai", x: 190, y: 150, color: "#15183A" },
+    { name: "Pune", x: 205, y: 172, color: "#15183A" },
+    { name: "Hyderabad", x: 260, y: 185, color: "#267A68" },
+    { name: "Chennai", x: 282, y: 235, color: "#FF6B4A" },
+    { name: "Bengaluru", x: 230, y: 220, color: "#267A68" },
+    { name: "Kochi", x: 208, y: 268, color: "#15183A" },
+    { name: "Kolkata", x: 350, y: 135, color: "#FF6B4A" },
   ];
   const cityStats = useMemo(() => cityPoints.map((point) => ({
     ...point,
@@ -93,7 +93,7 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
               <svg className="atlas-network h-[280px] w-full sm:h-[330px]" viewBox="80 20 330 280" role="img" aria-label="Interactive schematic map of Indian GCC city clusters">
                 <path d="M214 22 L250 34 L282 56 L306 77 L328 92 L349 112 L338 140 L315 157 L308 188 L292 216 L280 245 L258 275 L236 294 L218 267 L202 235 L180 214 L157 198 L140 169 L145 143 L154 118 L170 91 L187 65 Z" fill="#E3E3D8" stroke="#C6C9B8" strokeWidth="1.5"/>
                 <path d="M214 22 L230 100 L260 185 L230 220 L258 275 M154 118 L205 172 L260 185 L315 157 L349 112 M145 143 L230 220 L282 235 L292 216 M187 65 L275 70 L315 157" fill="none" stroke="#C7CABB" strokeWidth="1.1" strokeDasharray="3 5"/>
-                <path d="M190 150 Q220 160 205 172 T260 185 T230 220 T282 235" fill="none" stroke="#2536E8" strokeWidth="2" strokeDasharray="4 5" opacity=".35"/>
+                <path d="M190 150 Q220 160 205 172 T260 185 T230 220 T282 235" fill="none" stroke="#15183A" strokeWidth="2" strokeDasharray="4 5" opacity=".35"/>
                 {cityStats.map((point) => {
                   const active = selectedCity === point.name;
                   const radius = active ? 9 : Math.max(4, Math.min(7, 3 + point.count / 8));
@@ -109,10 +109,10 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
             </div>
             <div className="grid grid-cols-[1fr_auto] items-end gap-4 border-t border-[#DAD7CC] pt-4">
               <div><p className="font-mono text-[11px] uppercase tracking-wider text-[#525875]">Selected cluster</p><p className="mt-1 font-display text-2xl font-bold tracking-tight text-[#15183A]">{selectedCity}</p><p className="mt-1 text-sm text-[#525875]">{selectedCityStats?.count ?? 0} matching registry records</p></div>
-              <Link href="/compare" className="inline-flex min-h-11 items-center gap-2 bg-[#2536E8] px-4 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5">Compare cities <ArrowUpRight size={15}/></Link>
+              <Link href="/compare" className="inline-flex min-h-11 items-center gap-2 bg-[#15183A] px-4 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5">Compare cities <ArrowUpRight size={15}/></Link>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {cityStats.slice(0,4).map((city) => <button key={city.name} onClick={() => setSelectedCity(city.name)} className={`min-h-11 border px-3 py-2 text-left transition-all ${selectedCity === city.name ? "border-[#2536E8] bg-[#2536E8] text-white shadow-[3px_3px_0_#FF704F]" : "border-[#DAD7CC] bg-[#FFF6E5] text-[#15183A] hover:border-[#2536E8]"}`}><span className="block text-xs">{city.name}</span><span className={`mt-1 block font-mono text-sm font-semibold ${selectedCity === city.name ? "text-white" : "text-[#2536E8]"}`}>{city.count} records</span></button>)}
+              {cityStats.slice(0,4).map((city) => <button key={city.name} onClick={() => setSelectedCity(city.name)} className={`min-h-11 border px-3 py-2 text-left transition-all ${selectedCity === city.name ? "border-[#15183A] bg-[#15183A] text-white shadow-[3px_3px_0_#FF6B4A]" : "border-[#DAD7CC] bg-[#FFF6E5] text-[#15183A] hover:border-[#15183A]"}`}><span className="block text-xs">{city.name}</span><span className={`mt-1 block font-mono text-sm font-semibold ${selectedCity === city.name ? "text-white" : "text-[#15183A]"}`}>{city.count} records</span></button>)}
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
           <div className="mt-7 space-y-5">
             {sectorStats.length ? sectorStats.map(([sector, value], index) => <div key={sector}>
               <div className="mb-2 flex items-center justify-between gap-3 text-sm"><span className="font-medium text-[#15183A]">{sector.replaceAll("_", " ")}</span><span className="font-mono text-xs text-[#525875]">{value}</span></div>
-              <div className="h-3 overflow-hidden bg-[#F0EFE8]"><div className={`atlas-bar-fill h-full ${index % 3 === 0 ? "bg-[#2536E8]" : index % 3 === 1 ? "bg-[#FF704F]" : "bg-[#16A67A]"}`} style={{ width: `${Math.max(4, value / Math.max(1, sectorStats[0][1]) * 100)}%`, animationDelay: `${index * 70}ms` }}/></div>
+              <div className="h-3 overflow-hidden bg-[#F0EFE8]"><div className={`atlas-bar-fill h-full ${index % 3 === 0 ? "bg-[#15183A]" : index % 3 === 1 ? "bg-[#FF6B4A]" : "bg-[#267A68]"}`} style={{ width: `${Math.max(4, value / Math.max(1, sectorStats[0][1]) * 100)}%`, animationDelay: `${index * 70}ms` }}/></div>
             </div>) : <p className="border border-dashed border-[#DAD7CC] p-5 text-sm text-[#525875]">No matching sector records for this cluster in the current registry.</p>}
           </div>
           <p className="mt-6 border-t border-[#E8E6DD] pt-4 text-xs leading-5 text-[#525875]">Counts reflect records in ZeroDay's current registry. A company listed across multiple cities may appear in each relevant cluster.</p>
@@ -166,7 +166,7 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
       <section>
         <div className="flex flex-col justify-between gap-4 border-b border-hairline pb-5 sm:flex-row sm:items-end"><div><p className="text-sm font-semibold text-[#267A68]">Research pathways</p><h2 className="mt-2 font-display text-3xl font-semibold tracking-[-.035em] text-ink sm:text-4xl">Start with the decision you need to make.</h2></div><p className="max-w-sm text-sm leading-6 text-muted">Three practical ways into a complicated market. Each route is designed around a real research task.</p></div>
         <div className="grid grid-cols-1 divide-y divide-hairline border-b border-hairline md:grid-cols-3 md:divide-x md:divide-y-0">
-          {pathways.map((path) => { const Icon = path.icon; return <article key={path.number} className="group flex min-h-[270px] flex-col p-6 transition-colors hover:bg-surface sm:p-7"><div className="flex items-center justify-between"><span className="flex h-8 w-8 items-center justify-center border border-hairline text-xs font-semibold text-muted">{path.number}</span><Icon size={19} strokeWidth={1.6} className={path.tone === "orange" ? "text-[#B75B35]" : path.tone === "green" ? "text-[#267A68]" : "text-[#4568A5]"} /></div><h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink">{path.title}</h3><p className="mt-3 text-sm leading-6 text-muted">{path.description}</p><Link href={path.href} className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-ink group-hover:text-[#267A68]">{path.action}<ArrowUpRight size={15} /></Link></article>; })}
+          {pathways.map((path) => { const Icon = path.icon; return <article key={path.number} className="group flex min-h-[270px] flex-col p-6 transition-colors hover:bg-surface sm:p-7"><div className="flex items-center justify-between"><span className="flex h-8 w-8 items-center justify-center border border-hairline text-xs font-semibold text-muted">{path.number}</span><Icon size={19} strokeWidth={1.6} className={path.tone === "orange" ? "text-[#B75B35]" : path.tone === "green" ? "text-[#267A68]" : "text-[#267A68]"} /></div><h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink">{path.title}</h3><p className="mt-3 text-sm leading-6 text-muted">{path.description}</p><Link href={path.href} className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-ink group-hover:text-[#267A68]">{path.action}<ArrowUpRight size={15} /></Link></article>; })}
         </div>
       </section>
 
