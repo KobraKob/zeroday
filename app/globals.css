@@ -30,8 +30,8 @@
   --color-hairline-subtle: #E8DEC8;
 
   /* Palette Accents */
-  --cobalt: #15183A;               /* Primary Action / Brand */
-  --color-cobalt: #15183A;
+  --cobalt: #267A68;               /* Accent actions and focus */
+  --color-cobalt: #267A68;
   --marigold: #FFC21A;             /* Legal Entity */
   --color-marigold: #FFC21A;
   --coral: #FF6B4A;                /* Parent Company */
@@ -75,8 +75,8 @@
   --color-hairline-subtle: #252A4E;
 
   /* Accent Tokens: Same Accents tuned for high contrast on dark */
-  --cobalt: #4A58FF;
-  --color-cobalt: #4A58FF;
+  --cobalt: #5FE0B0;
+  --color-cobalt: #5FE0B0;
   --marigold: #FFC21A;
   --color-marigold: #FFC21A;
   --coral: #FF6B4A;
