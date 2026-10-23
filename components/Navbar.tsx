@@ -14,7 +14,6 @@ export function Navbar() {
   const { openAskDrawer } = useAsk();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-  const [tickerVisible, setTickerVisible] = useState(true);
 
   // Global keyboard shortcut to open Command Palette (Cmd+K or Ctrl+K or '/')
   useEffect(() => {
@@ -59,32 +58,11 @@ export function Navbar() {
 
   return (
     <>
-      {/* Ticker strip above header: scrolls away naturally with document scroll (NOT sticky) */}
-      {tickerVisible && (
-        <div className="hidden sm:block h-8 bg-surface text-ink text-xs font-mono tracking-tight border-b-2 border-ink overflow-hidden whitespace-nowrap select-none">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-            <div className="flex items-center gap-2 truncate">
-              <span className="w-2 h-2 bg-cobalt inline-block rounded-full flex-shrink-0 animate-pulse" />
-              <span className="uppercase tracking-wider font-medium truncate">
-                GCC Atlas • India&apos;s GCC Archival Record • Every number traced to a source
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => setTickerVisible(false)}
-              className="text-muted hover:text-ink p-1 ml-2 flex-shrink-0 transition-colors focus-visible:outline-cobalt cursor-pointer"
-              aria-label="Dismiss banner"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Single-row header (sticky top-0, 64px, 3 CSS grid zones) */}
-      <header className="sticky top-0 z-50 w-full bg-surface border-b-2 border-ink font-sans shadow-xs">
+      <header className="atlas-navbar sticky top-0 z-50 w-full border-b border-hairline-subtle bg-paper/95 font-sans shadow-[0_5px_20px_rgba(21,24,58,0.06)] backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-6 h-16 whitespace-nowrap min-w-0">
+          <div className="atlas-navbar-inner grid grid-cols-[auto_1fr_auto] items-center gap-3 lg:gap-6 h-[72px] whitespace-nowrap min-w-0">
             {/* Zone 1: Left - Logo mark + wordmark only (One brand name: GCC Atlas) */}
             <div className="flex items-center flex-shrink-0">
               <Link
@@ -102,7 +80,7 @@ export function Navbar() {
             </div>
 
             {/* Zone 2: Centre - Primary nav (max 5 items, single row, active = filled ink pill with cream text) */}
-            <nav aria-label="Primary Navigation" className="hidden lg:flex items-center justify-center gap-1.5 min-w-0">
+            <nav aria-label="Primary Navigation" className="atlas-nav-links hidden lg:flex items-center justify-center gap-1 min-w-0">
               {primaryNavLinks.map((item) => {
                 const isActive =
                   item.href &&
@@ -113,10 +91,10 @@ export function Navbar() {
                     key={item.label}
                     href={item.href || "#"}
                     aria-current={isActive ? "page" : undefined}
-                    className={`px-4 py-2 text-sm font-medium transition-all duration-fast rounded-full whitespace-nowrap ${
+                    className={`atlas-nav-link relative px-3.5 py-2.5 text-[13px] font-medium transition-all duration-200 rounded-full whitespace-nowrap ${
                       isActive
-                        ? "bg-ink text-cream dark:text-paper shadow-xs font-semibold"
-                        : "text-muted hover:text-ink hover:bg-paper/70"
+                        ? "atlas-nav-link-active bg-ink text-paper shadow-sm font-semibold"
+                        : "text-muted hover:text-ink hover:bg-surface"
                     }`}
                   >
                     {item.label}
@@ -133,7 +111,7 @@ export function Navbar() {
                 onClick={() => setCommandPaletteOpen(true)}
                 aria-label="Search Atlas (Press ⌘K or /)"
                 title="Search Atlas (⌘K)"
-                className="w-11 h-11 border-2 border-ink rounded-full bg-surface hover:bg-paper text-muted hover:text-ink flex items-center justify-center transition-all cursor-pointer focus-visible:outline-cobalt"
+                className="atlas-nav-control w-11 h-11 border border-hairline-subtle rounded-full bg-surface hover:bg-cream text-muted hover:text-ink flex items-center justify-center transition-all duration-200 cursor-pointer focus-visible:outline-cobalt"
               >
                 <Search className="w-4 h-4" strokeWidth={1.75} />
               </button>
@@ -151,17 +129,17 @@ export function Navbar() {
                     openAskDrawer();
                   }
                 }}
-                className="hidden sm:inline-flex items-center justify-center gap-2 px-4 h-11 text-xs font-mono font-medium border-2 border-ink bg-transparent text-ink hover:bg-ink hover:text-cream dark:hover:text-paper transition-all duration-fast rounded-full min-h-[44px] focus-visible:outline-cobalt cursor-pointer"
+                className="atlas-nav-control hidden sm:inline-flex items-center justify-center gap-2 px-4 h-11 text-xs font-mono font-medium border border-hairline-subtle bg-transparent text-ink hover:bg-ink hover:text-paper transition-all duration-200 rounded-full min-h-[44px] focus-visible:outline-cobalt cursor-pointer"
                 aria-label="Ask the record"
               >
-                <Sparkles className="w-4 h-4 text-cobalt" />
+                <Sparkles className="w-4 h-4 text-[#267A68]" />
                 <span>Ask</span>
               </button>
 
               {/* Attest: ONE primary button (filled cobalt, 44px high) */}
               <Link
                 href="/submit"
-                className="inline-flex items-center justify-center px-5 h-11 text-xs font-mono font-bold uppercase tracking-wider bg-cobalt text-white border-2 border-ink hover:shadow-[2px_2px_0px_var(--color-ink)] transition-all duration-fast rounded-full min-h-[44px] focus-visible:outline-cobalt"
+                className="atlas-nav-primary inline-flex items-center justify-center px-5 h-11 text-xs font-mono font-bold uppercase tracking-wider bg-ink text-paper border border-ink hover:bg-[#267A68] hover:border-[#267A68] hover:shadow-[3px_3px_0px_#FF6B4A] transition-all duration-200 rounded-full min-h-[44px] focus-visible:outline-cobalt"
               >
                 Attest
               </Link>
@@ -170,7 +148,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden w-11 h-11 border-2 border-ink rounded-full flex items-center justify-center text-ink bg-surface hover:bg-paper focus-visible:outline-cobalt"
+                className="atlas-nav-control lg:hidden w-11 h-11 border border-hairline-subtle rounded-full flex items-center justify-center text-ink bg-surface hover:bg-cream transition-all duration-200 focus-visible:outline-cobalt"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
               >
@@ -186,7 +164,7 @@ export function Navbar() {
 
         {/* Mobile menu drawer (<1024px) */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t-2 border-ink bg-surface px-4 py-4 space-y-2 shadow-lg">
+          <div className="atlas-mobile-panel lg:hidden border-t border-hairline-subtle bg-paper px-4 py-4 space-y-2 shadow-lg">
             <nav aria-label="Mobile Navigation" className="space-y-1">
               {mobileNavLinks.map((item) => {
                 const isActive =
@@ -199,10 +177,10 @@ export function Navbar() {
                     href={item.href || "#"}
                     aria-current={isActive ? "page" : undefined}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`min-h-[44px] px-3.5 py-2 text-sm font-medium flex items-center rounded-full transition-colors ${
+                    className={`atlas-mobile-link min-h-[44px] px-3.5 py-2 text-sm font-medium flex items-center rounded-full transition-all duration-200 ${
                       isActive
-                        ? "bg-ink text-cream font-semibold shadow-xs"
-                        : "text-muted hover:text-ink hover:bg-paper/60"
+                        ? "bg-ink text-paper font-semibold shadow-sm"
+                        : "text-muted hover:text-ink hover:bg-surface"
                     }`}
                   >
                     {item.label}
@@ -222,7 +200,7 @@ export function Navbar() {
                     openAskDrawer();
                   }
                 }}
-                className="min-h-[44px] h-11 flex items-center justify-center gap-2 text-xs font-mono font-bold border-2 border-ink bg-transparent text-ink text-center rounded-full cursor-pointer hover:bg-ink hover:text-cream"
+                className="min-h-[44px] h-11 flex items-center justify-center gap-2 text-xs font-mono font-bold border border-hairline-subtle bg-transparent text-ink text-center rounded-full cursor-pointer transition-colors duration-200 hover:bg-ink hover:text-paper"
               >
                 <Sparkles className="w-3.5 h-3.5 text-cobalt" />
                 <span>Ask</span>
@@ -230,7 +208,7 @@ export function Navbar() {
               <Link
                 href="/submit"
                 onClick={() => setMobileMenuOpen(false)}
-                className="min-h-[44px] h-11 flex items-center justify-center text-xs font-mono font-bold bg-cobalt text-white border-2 border-ink text-center uppercase rounded-full"
+                className="atlas-nav-primary min-h-[44px] h-11 flex items-center justify-center text-xs font-mono font-bold bg-ink text-paper border border-ink text-center uppercase rounded-full transition-all duration-200 hover:bg-[#267A68] hover:shadow-[3px_3px_0px_#FF6B4A]"
               >
                 + Attest
               </Link>
