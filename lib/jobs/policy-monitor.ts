@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 import { politeFetch } from "./http-client";
-import { and, desc, eq, isNotNull, isNull } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { getDb, schema } from "../db/client";
 import { storeSnapshotContent } from "../storage/snapshots";
 import { eventsRepo } from "../repo/eventsRepo";
