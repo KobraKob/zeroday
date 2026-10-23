@@ -2,7 +2,9 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 import { politeFetch } from "./http-client";
+import { and, desc, eq, isNotNull, isNull } from "drizzle-orm";
 import { getDb, schema } from "../db/client";
+import { storeSnapshotContent } from "../storage/snapshots";
 import { eventsRepo } from "../repo/eventsRepo";
 import { reviewsRepo } from "../repo/reviewsRepo";
 import { extractClaimsFromDocument } from "../ai/claim-extractor";
@@ -56,7 +58,16 @@ export async function runPolicyMonitor(mockUrlMap?: Record<string, string>) {
       contentHash = res.contentHash || crypto.createHash("sha256").update(content).digest("hex");
     }
 
-    const previousHash = localSnapshotHashes.get(policy.id);
+    let previousHash = localSnapshotHashes.get(policy.id);
+    if (database) {
+      const previousRows = await database
+        .select({ content_hash: schema.sourceSnapshots.content_hash })
+        .from(schema.sourceSnapshots)
+        .where(eq(schema.sourceSnapshots.source_id, policy.id))
+        .orderBy(desc(schema.sourceSnapshots.fetched_at))
+        .limit(1);
+      previousHash = previousRows[0]?.content_hash || previousHash;
+    }
 
     if (previousHash && previousHash !== contentHash) {
       changesDetected++;
@@ -108,18 +119,27 @@ export async function runPolicyMonitor(mockUrlMap?: Record<string, string>) {
     localSnapshotHashes.set(policy.id, contentHash);
 
     if (database) {
-      try {
-        await database.insert(schema.sourceSnapshots).values({
-          id: `snp-${policy.id}-${Date.now()}`,
-          source_id: policy.id,
-          raw_content: content.slice(0, 100000), // preserve raw text
-          content_hash: contentHash,
-          fetched_at: new Date(),
-          created_at: new Date(),
-        });
-      } catch {
-        // ignore
-      }
+      const snapshotId = `snp-${policy.id}-${Date.now()}`;
+      const stored = await storeSnapshotContent({
+        sourceId: policy.id,
+        snapshotId,
+        content,
+        contentHash,
+        contentType: "text/plain; charset=utf-8",
+      });
+
+      await database.insert(schema.sourceSnapshots).values({
+        id: snapshotId,
+        source_id: policy.id,
+        raw_content: stored.raw_content,
+        storage_bucket: stored.storage_bucket,
+        object_key: stored.object_key,
+        content_type: stored.content_type,
+        byte_size: stored.byte_size,
+        content_hash: contentHash,
+        fetched_at: new Date(),
+        created_at: new Date(),
+      });
     }
   }
 
