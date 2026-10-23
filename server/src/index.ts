@@ -128,7 +128,7 @@ class BackendVectorStore {
       title: "Zero Personality & Mandate",
       content:
         "I am Zero, the grounded intelligence auditor for ZeroDay. ZeroDay is the independent, citable record of India's Global Capability Centre (GCC) ecosystem. My role is to verify facts against primary statutory corporate filings (MCA CIN), registered lease deeds, and gazetted policies. I answer strictly from verified public evidence and never invent figures or speculate.",
-      claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
+      claim_ids: [],
     });
 
     // Methodology definitions
