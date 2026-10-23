@@ -1,4 +1,4 @@
-# ZeroDay Railway Backend
+# ZeroDay Backend — Render Docker deployment
 FROM node:20-alpine AS builder
 
 WORKDIR /app
