@@ -86,6 +86,27 @@ The schema enforces strict append-only semantics for factual claims and Row Leve
 
 ---
 
+## 🧭 Ask Zero — Groq Retrieval-Augmented Generation
+
+Ask Zero uses Groq with request-time retrieval, not fine-tuning. Each question receives the site guide plus relevant approved claims, GCC/city/state records, provider and proof-link listings, published-count definitions, source metadata, signals, and GCC planning checklists.
+
+- Responses distinguish approved claims from provider-marketed statements, proof links, signals, and seeded/demo records.
+- Claim citations are restricted to IDs from the retrieved approved context.
+- Site navigation and GCC setup questions can use the site guide and curated checklists even when no claim matches.
+- Unsupported factual questions fail closed rather than being answered from model memory.
+- The same retrieval module is shared by the Next.js Ask API and the standalone backend.
+
+Set these server-side variables in Vercel and the Render service when backend forwarding is enabled:
+
+```bash
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=openai/gpt-oss-120b
+```
+
+Keep the API key private. Do not expose it with a `NEXT_PUBLIC_` prefix. Confirm `BACKEND_URL` points to the live Render service before enabling backend forwarding.
+
+---
+
 ## 🔁 Append-Only Claim Lifecycle
 
 When a claim value changes (e.g., via administrative review or updated regulatory filing):
