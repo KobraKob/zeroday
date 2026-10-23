@@ -186,16 +186,6 @@ export function HomeClient({
           </div>
 
           <div className="atlas-hero-visual relative mx-auto w-full max-w-2xl">
-            <div className="atlas-cube-scene" aria-hidden="true">
-              <div className="atlas-cube">
-                <span className="atlas-cube-face atlas-cube-front">ZD</span>
-                <span className="atlas-cube-face atlas-cube-back">01</span>
-                <span className="atlas-cube-face atlas-cube-right">DATA</span>
-                <span className="atlas-cube-face atlas-cube-left">PROOF</span>
-                <span className="atlas-cube-face atlas-cube-top" />
-                <span className="atlas-cube-face atlas-cube-bottom" />
-              </div>
-            </div>
             <div className="atlas-map-panel relative overflow-hidden rounded-[1.4rem] border p-4 sm:p-6">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
