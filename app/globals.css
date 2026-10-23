@@ -746,11 +746,6 @@ small,
 }
 
 @media (max-width: 640px) {
-    top: 76px;
-    right: -4px;
-    transform: scale(.78);
-    transform-origin: top right;
-  }
   .atlas-map-panel {
     transform: none;
   }
