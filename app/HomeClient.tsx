@@ -92,7 +92,7 @@ function benchmarkNumber(item: PublishedCount): number {
   if (typeof item.count_value === "number") return item.count_value;
   const normalised = item.headline_count.replace(/,/g, "").trim();
   const parsed = Number(normalised.replace(/[^0-9.]/g, ""));
-  const suffix = normalised.match(/([kmb])\\s*(?:gccs?|centres?|centers?)?$/i)?.[1]?.toLowerCase();
+  const suffix = normalised.match(/([kmb])\s*(?:gccs?|centres?|centers?)?$/i)?.[1]?.toLowerCase();
   const multiplier = suffix === "k" ? 1_000 : suffix === "m" ? 1_000_000 : suffix === "b" ? 1_000_000_000 : 1;
   const value = parsed * multiplier;
   return Number.isFinite(value) ? value : Number.NaN;
