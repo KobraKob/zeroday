@@ -344,24 +344,24 @@ small,
   border-color: var(--color-hairline-subtle);
 }
 .atlas-hero-visual {
-  perspective: 1300px;
   isolation: isolate;
   animation: atlas-visual-enter 620ms cubic-bezier(.2,.75,.2,1) 70ms both;
 }
 .atlas-map-panel {
+  position: relative;
   z-index: 1;
+  min-width: 0;
   border-color: var(--color-hairline);
   background-color: var(--atlas-map-bg);
   box-shadow: var(--atlas-map-shadow);
   color: var(--color-ink);
-  transform: rotateX(1deg) rotateY(-1.5deg);
-  transform-style: preserve-3d;
-  transition: transform 420ms cubic-bezier(.2,.75,.2,1), box-shadow 420ms ease;
+  transform: none;
+  transition: box-shadow 180ms ease, border-color 180ms ease;
 }
 .atlas-map-panel:hover,
 .atlas-map-panel:focus-within {
-  transform: rotateX(0) rotateY(0) translateY(-2px);
-  box-shadow: var(--atlas-map-shadow), 0 8px 0 color-mix(in srgb, var(--color-cobalt) 22%, transparent);
+  transform: none;
+  box-shadow: var(--atlas-map-shadow);
 }
 .atlas-map-stage {
   isolation: isolate;
