@@ -1,5 +1,7 @@
 import { Claim, Source, Gcc, CountDefinition } from "./schema";
 
+export type ConfidenceGrade = "A" | "B" | "C" | "D";
+
 export type RecomputedGrade = {
   effectiveGrade: "A" | "B" | "C" | "D";
   originalGrade: "A" | "B" | "C" | "D";

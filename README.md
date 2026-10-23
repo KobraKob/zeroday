@@ -1,99 +1,216 @@
-# ZeroDay — Archival Record of India's GCC Ecosystem
+# ZeroDay — Grounded Intelligence Platform & Capability Centre Ledger
 
-> **"The independent, citable record of India's GCC ecosystem. Every number traced to a primary statutory source."**
-
-ZeroDay is an evidence-grounded institutional record tracking India's 2,117+ Global Capability Centres (GCCs). Rather than presenting unsourced aggregate claims, ZeroDay models every data point as an immutable claim anchored to a primary public source with a confidence grade (A/B/C/D), retrieved timestamp, verbatim quoted excerpt, and direct URL.
-
-> 📖 **Full System Architecture & Comparison**: See [ZERODAY_OVERVIEW.md](file:///c:/Users/badhu/OneDrive/Desktop/project-hire/testing-me/ZERODAY_OVERVIEW.md) for details on why ZeroDay is 10x better than existing analyst PDFs and directory lists.
+ZeroDay is the independent, citable record of India's Global Capability Centre (GCC) ecosystem. Every figure, headcount, and real estate absorption metric is anchored to an immutable primary statutory filing, registered lease deed, or gazetted government order.
 
 ---
 
-## What It Does
+## 🏗️ Architecture & Data Flow
 
-1. **Reconcile (`/reconcile`)**: Solves the central market riddle: *"Why do reports disagree on how many GCCs India has?"* Compares published benchmark counts (Zinnov-nasscom, AIM Research, GCC Journal, OceanFrogs), visualizes discrepancies by unit type (Parent Company vs Legal Entity vs Campus Unit), and dynamically recomputes our registry tally under each rule.
-2. **Registry (`/registry` & `/gcc/[slug]`)**: Searchable, filterable database of 50 verified GCCs (Google, Microsoft, Amazon, Boeing, Bosch, JPMorgan, Goldman Sachs, etc.) with verified Ministry of Corporate Affairs (MCA) Corporate Identification Numbers (CIN), functional mandates, and provenance drawer triggers for every number.
-3. **Radar (`/radar`)**: Predictive signal detection tracking high-intent corporate milestones (RoC entity incorporations, GST tax circle registrations, leadership appointments, state MoUs, and commercial lease executions). Uses a 60-day half-life exponential decay model to output a 0–100 likelihood score.
-4. **City & State Compare (`/compare`)**: Side-by-side comparison across 9 cities (Bengaluru, Hyderabad, Pune, Chennai, Gurugram, Noida, Mumbai, Coimbatore, Ahmedabad) displaying Grade A rents, vacancy rates, talent salary indices, and official state government subsidies (Karnataka, Tamil Nadu, Telangana, Maharashtra, Gujarat, Uttar Pradesh).
-5. **Proof & Providers (`/providers`, `/provider/[slug]`, `/submit`)**: Separates marketed vendor claims from evidenced engagements. Scores providers transparently based on verified public proof links (attestation = 3, lease/filing = 3, press = 2, case study = 1).
-6. **Entry Advisor (`/advisor`)**: Interactive guided intake generating a tailored, printable India Entry Briefing grounded purely in verified claims.
-7. **Ask Zero AI (`/ask`)**: Grounded question-answering assistant powered by **Groq's `openai/gpt-oss-120b`** and an in-memory TF-IDF semantic vector store; strictly refuses unverified queries without hallucinating.
-8. **Admin Review Queue (`/admin/review`)**: Human-in-the-loop review buffer where AI-proposed claims are audited against exact verbatim quotes before promotion to the public registry.
+```mermaid
+flowchart TD
+    subgraph IngestionSources["Primary Ingestion Sources"]
+        RSS["RSS Feeds (data/feeds.json)"]
+        StatePolicies["State Policy Portals (data/policy-sources.json)"]
+        FilingDocs["Regulatory Filings (MCA CIN, Lease Deeds)"]
+    end
 
----
+    subgraph Jobs["Automated Ingestion Pipeline (Vercel Cron / GitHub Actions)"]
+        NewsJob["news-ingest (Daily)\nURL Hash Dedupe + Verbatim AI Extraction"]
+        PolicyJob["policy-monitor (Weekly)\nSHA-256 Snapshot Diff + Alerting"]
+        LinkJob["link-check (Weekly)\nHEAD/GET Verification + Downgrade"]
+        FreshJob["freshness (Daily)\n24mo Staleness & Press Grade Capping"]
+    end
 
-## Interactive Design & Components
+    subgraph Postgres["Supabase PostgreSQL (Drizzle ORM)"]
+        SourcesTable[("sources")]
+        SnapshotsTable[("source_snapshots")]
+        ClaimsTable[("claims (Append-Only Ledger)")]
+        EventsTable[("events (Changelog Stream)")]
+        AILogTable[("ai_log")]
+        ReviewDecisions[("review_decisions")]
+    end
 
-- **`<GooeyNav />` (from React Bits)**: Fluid WebGL2 physics droplets navbar with custom shaders, dynamic pill transitions, and smooth SPA Next.js routing.
-- **`<StarBorder />` (from React Bits)**: Animated canvas perimeter light tracing around the primary "Ask Zero" action button.
-- **Cartographer & Ledger Aesthetics**: Fraunces display serif, Newsreader, JetBrains Mono tabular numerals, paper `#F8FAFC` and verdigris `#0F766E` palette, with accessible contrast in both Day Ledger and Obsidian Dark modes.
-- **Footnote Margins**: Clicking any superscript number opens a margin audit drawer displaying statutory source details, confidence grade, and verbatim filing quotes.
+    subgraph AdminLayer["Editorial Audit (Neutrality Firewall)"]
+        AdminQueue["/admin/review\n(Quote beside Source Snapshot)"]
+        Decision["Accept / Edit / Reject"]
+    end
 
----
+    subgraph PublicUI["Public Presentation (ISR + On-Demand Revalidation)"]
+        Registry["/registry (GCC Directory)"]
+        Reconcile["/reconcile (Unit Counts)"]
+        Radar["/radar (Signals)"]
+        Changelog["/changelog (Event Stream)"]
+        Ask["/ask (Grounded Q&A Engine)"]
+    end
 
-## Architecture & Deployment Setup
+    RSS --> NewsJob
+    StatePolicies --> PolicyJob
+    FilingDocs --> Jobs
 
-### Frontend (Next.js) -> Vercel
-- Production Next.js 14 App Router application.
-- Configured with `app/api/ask/route.ts` which automatically proxies to the Railway backend if `BACKEND_URL` is set, or executes directly with local fallback.
+    NewsJob -->|Pending Proposals| ClaimsTable
+    NewsJob --> AILogTable
+    PolicyJob --> SnapshotsTable
+    PolicyJob -->|On Hash Diff| EventsTable
+    LinkJob --> SourcesTable
+    FreshJob --> ClaimsTable
 
-### Backend (Express + Docker) -> Railway
-- Located in `/server/` directory with its own `Dockerfile` and `railway.json`.
-- Exposes:
-  - `GET /health`: Healthcheck & record counts.
-  - `POST /api/ask`: Grounded Groq LLM + vector store answering.
-  - `GET /api/claims`, `GET /api/gccs`, `GET /api/cities`: Structured repositories.
-  - `GET /api/vector/search`: TF-IDF semantic vector query.
+    ClaimsTable -->|Pending Claims| AdminQueue
+    SnapshotsTable -->|Raw Snapshots| AdminQueue
+    AdminQueue --> Decision
+    Decision -->|Approve / Supersede| ClaimsTable
+    Decision -->|Log Action| ReviewDecisions
+    Decision -->|On-Demand Revalidate| PublicUI
 
----
-
-## Quickstart & Installation
-
-### Prerequisites
-- Node.js 18+ (tested on Node v20/v22/v24)
-- npm 10+
-
-### 1. Install Dependencies
-```bash
-npm install
+    ClaimsTable -->|RLS: status = 'approved'| PublicUI
+    EventsTable --> Changelog
 ```
 
-### 2. Configure Environment Variables
-Copy `.env.example` to `.env.local`:
+---
+
+## 📦 Database & Drizzle Schema
+
+ZeroDay uses **Supabase PostgreSQL** with **Drizzle ORM**.
+The schema enforces strict append-only semantics for factual claims and Row Level Security (RLS) to ensure that public queries can read only approved records.
+
+### Core Tables
+1. **`sources`**: Authoritative registry of primary filings, press, and state gazettes.
+2. **`source_snapshots`**: Verbatim document text with cryptographic SHA-256 `content_hash` and `fetched_at` timestamp.
+3. **`claims`**: Immutable append-only ledger (`subject_type`, `subject_id`, `field`, `value`, `unit`, `as_of`, `source_id`, `confidence`, `status`, `valid_from`, `valid_to`, `last_checked_at`, `created_by`).
+4. **`entities`**: GCCs, cities, states, and service providers.
+5. **`signals`**: Expansion, lease, or incorporation events.
+6. **`proof_links`**: Evidentiary links connecting providers to GCCs.
+7. **`events`**: System changelog stream (new GCCs, changed claims, policy updates, staleness downgrades).
+8. **`ai_log`**: Audit log of verbatim AI parser executions.
+9. **`review_decisions`**: Human-in-the-loop audit log of accept, edit, and reject actions.
+10. **`cron_job_runs`**: Telemetry and idempotency tracking for pipeline executions.
+
+---
+
+## 🔁 Append-Only Claim Lifecycle
+
+When a claim value changes (e.g., via administrative review or updated regulatory filing):
+1. The existing active claim is closed:
+   - `valid_to = NOW()`
+   - `status = 'superseded'`
+2. A new claim is inserted:
+   - `valid_from = NOW()`
+   - `valid_to = NULL`
+   - `status = 'approved'`
+3. Complete history remains queryable via `claimsRepo.getHistory(subjectType, subjectId, field)` or direct PostgreSQL query ordered by `valid_from DESC`.
+4. Public queries (`claimsRepo.getAll()`) automatically filter out superseded, pending, and rejected claims.
+
+---
+
+## 🚀 How to Run Jobs Locally
+
+You can execute any of the background pipeline jobs locally using `tsx`:
+
 ```bash
-cp .env.example .env.local
-```
-Add your Groq API key:
-```env
-GROQ_API_KEY=gsk_...
-GROQ_MODEL=openai/gpt-oss-120b
+# 1. Run News Ingestion (RSS fetch, URL dedupe, verbatim AI extraction)
+npx tsx scripts/jobs/run-job.ts news-ingest
+
+# 2. Run Policy Monitor (State policy URL fetch, SHA-256 snapshot hashing, diff detection)
+npx tsx scripts/jobs/run-job.ts policy-monitor
+
+# 3. Run Link Checker (HEAD/GET probe, dead link detection, confidence downgrade)
+npx tsx scripts/jobs/run-job.ts link-check
+
+# 4. Run Freshness Audit (24-month staleness rules, single press Grade C capping)
+npx tsx scripts/jobs/run-job.ts freshness
 ```
 
-### 3. Run Validation & Tests
-```bash
-# Validate data schemas
-npm run validate
+---
 
-# Run unit tests (11 passing tests)
+## ➕ How to Add a New Source or Feed
+
+### Adding an RSS Feed
+Add a new feed entry to `data/feeds.json`:
+
+```json
+{
+  "id": "feed-custom-source",
+  "name": "Custom Technology Bulletin",
+  "url": "https://example.com/rss/gcc-news.xml",
+  "category": "press",
+  "enabled": true
+}
+```
+
+### Adding a State Policy Monitor
+Add a new policy entry to `data/policy-sources.json`:
+
+```json
+{
+  "id": "policy-ap-gcc-2026",
+  "state_id": "state-ap",
+  "state_name": "Andhra Pradesh",
+  "policy_name": "Andhra Pradesh Capability Centre Framework",
+  "url": "https://it.ap.gov.in/policies/gcc-framework",
+  "publisher": "Information Technology Department, Government of Andhra Pradesh",
+  "check_interval": "weekly",
+  "enabled": true
+}
+```
+
+### Adding a Primary Source Document
+Insert into `data/sources.json` or through the administrative portal:
+
+```json
+{
+  "id": "src-roc-ka-2026-091",
+  "name": "Ministry of Corporate Affairs RoC Bangalore Filing",
+  "type": "government",
+  "url": "https://www.mca.gov.in/mcafoportal/companyLLPMasterData.do",
+  "publisher": "Ministry of Corporate Affairs",
+  "published_at": "2026-02-14",
+  "retrieved_at": "2026-10-23"
+}
+```
+
+---
+
+## 🛡️ Security & Robots.txt Compliance
+
+1. **Polite Fetcher**: Strictly respects `robots.txt` Disallow directives.
+2. **Contact User-Agent**: Every request sends:
+   ```
+   User-Agent: ZeroDay-Bot/1.0 (+https://zeroday.in/bot; contact@zeroday.in)
+   ```
+3. **Domain Rate Limiting**: Enforces a minimum 1000ms delay between consecutive requests to the same origin.
+4. **No Gated Scraping**: Strictly prohibits and blocks crawling of LinkedIn, Facebook, Glassdoor, and other gated or login-wall platforms.
+5. **Row Level Security (RLS)**: Public client database tokens are restricted to `status = 'approved'` claims.
+
+---
+
+## 🧪 Testing & Verification
+
+Run the full Vitest suite:
+
+```bash
 npm test
-
-# Run AI grounding evaluation suite (32/32 passing tests)
-npm run evals
 ```
 
-### 4. Run Development Server
+The test suite validates:
+- `tests/claim-supersession.test.ts`: Append-only closure of old rows and insertion of new approved rows.
+- `tests/hash-change-detection.test.ts`: SHA-256 diffing and change detection.
+- `tests/staleness.test.ts`: 24-month staleness downgrade and press capping rules.
+- `tests/pipeline-integration.test.ts`: End-to-end integration proving policy updates create events and pending claims, and remain invisible publicly until human-in-the-loop review approves them.
+
+---
+
+## 💻 Local Development
+
 ```bash
+# Install dependencies
+npm install
+
+# Run migration script
+npx tsx scripts/migrate-to-postgres.ts
+
+# Start Next.js local server
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 5. Build for Production
-```bash
-npm run build
-npm start
-```
-
----
-
-## Neutrality Firewall
-
-Paid commercial tiers may buy verified profile badges, alerts, or buyer introductions. They **never** alter evidence depth scores, radar rankings, inclusion in lists, or search ordering.
+Visit [http://localhost:3000](http://localhost:3000) to view the dark-mode ZeroDay platform.
+Visit [http://localhost:3000/admin/review](http://localhost:3000/admin/review) for the human-in-the-loop review queue.
+Visit [http://localhost:3000/changelog](http://localhost:3000/changelog) for the live public event stream.

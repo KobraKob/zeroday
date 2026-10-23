@@ -30,6 +30,18 @@ export const ClaimSubjectTypeSchema = z.enum([
   "market",
 ]);
 
+export const ClaimStatusSchema = z.enum([
+  "pending",
+  "approved",
+  "superseded",
+  "rejected",
+  "unverified",
+  "verified",
+  "pending_review",
+]);
+
+export const ClaimCreatedBySchema = z.enum(["human", "ai", "import"]);
+
 export const ClaimSchema = z.object({
   id: z.string(),
   subject_type: ClaimSubjectTypeSchema,
@@ -49,7 +61,11 @@ export const ClaimSchema = z.object({
   confidence: ConfidenceGradeSchema,
   note: z.string().optional(),
   demo: z.boolean().optional(),
-  status: z.enum(["verified", "pending_review", "rejected"]).optional(),
+  status: ClaimStatusSchema.optional(),
+  valid_from: z.string().optional(),
+  valid_to: z.string().nullable().optional(),
+  last_checked_at: z.string().optional(),
+  created_by: ClaimCreatedBySchema.optional(),
   exact_quote: z.string().optional(),
 });
 

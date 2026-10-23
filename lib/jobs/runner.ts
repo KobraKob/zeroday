@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { eq } from "drizzle-orm";
 import { getDb, schema } from "../db/client";
 
 export interface JobExecutionResult {
@@ -51,7 +52,7 @@ export async function runJobWithTelemetry(
             duration_ms: durationMs,
             details,
           })
-          .where(schema.cronJobRuns.id.equals ? schema.cronJobRuns.id.equals(runId) as any : undefined as any);
+          .where(eq(schema.cronJobRuns.id, runId));
       } catch (e) {
         // Fallback update
       }
@@ -70,12 +71,15 @@ export async function runJobWithTelemetry(
 
     if (database) {
       try {
-        await database.update(schema.cronJobRuns).set({
-          status: "failed",
-          finished_at: new Date(),
-          duration_ms: durationMs,
-          details: { error: err.message },
-        });
+        await database
+          .update(schema.cronJobRuns)
+          .set({
+            status: "failed",
+            finished_at: new Date(),
+            duration_ms: durationMs,
+            details: { error: err.message },
+          })
+          .where(eq(schema.cronJobRuns.id, runId));
       } catch (e) {
         // Ignore
       }
