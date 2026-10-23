@@ -3,7 +3,7 @@
 import React from "react";
 import { City, State, Claim, Source } from "../lib/schema";
 import { SourceFootnote } from "./SourceFootnote";
-import { ExternalLink, Check, AlertCircle } from "lucide-react";
+import { ArrowUpRight, Minus } from "lucide-react";
 
 interface CompareTableProps {
   cities: City[];
@@ -12,13 +12,54 @@ interface CompareTableProps {
   sourcesMap: Map<string, Source>;
 }
 
+type IncentiveType = "rent" | "capex_subsidy" | "opex_subsidy" | "stamp_duty" | "power" | "skilling" | "other";
+
 interface MetricRowDef {
   label: string;
   field: string;
-  category: "real_estate" | "talent" | "policy" | "connectivity";
-  format?: (value: any, claim?: Claim) => string;
-  unit?: string;
-  isCityMetric?: boolean;
+  kind: "claim" | "policy" | "incentive";
+  incentiveType?: IncentiveType;
+  explanation: string;
+}
+
+interface MetricGroupDef {
+  section: string;
+  description: string;
+  rows: MetricRowDef[];
+}
+
+const metricGroups: MetricGroupDef[] = [
+  {
+    section: "Market footprint & operating economics",
+    description: "City-level claims attached to their source records",
+    rows: [
+      { label: "Tracked GCC units", field: "gcc_unit_count", kind: "claim", explanation: "Number of GCC units recorded by the cited source" },
+      { label: "National market share", field: "market_share_national", kind: "claim", explanation: "Source-reported national share range" },
+      { label: "Grade A office rent", field: "office_rent_range", kind: "claim", explanation: "Source-reported Grade A asking-rent range" },
+      { label: "Office vacancy rate", field: "office_vacancy_rate", kind: "claim", explanation: "Reported office vacancy rate" },
+      { label: "Tech talent cost index", field: "tech_talent_salary_index", kind: "claim", explanation: "Compensation index; Bengaluru baseline is 100" },
+    ],
+  },
+  {
+    section: "State policy & fiscal support",
+    description: "Policy and incentive entries from the currently captured state policy record",
+    rows: [
+      { label: "Published state policy", field: "policy_name", kind: "policy", explanation: "Policy name and stated period" },
+      { label: "Lease / rent support", field: "rent", kind: "incentive", incentiveType: "rent", explanation: "Rent or lease incentive captured for the state" },
+      { label: "Capital expenditure support", field: "capex_subsidy", kind: "incentive", incentiveType: "capex_subsidy", explanation: "CapEx support captured for the state" },
+      { label: "Operating expenditure support", field: "opex_subsidy", kind: "incentive", incentiveType: "opex_subsidy", explanation: "Operating support captured for the state" },
+      { label: "Stamp duty / registration", field: "stamp_duty", kind: "incentive", incentiveType: "stamp_duty", explanation: "Stamp duty and registration incentives captured for the state" },
+      { label: "Power / electricity support", field: "power", kind: "incentive", incentiveType: "power", explanation: "Power tariff or electricity-duty support captured for the state" },
+      { label: "Talent / skilling support", field: "skilling", kind: "incentive", incentiveType: "skilling", explanation: "Recruitment, training, or skilling support captured for the state" },
+      { label: "Other recorded incentive", field: "other", kind: "incentive", incentiveType: "other", explanation: "Other incentive entry in the captured state policy record" },
+    ],
+  },
+];
+
+function displayValue(value: Claim["value"]): string {
+  if (Array.isArray(value)) return value.join(", ");
+  if (typeof value === "object" && value !== null) return JSON.stringify(value);
+  return String(value);
 }
 
 export function CompareTable({
@@ -27,252 +68,127 @@ export function CompareTable({
   claimsMap,
   sourcesMap,
 }: CompareTableProps) {
-  const metrics: { section: string; rows: MetricRowDef[] }[] = [
-    {
-      section: "Commercial Real Estate Benchmarks",
-      rows: [
-        {
-          label: "Grade A Office Rent (INR / sq ft / mo)",
-          field: "rent_office_grade_a",
-          category: "real_estate",
-          unit: "₹/sqft",
-          isCityMetric: true,
-        },
-        {
-          label: "Office Vacancy Rate",
-          field: "office_vacancy_rate",
-          category: "real_estate",
-          unit: "%",
-          isCityMetric: true,
-        },
-        {
-          label: "Operating GCC Campuses Count",
-          field: "gcc_count",
-          category: "real_estate",
-          unit: "campuses",
-          isCityMetric: true,
-        },
-        {
-          label: "Primary GCC Micro-Markets",
-          field: "primary_clusters",
-          category: "real_estate",
-          format: (val) => (Array.isArray(val) ? val.join(", ") : String(val)),
-          isCityMetric: true,
-        },
-      ],
-    },
-    {
-      section: "Talent Economics & Tech Compensation",
-      rows: [
-        {
-          label: "Tech Compensation Index (Bengaluru = 100)",
-          field: "talent_cost_index",
-          category: "talent",
-          unit: "pts",
-          isCityMetric: true,
-        },
-        {
-          label: "Annual Engineering Graduates Pool",
-          field: "graduates_annual_pool",
-          category: "talent",
-          unit: "grads/yr",
-          isCityMetric: true,
-        },
-        {
-          label: "Average Tech Attrition Rate",
-          field: "tech_attrition_rate",
-          category: "talent",
-          unit: "%",
-          isCityMetric: true,
-        },
-      ],
-    },
-    {
-      section: "Infrastructure & Air Connectivity",
-      rows: [
-        {
-          label: "International Flight Destinations Direct",
-          field: "airport_direct_destinations",
-          category: "connectivity",
-          unit: "destinations",
-          isCityMetric: true,
-        },
-        {
-          label: "Operational Metro Rail Network",
-          field: "metro_network_length_km",
-          category: "connectivity",
-          unit: "km",
-          isCityMetric: true,
-        },
-      ],
-    },
-    {
-      section: "Statutory State Policy & Fiscal Incentives",
-      rows: [
-        {
-          label: "Gazetted State GCC Policy",
-          field: "gcc_policy_name",
-          category: "policy",
-          isCityMetric: false,
-        },
-        {
-          label: "Electricity Duty Exemption Duration",
-          field: "power_duty_exemption_years",
-          category: "policy",
-          unit: "years",
-          isCityMetric: false,
-        },
-        {
-          label: "Patent / R&D Filing Subsidy",
-          field: "patent_subsidy_amount",
-          category: "policy",
-          isCityMetric: false,
-        },
-        {
-          label: "Stamp Duty & Lease Registration Subsidy",
-          field: "stamp_duty_concession_pct",
-          category: "policy",
-          unit: "%",
-          isCityMetric: false,
-        },
-      ],
-    },
-  ];
-
   let footnoteCounter = 1;
 
   return (
-    <div className="w-full border border-hairline bg-surface overflow-x-auto">
-      <table className="w-full text-left border-collapse font-sans text-xs">
+    <div className="compare-matrix-wrap" role="region" aria-label="Side-by-side evidence ledger" tabIndex={0}>
+      <table className="compare-matrix">
         <caption className="sr-only">
-          Side-by-side comparative ledger of target Indian GCC hubs
+          Side-by-side evidence ledger comparing market economics and captured state policy support across selected Indian GCC hubs.
         </caption>
         <thead>
-          <tr className="border-b-2 border-ink bg-paper/90 font-mono text-[11px] uppercase tracking-wider text-muted">
-            {/* Sticky first column */}
-            <th
-              scope="col"
-              className="sticky left-0 z-20 bg-paper/95 backdrop-blur-xs py-3.5 px-4 min-w-[240px] max-w-[280px] border-r border-hairline font-semibold text-ink"
-            >
-              Metric / Verification Rubric
+          <tr>
+            <th scope="col" className="compare-matrix-metric-head">
+              <span>METRIC / RECORD</span>
+              <small>Definition follows cited data</small>
             </th>
-            {cities.map((city) => (
-              <th
-                key={city.id}
-                scope="col"
-                className="py-3.5 px-4 min-w-[190px] font-semibold text-ink text-left border-r border-hairline last:border-r-0"
-              >
-                <div className="font-display text-base font-bold text-ink normal-case">
-                  {city.name}
+            {cities.map((city, index) => (
+              <th scope="col" key={city.id} className="compare-matrix-city-head">
+                <div className="compare-matrix-city-title">
+                  <i className={"compare-city-swatch compare-tone-" + (index + 1)} aria-hidden="true" />
+                  <strong>{city.name}</strong>
                 </div>
-                <div className="text-[10px] font-mono text-muted tracking-normal uppercase">
-                  {statesMap.get(city.state_id)?.name || "State Verified"}
-                </div>
+                <span>{statesMap.get(city.state_id)?.name || "State not recorded"}</span>
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-hairline">
-          {metrics.map((group) => (
-            <React.Fragment key={group.section}>
-              {/* Category Section Header */}
-              <tr className="bg-paper/70 border-y border-hairline font-mono text-[10px] uppercase tracking-wider text-muted font-bold">
-                <td
-                  colSpan={cities.length + 1}
-                  className="py-2.5 px-4 sticky left-0 z-10 bg-paper/90"
-                >
-                  § {group.section}
-                </td>
-              </tr>
+        {metricGroups.map((group) => (
+          <tbody key={group.section}>
+            <tr className="compare-matrix-section-row">
+              <th colSpan={cities.length + 1} scope="colgroup">
+                <div>
+                  <span>{group.section}</span>
+                  <small>{group.description}</small>
+                </div>
+              </th>
+            </tr>
+            {group.rows.map((row) => (
+              <tr key={row.field} className="compare-matrix-data-row">
+                <th scope="row" className="compare-matrix-metric-cell">
+                  <strong>{row.label}</strong>
+                  <small>{row.explanation}</small>
+                </th>
+                {cities.map((city) => {
+                  const state = statesMap.get(city.state_id);
+                  let value: string | undefined;
+                  let secondary: string | undefined;
+                  let source: Source | undefined;
+                  let targetClaim: Claim | undefined;
 
-              {group.rows.map((metricRow) => (
-                <tr key={metricRow.field} className="hover:bg-paper/30 transition-colors">
-                  {/* Sticky First Column Metric Name */}
-                  <th
-                    scope="row"
-                    className="sticky left-0 z-10 bg-surface hover:bg-paper/30 py-3 px-4 font-mono text-xs font-medium text-ink border-r border-hairline leading-snug"
-                  >
-                    {metricRow.label}
-                  </th>
-
-                  {/* City Benchmark Cells */}
-                  {cities.map((city) => {
-                    const state = statesMap.get(city.state_id);
-                    let rawValue: any = null;
-                    let targetClaim: Claim | undefined = undefined;
-
-                    if (metricRow.isCityMetric) {
-                      rawValue = (city as any)[metricRow.field];
-                      targetClaim = (city.claim_ids || [])
-                        .map((id) => claimsMap.get(id))
-                        .find((c) => c?.field === metricRow.field);
-                    } else if (state) {
-                      if (metricRow.field === "gcc_policy_name") {
-                        rawValue = state.policy?.policy_name;
-                      } else {
-                        const inc = state.policy?.incentives?.find((i) =>
-                          metricRow.field.includes(i.type) || i.type === metricRow.field
-                        );
-                        rawValue = inc?.amount_or_rate || inc?.description || (state as any)[metricRow.field];
-                      }
+                  if (row.kind === "claim") {
+                    targetClaim = city.claim_ids
+                      .map((id) => claimsMap.get(id))
+                      .find((claim) => claim?.field === row.field);
+                    if (targetClaim) {
+                      value = displayValue(targetClaim.value);
+                      secondary = targetClaim.as_of + " · Confidence " + targetClaim.confidence;
+                      source = sourcesMap.get(targetClaim.source_id);
                     }
-
-                    const val = targetClaim?.value ?? rawValue;
-                    const hasValue = val !== undefined && val !== null && val !== "";
-                    const source = targetClaim ? sourcesMap.get(targetClaim.source_id) : null;
-                    const currentMarker = hasValue && source ? footnoteCounter++ : undefined;
-
-                    if (!hasValue) {
-                      return (
-                        <td
-                          key={city.id}
-                          className="py-3 px-4 bg-hatched text-muted border-r border-hairline last:border-r-0 select-none text-center"
-                          title="Data point unverified or not yet sourced in primary gazette"
-                        >
-                          <span className="font-mono text-[10px] uppercase text-muted/70 tracking-widest bg-surface/90 px-1 py-0.5 border border-hairline-subtle">
-                            [Not yet sourced]
-                          </span>
-                        </td>
-                      );
+                  } else if (row.kind === "policy" && state?.policy) {
+                    value = state.policy.policy_name;
+                    secondary = "Policy period " + state.policy.period;
+                    source = sourcesMap.get(state.policy.source_id);
+                  } else if (row.kind === "incentive" && state?.policy) {
+                    const incentive = state.policy.incentives.find((item) => item.type === row.incentiveType);
+                    if (incentive) {
+                      value = incentive.amount_or_rate || incentive.description;
+                      secondary = incentive.amount_or_rate ? incentive.description : "Description recorded; no separate amount field";
+                      source = sourcesMap.get(incentive.source_id);
                     }
+                  }
 
-                    const formattedDisplay = metricRow.format
-                      ? metricRow.format(val, targetClaim)
-                      : String(val);
+                  const hasValue = Boolean(value);
+                  const marker = hasValue && source ? footnoteCounter++ : undefined;
 
-                    return (
-                      <td
-                        key={city.id}
-                        className="py-3 px-4 border-r border-hairline last:border-r-0 text-ink tabular-nums font-mono text-xs"
-                      >
-                        <div className="flex items-baseline justify-between gap-1.5">
-                          <span className="font-medium">
-                            {formattedDisplay}
-                            {metricRow.unit && (
-                              <span className="text-[10px] text-muted font-sans ml-1">
-                                {metricRow.unit}
-                              </span>
+                  return (
+                    <td
+                      key={city.id}
+                      className={"compare-matrix-value-cell" + (!hasValue ? " is-unrecorded" : "")}
+                      title={targetClaim?.note || row.explanation}
+                    >
+                      {hasValue ? (
+                        <div className="compare-matrix-value">
+                          <div className="compare-matrix-value-main">
+                            <span>{value}</span>
+                            {source && (
+                              <SourceFootnote
+                                marker={marker}
+                                source={source}
+                                claim={targetClaim}
+                                fieldLabel={city.name + " — " + row.label}
+                                showMarkerOnly={true}
+                                className="compare-matrix-citation"
+                              />
                             )}
-                          </span>
-
-                          {source && (
-                            <SourceFootnote
-                              marker={currentMarker}
-                              source={source}
-                              claim={targetClaim}
-                              fieldLabel={`${city.name} — ${metricRow.label}`}
-                              showMarkerOnly={true}
-                            />
-                          )}
+                            {source && (
+                              <a
+                                className="compare-matrix-open-source"
+                                href={source.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={"Open source for " + city.name + " " + row.label}
+                                title={"Open source: " + source.publisher}
+                              >
+                                <ArrowUpRight size={12} aria-hidden="true" />
+                              </a>
+                            )}
+                          </div>
+                          {secondary && <small>{secondary}</small>}
                         </div>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </React.Fragment>
-          ))}
-        </tbody>
+                      ) : (
+                        <span className="compare-matrix-unrecorded">
+                          <Minus size={12} aria-hidden="true" />
+                          <span>Not listed in current record</span>
+                        </span>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        ))}
       </table>
     </div>
   );
