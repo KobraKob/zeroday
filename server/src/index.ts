@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
+import postgres from "postgres";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
 dotenv.config();
 
@@ -31,11 +33,58 @@ function loadJson(filename: string): any {
   return [];
 }
 
-const claimsData: any[] = loadJson("claims.json");
-const gccData: any[] = loadJson("gccs.json");
-const citiesData: any[] = loadJson("cities.json");
-const definitionsData: any[] = loadJson("definitions.json");
-const statesData: any[] = loadJson("states.json");
+let claimsData: any[] = loadJson("claims.json");
+let gccData: any[] = loadJson("gccs.json");
+let citiesData: any[] = loadJson("cities.json");
+let definitionsData: any[] = loadJson("definitions.json");
+let statesData: any[] = loadJson("states.json");
+
+const DATABASE_URL =
+  process.env.DATABASE_URL ||
+  process.env.SUPABASE_DATABASE_URL ||
+  process.env.POSTGRES_URL ||
+  "";
+const SUPABASE_URL =
+  process.env.SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  "";
+const SUPABASE_PUBLIC_KEY =
+  process.env.SUPABASE_PUBLISHABLE_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  process.env.SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "";
+
+let dbClient: ReturnType<typeof postgres> | null = null;
+let supabaseClient: SupabaseClient | null = null;
+
+function getDatabase() {
+  if (!DATABASE_URL) return null;
+  if (!dbClient) {
+    dbClient = postgres(DATABASE_URL, {
+      max: Math.max(1, Number(process.env.DB_POOL_MAX || 5)),
+      idle_timeout: 20,
+      connect_timeout: 10,
+      prepare: false,
+      ssl: process.env.NODE_ENV === "production" ? "require" : false,
+    });
+  }
+  return dbClient;
+}
+
+function getSupabaseClient() {
+  if (!SUPABASE_URL || !SUPABASE_PUBLIC_KEY) return null;
+  if (!supabaseClient) {
+    supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLIC_KEY, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+        detectSessionInUrl: false,
+      },
+    });
+  }
+  return supabaseClient;
+}
 
 // In-Memory Vector Store for Railway Backend
 interface Chunk {
@@ -191,9 +240,113 @@ class BackendVectorStore {
   }
 }
 
-const vectorStore = new BackendVectorStore();
-const claimsMap = new Map<string, any>();
+let vectorStore = new BackendVectorStore();
+let claimsMap = new Map<string, any>();
 claimsData.forEach((c) => claimsMap.set(c.id, c));
+
+function unwrapJson(value: any) {
+  if (typeof value !== "string") return value;
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
+}
+
+/**
+ * Railway runs against persistent database records when DATABASE_URL exists.
+ * JSON files are only a local/test fallback. Production must not silently boot
+ * against bundled fixtures when a database has not been configured.
+ */
+async function initialiseDataSource(): Promise<"supabase-postgres" | "supabase-rest" | "local-json"> {
+  const database = getDatabase();
+  const supabase = getSupabaseClient();
+
+  if (!database && !supabase) {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "Configure DATABASE_URL or both SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (or SUPABASE_ANON_KEY)."
+      );
+    }
+    console.warn("Supabase credentials missing; backend is using local JSON fixtures.");
+    return "local-json";
+  }
+
+  let claimRows: any[];
+  let gccRows: any[];
+  let cityRows: any[];
+  let stateRows: any[];
+
+  if (database) {
+    [claimRows, gccRows, cityRows, stateRows] = await Promise.all([
+      database`select id, subject_type, subject_id, field, value, unit, as_of, source_id, confidence, status, exact_quote, note, demo
+        from public.claims
+        where status = 'approved' and valid_to is null
+        order by subject_type, subject_id, field`,
+      database`select data from public.entities where type = 'gcc' order by name`,
+      database`select data from public.entities where type = 'city' order by name`,
+      database`select data from public.entities where type = 'state' order by name`,
+    ]);
+  } else {
+    // Public, read-only queries. RLS remains authoritative; no service-role key
+    // is used or exposed by the public API service.
+    const [claimsResult, gccResult, cityResult, stateResult] = await Promise.all([
+      supabase!.from("claims")
+        .select("id,subject_type,subject_id,field,value,unit,as_of,source_id,confidence,status,exact_quote,note,demo")
+        .eq("status", "approved")
+        .is("valid_to", null)
+        .order("subject_type")
+        .order("subject_id")
+        .order("field"),
+      supabase!.from("entities").select("data").eq("type", "gcc").order("name"),
+      supabase!.from("entities").select("data").eq("type", "city").order("name"),
+      supabase!.from("entities").select("data").eq("type", "state").order("name"),
+    ]);
+
+    for (const [table, result] of [
+      ["claims", claimsResult],
+      ["GCC entities", gccResult],
+      ["city entities", cityResult],
+      ["state entities", stateResult],
+    ] as const) {
+      if (result.error) {
+        throw new Error("Supabase REST query failed for " + table + ": " + result.error.message);
+      }
+    }
+
+    claimRows = claimsResult.data || [];
+    gccRows = gccResult.data || [];
+    cityRows = cityResult.data || [];
+    stateRows = stateResult.data || [];
+  }
+
+  claimsData = claimRows.map((row: any) => ({
+    ...row,
+    value: unwrapJson(row.value),
+    source_id: row.source_id || "MISSING",
+    demo: Boolean(row.demo),
+  }));
+  gccData = gccRows.map((row: any) => unwrapJson(row.data));
+  citiesData = cityRows.map((row: any) => unwrapJson(row.data));
+  statesData = stateRows.map((row: any) => unwrapJson(row.data));
+
+  // Rebuild retrieval vectors from current database records.
+  vectorStore = new BackendVectorStore();
+  claimsMap = new Map<string, any>();
+  claimsData.forEach((claim) => claimsMap.set(claim.id, claim));
+
+  if (!gccData.length || !citiesData.length) {
+    console.warn("Supabase connected, but GCC/city tables currently have no seeded records.");
+  }
+  const dataSource = database ? "supabase-postgres" : "supabase-rest";
+  console.log("Loaded live records from " + dataSource + ".", JSON.stringify({
+    claims: claimsData.length,
+    gccs: gccData.length,
+    cities: citiesData.length,
+    states: statesData.length,
+  }));
+  return dataSource;
+}
 
 // --- HTTP Routes ---
 
@@ -208,9 +361,10 @@ app.get("/health", (_req: Request, res: Response) => {
       gccs: gccData.length,
       cities: citiesData.length,
     },
+    database: DATABASE_URL ? "supabase-postgres" : (SUPABASE_URL && SUPABASE_PUBLIC_KEY ? "supabase-rest" : "local-json"),
     llm: {
       model: GROQ_MODEL,
-      status: "connected",
+      status: GROQ_API_KEY ? "connected" : "disabled",
     },
   });
 });
@@ -407,6 +561,14 @@ MANDATORY RULES:
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`⚡ ZeroDay Railway Backend service running on port ${PORT}`);
+async function startServer() {
+  const dataSource = await initialiseDataSource();
+  app.listen(Number(PORT), () => {
+    console.log("ZeroDay Railway Backend listening on port " + PORT + " using " + dataSource + ".");
+  });
+}
+
+startServer().catch((error) => {
+  console.error("ZeroDay backend startup failed:", error);
+  process.exitCode = 1;
 });
