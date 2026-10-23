@@ -3,14 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Search, Sparkles } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { CommandPalette } from "./CommandPalette";
 import { ThemeToggle } from "./ThemeToggle";
-import { useAsk } from "./AskContext";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { openAskDrawer } = useAsk();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
@@ -122,23 +120,6 @@ export function Navbar() {
               {/* Dark Mode Permanent Status Pill */}
               <ThemeToggle />
 
-              {/* Ask: Grounded Q&A Drawer */}
-              <button
-                type="button"
-                onClick={() => {
-                  if (pathname === "/ask") {
-                    document.getElementById("ask-main-input")?.focus();
-                  } else {
-                    openAskDrawer();
-                  }
-                }}
-                className="atlas-nav-control hidden sm:inline-flex items-center justify-center gap-2 px-4 h-11 text-xs font-mono font-medium border border-hairline-subtle bg-transparent text-ink hover:bg-ink hover:text-paper transition-all duration-200 rounded-full min-h-[44px] focus-visible:outline-cobalt cursor-pointer"
-                aria-label="Ask ZeroDay Grounded Intelligence"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-mint" />
-                <span>Ask</span>
-              </button>
-
               {/* Attest Button */}
               <Link
                 href="/submit"
@@ -193,22 +174,7 @@ export function Navbar() {
               })}
             </nav>
 
-            <div className="pt-3 border-t-2 border-rule grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  if (pathname === "/ask") {
-                    document.getElementById("ask-main-input")?.focus();
-                  } else {
-                    openAskDrawer();
-                  }
-                }}
-                className="min-h-[44px] h-11 flex items-center justify-center gap-2 text-xs font-mono font-bold border border-hairline-subtle bg-transparent text-ink text-center rounded-full cursor-pointer transition-all duration-200 hover:bg-ink hover:text-paper"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-mint" />
-                <span>Ask</span>
-              </button>
+            <div className="pt-3 border-t-2 border-rule grid grid-cols-1 gap-2">
               <Link
                 href="/submit"
                 onClick={() => setMobileMenuOpen(false)}
