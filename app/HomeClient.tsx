@@ -91,8 +91,8 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
             </div>
             <div className="relative mt-3">
               <svg className="atlas-network h-[280px] w-full sm:h-[330px]" viewBox="80 20 330 280" role="img" aria-label="Interactive schematic map of Indian GCC city clusters">
-                <path d="M214 22 L250 34 L282 56 L306 77 L328 92 L349 112 L338 140 L315 157 L308 188 L292 216 L280 245 L258 275 L236 294 L218 267 L202 235 L180 214 L157 198 L140 169 L145 143 L154 118 L170 91 L187 65 Z" fill="#E3E3D8" stroke="#C6C9B8" strokeWidth="1.5"/>
-                <path d="M214 22 L230 100 L260 185 L230 220 L258 275 M154 118 L205 172 L260 185 L315 157 L349 112 M145 143 L230 220 L282 235 L292 216 M187 65 L275 70 L315 157" fill="none" stroke="#C7CABB" strokeWidth="1.1" strokeDasharray="3 5"/>
+                <path d="M214 22 L250 34 L282 56 L306 77 L328 92 L349 112 L338 140 L315 157 L308 188 L292 216 L280 245 L258 275 L236 294 L218 267 L202 235 L180 214 L157 198 L140 169 L145 143 L154 118 L170 91 L187 65 Z" fill="#E3E3D8" stroke="#DAD7CC" strokeWidth="1.5"/>
+                <path d="M214 22 L230 100 L260 185 L230 220 L258 275 M154 118 L205 172 L260 185 L315 157 L349 112 M145 143 L230 220 L282 235 L292 216 M187 65 L275 70 L315 157" fill="none" stroke="#DAD7CC" strokeWidth="1.1" strokeDasharray="3 5"/>
                 <path d="M190 150 Q220 160 205 172 T260 185 T230 220 T282 235" fill="none" stroke="#15183A" strokeWidth="2" strokeDasharray="4 5" opacity=".35"/>
                 {cityStats.map((point) => {
                   const active = selectedCity === point.name;
@@ -128,10 +128,10 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
         <div className="bg-[#15183A] p-6 text-[#FFF6E5] sm:p-8">
           <p className="font-mono text-xs uppercase tracking-[.18em] text-[#5FE0B0]">Cluster snapshot / 01</p>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-[-.04em] sm:text-4xl">Zoom in on <span className="text-[#5FE0B0]">{selectedCity}.</span></h2>
-          <p className="mt-4 max-w-sm text-sm leading-6 text-[#C4C8DE]">The chart updates from the registry records currently associated with this city cluster. It is a view of this dataset, not a claim about the entire market.</p>
-          <div className="mt-8 grid grid-cols-2 gap-4 border-t border-[#3D4472] pt-5">
-            <div><p className="text-xs text-[#C4C8DE]">Matching records</p><p className="mt-1 font-display text-4xl font-bold tabular-nums">{cityGccs.length}</p></div>
-            <div><p className="text-xs text-[#C4C8DE]">Sectors represented</p><p className="mt-1 font-display text-4xl font-bold tabular-nums">{new Set(cityGccs.map((gcc) => gcc.sector)).size}</p></div>
+          <p className="mt-4 max-w-sm text-sm leading-6 text-[#E8DEC8]">The chart updates from the registry records currently associated with this city cluster. It is a view of this dataset, not a claim about the entire market.</p>
+          <div className="mt-8 grid grid-cols-2 gap-4 border-t border-[#525875] pt-5">
+            <div><p className="text-xs text-[#E8DEC8]">Matching records</p><p className="mt-1 font-display text-4xl font-bold tabular-nums">{cityGccs.length}</p></div>
+            <div><p className="text-xs text-[#E8DEC8]">Sectors represented</p><p className="mt-1 font-display text-4xl font-bold tabular-nums">{new Set(cityGccs.map((gcc) => gcc.sector)).size}</p></div>
           </div>
           <Link href="/registry" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#5FE0B0] hover:text-white">Open matching registry <ArrowRight size={15}/></Link>
         </div>
@@ -140,10 +140,10 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
           <div className="mt-7 space-y-5">
             {sectorStats.length ? sectorStats.map(([sector, value], index) => <div key={sector}>
               <div className="mb-2 flex items-center justify-between gap-3 text-sm"><span className="font-medium text-[#15183A]">{sector.replaceAll("_", " ")}</span><span className="font-mono text-xs text-[#525875]">{value}</span></div>
-              <div className="h-3 overflow-hidden bg-[#F0EFE8]"><div className={`atlas-bar-fill h-full ${index % 3 === 0 ? "bg-[#15183A]" : index % 3 === 1 ? "bg-[#FF6B4A]" : "bg-[#267A68]"}`} style={{ width: `${Math.max(4, value / Math.max(1, sectorStats[0][1]) * 100)}%`, animationDelay: `${index * 70}ms` }}/></div>
+              <div className="h-3 overflow-hidden bg-[#F2F0E7]"><div className={`atlas-bar-fill h-full ${index % 3 === 0 ? "bg-[#15183A]" : index % 3 === 1 ? "bg-[#FF6B4A]" : "bg-[#267A68]"}`} style={{ width: `${Math.max(4, value / Math.max(1, sectorStats[0][1]) * 100)}%`, animationDelay: `${index * 70}ms` }}/></div>
             </div>) : <p className="border border-dashed border-[#DAD7CC] p-5 text-sm text-[#525875]">No matching sector records for this cluster in the current registry.</p>}
           </div>
-          <p className="mt-6 border-t border-[#E8E6DD] pt-4 text-xs leading-5 text-[#525875]">Counts reflect records in ZeroDay's current registry. A company listed across multiple cities may appear in each relevant cluster.</p>
+          <p className="mt-6 border-t border-[#DAD7CC] pt-4 text-xs leading-5 text-[#525875]">Counts reflect records in ZeroDay's current registry. A company listed across multiple cities may appear in each relevant cluster.</p>
         </div>
       </section>
 
@@ -152,13 +152,13 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
           <p className="text-sm font-semibold text-[#267A68]">The counting problem</p><h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-[-.035em] text-ink sm:text-4xl">One market. Three different counts.</h2>
           <p className="mt-4 text-sm leading-6 text-muted">A parent company, a registered legal entity and a physical campus are not the same unit. Change the definition to see how the verified registry recalculates.</p>
           <Link href="/reconcile" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink hover:text-[#267A68]">Read the reconciliation method <ArrowUpRight size={15} /></Link>
-          <div className="mt-8 border-l-2 border-[#267A68] pl-4"><p className="text-xs text-muted">Registry coverage</p><p className="mt-1 font-display text-3xl font-semibold text-ink">{coverage.wellSourcedCount} <span className="text-base font-normal text-muted">of {coverage.reportedTotal.toLocaleString()} benchmarked</span></p><div className="mt-3 h-1.5 w-full bg-[#DCE3D9]"><div className="h-full bg-[#267A68] transition-all duration-500" style={{ width: Math.max(0.7, coverage.coveragePercentage) + "%" }} /></div><p className="mt-2 text-xs leading-5 text-muted">Evidence completeness: {coverage.coveragePercentage.toFixed(1)}%. The record shows its limits instead of implying full coverage.</p></div>
+          <div className="mt-8 border-l-2 border-[#267A68] pl-4"><p className="text-xs text-muted">Registry coverage</p><p className="mt-1 font-display text-3xl font-semibold text-ink">{coverage.wellSourcedCount} <span className="text-base font-normal text-muted">of {coverage.reportedTotal.toLocaleString()} benchmarked</span></p><div className="mt-3 h-1.5 w-full bg-[#E8DEC8]"><div className="h-full bg-[#267A68] transition-all duration-500" style={{ width: Math.max(0.7, coverage.coveragePercentage) + "%" }} /></div><p className="mt-2 text-xs leading-5 text-muted">Evidence completeness: {coverage.coveragePercentage.toFixed(1)}%. The record shows its limits instead of implying full coverage.</p></div>
         </div>
         <div className="min-w-0">
           <DefinitionToggle definitions={definitions} selectedUnit={selectedUnit} onSelectUnit={setSelectedUnit} />
           <div className="mt-4 grid grid-cols-1 border border-hairline bg-surface sm:grid-cols-[1fr_190px]">
             <div className="p-5 sm:p-7"><div className="flex items-center justify-between gap-3"><p className="text-xs text-muted">Recomputed registry count</p><span className="inline-flex items-center gap-1.5 text-[11px] text-[#267A68]"><span className="h-1.5 w-1.5 rounded-full bg-[#267A68]" /> Updates on selection</span></div><p key={count.count} className="atlas-count mt-3 font-display text-6xl font-semibold tracking-[-.06em] text-ink sm:text-7xl">{count.count.toLocaleString()}</p><p className="mt-3 max-w-lg text-sm leading-6 text-muted">{count.explanation}</p></div>
-            <div className="flex flex-col justify-between border-t border-hairline bg-[#F0F2EB] p-5 sm:border-l sm:border-t-0"><div><ChartNoAxesCombined size={19} className="text-[#267A68}" /><p className="mt-4 text-xs text-[#52655B]">Counting unit</p><p className="mt-1 font-semibold text-[#203A32]">{selectedUnit === "parent_company" ? "Parent enterprise" : selectedUnit === "legal_entity" ? "Legal entity" : "Campus unit"}</p></div><p className="mt-5 text-xs leading-5 text-[#52655B]">The number changes because the rule changes—not because the source data is being silently rewritten.</p></div>
+            <div className="flex flex-col justify-between border-t border-hairline bg-[#F2F0E7] p-5 sm:border-l sm:border-t-0"><div><ChartNoAxesCombined size={19} className="text-[#267A68}" /><p className="mt-4 text-xs text-[#267A68]">Counting unit</p><p className="mt-1 font-semibold text-[#15183A]">{selectedUnit === "parent_company" ? "Parent enterprise" : selectedUnit === "legal_entity" ? "Legal entity" : "Campus unit"}</p></div><p className="mt-5 text-xs leading-5 text-[#267A68]">The number changes because the rule changes—not because the source data is being silently rewritten.</p></div>
           </div>
         </div>
       </section>
@@ -166,7 +166,7 @@ export function HomeClient({ gccs, claims, sources, definitions }: HomeClientPro
       <section>
         <div className="flex flex-col justify-between gap-4 border-b border-hairline pb-5 sm:flex-row sm:items-end"><div><p className="text-sm font-semibold text-[#267A68]">Research pathways</p><h2 className="mt-2 font-display text-3xl font-semibold tracking-[-.035em] text-ink sm:text-4xl">Start with the decision you need to make.</h2></div><p className="max-w-sm text-sm leading-6 text-muted">Three practical ways into a complicated market. Each route is designed around a real research task.</p></div>
         <div className="grid grid-cols-1 divide-y divide-hairline border-b border-hairline md:grid-cols-3 md:divide-x md:divide-y-0">
-          {pathways.map((path) => { const Icon = path.icon; return <article key={path.number} className="group flex min-h-[270px] flex-col p-6 transition-colors hover:bg-surface sm:p-7"><div className="flex items-center justify-between"><span className="flex h-8 w-8 items-center justify-center border border-hairline text-xs font-semibold text-muted">{path.number}</span><Icon size={19} strokeWidth={1.6} className={path.tone === "orange" ? "text-[#B75B35]" : path.tone === "green" ? "text-[#267A68]" : "text-[#267A68]"} /></div><h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink">{path.title}</h3><p className="mt-3 text-sm leading-6 text-muted">{path.description}</p><Link href={path.href} className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-ink group-hover:text-[#267A68]">{path.action}<ArrowUpRight size={15} /></Link></article>; })}
+          {pathways.map((path) => { const Icon = path.icon; return <article key={path.number} className="group flex min-h-[270px] flex-col p-6 transition-colors hover:bg-surface sm:p-7"><div className="flex items-center justify-between"><span className="flex h-8 w-8 items-center justify-center border border-hairline text-xs font-semibold text-muted">{path.number}</span><Icon size={19} strokeWidth={1.6} className={path.tone === "orange" ? "text-[#FF6B4A]" : path.tone === "green" ? "text-[#267A68]" : "text-[#267A68]"} /></div><h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-ink">{path.title}</h3><p className="mt-3 text-sm leading-6 text-muted">{path.description}</p><Link href={path.href} className="mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-ink group-hover:text-[#267A68]">{path.action}<ArrowUpRight size={15} /></Link></article>; })}
         </div>
       </section>
 
