@@ -73,12 +73,48 @@ export function ReconcileClient({
   const [selectedUnit, setSelectedUnit] = useState<
     "parent_company" | "legal_entity" | "centre_unit"
   >("parent_company");
+  const [selectedCity, setSelectedCity] = useState("Bengaluru");
+  const [selectedPublisher, setSelectedPublisher] = useState<string | null>(null);
+  const [publisherQuery, setPublisherQuery] = useState("");
 
   const sourcesMap = useMemo(() => {
     const map = new Map<string, Source>();
     sources.forEach((s) => map.set(s.id, s));
     return map;
   }, [sources]);
+
+  const cityPoints = [
+    { name: "Delhi NCR", x: 275, y: 70, tone: "coral" },
+    { name: "Mumbai", x: 190, y: 150, tone: "cobalt" },
+    { name: "Pune", x: 205, y: 172, tone: "cobalt" },
+    { name: "Hyderabad", x: 260, y: 185, tone: "mint" },
+    { name: "Chennai", x: 282, y: 235, tone: "coral" },
+    { name: "Bengaluru", x: 230, y: 220, tone: "mint" },
+    { name: "Kochi", x: 208, y: 268, tone: "cobalt" },
+    { name: "Kolkata", x: 350, y: 135, tone: "coral" },
+  ] as const;
+  const matchesCity = (gcc: Gcc, cityName: string) => gcc.cities.some((city) => {
+    const normalised = city.toLowerCase();
+    return cityName === "Delhi NCR"
+      ? /delhi|gurugram|gurgaon|noida/i.test(normalised)
+      : normalised.includes(cityName.toLowerCase());
+  });
+  const cityStats = useMemo(() => cityPoints.map((point) => ({
+    ...point, count: gccs.filter((gcc) => matchesCity(gcc, point.name)).length,
+  })), [gccs]);
+  const selectedCityStats = cityStats.find((city) => city.name === selectedCity) || cityStats[5];
+  const cityGccs = useMemo(() => gccs.filter((gcc) => matchesCity(gcc, selectedCity)), [gccs, selectedCity]);
+  const sectorStats = useMemo(() => {
+    const counts = new Map<string, number>();
+    cityGccs.forEach((gcc) => counts.set(gcc.sector || "Unclassified", (counts.get(gcc.sector || "Unclassified") || 0) + 1));
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+  }, [cityGccs]);
+  const visibleNumericRows = useMemo(() => numericRows.filter((row) =>
+    row.publisher.toLowerCase().includes(publisherQuery.toLowerCase()) ||
+    row.headline_count.toLowerCase().includes(publisherQuery.toLowerCase())
+  ), [numericRows, publisherQuery]);
+  const selectedPublisherRow = numericRows.find((row) => row.id === selectedPublisher) || numericRows[0];
+  const chartMax = Math.max(1, ...numericRows.map((row) => row.count_value || 0));
 
   // Separate concrete numeric published reports from commentary meta-reviews (Requirement 4)
   const { numericRows, commentaryRows } = useMemo(() => {
@@ -180,167 +216,97 @@ export function ReconcileClient({
   };
 
   return (
-    <div className="space-y-12 font-sans max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="atlas-home atlas-reconcile space-y-10 md:space-y-14 font-sans max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* =========================================================================
           HERO SECTION: Plain-English headline + 2-line explainer + Range-strip chart (Requirement 8)
           ========================================================================= */}
-      <section
-        id="hero"
-        aria-labelledby="hero-heading"
-        className="scroll-mt-24 border-b-2 border-ink pb-10 pt-2"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column: Plain-English headline + 2-line explainer */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-mono text-muted uppercase tracking-wider">
-              <span className="w-2.5 h-2.5 rounded-full bg-cobalt" />
-              <span>Reconciliation Ledger • Edition: May 2026</span>
+      <section id="hero" aria-labelledby="hero-heading" className="atlas-reconcile-hero">
+        <div className="atlas-reconcile-hero-grid">
+          <div className="atlas-reconcile-copy">
+            <div className="atlas-eyebrow">
+              <span className="atlas-live-dot" aria-hidden="true" />
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-mint">ZeroDay / Reconciliation engine</span>
+              <span className="atlas-edition">Evidence workspace</span>
             </div>
-
-            <h1
-              id="hero-heading"
-              className="font-display text-3xl sm:text-4xl lg:text-[42px] font-bold text-ink leading-tight tracking-tight"
-            >
-              Why India&apos;s GCC counts vary between{" "}
-              <span className="text-cobalt tabular-nums">
-                {minPublished.toLocaleString()}
-              </span>{" "}
-              and{" "}
-              <span className="text-cobalt tabular-nums">
-                {maxPublished.toLocaleString()}
-              </span>
-            </h1>
-
-            <p className="font-body text-base text-muted leading-relaxed">
-              Major industry reports disagree because each survey measures an
-              unstated, different unit: the global parent corporation, the
-              incorporated Indian legal entity, or the multi-city campus operating
-              unit.
-            </p>
-
-            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-muted border-t border-rule-subtle">
-              <span>{numericRows.length} publisher benchmarks reconciled</span>
-              <span>•</span>
-              <span>{gccs.length} parent enterprises in verified registry</span>
-              <span>•</span>
-              <span className="text-cobalt font-semibold">Reviewed: May 2026</span>
+            <h1 id="hero-heading" className="atlas-hero-title">One market. <span className="atlas-title-accent">Different counting rules.</span></h1>
+            <p className="mt-6 max-w-xl text-base leading-7 text-muted sm:text-lg">Explore how published India GCC totals diverge, switch counting definitions, and trace the evidence behind every benchmark.</p>
+            <div className="atlas-reconcile-proof">
+              <span><Shield size={15} className="text-mint" /> Evidence-linked comparisons</span>
+              <span><Layers size={15} className="text-coral" /> Three counting definitions</span>
+              <span><BookOpen size={15} className="text-cobalt" /> Source-traceable reports</span>
             </div>
           </div>
-
-          {/* Right Column: Range-Strip Chart (One horizontal axis, one dot per publisher, coloured by unit) */}
-          <div className="lg:col-span-6 p-5 border-2 border-ink bg-surface rounded-xs shadow-[3px_3px_0px_var(--color-ink)] space-y-5">
-            <div className="flex items-baseline justify-between border-b-2 border-ink pb-2">
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
-                Published Counts Range Strip
-              </span>
-              <span className="font-mono text-xs text-muted">
-                Axis: {axisMin.toLocaleString()} – {axisMax.toLocaleString()}
-              </span>
+          <div className="atlas-reconcile-hero-metrics">
+            <div className="atlas-reconcile-kpi atlas-reconcile-kpi--cobalt"><span>Published numeric benchmarks</span><strong>{numericRows.length}</strong><small>Direct count values</small></div>
+            <div className="atlas-reconcile-kpi atlas-reconcile-kpi--mint"><span>Registry enterprises</span><strong>{gccs.length.toLocaleString()}</strong><small>Current page dataset</small></div>
+            <div className="atlas-reconcile-kpi atlas-reconcile-kpi--coral"><span>Range between reports</span><strong>{minPublished.toLocaleString()}–{maxPublished.toLocaleString()}</strong><small>Published counts, not a verified market total</small></div>
+            <div className="atlas-reconcile-kpi atlas-reconcile-kpi--gold"><span>Well-sourced records</span><strong>{coverageResult.wellSourcedCount.toLocaleString()}</strong><small>3+ statutory filings</small></div>
+          </div>
+        </div>
+        <div className="atlas-reconcile-workspace">
+          <div className="atlas-map-panel atlas-reconcile-map-panel">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div><div className="atlas-section-kicker"><MapPin size={14} /> Registry footprint</div><h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink">Where the registry clusters</h2><p className="mt-1 text-sm text-muted">Select a city node. Counts and sector mix update from the supplied registry records.</p></div>
+              <span className="atlas-map-badge">SCHEMATIC / NOT TO SCALE</span>
             </div>
-
-            {/* Horizontal Axis Chart */}
-            <div className="pt-8 pb-10 px-4 relative">
-              {/* Main Axis Line */}
-              <div className="w-full h-0.5 bg-hairline relative">
-                {/* Tick marks */}
-                {[1000, 1500, 2000, 2500, 3000].map((tick) => {
-                  const leftPct = ((tick - axisMin) / (axisMax - axisMin)) * 100;
-                  return (
-                    <div
-                      key={tick}
-                      className="absolute top-0 flex flex-col items-center -translate-x-1/2"
-                      style={{ left: `${leftPct}%` }}
-                    >
-                      <div className="w-0.5 h-2 bg-hairline" />
-                      <span className="font-mono text-[10px] text-muted mt-1 tabular-nums">
-                        {tick.toLocaleString()}
-                      </span>
-                    </div>
-                  );
+            <div className="atlas-map-stage">
+              <svg className="atlas-network h-[260px] w-full sm:h-[300px]" viewBox="80 20 330 280" role="group" aria-label="Interactive schematic map of Indian GCC clusters">
+                <path className="atlas-map-land" d="M214 22 L250 34 L282 56 L306 77 L328 92 L349 112 L338 140 L315 157 L308 188 L292 216 L280 245 L258 275 L236 294 L218 267 L202 235 L180 214 L157 198 L140 169 L145 143 L154 118 L170 91 L187 65 Z" />
+                <path className="atlas-map-internal" d="M214 22 L230 100 L260 185 L230 220 L258 275 M154 118 L205 172 L260 185 L315 157 L349 112 M145 143 L230 220 L282 235 L292 216 M187 65 L275 70 L315 157" />
+                <path className="atlas-map-route atlas-route-trace" d="M190 150 Q220 160 205 172 T260 185 T230 220 T282 235" />
+                {cityStats.map((point) => {
+                  const active = selectedCity === point.name;
+                  const radius = active ? 8 : Math.max(4, Math.min(7, 3.5 + point.count / 10));
+                  return <g key={point.name} role="button" tabIndex={0} aria-label={"Select " + point.name + ", " + point.count + " registry records"} aria-pressed={active}
+                    onClick={() => setSelectedCity(point.name)}
+                    onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedCity(point.name); } }}
+                    className={"atlas-city-node atlas-city-node--" + point.tone + (active ? " is-active" : "")}>
+                    {active && <circle cx={point.x} cy={point.y} r="19" className="atlas-city-pulse" />}
+                    <circle cx={point.x} cy={point.y} r={radius + 4} className="atlas-city-halo" />
+                    <circle cx={point.x} cy={point.y} r={radius} className="atlas-city-core" />
+                    <text x={point.x + 11} y={point.y - 9} className="atlas-map-label" fontSize="10" fontWeight={active ? "700" : "500"}>{point.name}</text>
+                    {active && <text x={point.x + 11} y={point.y + 5} className="atlas-map-sub-label" fontSize="10">{point.count} records</text>}
+                  </g>;
                 })}
-
-                {/* Publisher Dots */}
-                {numericRows.map((row, idx) => {
-                  const val = row.count_value || 0;
-                  const leftPct = Math.min(
-                    98,
-                    Math.max(2, ((val - axisMin) / (axisMax - axisMin)) * 100)
-                  );
-                  const isTop = idx % 2 === 0;
-                  const colors = getUnitColorClasses(row.unit_type);
-
-                  // Short publisher label
-                  const shortName = row.publisher.includes("Zinnov")
-                    ? row.publisher.includes("2025/26")
-                      ? "Zinnov FY26"
-                      : "Zinnov FY24"
-                    : row.publisher.includes("AIM")
-                    ? "AIM Research"
-                    : row.publisher.includes("Journal")
-                    ? "GCC Journal"
-                    : "OceanFrogs";
-
-                  return (
-                    <div
-                      key={row.id}
-                      className="absolute top-0 -translate-x-1/2 flex flex-col items-center group cursor-pointer"
-                      style={{ left: `${leftPct}%` }}
-                    >
-                      {/* Label above or below to avoid visual collision */}
-                      {isTop ? (
-                        <div className="absolute bottom-4 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                          <span className="font-mono font-bold text-xs text-ink tabular-nums bg-surface px-1 border border-hairline rounded-2xs shadow-2xs">
-                            {val.toLocaleString()}
-                          </span>
-                          <span className="text-[10px] text-muted font-sans font-medium">
-                            {shortName}
-                          </span>
-                        </div>
-                      ) : (
-                        <div className="absolute top-4 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                          <span className="text-[10px] text-muted font-sans font-medium">
-                            {shortName}
-                          </span>
-                          <span className="font-mono font-bold text-xs text-ink tabular-nums bg-surface px-1 border border-hairline rounded-2xs shadow-2xs">
-                            {val.toLocaleString()}
-                          </span>
-                        </div>
-                      )}
-
-                      {/* Dot */}
-                      <div
-                        className={`w-3.5 h-3.5 rounded-full border-2 -translate-y-1/2 transition-transform duration-fast group-hover:scale-125 ${
-                          row.unit_type === "unknown"
-                            ? "bg-paper border-muted"
-                            : colors.bar
-                        }`}
-                        title={`${row.publisher}: ${row.headline_count}`}
-                      />
-                    </div>
-                  );
-                })}
+              </svg>
+            </div>
+            <div className="atlas-map-footer">
+              <div><span className="atlas-reconcile-overline">Selected cluster</span><h3 className="mt-1 font-display text-3xl font-bold tracking-tight text-ink">{selectedCity}</h3><p className="mt-1 text-sm text-muted">{selectedCityStats?.count ?? 0} matching registry records</p></div>
+              <div className="atlas-reconcile-city-pills">
+                {cityStats.map((city) => <button key={city.name} type="button" onClick={() => setSelectedCity(city.name)} aria-pressed={selectedCity === city.name} className={"atlas-city-pill" + (selectedCity === city.name ? " is-active" : "")}><span>{city.name}</span><strong>{city.count}</strong></button>)}
               </div>
             </div>
-
-            {/* Strip Chart Legend */}
-            <div className="pt-2 border-t-2 border-ink flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-muted">
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-coral inline-block rounded-2xs" />
-                <span>Parent Company</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-marigold inline-block rounded-2xs" />
-                <span>Legal Entity</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-mint inline-block rounded-2xs" />
-                <span>Centre Unit</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 bg-hatched border border-ink inline-block rounded-2xs" />
-                <span>Unstated Unit</span>
-              </div>
+          </div>
+          <div className="atlas-insight-panel atlas-reconcile-sector-panel rounded-[1.4rem] border p-6 sm:p-7">
+            <div className="atlas-section-kicker"><Activity size={14} /> Cluster intelligence</div>
+            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink">Sector composition</h2>
+            <p className="mt-1 text-sm leading-6 text-muted">Ranked by matching registry records in {selectedCity}. Select another city to recompute.</p>
+            <div className="atlas-reconcile-sector-total"><strong>{cityGccs.length}</strong><span>records in selected cluster</span></div>
+            {sectorStats.length ? <div className="mt-5 space-y-5">{sectorStats.map(([sector, count], index) => <div key={sector} className="atlas-sector-row"><div className="mb-2 flex items-center justify-between gap-3"><span className="font-semibold text-ink">{sector}</span><span className="font-mono text-xs text-muted">{count} · {Math.round((count / Math.max(1, cityGccs.length)) * 100)}%</span></div><div className="atlas-chart-track h-3 overflow-hidden rounded-full"><div className={"atlas-chart-fill atlas-chart-fill--" + (index % 4)} style={{ width: ((count / Math.max(1, cityGccs.length)) * 100) + "%" }} /></div></div>)}</div> : <div className="atlas-empty-state mt-5">No matching records for this city in the current registry dataset.</div>}
+            <div className="atlas-callout mt-6 flex items-start gap-3 rounded-xl border p-4"><Activity size={17} className="mt-0.5 shrink-0 text-mint" /><p className="text-sm leading-6 text-muted">This is a city-tagged registry view, not a complete estimate of the city market. Multi-city companies may appear in more than one cluster.</p></div>
+          </div>
+        </div>
+        <div className="atlas-reconcile-benchmark-panel atlas-benchmark-panel rounded-[1.4rem] border p-6 sm:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-4"><div><div className="atlas-section-kicker"><ChartNoAxesCombined size={14} /> Benchmark comparison</div><h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink">Published counts, side by side</h2><p className="mt-1 text-sm text-muted">Choose a publisher to inspect its unit definition and source.</p></div>
+            <label className="atlas-reconcile-search"><span className="sr-only">Filter publishers</span><Search size={15} aria-hidden="true" /><input value={publisherQuery} onChange={(event) => setPublisherQuery(event.target.value)} placeholder="Filter publishers…" /></label>
+          </div>
+          <div className="atlas-reconcile-benchmark-grid">
+            <div className="atlas-reconcile-benchmark-bars">
+              {visibleNumericRows.map((row, index) => {
+                const active = selectedPublisher === row.id || (!selectedPublisher && index === 0);
+                const count = row.count_value || 0;
+                return <button type="button" key={row.id} onClick={() => setSelectedPublisher(row.id)} aria-pressed={active} className={"atlas-reconcile-benchmark-row" + (active ? " is-active" : "")}>
+                  <span className="atlas-reconcile-benchmark-meta"><strong>{row.publisher}</strong><small>{row.unit_claimed || getUnitColorClasses(row.unit_type).label}</small></span>
+                  <span className="atlas-chart-track atlas-reconcile-benchmark-track"><span className={"atlas-chart-fill atlas-chart-fill--" + (index % 4)} style={{ width: Math.max(3, (count / chartMax) * 100) + "%" }} /></span>
+                  <strong className="atlas-reconcile-benchmark-value">{count.toLocaleString()}</strong>
+                </button>;
+              })}
+              {!visibleNumericRows.length && <div className="atlas-empty-state">No published benchmark matches that filter.</div>}
             </div>
+            {selectedPublisherRow && <div className="atlas-reconcile-source-detail"><span className="atlas-reconcile-overline">Selected evidence record</span><h3 className="mt-2 font-display text-xl font-bold text-ink">{selectedPublisherRow.publisher}</h3><p className="mt-2 text-sm leading-6 text-muted">{selectedPublisherRow.note}</p>
+              <dl className="atlas-reconcile-detail-list"><div><dt>Reported count</dt><dd>{selectedPublisherRow.headline_count}</dd></div><div><dt>Claimed unit</dt><dd>{getUnitColorClasses(selectedPublisherRow.unit_type).label}</dd></div><div><dt>As of</dt><dd>{selectedPublisherRow.as_of}</dd></div><div><dt>Definition</dt><dd>{selectedPublisherRow.definition_known ? "Explicitly stated" : "Not stated"}</dd></div></dl>
+              {sourcesMap.get(selectedPublisherRow.source_id) && <SourceFootnote marker={numericRows.findIndex((row) => row.id === selectedPublisherRow.id) + 1} source={sourcesMap.get(selectedPublisherRow.source_id)!} fieldLabel={selectedPublisherRow.publisher + " — Reported GCC Count"} definitionRule={selectedPublisherRow.note} />}
+            </div>}
           </div>
         </div>
       </section>
@@ -351,7 +317,7 @@ export function ReconcileClient({
       <section
         id="why-numbers-differ"
         aria-labelledby="why-heading"
-        className="scroll-mt-24 space-y-6"
+        className="atlas-reconcile-section scroll-mt-24 space-y-6"
       >
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b-2 border-ink pb-3">
           <div>
@@ -544,7 +510,7 @@ export function ReconcileClient({
       <section
         id="compare-counts"
         aria-labelledby="compare-heading"
-        className="scroll-mt-24 space-y-4"
+        className="atlas-reconcile-section scroll-mt-24 space-y-4"
       >
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b-2 border-ink pb-3">
           <div>
