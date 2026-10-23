@@ -35,8 +35,8 @@ const METRICS: CompareMetric[] = [
     key: "office_rent_range",
     label: "Office rent",
     sublabel: "₹ / sq ft / month",
-    scale: 180,
-    scaleLabel: "₹180",
+    scale: 300,
+    scaleLabel: "₹300",
     range: true,
     description: "Recorded Grade A asking-rent bands. A shorter band is not necessarily a better lease deal.",
   },
@@ -443,7 +443,7 @@ export function CompareClient({
 
             <div
               className="compare-chart"
-              role="img"
+              role="group"
               aria-label={"Comparison of " + activeMetric.label + " across " + selectedCities.map((city) => city.name).join(", ")}
             >
               <div className="compare-chart-axis">
