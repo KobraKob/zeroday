@@ -182,6 +182,18 @@ Insert into `data/sources.json` or through the administrative portal:
 
 ---
 
+## 🚀 Render Backend Deployment
+
+The standalone Ask API is defined by the root `render.yaml` Blueprint. It builds `server/Dockerfile`, serves `/api/ask`, and exposes `/health` for health checks.
+
+1. In Render, create a **Blueprint** from this repository after the deployment PR is merged. Review the service definition before deploying.
+2. Enter `GROQ_API_KEY`, `SUPABASE_URL`, and `SUPABASE_PUBLISHABLE_KEY` as secret environment variables in Render. Do not commit their values. The Blueprint defaults to the Free web-service plan to avoid silently creating paid infrastructure.
+3. Wait until the service is live and `https://<render-service-host>/health` reports healthy.
+4. In the Vercel project settings, set the **server-only** environment variable `BACKEND_URL` to the Render service URL, then redeploy the frontend. Do not set `NEXT_PUBLIC_BACKEND_URL`; the backend URL should not be exposed as a client environment variable.
+5. Smoke-test `GET /health`, a site-help question such as “How do I get started?”, and a claim-backed GCC question. Confirm citations and source links before routing users to the new backend.
+
+Decommission the old Railway deployment only after the Render health check and Ask smoke tests pass. Removing a Railway URL from source code does not delete the hosted service or its data.
+
 ## 🧪 Testing & Verification
 
 Run the full Vitest suite:
