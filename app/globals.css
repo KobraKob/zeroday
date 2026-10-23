@@ -231,3 +231,41 @@ small,
     scroll-behavior: auto !important;
   }
 }
+
+
+/* ZeroDay interactive atlas and navigation motion. Uses the existing dark ledger tokens. */
+.atlas-map-panel { background-color: #15183A; background-image: none; }
+.atlas-network .atlas-city-node { transform-box: fill-box; transform-origin: center; transition: opacity 180ms ease, filter 180ms ease; }
+.atlas-network .atlas-city-node:hover { filter: saturate(1.18); }
+.atlas-network .atlas-city-node:focus-visible { outline: none; filter: drop-shadow(0 0 4px rgba(74, 88, 255, .8)); }
+.atlas-city-pulse { transform-box: fill-box; transform-origin: center; animation: atlas-city-pulse 2.2s ease-out infinite; }
+.atlas-bar-fill { transform-origin: left center; animation: atlas-bar-enter 650ms cubic-bezier(.2,.75,.25,1) both; }
+.atlas-count { animation: atlas-count-in 220ms ease-out; }
+.atlas-home a, .atlas-home button { -webkit-tap-highlight-color: transparent; }
+.atlas-navbar { isolation: isolate; animation: atlas-nav-enter 420ms cubic-bezier(.2,.7,.2,1) both; }
+.atlas-navbar-inner { animation: atlas-nav-content-enter 520ms cubic-bezier(.2,.7,.2,1) both; }
+.atlas-nav-link::after { content: ""; position: absolute; left: 50%; right: 50%; bottom: 5px; height: 2px; border-radius: 999px; background: #FF6B4A; opacity: 0; transition: left 180ms ease, right 180ms ease, opacity 180ms ease; }
+.atlas-nav-link:not(.atlas-nav-link-active):hover, .atlas-nav-control:hover, .atlas-nav-primary:hover { transform: translateY(-1px); }
+.atlas-nav-link:not(.atlas-nav-link-active):hover::after, .atlas-nav-link:not(.atlas-nav-link-active):focus-visible::after { left: 12px; right: 12px; opacity: 1; }
+.atlas-nav-link-active::after { content: ""; position: absolute; left: auto; right: 7px; top: 6px; bottom: auto; width: 5px; height: 5px; border-radius: 50%; background: #FF6B4A; opacity: 1; }
+.atlas-mobile-panel { transform-origin: top; animation: atlas-mobile-open 190ms cubic-bezier(.2,.7,.2,1) both; }
+.atlas-mobile-link { animation: atlas-mobile-link-in 260ms cubic-bezier(.2,.7,.2,1) both; }
+.atlas-mobile-link:nth-child(2) { animation-delay: 20ms; }
+.atlas-mobile-link:nth-child(3) { animation-delay: 40ms; }
+.atlas-mobile-link:nth-child(4) { animation-delay: 60ms; }
+.atlas-mobile-link:nth-child(5) { animation-delay: 80ms; }
+.atlas-mobile-link:nth-child(6) { animation-delay: 100ms; }
+.atlas-mobile-link:nth-child(7) { animation-delay: 120ms; }
+.atlas-mobile-link:nth-child(8) { animation-delay: 140ms; }
+@keyframes atlas-city-pulse { 0% { transform: scale(.7); opacity: .6; } 75%, 100% { transform: scale(1.65); opacity: 0; } }
+@keyframes atlas-bar-enter { from { transform: scaleX(.03); opacity: .4; } to { transform: scaleX(1); opacity: 1; } }
+@keyframes atlas-count-in { from { opacity: .45; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes atlas-nav-enter { from { opacity: .75; } to { opacity: 1; } }
+@keyframes atlas-nav-content-enter { from { opacity: .6; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes atlas-mobile-open { from { opacity: 0; transform: scaleY(.96) translateY(-4px); } to { opacity: 1; transform: scaleY(1) translateY(0); } }
+@keyframes atlas-mobile-link-in { from { opacity: 0; transform: translateX(-5px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .atlas-city-pulse, .atlas-bar-fill, .atlas-count, .atlas-navbar, .atlas-navbar-inner, .atlas-nav-link, .atlas-nav-control, .atlas-nav-primary, .atlas-mobile-panel, .atlas-mobile-link {
+    animation: none !important; transition: none !important; transform: none !important;
+  }
+}
