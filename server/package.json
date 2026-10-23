@@ -4,20 +4,21 @@
   "description": "ZeroDay Grounded Intelligence & Vector API Server for Railway deployment",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --pretty false",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "cors": "2.8.5",
+    "dotenv": "16.4.7",
+    "express": "4.21.2",
+    "postgres": "3.4.9"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.14.9",
-    "tsx": "^4.19.2",
-    "typescript": "^5.5.2"
+    "@types/cors": "2.8.17",
+    "@types/express": "4.17.21",
+    "@types/node": "20.14.9",
+    "tsx": "4.19.2",
+    "typescript": "5.5.2"
   }
 }
