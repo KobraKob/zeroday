@@ -932,3 +932,51 @@ small,
 @media(prefers-reduced-motion:reduce) {
  .atlas-reconcile .atlas-reconcile-kpi,.atlas-reconcile .atlas-city-pill,.atlas-reconcile .atlas-reconcile-benchmark-row { transition:none!important; transform:none!important; }
 }
+
+
+/* Registry — editorial research console */
+.atlas-registry { color:var(--color-ink); }
+.atlas-registry .registry-hero { border-bottom:1px solid var(--color-hairline)!important; }
+.registry-pulse-grid { display:grid; grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr); gap:16px; }
+.registry-pulse-panel { min-width:0; padding:clamp(18px,2.2vw,28px); border:1px solid var(--color-hairline-subtle); border-radius:18px; background:var(--color-surface); box-shadow:0 8px 26px color-mix(in srgb,var(--color-ink) 4%,transparent); }
+.registry-panel-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding-bottom:19px; border-bottom:1px solid var(--color-hairline-subtle); }
+.registry-panel-heading h2 { margin-top:8px; font-family:var(--font-display); font-size:clamp(17px,1.7vw,22px); line-height:1.2; font-weight:800; letter-spacing:-.035em; color:var(--color-ink); }
+.registry-panel-heading p { margin-top:7px; font-size:12px; line-height:1.55; color:var(--color-muted); }
+.registry-eyebrow,.registry-panel-index { font-family:var(--font-mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--color-muted); }
+.registry-panel-index { white-space:nowrap; padding:6px 8px; border:1px solid var(--color-hairline-subtle); border-radius:7px; }
+.registry-city-visual,.registry-sector-visual { display:grid; gap:4px; padding-top:14px; }
+.registry-city-row,.registry-sector-row { display:grid; align-items:center; gap:10px; min-width:0; padding:10px 8px; border:1px solid transparent; border-radius:9px; background:transparent; text-align:left; color:var(--color-ink); cursor:pointer; transition:background 150ms ease,border-color 150ms ease; }
+.registry-city-row { grid-template-columns:25px minmax(80px,.75fr) minmax(55px,1fr) 30px; }
+.registry-sector-row { grid-template-columns:minmax(115px,1fr) minmax(50px,.9fr) 30px; }
+.registry-city-row:hover,.registry-sector-row:hover { background:var(--atlas-side-bg); border-color:var(--color-hairline-subtle); }
+.registry-city-row.is-selected,.registry-sector-row.is-selected { background:color-mix(in srgb,var(--color-cobalt) 8%,var(--color-surface)); border-color:var(--color-cobalt); }
+.registry-city-rank,.registry-sector-label i { color:var(--color-muted); font-family:var(--font-mono); font-size:10px; font-style:normal; }
+.registry-city-name,.registry-sector-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; font-weight:600; }
+.registry-sector-label { display:flex; align-items:center; gap:9px; }
+.registry-city-row strong,.registry-sector-row strong { text-align:right; font-family:var(--font-mono); font-size:12px; font-weight:700; font-variant-numeric:tabular-nums; }
+.registry-city-track,.registry-sector-track { display:block; height:7px; overflow:hidden; border-radius:2px; background:var(--atlas-side-bg); }
+.registry-city-track span,.registry-sector-track span { display:block; height:100%; border-radius:2px; background:var(--color-cobalt); transform-origin:left; animation:registry-bar-enter 480ms cubic-bezier(.2,.7,.2,1) both; }
+.registry-city-row:nth-child(2) .registry-city-track span,.registry-sector-row:nth-child(2) .registry-sector-track span { animation-delay:45ms; }
+.registry-city-row:nth-child(3) .registry-city-track span,.registry-sector-row:nth-child(3) .registry-sector-track span { animation-delay:90ms; }
+.registry-city-row:nth-child(4) .registry-city-track span,.registry-sector-row:nth-child(4) .registry-sector-track span { animation-delay:135ms; }
+.registry-city-row:nth-child(5) .registry-city-track span,.registry-sector-row:nth-child(5) .registry-sector-track span { animation-delay:180ms; }
+.registry-city-row:nth-child(6) .registry-city-track span,.registry-sector-row:nth-child(6) .registry-sector-track span { animation-delay:225ms; }
+.registry-panel-footnote { display:flex; align-items:center; gap:8px; margin-top:15px; padding-top:13px; border-top:1px solid var(--color-hairline-subtle); color:var(--color-muted); font-size:10px; line-height:1.5; }
+.registry-live-dot { width:6px; height:6px; flex:0 0 auto; border-radius:50%; background:var(--color-mint); box-shadow:0 0 0 3px color-mix(in srgb,var(--color-mint) 15%,transparent); }
+.atlas-registry :is(button,a,input):focus-visible { outline:3px solid var(--color-cobalt); outline-offset:3px; }
+.atlas-registry .registry-desktop-table { border:1px solid var(--color-hairline-subtle)!important; border-radius:14px!important; box-shadow:none!important; }
+.atlas-registry .registry-desktop-table thead { background:var(--atlas-side-bg); }
+.atlas-registry .registry-desktop-table th { letter-spacing:.045em; text-transform:uppercase; font-size:10px; }
+.atlas-registry .registry-desktop-table tbody tr { transition:background 140ms ease; }
+.atlas-registry .registry-desktop-table tbody tr:hover { background:var(--atlas-side-bg); }
+.atlas-registry .registry-mobile-cards>div { border-width:1px!important; border-color:var(--color-hairline-subtle)!important; border-radius:14px!important; box-shadow:none!important; }
+@keyframes registry-bar-enter { from { transform:scaleX(.03); opacity:.45; } to { transform:scaleX(1); opacity:1; } }
+@media(max-width:850px) { .registry-pulse-grid { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:520px) {
+ .registry-pulse-panel { padding:16px 13px; border-radius:14px; }
+ .registry-panel-heading h2 { font-size:18px; }
+ .registry-city-row { grid-template-columns:22px minmax(75px,.75fr) minmax(40px,1fr) 25px; gap:7px; padding:9px 4px; }
+ .registry-sector-row { grid-template-columns:minmax(100px,1fr) minmax(40px,.8fr) 25px; gap:7px; padding:9px 4px; }
+ .registry-city-name,.registry-sector-label { font-size:11px; }
+}
+@media(prefers-reduced-motion:reduce) { .registry-city-track span,.registry-sector-track span { animation:none!important; } .registry-city-row,.registry-sector-row { transition:none!important; } }
