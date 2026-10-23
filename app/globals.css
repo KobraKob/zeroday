@@ -62,15 +62,15 @@
 
   --ink: #FFF6E5;                  /* Warm Cream Text & Borders */
   --color-ink: #FFF6E5;
-  --muted: #A3A9C7;                /* High contrast muted in dark mode */
-  --color-muted: #A3A9C7;
+  --muted: #DAD7CC;                /* High contrast muted in dark mode */
+  --color-muted: #DAD7CC;
 
-  --rule: #3D4472;                 /* Navy Rule */
-  --color-rule: #3D4472;
+  --rule: #525875;                 /* Navy Rule */
+  --color-rule: #525875;
   --rule-subtle: #252A4E;
   --color-rule-subtle: #252A4E;
-  --hairline: #3D4472;
-  --color-hairline: #3D4472;
+  --hairline: #525875;
+  --color-hairline: #525875;
   --hairline-subtle: #252A4E;
   --color-hairline-subtle: #252A4E;
 
