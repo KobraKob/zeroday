@@ -113,13 +113,6 @@ export function ReconcileClient({
     cityGccs.forEach((gcc) => counts.set(gcc.sector || "Unclassified", (counts.get(gcc.sector || "Unclassified") || 0) + 1));
     return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
   }, [cityGccs]);
-  const visibleNumericRows = useMemo(() => numericRows.filter((row) =>
-    row.publisher.toLowerCase().includes(publisherQuery.toLowerCase()) ||
-    row.headline_count.toLowerCase().includes(publisherQuery.toLowerCase())
-  ), [numericRows, publisherQuery]);
-  const selectedPublisherRow = numericRows.find((row) => row.id === selectedPublisher) || numericRows[0];
-  const chartMax = Math.max(1, ...numericRows.map((row) => row.count_value || 0));
-
   // Separate concrete numeric published reports from commentary meta-reviews (Requirement 4)
   const { numericRows, commentaryRows } = useMemo(() => {
     const numeric: PublishedCount[] = [];
@@ -141,6 +134,14 @@ export function ReconcileClient({
 
     return { numericRows: numeric, commentaryRows: commentary };
   }, [publishedCounts]);
+
+  // Keep derived benchmark values below numericRows initialization.
+  const visibleNumericRows = useMemo(() => numericRows.filter((row) =>
+    row.publisher.toLowerCase().includes(publisherQuery.toLowerCase()) ||
+    row.headline_count.toLowerCase().includes(publisherQuery.toLowerCase())
+  ), [numericRows, publisherQuery]);
+  const selectedPublisherRow = numericRows.find((row) => row.id === selectedPublisher) || numericRows[0];
+  const chartMax = Math.max(1, ...numericRows.map((row) => row.count_value || 0));
 
   // Dynamic calculation of headline and finding values (Requirement 1)
   const minPublished = useMemo(() => {
