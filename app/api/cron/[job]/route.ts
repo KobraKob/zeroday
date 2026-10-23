@@ -15,14 +15,22 @@ export async function POST(
   const authHeader = req.headers.get("authorization");
   const headerSecret = req.headers.get("x-cron-secret");
 
-  // Authentication check
-  if (cronSecret) {
-    const bearer = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
-    const provided = bearer || headerSecret;
+  // Fail closed: a missing secret must never expose ingestion jobs publicly.
+  if (!cronSecret) {
+    return NextResponse.json(
+      { error: "Cron jobs are not configured." },
+      { status: 503 }
+    );
+  }
 
-    if (provided !== cronSecret) {
-      return NextResponse.json({ error: "Unauthorized: Invalid cron secret" }, { status: 401 });
-    }
+  const bearer = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const provided = bearer || headerSecret;
+
+  if (!provided || provided !== cronSecret) {
+    return NextResponse.json(
+      { error: "Unauthorized: Invalid cron secret" },
+      { status: 401 }
+    );
   }
 
   const { job } = params;
