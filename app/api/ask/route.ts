@@ -445,10 +445,12 @@ export async function POST(req: NextRequest) {
       q.includes("good afternoon")
     ) {
       return NextResponse.json({
+        query,
+        answer_kind: "site_help",
         answer_blocks: [
           {
             text: "Hello! ZeroDay is the independent, citable record of India's Global Capability Centre ecosystem. Answers come strictly from primary statutory filings, registered lease deeds, and gazetted state policies.",
-            claim_ids: ["clm-mkt-rev-fy26"],
+            claim_ids: [],
           },
         ],
         follow_ups: [
@@ -468,10 +470,12 @@ export async function POST(req: NextRequest) {
       q.includes("what does this site do")
     ) {
       return NextResponse.json({
+        query,
+        answer_kind: "site_help",
         answer_blocks: [
           {
             text: "ZeroDay is the independent, citable record of India's Global Capability Centre ecosystem, where every number is traced to a primary statutory filing, registered lease deed, or gazetted order.",
-            claim_ids: ["clm-mkt-rev-fy26", "clm-mkt-workforce-fy26"],
+            claim_ids: [],
           },
           {
             text: "Unlike analyst surveys with opaque methodologies or paid vendor listings, ZeroDay operates under a strict neutrality firewall with zero commercial pay-to-play rankings.",
