@@ -59,7 +59,7 @@ export function Navbar() {
   return (
     <>
 
-      {/* Single-row header (sticky top-0, 64px, 3 CSS grid zones) */}
+      {/* Single-row header (sticky top-0, 72px, 3 CSS grid zones) */}
       <header className="atlas-navbar sticky top-0 z-50 w-full border-b border-hairline-subtle bg-paper font-sans shadow-[0_5px_20px_rgba(21,24,58,0.06)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="atlas-navbar-inner grid grid-cols-[auto_1fr_auto] items-center gap-3 lg:gap-6 h-[72px] whitespace-nowrap min-w-0">
@@ -151,6 +151,7 @@ export function Navbar() {
                 className="atlas-nav-control lg:hidden w-11 h-11 border border-hairline-subtle rounded-full flex items-center justify-center text-ink bg-surface hover:bg-cream transition-all duration-200 focus-visible:outline-cobalt"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
+                aria-controls="atlas-mobile-menu"
               >
                 {mobileMenuOpen ? (
                   <X className="w-5 h-5" />
@@ -164,7 +165,7 @@ export function Navbar() {
 
         {/* Mobile menu drawer (<1024px) */}
         {mobileMenuOpen && (
-          <div className="atlas-mobile-panel lg:hidden border-t border-hairline-subtle bg-paper px-4 py-4 space-y-2 shadow-lg">
+          <div id="atlas-mobile-menu" className="atlas-mobile-panel lg:hidden border-t border-hairline-subtle bg-paper px-4 py-4 space-y-2 shadow-lg">
             <nav aria-label="Mobile Navigation" className="space-y-1">
               {mobileNavLinks.map((item) => {
                 const isActive =
